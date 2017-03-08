@@ -1,0 +1,490 @@
+INFO  | 2017-03-03 07:49:23 | [main] Start (Start.java:17) - This will be printed on info
+WARN  | 2017-03-03 07:49:23 | [main] Start (Start.java:18) - This will be printed on warn
+ERROR | 2017-03-03 07:49:23 | [main] Start (Start.java:19) - This will be printed on error
+FATAL | 2017-03-03 07:49:23 | [main] Start (Start.java:20) - This will be printed on fatal
+INFO  | 2017-03-03 07:49:23 | [main] Start (Start.java:22) - Appending string: Hello, World.
+INFO  | 2017-03-03 16:51:13 | [main] Start (Start.java:17) - This will be printed on info
+WARN  | 2017-03-03 16:51:13 | [main] Start (Start.java:18) - This will be printed on warn
+ERROR | 2017-03-03 16:51:13 | [main] Start (Start.java:19) - This will be printed on error
+FATAL | 2017-03-03 16:51:13 | [main] Start (Start.java:20) - This will be printed on fatal
+INFO  | 2017-03-03 16:51:13 | [main] Start (Start.java:22) - Appending string: Hello, World.
+INFO  | 2017-03-03 17:30:21 | [Start.main()] Start (Start.java:17) - This will be printed on info
+WARN  | 2017-03-03 17:30:21 | [Start.main()] Start (Start.java:18) - This will be printed on warn
+ERROR | 2017-03-03 17:30:21 | [Start.main()] Start (Start.java:19) - This will be printed on error
+FATAL | 2017-03-03 17:30:21 | [Start.main()] Start (Start.java:20) - This will be printed on fatal
+INFO  | 2017-03-03 17:30:21 | [Start.main()] Start (Start.java:22) - Appending string: Hello, World.
+INFO  | 2017-03-03 17:33:27 | [main] Start (Start.java:17) - This will be printed on info
+WARN  | 2017-03-03 17:33:27 | [main] Start (Start.java:18) - This will be printed on warn
+ERROR | 2017-03-03 17:33:27 | [main] Start (Start.java:19) - This will be printed on error
+FATAL | 2017-03-03 17:33:27 | [main] Start (Start.java:20) - This will be printed on fatal
+INFO  | 2017-03-03 17:33:27 | [main] Start (Start.java:22) - Appending string: Hello, World.
+INFO  | 2017-03-03 17:46:47 | [main] Start (Start.java:17) - This will be printed on info
+WARN  | 2017-03-03 17:46:47 | [main] Start (Start.java:18) - This will be printed on warn
+ERROR | 2017-03-03 17:46:47 | [main] Start (Start.java:19) - This will be printed on error
+FATAL | 2017-03-03 17:46:47 | [main] Start (Start.java:20) - This will be printed on fatal
+INFO  | 2017-03-03 17:46:47 | [main] Start (Start.java:22) - Appending string: Hello, World.
+INFO  | 2017-03-03 17:48:45 | [main] Start (Start.java:17) - This will be printed on info
+WARN  | 2017-03-03 17:48:45 | [main] Start (Start.java:18) - This will be printed on warn
+ERROR | 2017-03-03 17:48:45 | [main] Start (Start.java:19) - This will be printed on error
+FATAL | 2017-03-03 17:48:45 | [main] Start (Start.java:20) - This will be printed on fatal
+INFO  | 2017-03-03 17:48:45 | [main] Start (Start.java:22) - Appending string: Hello, World.
+INFO  | 2017-03-03 18:10:50 | [main] Start (Start.java:17) - This will be printed on info
+WARN  | 2017-03-03 18:10:50 | [main] Start (Start.java:18) - This will be printed on warn
+ERROR | 2017-03-03 18:10:50 | [main] Start (Start.java:19) - This will be printed on error
+FATAL | 2017-03-03 18:10:50 | [main] Start (Start.java:20) - This will be printed on fatal
+INFO  | 2017-03-03 18:10:50 | [main] Start (Start.java:22) - Appending string: Hello, World.
+INFO  | 2017-03-03 18:11:35 | [main] Start (Start.java:17) - This will be printed on info
+WARN  | 2017-03-03 18:11:35 | [main] Start (Start.java:18) - This will be printed on warn
+ERROR | 2017-03-03 18:11:35 | [main] Start (Start.java:19) - This will be printed on error
+FATAL | 2017-03-03 18:11:35 | [main] Start (Start.java:20) - This will be printed on fatal
+INFO  | 2017-03-03 18:11:35 | [main] Start (Start.java:22) - Appending string: Hello, World.
+WARN  | 2017-03-03 18:11:54 | [main] Start (Start.java:29) - This will be printed on warn
+INFO  | 2017-03-03 18:12:03 | [main] Start (Start.java:17) - This will be printed on info
+WARN  | 2017-03-03 18:12:03 | [main] Start (Start.java:18) - This will be printed on warn
+ERROR | 2017-03-03 18:12:03 | [main] Start (Start.java:19) - This will be printed on error
+FATAL | 2017-03-03 18:12:03 | [main] Start (Start.java:20) - This will be printed on fatal
+INFO  | 2017-03-03 18:12:03 | [main] Start (Start.java:22) - Appending string: Hello, World.
+WARN  | 2017-03-03 18:12:03 | [main] Start (Start.java:29) - This will be printed on warn
+INFO  | 2017-03-06 17:49:45 | [main] Start (Start.java:26) - Port:4500
+INFO  | 2017-03-07 10:14:33 | [main] Start (Start.java:29) - Port:4500
+INFO  | 2017-03-07 10:20:59 | [main] Start (Start.java:29) - Port:4500
+INFO  | 2017-03-07 10:22:02 | [main] Start (Start.java:29) - Port:4500
+INFO  | 2017-03-07 10:23:07 | [main] Start (Start.java:29) - Port:4500
+INFO  | 2017-03-07 10:35:30 | [main] Start (Start.java:29) - Port:4500
+INFO  | 2017-03-07 10:40:04 | [main] Start (Start.java:29) - Port:4500
+INFO  | 2017-03-07 10:40:08 | [nioEventLoopGroup-3-1] serverHandlers.DiscardServerHandler (DiscardServerHandler.java:23) - Server Recieved:PooledUnsafeDirectByteBuf(ridx: 0, widx: 6, cap: 1024)
+INFO  | 2017-03-07 10:40:16 | [nioEventLoopGroup-3-1] serverHandlers.DiscardServerHandler (DiscardServerHandler.java:23) - Server Recieved:PooledUnsafeDirectByteBuf(ridx: 0, widx: 9, cap: 1024)
+INFO  | 2017-03-07 10:40:37 | [nioEventLoopGroup-3-1] serverHandlers.DiscardServerHandler (DiscardServerHandler.java:23) - Server Recieved:PooledUnsafeDirectByteBuf(ridx: 0, widx: 9, cap: 512)
+INFO  | 2017-03-07 10:40:39 | [nioEventLoopGroup-3-1] serverHandlers.DiscardServerHandler (DiscardServerHandler.java:23) - Server Recieved:PooledUnsafeDirectByteBuf(ridx: 0, widx: 5, cap: 512)
+INFO  | 2017-03-07 10:40:42 | [nioEventLoopGroup-3-1] serverHandlers.DiscardServerHandler (DiscardServerHandler.java:23) - Server Recieved:PooledUnsafeDirectByteBuf(ridx: 0, widx: 6, cap: 496)
+INFO  | 2017-03-07 10:40:45 | [nioEventLoopGroup-3-1] serverHandlers.DiscardServerHandler (DiscardServerHandler.java:23) - Server Recieved:PooledUnsafeDirectByteBuf(ridx: 0, widx: 9, cap: 496)
+INFO  | 2017-03-07 10:40:48 | [nioEventLoopGroup-3-1] serverHandlers.DiscardServerHandler (DiscardServerHandler.java:23) - Server Recieved:PooledUnsafeDirectByteBuf(ridx: 0, widx: 15, cap: 480)
+INFO  | 2017-03-07 10:40:51 | [nioEventLoopGroup-3-1] serverHandlers.DiscardServerHandler (DiscardServerHandler.java:23) - Server Recieved:PooledUnsafeDirectByteBuf(ridx: 0, widx: 4, cap: 480)
+INFO  | 2017-03-07 10:45:35 | [main] Start (Start.java:29) - Port:4500
+INFO  | 2017-03-07 10:46:34 | [main] Start (Start.java:29) - Port:4500
+INFO  | 2017-03-07 10:46:38 | [nioEventLoopGroup-3-1] serverHandlers.DiscardServerHandler (DiscardServerHandler.java:24) - Server Recieved:PooledUnsafeDirectByteBuf(ridx: 0, widx: 5, cap: 1024)
+INFO  | 2017-03-07 10:50:38 | [main] Start (Start.java:29) - Port:4500
+INFO  | 2017-03-07 10:50:41 | [nioEventLoopGroup-3-1] serverHandlers.DiscardServerHandler (DiscardServerHandler.java:28) - Server Recieved:abcd
+
+INFO  | 2017-03-07 10:50:47 | [nioEventLoopGroup-3-1] serverHandlers.DiscardServerHandler (DiscardServerHandler.java:28) - Server Recieved:;slad;lds
+
+INFO  | 2017-03-07 10:51:21 | [nioEventLoopGroup-3-1] serverHandlers.DiscardServerHandler (DiscardServerHandler.java:28) - Server Recieved:abcd 
+
+INFO  | 2017-03-07 10:52:44 | [main] Start (Start.java:29) - Port:4500
+INFO  | 2017-03-07 10:52:48 | [nioEventLoopGroup-3-1] serverHandlers.DiscardServerHandler (DiscardServerHandler.java:26) - Server Recieved:abcd
+
+INFO  | 2017-03-07 10:52:55 | [nioEventLoopGroup-3-1] serverHandlers.DiscardServerHandler (DiscardServerHandler.java:26) - Server Recieved:asbdnksda
+
+INFO  | 2017-03-07 10:53:02 | [nioEventLoopGroup-3-1] serverHandlers.DiscardServerHandler (DiscardServerHandler.java:26) - Server Recieved:asjdlks
+
+INFO  | 2017-03-07 10:53:35 | [nioEventLoopGroup-3-2] serverHandlers.DiscardServerHandler (DiscardServerHandler.java:26) - Server Recieved:abc
+
+INFO  | 2017-03-07 10:55:55 | [main] Start (Start.java:29) - Port:4500
+INFO  | 2017-03-07 10:56:15 | [main] Start (Start.java:29) - Port:4500
+INFO  | 2017-03-07 10:56:23 | [nioEventLoopGroup-3-1] serverHandlers.DiscardServerHandler (DiscardServerHandler.java:26) - Server Recieved:abcd
+
+INFO  | 2017-03-07 10:56:26 | [nioEventLoopGroup-3-1] serverHandlers.DiscardServerHandler (DiscardServerHandler.java:26) - Server Recieved:ksdlkfsd
+
+INFO  | 2017-03-07 11:01:25 | [nioEventLoopGroup-3-1] serverHandlers.DiscardServerHandler (DiscardServerHandler.java:26) - Server Recieved:hello world
+
+INFO  | 2017-03-07 14:17:50 | [main] Start (Start.java:29) - Port:4500
+INFO  | 2017-03-07 14:18:13 | [nioEventLoopGroup-3-1] serverHandlers.DiscardServerHandler (DiscardServerHandler.java:55) - Server Recieved:set 192.168.10.0:2020
+
+INFO  | 2017-03-07 14:18:13 | [nioEventLoopGroup-3-1] serverHandlers.DiscardServerHandler (DiscardServerHandler.java:132) - Members List,set 192.168.10.0:2020,
+INFO  | 2017-03-07 14:18:13 | [nioEventLoopGroup-3-1] serverHandlers.DiscardServerHandler (DiscardServerHandler.java:99) - ,set 192.168.10.0:2020,
+INFO  | 2017-03-07 14:18:28 | [nioEventLoopGroup-3-1] serverHandlers.DiscardServerHandler (DiscardServerHandler.java:55) - Server Recieved:[A[A[B[B[B
+
+INFO  | 2017-03-07 14:18:28 | [nioEventLoopGroup-3-1] serverHandlers.DiscardServerHandler (DiscardServerHandler.java:99) - 
+INFO  | 2017-03-07 14:18:42 | [nioEventLoopGroup-3-1] serverHandlers.DiscardServerHandler (DiscardServerHandler.java:55) - Server Recieved:set 192.168.11.11:3030
+
+INFO  | 2017-03-07 14:18:42 | [nioEventLoopGroup-3-1] serverHandlers.DiscardServerHandler (DiscardServerHandler.java:132) - Members List,set 192.168.10.0:2020,,set 192.168.11.11:3030,
+INFO  | 2017-03-07 14:18:42 | [nioEventLoopGroup-3-1] serverHandlers.DiscardServerHandler (DiscardServerHandler.java:99) - ,set 192.168.10.0:2020,,set 192.168.11.11:3030,
+INFO  | 2017-03-07 14:18:45 | [nioEventLoopGroup-3-1] serverHandlers.DiscardServerHandler (DiscardServerHandler.java:55) - Server Recieved:get
+
+INFO  | 2017-03-07 14:18:45 | [nioEventLoopGroup-3-1] serverHandlers.DiscardServerHandler (DiscardServerHandler.java:132) - Members List,set 192.168.10.0:2020,,set 192.168.11.11:3030,
+INFO  | 2017-03-07 14:18:45 | [nioEventLoopGroup-3-1] serverHandlers.DiscardServerHandler (DiscardServerHandler.java:99) - ,set 192.168.10.0:2020,,set 192.168.11.11:3030,
+INFO  | 2017-03-07 14:19:01 | [nioEventLoopGroup-3-1] serverHandlers.DiscardServerHandler (DiscardServerHandler.java:55) - Server Recieved:
+
+INFO  | 2017-03-07 14:19:01 | [nioEventLoopGroup-3-1] serverHandlers.DiscardServerHandler (DiscardServerHandler.java:99) - 
+INFO  | 2017-03-07 14:19:05 | [nioEventLoopGroup-3-1] serverHandlers.DiscardServerHandler (DiscardServerHandler.java:55) - Server Recieved:get
+
+INFO  | 2017-03-07 14:19:05 | [nioEventLoopGroup-3-1] serverHandlers.DiscardServerHandler (DiscardServerHandler.java:132) - Members List,set 192.168.10.0:2020,,set 192.168.11.11:3030,
+INFO  | 2017-03-07 14:19:05 | [nioEventLoopGroup-3-1] serverHandlers.DiscardServerHandler (DiscardServerHandler.java:99) - ,set 192.168.10.0:2020,,set 192.168.11.11:3030,
+INFO  | 2017-03-07 14:24:52 | [nioEventLoopGroup-3-1] serverHandlers.DiscardServerHandler (DiscardServerHandler.java:55) - Server Recieved:set 192.168.10.0:2020
+
+INFO  | 2017-03-07 14:24:52 | [nioEventLoopGroup-3-1] serverHandlers.DiscardServerHandler (DiscardServerHandler.java:132) - Members List,set 192.168.10.0:2020,,set 192.168.11.11:3030,,set 192.168.10.0:2020,
+INFO  | 2017-03-07 14:24:52 | [nioEventLoopGroup-3-1] serverHandlers.DiscardServerHandler (DiscardServerHandler.java:99) - ,set 192.168.10.0:2020,,set 192.168.11.11:3030,,set 192.168.10.0:2020,
+INFO  | 2017-03-07 14:46:16 | [main] Start (Start.java:29) - Port:4500
+INFO  | 2017-03-07 14:46:30 | [nioEventLoopGroup-3-1] serverHandlers.DiscardServerHandler (DiscardServerHandler.java:55) - Server Recieved:set 192.168.11.11:3030
+
+INFO  | 2017-03-07 14:46:30 | [nioEventLoopGroup-3-1] serverHandlers.DiscardServerHandler (DiscardServerHandler.java:132) - Members Listset 192.168.10.0:2020set 192.168.11.11:3030set 192.168.10.0:2020set 192.168.11.11:3030
+INFO  | 2017-03-07 14:46:30 | [nioEventLoopGroup-3-1] serverHandlers.DiscardServerHandler (DiscardServerHandler.java:99) - set 192.168.10.0:2020set 192.168.11.11:3030set 192.168.10.0:2020set 192.168.11.11:3030
+INFO  | 2017-03-07 14:46:40 | [nioEventLoopGroup-3-1] serverHandlers.DiscardServerHandler (DiscardServerHandler.java:55) - Server Recieved:set 192.168.10.0:2020
+
+INFO  | 2017-03-07 14:46:40 | [nioEventLoopGroup-3-1] serverHandlers.DiscardServerHandler (DiscardServerHandler.java:132) - Members Listset 192.168.10.0:2020set 192.168.11.11:3030set 192.168.10.0:2020set 192.168.11.11:3030set 192.168.10.0:2020
+INFO  | 2017-03-07 14:46:40 | [nioEventLoopGroup-3-1] serverHandlers.DiscardServerHandler (DiscardServerHandler.java:99) - set 192.168.10.0:2020set 192.168.11.11:3030set 192.168.10.0:2020set 192.168.11.11:3030set 192.168.10.0:2020
+INFO  | 2017-03-07 14:46:55 | [nioEventLoopGroup-3-1] serverHandlers.DiscardServerHandler (DiscardServerHandler.java:55) - Server Recieved:[A[A[A
+
+INFO  | 2017-03-07 14:46:55 | [nioEventLoopGroup-3-1] serverHandlers.DiscardServerHandler (DiscardServerHandler.java:99) - 
+INFO  | 2017-03-07 14:46:58 | [nioEventLoopGroup-3-1] serverHandlers.DiscardServerHandler (DiscardServerHandler.java:55) - Server Recieved:set 192.168.10.0:2020
+
+INFO  | 2017-03-07 14:46:58 | [nioEventLoopGroup-3-1] serverHandlers.DiscardServerHandler (DiscardServerHandler.java:132) - Members Listset 192.168.10.0:2020set 192.168.11.11:3030set 192.168.10.0:2020set 192.168.11.11:3030set 192.168.10.0:2020set 192.168.10.0:2020
+INFO  | 2017-03-07 14:46:58 | [nioEventLoopGroup-3-1] serverHandlers.DiscardServerHandler (DiscardServerHandler.java:99) - set 192.168.10.0:2020set 192.168.11.11:3030set 192.168.10.0:2020set 192.168.11.11:3030set 192.168.10.0:2020set 192.168.10.0:2020
+INFO  | 2017-03-07 14:49:37 | [main] Start (Start.java:29) - Port:4500
+INFO  | 2017-03-07 14:49:44 | [nioEventLoopGroup-3-1] serverHandlers.DiscardServerHandler (DiscardServerHandler.java:55) - Server Recieved:set 192.168.10.0:2020
+
+INFO  | 2017-03-07 14:49:44 | [nioEventLoopGroup-3-1] serverHandlers.DiscardServerHandler (DiscardServerHandler.java:132) - Members List,set 192.168.10.0:2020,,set 192.168.11.11:3030,,set 192.168.10.0:2020,,set 192.168.11.11:3030,,set 192.168.10.0:2020,,set 192.168.10.0:2020,set 192.168.10.0:2020,
+INFO  | 2017-03-07 14:49:44 | [nioEventLoopGroup-3-1] serverHandlers.DiscardServerHandler (DiscardServerHandler.java:99) - ,set 192.168.10.0:2020,,set 192.168.11.11:3030,,set 192.168.10.0:2020,,set 192.168.11.11:3030,,set 192.168.10.0:2020,,set 192.168.10.0:2020,set 192.168.10.0:2020,
+INFO  | 2017-03-07 14:49:55 | [nioEventLoopGroup-3-1] serverHandlers.DiscardServerHandler (DiscardServerHandler.java:55) - Server Recieved:set 192.168.11.11:3030
+
+INFO  | 2017-03-07 14:49:55 | [nioEventLoopGroup-3-1] serverHandlers.DiscardServerHandler (DiscardServerHandler.java:132) - Members List,set 192.168.10.0:2020,,set 192.168.11.11:3030,,set 192.168.10.0:2020,,set 192.168.11.11:3030,,set 192.168.10.0:2020,,set 192.168.10.0:2020,set 192.168.10.0:2020,set 192.168.11.11:3030,
+INFO  | 2017-03-07 14:49:55 | [nioEventLoopGroup-3-1] serverHandlers.DiscardServerHandler (DiscardServerHandler.java:99) - ,set 192.168.10.0:2020,,set 192.168.11.11:3030,,set 192.168.10.0:2020,,set 192.168.11.11:3030,,set 192.168.10.0:2020,,set 192.168.10.0:2020,set 192.168.10.0:2020,set 192.168.11.11:3030,
+INFO  | 2017-03-07 14:50:14 | [nioEventLoopGroup-3-1] serverHandlers.DiscardServerHandler (DiscardServerHandler.java:55) - Server Recieved:set 192.168.11.11:3030
+
+INFO  | 2017-03-07 14:50:14 | [nioEventLoopGroup-3-1] serverHandlers.DiscardServerHandler (DiscardServerHandler.java:132) - Members Listset 192.168.11.11:3030,
+INFO  | 2017-03-07 14:50:14 | [nioEventLoopGroup-3-1] serverHandlers.DiscardServerHandler (DiscardServerHandler.java:99) - set 192.168.11.11:3030,
+INFO  | 2017-03-07 14:50:23 | [nioEventLoopGroup-3-1] serverHandlers.DiscardServerHandler (DiscardServerHandler.java:55) - Server Recieved:set 192.168.10.0:2020 
+
+INFO  | 2017-03-07 14:50:23 | [nioEventLoopGroup-3-1] serverHandlers.DiscardServerHandler (DiscardServerHandler.java:132) - Members Listset 192.168.11.11:3030,set 192.168.10.0:2020 ,
+INFO  | 2017-03-07 14:50:23 | [nioEventLoopGroup-3-1] serverHandlers.DiscardServerHandler (DiscardServerHandler.java:99) - set 192.168.11.11:3030,set 192.168.10.0:2020 ,
+INFO  | 2017-03-07 14:50:38 | [nioEventLoopGroup-3-1] serverHandlers.DiscardServerHandler (DiscardServerHandler.java:55) - Server Recieved:set 192.168.10.0:2020
+
+INFO  | 2017-03-07 14:50:38 | [nioEventLoopGroup-3-1] serverHandlers.DiscardServerHandler (DiscardServerHandler.java:132) - Members Listset 192.168.11.11:3030,set 192.168.10.0:2020 ,set 192.168.10.0:2020,
+INFO  | 2017-03-07 14:50:38 | [nioEventLoopGroup-3-1] serverHandlers.DiscardServerHandler (DiscardServerHandler.java:99) - set 192.168.11.11:3030,set 192.168.10.0:2020 ,set 192.168.10.0:2020,
+INFO  | 2017-03-07 14:50:40 | [nioEventLoopGroup-3-1] serverHandlers.DiscardServerHandler (DiscardServerHandler.java:55) - Server Recieved:[B
+
+INFO  | 2017-03-07 14:50:40 | [nioEventLoopGroup-3-1] serverHandlers.DiscardServerHandler (DiscardServerHandler.java:99) - 
+INFO  | 2017-03-07 14:50:42 | [nioEventLoopGroup-3-1] serverHandlers.DiscardServerHandler (DiscardServerHandler.java:55) - Server Recieved:set 192.168.10.0:2020
+
+INFO  | 2017-03-07 14:50:42 | [nioEventLoopGroup-3-1] serverHandlers.DiscardServerHandler (DiscardServerHandler.java:132) - Members Listset 192.168.11.11:3030,set 192.168.10.0:2020 ,set 192.168.10.0:2020,set 192.168.10.0:2020,
+INFO  | 2017-03-07 14:50:42 | [nioEventLoopGroup-3-1] serverHandlers.DiscardServerHandler (DiscardServerHandler.java:99) - set 192.168.11.11:3030,set 192.168.10.0:2020 ,set 192.168.10.0:2020,set 192.168.10.0:2020,
+INFO  | 2017-03-07 14:51:48 | [main] Start (Start.java:29) - Port:4500
+INFO  | 2017-03-07 15:08:54 | [main] Start (Start.java:29) - Port:4500
+INFO  | 2017-03-07 15:09:09 | [nioEventLoopGroup-3-1] serverHandlers.DiscardServerHandler (DiscardServerHandler.java:55) - Server Recieved:192.168.10.0:2020
+
+INFO  | 2017-03-07 15:09:09 | [nioEventLoopGroup-3-1] serverHandlers.DiscardServerHandler (DiscardServerHandler.java:99) - 
+INFO  | 2017-03-07 15:09:29 | [nioEventLoopGroup-3-1] serverHandlers.DiscardServerHandler (DiscardServerHandler.java:55) - Server Recieved:192.168.10.0:2020
+
+INFO  | 2017-03-07 15:09:29 | [nioEventLoopGroup-3-1] serverHandlers.DiscardServerHandler (DiscardServerHandler.java:99) - 
+INFO  | 2017-03-07 15:10:07 | [main] Start (Start.java:29) - Port:4500
+INFO  | 2017-03-07 15:10:11 | [nioEventLoopGroup-3-1] serverHandlers.DiscardServerHandler (DiscardServerHandler.java:55) - Server Recieved:192.168.10.0:2020
+
+INFO  | 2017-03-07 15:10:11 | [nioEventLoopGroup-3-1] serverHandlers.DiscardServerHandler (DiscardServerHandler.java:99) - 
+INFO  | 2017-03-07 15:10:23 | [nioEventLoopGroup-3-1] serverHandlers.DiscardServerHandler (DiscardServerHandler.java:55) - Server Recieved:set 192.168.11.11:3030
+
+INFO  | 2017-03-07 15:10:23 | [nioEventLoopGroup-3-1] serverHandlers.DiscardServerHandler (DiscardServerHandler.java:132) - Members List192.168.11.11:3030,
+INFO  | 2017-03-07 15:10:23 | [nioEventLoopGroup-3-1] serverHandlers.DiscardServerHandler (DiscardServerHandler.java:99) - 192.168.11.11:3030,
+INFO  | 2017-03-07 15:10:32 | [nioEventLoopGroup-3-1] serverHandlers.DiscardServerHandler (DiscardServerHandler.java:55) - Server Recieved:
+
+INFO  | 2017-03-07 15:10:32 | [nioEventLoopGroup-3-1] serverHandlers.DiscardServerHandler (DiscardServerHandler.java:99) - 
+INFO  | 2017-03-07 15:10:41 | [nioEventLoopGroup-3-1] serverHandlers.DiscardServerHandler (DiscardServerHandler.java:55) - Server Recieved:[Aset 192.168.10.0:2020
+
+INFO  | 2017-03-07 15:10:41 | [nioEventLoopGroup-3-1] serverHandlers.DiscardServerHandler (DiscardServerHandler.java:132) - Members List192.168.11.11:3030,192.168.10.0:2020,
+INFO  | 2017-03-07 15:10:41 | [nioEventLoopGroup-3-1] serverHandlers.DiscardServerHandler (DiscardServerHandler.java:99) - 192.168.11.11:3030,192.168.10.0:2020,
+INFO  | 2017-03-07 15:10:46 | [nioEventLoopGroup-3-1] serverHandlers.DiscardServerHandler (DiscardServerHandler.java:55) - Server Recieved:[B
+
+INFO  | 2017-03-07 15:10:46 | [nioEventLoopGroup-3-1] serverHandlers.DiscardServerHandler (DiscardServerHandler.java:99) - 
+INFO  | 2017-03-07 15:10:53 | [nioEventLoopGroup-3-1] serverHandlers.DiscardServerHandler (DiscardServerHandler.java:55) - Server Recieved:set 192.168.10.0
+
+INFO  | 2017-03-07 15:10:53 | [nioEventLoopGroup-3-1] serverHandlers.DiscardServerHandler (DiscardServerHandler.java:132) - Members List192.168.11.11:3030,192.168.10.0:2020,192.168.10.0,:8080,
+INFO  | 2017-03-07 15:10:53 | [nioEventLoopGroup-3-1] serverHandlers.DiscardServerHandler (DiscardServerHandler.java:99) - 192.168.11.11:3030,192.168.10.0:2020,192.168.10.0,:8080,
+INFO  | 2017-03-07 15:13:07 | [main] Start (Start.java:29) - Port:4500
+INFO  | 2017-03-07 15:13:18 | [nioEventLoopGroup-3-1] serverHandlers.DiscardServerHandler (DiscardServerHandler.java:55) - Server Recieved:set 192.168.10.0:2020
+
+INFO  | 2017-03-07 15:13:18 | [nioEventLoopGroup-3-1] serverHandlers.DiscardServerHandler (DiscardServerHandler.java:132) - Members List192.168.10.0:2020,
+INFO  | 2017-03-07 15:13:18 | [nioEventLoopGroup-3-1] serverHandlers.DiscardServerHandler (DiscardServerHandler.java:99) - 192.168.10.0:2020,
+INFO  | 2017-03-07 15:13:23 | [nioEventLoopGroup-3-1] serverHandlers.DiscardServerHandler (DiscardServerHandler.java:55) - Server Recieved:
+
+INFO  | 2017-03-07 15:13:23 | [nioEventLoopGroup-3-1] serverHandlers.DiscardServerHandler (DiscardServerHandler.java:99) - 
+INFO  | 2017-03-07 15:13:37 | [nioEventLoopGroup-3-1] serverHandlers.DiscardServerHandler (DiscardServerHandler.java:55) - Server Recieved:set 192.168.10.0
+
+INFO  | 2017-03-07 15:13:37 | [nioEventLoopGroup-3-1] serverHandlers.DiscardServerHandler (DiscardServerHandler.java:132) - Members List192.168.10.0:2020,192.168.10.0,:8080,
+INFO  | 2017-03-07 15:13:37 | [nioEventLoopGroup-3-1] serverHandlers.DiscardServerHandler (DiscardServerHandler.java:99) - 192.168.10.0:2020,192.168.10.0,:8080,
+INFO  | 2017-03-07 15:14:31 | [main] Start (Start.java:29) - Port:4500
+INFO  | 2017-03-07 15:14:38 | [nioEventLoopGroup-3-1] serverHandlers.DiscardServerHandler (DiscardServerHandler.java:55) - Server Recieved:set 192.168.10.0:2020
+
+INFO  | 2017-03-07 15:14:38 | [nioEventLoopGroup-3-1] serverHandlers.DiscardServerHandler (DiscardServerHandler.java:143) - After Format:192.168.10.0:2020
+
+INFO  | 2017-03-07 15:14:38 | [nioEventLoopGroup-3-1] serverHandlers.DiscardServerHandler (DiscardServerHandler.java:132) - Members List192.168.10.0:2020,192.168.10.0,:8080192.168.10.0:2020,
+INFO  | 2017-03-07 15:14:38 | [nioEventLoopGroup-3-1] serverHandlers.DiscardServerHandler (DiscardServerHandler.java:99) - 192.168.10.0:2020,192.168.10.0,:8080192.168.10.0:2020,
+INFO  | 2017-03-07 15:14:54 | [nioEventLoopGroup-3-1] serverHandlers.DiscardServerHandler (DiscardServerHandler.java:55) - Server Recieved:
+
+INFO  | 2017-03-07 15:14:54 | [nioEventLoopGroup-3-1] serverHandlers.DiscardServerHandler (DiscardServerHandler.java:99) - 
+INFO  | 2017-03-07 15:14:57 | [nioEventLoopGroup-3-1] serverHandlers.DiscardServerHandler (DiscardServerHandler.java:55) - Server Recieved:[A
+
+INFO  | 2017-03-07 15:14:57 | [nioEventLoopGroup-3-1] serverHandlers.DiscardServerHandler (DiscardServerHandler.java:99) - 
+INFO  | 2017-03-07 15:15:00 | [nioEventLoopGroup-3-1] serverHandlers.DiscardServerHandler (DiscardServerHandler.java:55) - Server Recieved:set 192.168.10.0
+
+INFO  | 2017-03-07 15:15:00 | [nioEventLoopGroup-3-1] serverHandlers.DiscardServerHandler (DiscardServerHandler.java:143) - After Format:192.168.10.0
+:8080
+INFO  | 2017-03-07 15:15:00 | [nioEventLoopGroup-3-1] serverHandlers.DiscardServerHandler (DiscardServerHandler.java:132) - Members List192.168.10.0:2020,192.168.10.0,:8080192.168.10.0:2020,192.168.10.0,:8080,
+INFO  | 2017-03-07 15:15:00 | [nioEventLoopGroup-3-1] serverHandlers.DiscardServerHandler (DiscardServerHandler.java:99) - 192.168.10.0:2020,192.168.10.0,:8080192.168.10.0:2020,192.168.10.0,:8080,
+INFO  | 2017-03-07 15:15:47 | [main] Start (Start.java:29) - Port:4500
+INFO  | 2017-03-07 15:15:52 | [nioEventLoopGroup-3-1] serverHandlers.DiscardServerHandler (DiscardServerHandler.java:55) - Server Recieved:set 192.168.10.0:2020
+
+INFO  | 2017-03-07 15:15:52 | [nioEventLoopGroup-3-1] serverHandlers.DiscardServerHandler (DiscardServerHandler.java:143) - After Format:192.168.10.0:2020
+
+INFO  | 2017-03-07 15:15:52 | [nioEventLoopGroup-3-1] serverHandlers.DiscardServerHandler (DiscardServerHandler.java:132) - Members List192.168.10.0:2020,192.168.10.0,:8080192.168.10.0:2020,192.168.10.0,:8080192.168.10.0:2020,
+INFO  | 2017-03-07 15:15:52 | [nioEventLoopGroup-3-1] serverHandlers.DiscardServerHandler (DiscardServerHandler.java:99) - 192.168.10.0:2020,192.168.10.0,:8080192.168.10.0:2020,192.168.10.0,:8080192.168.10.0:2020,
+INFO  | 2017-03-07 15:15:58 | [nioEventLoopGroup-3-1] serverHandlers.DiscardServerHandler (DiscardServerHandler.java:55) - Server Recieved:[A
+
+INFO  | 2017-03-07 15:15:58 | [nioEventLoopGroup-3-1] serverHandlers.DiscardServerHandler (DiscardServerHandler.java:99) - 
+INFO  | 2017-03-07 15:16:00 | [nioEventLoopGroup-3-1] serverHandlers.DiscardServerHandler (DiscardServerHandler.java:55) - Server Recieved:set 192.168.10.0
+
+INFO  | 2017-03-07 15:16:00 | [nioEventLoopGroup-3-1] serverHandlers.DiscardServerHandler (DiscardServerHandler.java:143) - After Format:192.168.10.0:8080
+INFO  | 2017-03-07 15:16:00 | [nioEventLoopGroup-3-1] serverHandlers.DiscardServerHandler (DiscardServerHandler.java:132) - Members List192.168.10.0:2020,192.168.10.0,:8080192.168.10.0:2020,192.168.10.0,:8080192.168.10.0:2020,192.168.10.0:8080,
+INFO  | 2017-03-07 15:16:00 | [nioEventLoopGroup-3-1] serverHandlers.DiscardServerHandler (DiscardServerHandler.java:99) - 192.168.10.0:2020,192.168.10.0,:8080192.168.10.0:2020,192.168.10.0,:8080192.168.10.0:2020,192.168.10.0:8080,
+INFO  | 2017-03-07 15:16:17 | [nioEventLoopGroup-3-1] serverHandlers.DiscardServerHandler (DiscardServerHandler.java:55) - Server Recieved:
+
+INFO  | 2017-03-07 15:16:17 | [nioEventLoopGroup-3-1] serverHandlers.DiscardServerHandler (DiscardServerHandler.java:99) - 
+INFO  | 2017-03-07 15:16:18 | [nioEventLoopGroup-3-1] serverHandlers.DiscardServerHandler (DiscardServerHandler.java:55) - Server Recieved:
+
+INFO  | 2017-03-07 15:16:18 | [nioEventLoopGroup-3-1] serverHandlers.DiscardServerHandler (DiscardServerHandler.java:99) - 
+INFO  | 2017-03-07 15:16:18 | [nioEventLoopGroup-3-1] serverHandlers.DiscardServerHandler (DiscardServerHandler.java:55) - Server Recieved:
+
+INFO  | 2017-03-07 15:16:18 | [nioEventLoopGroup-3-1] serverHandlers.DiscardServerHandler (DiscardServerHandler.java:99) - 
+INFO  | 2017-03-07 15:16:20 | [nioEventLoopGroup-3-1] serverHandlers.DiscardServerHandler (DiscardServerHandler.java:55) - Server Recieved:set 192.168.10.0:2020
+
+INFO  | 2017-03-07 15:16:20 | [nioEventLoopGroup-3-1] serverHandlers.DiscardServerHandler (DiscardServerHandler.java:143) - After Format:192.168.10.0:2020
+
+INFO  | 2017-03-07 15:16:20 | [nioEventLoopGroup-3-1] serverHandlers.DiscardServerHandler (DiscardServerHandler.java:132) - Members List192.168.10.0:2020,
+INFO  | 2017-03-07 15:16:20 | [nioEventLoopGroup-3-1] serverHandlers.DiscardServerHandler (DiscardServerHandler.java:99) - 192.168.10.0:2020,
+INFO  | 2017-03-07 15:16:22 | [nioEventLoopGroup-3-1] serverHandlers.DiscardServerHandler (DiscardServerHandler.java:55) - Server Recieved:
+
+INFO  | 2017-03-07 15:16:22 | [nioEventLoopGroup-3-1] serverHandlers.DiscardServerHandler (DiscardServerHandler.java:99) - 
+INFO  | 2017-03-07 15:16:26 | [nioEventLoopGroup-3-1] serverHandlers.DiscardServerHandler (DiscardServerHandler.java:55) - Server Recieved:set 192.168.10.0:
+
+INFO  | 2017-03-07 15:16:26 | [nioEventLoopGroup-3-1] serverHandlers.DiscardServerHandler (DiscardServerHandler.java:143) - After Format:192.168.10.0:
+
+INFO  | 2017-03-07 15:16:26 | [nioEventLoopGroup-3-1] serverHandlers.DiscardServerHandler (DiscardServerHandler.java:132) - Members List192.168.10.0:2020,192.168.10.0:,
+INFO  | 2017-03-07 15:16:26 | [nioEventLoopGroup-3-1] serverHandlers.DiscardServerHandler (DiscardServerHandler.java:99) - 192.168.10.0:2020,192.168.10.0:,
+INFO  | 2017-03-07 15:16:54 | [nioEventLoopGroup-3-1] serverHandlers.DiscardServerHandler (DiscardServerHandler.java:55) - Server Recieved:
+
+INFO  | 2017-03-07 15:16:54 | [nioEventLoopGroup-3-1] serverHandlers.DiscardServerHandler (DiscardServerHandler.java:99) - 
+INFO  | 2017-03-07 15:18:37 | [main] Start (Start.java:29) - Port:4500
+INFO  | 2017-03-07 15:18:44 | [nioEventLoopGroup-3-1] serverHandlers.DiscardServerHandler (DiscardServerHandler.java:55) - Server Recieved:System.out.println("----------------------")
+
+INFO  | 2017-03-07 15:18:44 | [nioEventLoopGroup-3-1] serverHandlers.DiscardServerHandler (DiscardServerHandler.java:99) - 
+INFO  | 2017-03-07 15:18:49 | [nioEventLoopGroup-3-1] serverHandlers.DiscardServerHandler (DiscardServerHandler.java:55) - Server Recieved:set 192.168.10.0:2020
+
+INFO  | 2017-03-07 15:18:49 | [nioEventLoopGroup-3-1] serverHandlers.DiscardServerHandler (DiscardServerHandler.java:143) - After Format:192.168.10.0:2020
+
+INFO  | 2017-03-07 15:18:49 | [nioEventLoopGroup-3-1] serverHandlers.DiscardServerHandler (DiscardServerHandler.java:132) - Members List192.168.10.0:2020,192.168.10.0:,192.168.10.0:2020,
+INFO  | 2017-03-07 15:18:49 | [nioEventLoopGroup-3-1] serverHandlers.DiscardServerHandler (DiscardServerHandler.java:99) - 192.168.10.0:2020,192.168.10.0:,192.168.10.0:2020,
+INFO  | 2017-03-07 15:19:01 | [nioEventLoopGroup-3-1] serverHandlers.DiscardServerHandler (DiscardServerHandler.java:55) - Server Recieved:
+
+INFO  | 2017-03-07 15:19:01 | [nioEventLoopGroup-3-1] serverHandlers.DiscardServerHandler (DiscardServerHandler.java:99) - 
+INFO  | 2017-03-07 15:19:02 | [nioEventLoopGroup-3-1] serverHandlers.DiscardServerHandler (DiscardServerHandler.java:55) - Server Recieved:
+
+INFO  | 2017-03-07 15:19:02 | [nioEventLoopGroup-3-1] serverHandlers.DiscardServerHandler (DiscardServerHandler.java:99) - 
+INFO  | 2017-03-07 15:19:04 | [nioEventLoopGroup-3-1] serverHandlers.DiscardServerHandler (DiscardServerHandler.java:55) - Server Recieved:set 192.168.10.0:
+
+INFO  | 2017-03-07 15:19:04 | [nioEventLoopGroup-3-1] serverHandlers.DiscardServerHandler (DiscardServerHandler.java:143) - After Format:192.168.10.0:
+
+INFO  | 2017-03-07 15:19:04 | [nioEventLoopGroup-3-1] serverHandlers.DiscardServerHandler (DiscardServerHandler.java:132) - Members List192.168.10.0:2020,192.168.10.0:,192.168.10.0:2020,192.168.10.0:,
+INFO  | 2017-03-07 15:19:04 | [nioEventLoopGroup-3-1] serverHandlers.DiscardServerHandler (DiscardServerHandler.java:99) - 192.168.10.0:2020,192.168.10.0:,192.168.10.0:2020,192.168.10.0:,
+INFO  | 2017-03-07 15:22:02 | [main] Start (Start.java:29) - Port:4500
+INFO  | 2017-03-07 15:22:32 | [nioEventLoopGroup-3-1] serverHandlers.DiscardServerHandler (DiscardServerHandler.java:55) - Server Recieved:set 192.168.10.0:2020
+
+INFO  | 2017-03-07 15:22:32 | [nioEventLoopGroup-3-1] serverHandlers.DiscardServerHandler (DiscardServerHandler.java:143) - After Format:192.168.10.0:2020
+
+INFO  | 2017-03-07 15:22:32 | [nioEventLoopGroup-3-1] serverHandlers.DiscardServerHandler (DiscardServerHandler.java:132) - Members List192.168.10.0:2020,
+INFO  | 2017-03-07 15:22:32 | [nioEventLoopGroup-3-1] serverHandlers.DiscardServerHandler (DiscardServerHandler.java:99) - 192.168.10.0:2020,
+INFO  | 2017-03-07 15:22:36 | [nioEventLoopGroup-3-1] serverHandlers.DiscardServerHandler (DiscardServerHandler.java:55) - Server Recieved:set 192.168.10.0:
+
+INFO  | 2017-03-07 15:22:36 | [nioEventLoopGroup-3-1] serverHandlers.DiscardServerHandler (DiscardServerHandler.java:143) - After Format:192.168.10.0:8080
+INFO  | 2017-03-07 15:22:36 | [nioEventLoopGroup-3-1] serverHandlers.DiscardServerHandler (DiscardServerHandler.java:132) - Members List192.168.10.0:2020,192.168.10.0:8080,
+INFO  | 2017-03-07 15:22:36 | [nioEventLoopGroup-3-1] serverHandlers.DiscardServerHandler (DiscardServerHandler.java:99) - 192.168.10.0:2020,192.168.10.0:8080,
+INFO  | 2017-03-07 15:22:40 | [nioEventLoopGroup-3-1] serverHandlers.DiscardServerHandler (DiscardServerHandler.java:55) - Server Recieved:set 192.168.10.1
+
+INFO  | 2017-03-07 15:22:40 | [nioEventLoopGroup-3-1] serverHandlers.DiscardServerHandler (DiscardServerHandler.java:143) - After Format:192.168.10.1:8080
+INFO  | 2017-03-07 15:22:40 | [nioEventLoopGroup-3-1] serverHandlers.DiscardServerHandler (DiscardServerHandler.java:132) - Members List192.168.10.0:2020,192.168.10.0:8080192.168.10.1:8080,
+INFO  | 2017-03-07 15:22:40 | [nioEventLoopGroup-3-1] serverHandlers.DiscardServerHandler (DiscardServerHandler.java:99) - 192.168.10.0:2020,192.168.10.0:8080192.168.10.1:8080,
+INFO  | 2017-03-07 15:23:07 | [nioEventLoopGroup-3-1] serverHandlers.DiscardServerHandler (DiscardServerHandler.java:55) - Server Recieved:set 192.168.10.0:
+
+INFO  | 2017-03-07 15:23:07 | [nioEventLoopGroup-3-1] serverHandlers.DiscardServerHandler (DiscardServerHandler.java:143) - After Format:192.168.10.0:8080
+INFO  | 2017-03-07 15:23:07 | [nioEventLoopGroup-3-1] serverHandlers.DiscardServerHandler (DiscardServerHandler.java:132) - Members List192.168.10.0:2020,192.168.10.0:8080192.168.10.1:8080192.168.10.0:8080,
+INFO  | 2017-03-07 15:23:07 | [nioEventLoopGroup-3-1] serverHandlers.DiscardServerHandler (DiscardServerHandler.java:99) - 192.168.10.0:2020,192.168.10.0:8080192.168.10.1:8080192.168.10.0:8080,
+INFO  | 2017-03-07 15:23:17 | [nioEventLoopGroup-3-1] serverHandlers.DiscardServerHandler (DiscardServerHandler.java:55) - Server Recieved:set 192.168.10.0:5050
+
+INFO  | 2017-03-07 15:23:17 | [nioEventLoopGroup-3-1] serverHandlers.DiscardServerHandler (DiscardServerHandler.java:143) - After Format:192.168.10.0:5050
+
+INFO  | 2017-03-07 15:23:17 | [nioEventLoopGroup-3-1] serverHandlers.DiscardServerHandler (DiscardServerHandler.java:132) - Members List192.168.10.0:2020,192.168.10.0:8080192.168.10.1:8080192.168.10.0:8080192.168.10.0:5050,
+INFO  | 2017-03-07 15:23:17 | [nioEventLoopGroup-3-1] serverHandlers.DiscardServerHandler (DiscardServerHandler.java:99) - 192.168.10.0:2020,192.168.10.0:8080192.168.10.1:8080192.168.10.0:8080192.168.10.0:5050,
+INFO  | 2017-03-07 15:23:19 | [nioEventLoopGroup-3-1] serverHandlers.DiscardServerHandler (DiscardServerHandler.java:55) - Server Recieved:
+
+INFO  | 2017-03-07 15:23:19 | [nioEventLoopGroup-3-1] serverHandlers.DiscardServerHandler (DiscardServerHandler.java:99) - 
+INFO  | 2017-03-07 15:23:19 | [nioEventLoopGroup-3-1] serverHandlers.DiscardServerHandler (DiscardServerHandler.java:55) - Server Recieved:
+
+INFO  | 2017-03-07 15:23:19 | [nioEventLoopGroup-3-1] serverHandlers.DiscardServerHandler (DiscardServerHandler.java:99) - 
+INFO  | 2017-03-07 15:23:20 | [nioEventLoopGroup-3-1] serverHandlers.DiscardServerHandler (DiscardServerHandler.java:55) - Server Recieved:get
+
+INFO  | 2017-03-07 15:23:20 | [nioEventLoopGroup-3-1] serverHandlers.DiscardServerHandler (DiscardServerHandler.java:132) - Members List192.168.10.0:2020,192.168.10.0:8080192.168.10.1:8080192.168.10.0:8080192.168.10.0:5050,
+INFO  | 2017-03-07 15:23:20 | [nioEventLoopGroup-3-1] serverHandlers.DiscardServerHandler (DiscardServerHandler.java:99) - 192.168.10.0:2020,192.168.10.0:8080192.168.10.1:8080192.168.10.0:8080192.168.10.0:5050,
+INFO  | 2017-03-07 15:24:30 | [main] Start (Start.java:29) - Port:4500
+INFO  | 2017-03-07 15:24:51 | [main] Start (Start.java:29) - Port:4500
+INFO  | 2017-03-07 15:24:58 | [nioEventLoopGroup-3-1] serverHandlers.DiscardServerHandler (DiscardServerHandler.java:55) - Server Recieved:bufferedWriter.newLine(
+
+INFO  | 2017-03-07 15:24:58 | [nioEventLoopGroup-3-1] serverHandlers.DiscardServerHandler (DiscardServerHandler.java:99) - 
+INFO  | 2017-03-07 15:25:03 | [nioEventLoopGroup-3-1] serverHandlers.DiscardServerHandler (DiscardServerHandler.java:55) - Server Recieved:set 192.168.10.0:2020
+
+INFO  | 2017-03-07 15:25:03 | [nioEventLoopGroup-3-1] serverHandlers.DiscardServerHandler (DiscardServerHandler.java:143) - After Format:192.168.10.0:2020
+
+INFO  | 2017-03-07 15:25:03 | [nioEventLoopGroup-3-1] serverHandlers.DiscardServerHandler (DiscardServerHandler.java:132) - Members List192.168.10.0:2020,192.168.10.0:8080192.168.10.1:8080192.168.10.0:8080192.168.10.0:5050,,192.168.10.0:2020,
+INFO  | 2017-03-07 15:25:03 | [nioEventLoopGroup-3-1] serverHandlers.DiscardServerHandler (DiscardServerHandler.java:99) - 192.168.10.0:2020,192.168.10.0:8080192.168.10.1:8080192.168.10.0:8080192.168.10.0:5050,,192.168.10.0:2020,
+INFO  | 2017-03-07 15:25:13 | [nioEventLoopGroup-3-1] serverHandlers.DiscardServerHandler (DiscardServerHandler.java:55) - Server Recieved:
+
+INFO  | 2017-03-07 15:25:13 | [nioEventLoopGroup-3-1] serverHandlers.DiscardServerHandler (DiscardServerHandler.java:99) - 
+INFO  | 2017-03-07 15:25:15 | [nioEventLoopGroup-3-1] serverHandlers.DiscardServerHandler (DiscardServerHandler.java:55) - Server Recieved:set 192.168.10.0:2020
+
+INFO  | 2017-03-07 15:25:15 | [nioEventLoopGroup-3-1] serverHandlers.DiscardServerHandler (DiscardServerHandler.java:143) - After Format:192.168.10.0:2020
+
+INFO  | 2017-03-07 15:25:15 | [nioEventLoopGroup-3-1] serverHandlers.DiscardServerHandler (DiscardServerHandler.java:132) - Members List,192.168.10.0:2020,
+INFO  | 2017-03-07 15:25:15 | [nioEventLoopGroup-3-1] serverHandlers.DiscardServerHandler (DiscardServerHandler.java:99) - ,192.168.10.0:2020,
+INFO  | 2017-03-07 15:25:19 | [nioEventLoopGroup-3-1] serverHandlers.DiscardServerHandler (DiscardServerHandler.java:55) - Server Recieved:
+
+INFO  | 2017-03-07 15:25:19 | [nioEventLoopGroup-3-1] serverHandlers.DiscardServerHandler (DiscardServerHandler.java:99) - 
+INFO  | 2017-03-07 15:25:19 | [nioEventLoopGroup-3-1] serverHandlers.DiscardServerHandler (DiscardServerHandler.java:55) - Server Recieved:
+
+INFO  | 2017-03-07 15:25:19 | [nioEventLoopGroup-3-1] serverHandlers.DiscardServerHandler (DiscardServerHandler.java:99) - 
+INFO  | 2017-03-07 15:25:23 | [nioEventLoopGroup-3-1] serverHandlers.DiscardServerHandler (DiscardServerHandler.java:55) - Server Recieved:set 192.168.10.0:5050
+
+INFO  | 2017-03-07 15:25:23 | [nioEventLoopGroup-3-1] serverHandlers.DiscardServerHandler (DiscardServerHandler.java:143) - After Format:192.168.10.0:5050
+
+INFO  | 2017-03-07 15:25:23 | [nioEventLoopGroup-3-1] serverHandlers.DiscardServerHandler (DiscardServerHandler.java:132) - Members List,192.168.10.0:2020,,192.168.10.0:5050,
+INFO  | 2017-03-07 15:25:23 | [nioEventLoopGroup-3-1] serverHandlers.DiscardServerHandler (DiscardServerHandler.java:99) - ,192.168.10.0:2020,,192.168.10.0:5050,
+INFO  | 2017-03-07 15:26:57 | [main] Start (Start.java:29) - Port:4500
+INFO  | 2017-03-07 15:27:20 | [nioEventLoopGroup-3-1] serverHandlers.DiscardServerHandler (DiscardServerHandler.java:55) - Server Recieved:set 192.168.10.0:2020
+
+INFO  | 2017-03-07 15:27:20 | [nioEventLoopGroup-3-1] serverHandlers.DiscardServerHandler (DiscardServerHandler.java:143) - After Format:192.168.10.0:2020
+
+INFO  | 2017-03-07 15:27:20 | [nioEventLoopGroup-3-1] serverHandlers.DiscardServerHandler (DiscardServerHandler.java:132) - Members List192.168.10.0:2020,,
+INFO  | 2017-03-07 15:27:20 | [nioEventLoopGroup-3-1] serverHandlers.DiscardServerHandler (DiscardServerHandler.java:99) - 192.168.10.0:2020,,
+INFO  | 2017-03-07 15:27:26 | [nioEventLoopGroup-3-1] serverHandlers.DiscardServerHandler (DiscardServerHandler.java:55) - Server Recieved:
+
+INFO  | 2017-03-07 15:27:26 | [nioEventLoopGroup-3-1] serverHandlers.DiscardServerHandler (DiscardServerHandler.java:99) - 
+INFO  | 2017-03-07 15:27:29 | [nioEventLoopGroup-3-1] serverHandlers.DiscardServerHandler (DiscardServerHandler.java:55) - Server Recieved:set 192.168.10.0:
+
+INFO  | 2017-03-07 15:27:29 | [nioEventLoopGroup-3-1] serverHandlers.DiscardServerHandler (DiscardServerHandler.java:143) - After Format:192.168.10.0:8080
+INFO  | 2017-03-07 15:27:29 | [nioEventLoopGroup-3-1] serverHandlers.DiscardServerHandler (DiscardServerHandler.java:132) - Members List192.168.10.0:2020,,192.168.10.0:8080,
+INFO  | 2017-03-07 15:27:29 | [nioEventLoopGroup-3-1] serverHandlers.DiscardServerHandler (DiscardServerHandler.java:99) - 192.168.10.0:2020,,192.168.10.0:8080,
+INFO  | 2017-03-07 15:27:33 | [nioEventLoopGroup-3-1] serverHandlers.DiscardServerHandler (DiscardServerHandler.java:55) - Server Recieved:set 192.168.10.0
+
+INFO  | 2017-03-07 15:27:33 | [nioEventLoopGroup-3-1] serverHandlers.DiscardServerHandler (DiscardServerHandler.java:143) - After Format:192.168.10.0:8080
+INFO  | 2017-03-07 15:27:33 | [nioEventLoopGroup-3-1] serverHandlers.DiscardServerHandler (DiscardServerHandler.java:132) - Members List192.168.10.0:2020,,192.168.10.0:8080,192.168.10.0:8080,
+INFO  | 2017-03-07 15:27:33 | [nioEventLoopGroup-3-1] serverHandlers.DiscardServerHandler (DiscardServerHandler.java:99) - 192.168.10.0:2020,,192.168.10.0:8080,192.168.10.0:8080,
+INFO  | 2017-03-07 15:27:40 | [nioEventLoopGroup-3-1] serverHandlers.DiscardServerHandler (DiscardServerHandler.java:55) - Server Recieved:set 192.168.10.0:2020
+
+INFO  | 2017-03-07 15:27:40 | [nioEventLoopGroup-3-1] serverHandlers.DiscardServerHandler (DiscardServerHandler.java:143) - After Format:192.168.10.0:2020
+
+INFO  | 2017-03-07 15:27:40 | [nioEventLoopGroup-3-1] serverHandlers.DiscardServerHandler (DiscardServerHandler.java:132) - Members List192.168.10.0:2020,,192.168.10.0:8080,192.168.10.0:8080,192.168.10.0:2020,,
+INFO  | 2017-03-07 15:27:40 | [nioEventLoopGroup-3-1] serverHandlers.DiscardServerHandler (DiscardServerHandler.java:99) - 192.168.10.0:2020,,192.168.10.0:8080,192.168.10.0:8080,192.168.10.0:2020,,
+INFO  | 2017-03-07 15:28:26 | [main] Start (Start.java:29) - Port:4500
+INFO  | 2017-03-07 15:28:29 | [nioEventLoopGroup-3-1] serverHandlers.DiscardServerHandler (DiscardServerHandler.java:55) - Server Recieved:set 192.168.10.0:2020
+
+INFO  | 2017-03-07 15:28:29 | [nioEventLoopGroup-3-1] serverHandlers.DiscardServerHandler (DiscardServerHandler.java:143) - After Format:192.168.10.0:2020
+INFO  | 2017-03-07 15:28:29 | [nioEventLoopGroup-3-1] serverHandlers.DiscardServerHandler (DiscardServerHandler.java:132) - Members List192.168.10.0:2020,
+INFO  | 2017-03-07 15:28:29 | [nioEventLoopGroup-3-1] serverHandlers.DiscardServerHandler (DiscardServerHandler.java:99) - 192.168.10.0:2020,
+INFO  | 2017-03-07 15:28:34 | [nioEventLoopGroup-3-1] serverHandlers.DiscardServerHandler (DiscardServerHandler.java:55) - Server Recieved:set 192.168.10.0:2021
+
+INFO  | 2017-03-07 15:28:34 | [nioEventLoopGroup-3-1] serverHandlers.DiscardServerHandler (DiscardServerHandler.java:143) - After Format:192.168.10.0:2021
+INFO  | 2017-03-07 15:28:34 | [nioEventLoopGroup-3-1] serverHandlers.DiscardServerHandler (DiscardServerHandler.java:132) - Members List192.168.10.0:2020,192.168.10.0:2021,
+INFO  | 2017-03-07 15:28:34 | [nioEventLoopGroup-3-1] serverHandlers.DiscardServerHandler (DiscardServerHandler.java:99) - 192.168.10.0:2020,192.168.10.0:2021,
+INFO  | 2017-03-07 15:28:36 | [nioEventLoopGroup-3-1] serverHandlers.DiscardServerHandler (DiscardServerHandler.java:55) - Server Recieved:set 192.168.10.0:
+
+INFO  | 2017-03-07 15:28:36 | [nioEventLoopGroup-3-1] serverHandlers.DiscardServerHandler (DiscardServerHandler.java:143) - After Format:192.168.10.0:8080
+INFO  | 2017-03-07 15:28:36 | [nioEventLoopGroup-3-1] serverHandlers.DiscardServerHandler (DiscardServerHandler.java:132) - Members List192.168.10.0:2020,192.168.10.0:2021,192.168.10.0:8080,
+INFO  | 2017-03-07 15:28:36 | [nioEventLoopGroup-3-1] serverHandlers.DiscardServerHandler (DiscardServerHandler.java:99) - 192.168.10.0:2020,192.168.10.0:2021,192.168.10.0:8080,
+INFO  | 2017-03-07 15:28:38 | [nioEventLoopGroup-3-1] serverHandlers.DiscardServerHandler (DiscardServerHandler.java:55) - Server Recieved:set 192.168.10.0
+
+INFO  | 2017-03-07 15:28:38 | [nioEventLoopGroup-3-1] serverHandlers.DiscardServerHandler (DiscardServerHandler.java:143) - After Format:192.168.10.0:8080
+INFO  | 2017-03-07 15:28:38 | [nioEventLoopGroup-3-1] serverHandlers.DiscardServerHandler (DiscardServerHandler.java:132) - Members List192.168.10.0:2020,192.168.10.0:2021,192.168.10.0:8080,192.168.10.0:8080,
+INFO  | 2017-03-07 15:28:38 | [nioEventLoopGroup-3-1] serverHandlers.DiscardServerHandler (DiscardServerHandler.java:99) - 192.168.10.0:2020,192.168.10.0:2021,192.168.10.0:8080,192.168.10.0:8080,
+INFO  | 2017-03-07 15:28:43 | [nioEventLoopGroup-3-1] serverHandlers.DiscardServerHandler (DiscardServerHandler.java:55) - Server Recieved:set 192.168.10.0:202012
+
+INFO  | 2017-03-07 15:28:43 | [nioEventLoopGroup-3-1] serverHandlers.DiscardServerHandler (DiscardServerHandler.java:143) - After Format:192.168.10.0:202012
+INFO  | 2017-03-07 15:28:43 | [nioEventLoopGroup-3-1] serverHandlers.DiscardServerHandler (DiscardServerHandler.java:132) - Members List192.168.10.0:2020,192.168.10.0:2021,192.168.10.0:8080,192.168.10.0:8080,192.168.10.0:202012,
+INFO  | 2017-03-07 15:28:43 | [nioEventLoopGroup-3-1] serverHandlers.DiscardServerHandler (DiscardServerHandler.java:99) - 192.168.10.0:2020,192.168.10.0:2021,192.168.10.0:8080,192.168.10.0:8080,192.168.10.0:202012,
+INFO  | 2017-03-07 19:33:51 | [main] Start (Start.java:37) - Port:4500
+INFO  | 2017-03-07 19:34:28 | [main] Start (Start.java:37) - Port:4500
+INFO  | 2017-03-07 19:39:23 | [main] Start (Start.java:37) - Port:4500
+INFO  | 2017-03-07 19:49:13 | [main] Start (Start.java:37) - Port:4500
+INFO  | 2017-03-07 19:51:19 | [main] Start (Start.java:37) - Port:4500
+INFO  | 2017-03-07 19:53:20 | [main] Start (Start.java:37) - Port:4500
+INFO  | 2017-03-07 19:53:37 | [main] Start (Start.java:37) - Port:4500
+INFO  | 2017-03-07 19:54:49 | [main] Start (Start.java:37) - Port:4500
+INFO  | 2017-03-07 19:57:37 | [main] Start (Start.java:37) - Port:4500
+INFO  | 2017-03-07 20:14:21 | [main] Start (Start.java:37) - Port:4500
+INFO  | 2017-03-07 20:16:47 | [main] Start (Start.java:37) - Port:4500
+INFO  | 2017-03-07 20:22:03 | [main] Start (Start.java:37) - Port:4500
+INFO  | 2017-03-07 20:23:43 | [main] Start (Start.java:37) - Port:4500
+INFO  | 2017-03-07 20:23:48 | [main] Start (Start.java:37) - Port:4500
+INFO  | 2017-03-07 20:24:10 | [main] Start (Start.java:37) - Port:4500
+INFO  | 2017-03-07 20:24:13 | [main] Start (Start.java:37) - Port:4500
+INFO  | 2017-03-08 08:38:57 | [main] Start (Start.java:37) - Port:4500
+INFO  | 2017-03-08 08:38:58 | [nioEventLoopGroup-3-1] serverHandlers.DiscardServerHandler (DiscardServerHandler.java:55) - Server Recieved:Hello from JAVA TCP Client
+
+INFO  | 2017-03-08 08:38:58 | [nioEventLoopGroup-3-1] serverHandlers.DiscardServerHandler (DiscardServerHandler.java:99) - 
+INFO  | 2017-03-08 08:42:23 | [main] Start (Start.java:37) - Port:4500
+INFO  | 2017-03-08 08:42:23 | [nioEventLoopGroup-3-2] serverHandlers.DiscardServerHandler (DiscardServerHandler.java:55) - Server Recieved:Hello from JAVA TCP Client
+
+INFO  | 2017-03-08 08:42:23 | [nioEventLoopGroup-3-2] serverHandlers.DiscardServerHandler (DiscardServerHandler.java:99) - 
+INFO  | 2017-03-08 08:44:20 | [main] Start (Start.java:37) - Port:4500
+INFO  | 2017-03-08 08:44:20 | [nioEventLoopGroup-3-3] serverHandlers.DiscardServerHandler (DiscardServerHandler.java:55) - Server Recieved:Hello from JAVA TCP Client
+
+INFO  | 2017-03-08 08:44:20 | [nioEventLoopGroup-3-3] serverHandlers.DiscardServerHandler (DiscardServerHandler.java:99) - 
+INFO  | 2017-03-08 08:50:41 | [main] Start (Start.java:37) - Port:4500
+INFO  | 2017-03-08 08:54:52 | [main] Start (Start.java:37) - Port:4500
+INFO  | 2017-03-08 08:55:47 | [main] Start (Start.java:37) - Port:4500
+INFO  | 2017-03-08 10:27:14 | [main] Start (Start.java:64) - Port:4500
+INFO  | 2017-03-08 10:27:17 | [main] Start (Start.java:49) - Host:127.0.0.1
+INFO  | 2017-03-08 10:27:17 | [main] Start (Start.java:50) - Port:808
+INFO  | 2017-03-08 10:28:09 | [main] Start (Start.java:49) - Host:127.0.0.1
+INFO  | 2017-03-08 10:28:09 | [main] Start (Start.java:50) - Port:808
+INFO  | 2017-03-08 10:28:35 | [main] Start (Start.java:49) - Host:127.0.0.1
+INFO  | 2017-03-08 10:28:35 | [main] Start (Start.java:50) - Port:808
+INFO  | 2017-03-08 10:29:16 | [main] Start (Start.java:49) - Host:127.0.0.1
+INFO  | 2017-03-08 10:29:16 | [main] Start (Start.java:50) - Port:808
+INFO  | 2017-03-08 10:29:23 | [main] Start (Start.java:64) - Port:4500
+INFO  | 2017-03-08 10:29:29 | [main] Start (Start.java:49) - Host:127.0.0.1
+INFO  | 2017-03-08 10:29:29 | [main] Start (Start.java:50) - Port:808
+INFO  | 2017-03-08 10:32:18 | [main] Start (Start.java:49) - Host:152.46.18.157
+INFO  | 2017-03-08 10:32:18 | [main] Start (Start.java:50) - Port:808
+INFO  | 2017-03-08 10:40:49 | [main] Start (Start.java:49) - Host:152.46.18.157
+INFO  | 2017-03-08 10:40:49 | [main] Start (Start.java:50) - Port:808
+INFO  | 2017-03-08 10:41:04 | [main] Start (Start.java:49) - Host:152.46.18.157
+INFO  | 2017-03-08 10:41:04 | [main] Start (Start.java:50) - Port:808
+INFO  | 2017-03-08 10:42:26 | [main] Start (Start.java:50) - Host:152.46.18.157
+INFO  | 2017-03-08 10:42:26 | [main] Start (Start.java:51) - Port:808
+INFO  | 2017-03-08 10:43:04 | [main] Start (Start.java:45) - Host:152.46.18.157
+INFO  | 2017-03-08 10:43:04 | [main] Start (Start.java:46) - Port:4500
+INFO  | 2017-03-08 10:45:21 | [main] Start (Start.java:45) - Host:152.46.18.157
+INFO  | 2017-03-08 10:45:21 | [main] Start (Start.java:46) - Port:4500
+INFO  | 2017-03-08 10:47:04 | [main] Start (Start.java:45) - Host:152.46.18.157
+INFO  | 2017-03-08 10:47:04 | [main] Start (Start.java:46) - Port:4500
+INFO  | 2017-03-08 10:47:49 | [main] Start (Start.java:45) - Host:152.46.18.157
+INFO  | 2017-03-08 10:47:49 | [main] Start (Start.java:46) - Port:4500
+INFO  | 2017-03-08 10:48:28 | [main] Start (Start.java:45) - Host:152.46.18.157
+INFO  | 2017-03-08 10:48:28 | [main] Start (Start.java:46) - Port:4500
+INFO  | 2017-03-08 10:59:21 | [main] Start (Start.java:45) - Host:152.46.18.157
+INFO  | 2017-03-08 10:59:21 | [main] Start (Start.java:46) - Port:4500
+INFO  | 2017-03-08 10:59:21 | [nioEventLoopGroup-3-1] serverHandlers.ClientHandler (ClientHandler.java:28) - Server Recieved : 192.168.1.22:5050,192.168.1.22:5050,
+INFO  | 2017-03-08 11:00:34 | [main] Start (Start.java:45) - Host:152.46.18.157
+INFO  | 2017-03-08 11:00:34 | [main] Start (Start.java:46) - Port:4500
+INFO  | 2017-03-08 11:00:34 | [nioEventLoopGroup-3-1] serverHandlers.ClientHandler (ClientHandler.java:28) - Server Recieved : 192.168.1.22:5050,192.168.1.22:5050,192.168.1.22:5050,
+INFO  | 2017-03-08 11:17:17 | [main] Start (Start.java:45) - Host:152.46.18.157
+INFO  | 2017-03-08 11:17:17 | [main] Start (Start.java:46) - Port:4500
+INFO  | 2017-03-08 11:17:40 | [main] Start (Start.java:45) - Host:152.46.18.157
+INFO  | 2017-03-08 11:17:40 | [main] Start (Start.java:46) - Port:4500
+INFO  | 2017-03-08 11:19:59 | [main] Start (Start.java:45) - Host:152.46.18.157
+INFO  | 2017-03-08 11:19:59 | [main] Start (Start.java:46) - Port:4500
+INFO  | 2017-03-08 11:22:42 | [main] Start (Start.java:45) - Host:152.46.18.157
+INFO  | 2017-03-08 11:22:42 | [main] Start (Start.java:46) - Port:4500
+INFO  | 2017-03-08 11:23:30 | [main] Start (Start.java:45) - Host:152.46.18.157
+INFO  | 2017-03-08 11:23:30 | [main] Start (Start.java:46) - Port:4500
+INFO  | 2017-03-08 11:23:39 | [main] Start (Start.java:45) - Host:152.46.18.157
+INFO  | 2017-03-08 11:23:39 | [main] Start (Start.java:46) - Port:4500
+INFO  | 2017-03-08 11:23:54 | [main] Start (Start.java:45) - Host:152.46.18.157
+INFO  | 2017-03-08 11:23:54 | [main] Start (Start.java:46) - Port:4500
+INFO  | 2017-03-08 11:25:48 | [main] Start (Start.java:45) - Host:152.46.18.157
+INFO  | 2017-03-08 11:25:48 | [main] Start (Start.java:46) - Port:4500
