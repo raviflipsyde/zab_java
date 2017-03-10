@@ -31,6 +31,7 @@ import serverHandlers.DiscardServerHandler;
 import serverHandlers.InHandler2;
 import serverHandlers.NodeInboundHandler;
 import serverHandlers.NodeOutboundHandler;
+import util.TcpClient;
 import util.TcpRequestHandler;
 import util.TcpServer;
 
@@ -66,7 +67,7 @@ public class NodeServer implements Runnable{
 		try {
 			// Start the tcp serve to listen to incoming msgs
 			Thread serverThread = new Thread(new TcpServer(nodePort));
-			Thread serverClient = new Thread(new TcpServer(nodePort));
+			Thread serverClient = new Thread(new TcpClient(bootstrapHost, bootstrapPort, myIP));
 			serverThread.start();
 			serverThread.join();
 			
