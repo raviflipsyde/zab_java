@@ -5,61 +5,80 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.PrintWriter;
 import java.net.InetSocketAddress;
+import java.net.MalformedURLException;
 import java.net.ServerSocket;
 import java.net.Socket;
+import java.net.URL;
 import java.net.UnknownHostException;
+import java.nio.charset.StandardCharsets;
+import java.util.ArrayList;
+import java.util.List;
+
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 import io.netty.bootstrap.Bootstrap;
+import io.netty.buffer.Unpooled;
+import io.netty.channel.Channel;
 import io.netty.channel.ChannelFuture;
 import io.netty.channel.ChannelInitializer;
+import io.netty.channel.ChannelOption;
 import io.netty.channel.EventLoopGroup;
 import io.netty.channel.nio.NioEventLoopGroup;
 import io.netty.channel.socket.SocketChannel;
 import io.netty.channel.socket.nio.NioSocketChannel;
-import serverHandlers.ClientHandler;
+import serverHandlers.DiscardServerHandler;
+import serverHandlers.InHandler2;
+import serverHandlers.NodeInboundHandler;
+import serverHandlers.NodeOutboundHandler;
+import util.TcpRequestHandler;
+import util.TcpServer;
 
 public class NodeServer implements Runnable{
-	private String host;
-	private int port;
 
-	public NodeServer(String host, int port){
-		this.host = host;
-		this.port = port;
+	private static final Logger LOG = LogManager.getLogger(NodeServer.class);
+	private String bootstrapHost;
+	private int bootstrapPort;
+	private int nodePort;
+	private List<InetSocketAddress> memberList;
+
+	private String myIP;
+
+	public NodeServer(String bhost, int bport, int nport){
+		this.bootstrapHost = bhost;
+		this.bootstrapPort = bport;
+		this.nodePort = nport;
+		this.memberList = new ArrayList<InetSocketAddress>();
+		myIP = getMyIP();
 	}
 
 
 
 	public void run() {
-		System.out.println("in run");
+
+		System.out.println("in Node Server run");
 
 		// send the address to bootstrap
+		msgBootstrap();
 		// get the memberlist
-		// start phase 0
-		EventLoopGroup bossGroup = new NioEventLoopGroup(); // (1)
-		EventLoopGroup workerGroup = new NioEventLoopGroup();
+		// memberlist set after msgBootstrap call
+
 		try {
-			Bootstrap b = new Bootstrap();
-			b.group(workerGroup);
-			b.channel(NioSocketChannel.class);
-			b.remoteAddress(new InetSocketAddress(host, port));		    
-			b.handler(new ChannelInitializer<SocketChannel>() {
-				@Override
-				public void initChannel(SocketChannel ch) throws Exception {
-					ch.pipeline().addLast(new ClientHandler());
-				}
-			});
-
-			ChannelFuture f = b.connect().sync();; 
-			f.channel().closeFuture().sync();
-
-
+			// Start the tcp serve to listen to incoming msgs
+			Thread serverThread = new Thread(new TcpServer(nodePort));
+			Thread serverClient = new Thread(new TcpServer(nodePort));
+			serverThread.start();
+			serverThread.join();
+			
 		} catch (InterruptedException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
-		} finally {
-			workerGroup.shutdownGracefully();
-			bossGroup.shutdownGracefully();
 		}
+
+
+		// connect with all the members
+		// start phase 0
+
 
 
 	}
@@ -68,57 +87,77 @@ public class NodeServer implements Runnable{
 	public void msgBootstrap(){
 		Socket socket;
 		try {
-			socket = new Socket (host, port);
-			
+			socket = new Socket (bootstrapHost, bootstrapPort);
+
 			PrintWriter out = new PrintWriter (socket.getOutputStream(), true);
 			BufferedReader in = new BufferedReader (new InputStreamReader(socket.getInputStream ()));
 			//set self_ip:port to bootsstrap
-			out.println ("set 192.168.1.20:2020");
-		
-			
+
+			out.println ("set "+ myIP + ":"+nodePort);
+
+
 			String memberList = in.readLine ();
 			//process memberlist
-			System.out.println ("Relaying: " + memberList);
+			parseMemberList(memberList);
+
 			out.close ();
 			in.close();
 			socket.close ();
+
+
 		} catch (UnknownHostException e) {
-			// TODO Auto-generated catch block
+
 			e.printStackTrace();
 		} catch (IOException e) {
-			// TODO Auto-generated catch block
+
 			e.printStackTrace();
 		}
 
 	}
 
-	public void relatBootstrap(){
-		ServerSocket serverSocket;
-		try {
-			serverSocket = new ServerSocket (1234);
 
-	     Socket rxSocket = serverSocket.accept ();
-	     BufferedReader in = new BufferedReader (new InputStreamReader(rxSocket.getInputStream ()));
-	    
-	     String fromClient = in.readLine ();
-	                                   
-	     in.close ();        
-	     rxSocket.close ();
-	     serverSocket.close ();
-	 
-	     System.out.println ("Relaying: " + fromClient);
-	    
-	     Socket txSocket = new Socket ("127.0.0.1", 2345);
-	     PrintWriter out = new PrintWriter (txSocket.getOutputStream(), true);
-	    
-	     out.println (fromClient);
-	    
-	     out.close ();
-	     txSocket.close ();
-	     
-	} catch (IOException e) {
-		// TODO Auto-generated catch block
-		e.printStackTrace();
+
+
+	private void parseMemberList(String memberList) {
+
+		String[] list = memberList.split(",");
+		System.out.println("Members");
+		for(String s:list){
+			String[] address = s.split(":");
+			String ip = address[0];
+			int port = Integer.parseInt(address[1]);
+			if(myIP.equals(ip) && nodePort== port){}
+			else{
+				InetSocketAddress addr = new InetSocketAddress(address[0], Integer.parseInt(address[1]));
+				this.memberList.add(addr);
+			}
+			//	System.out.println(addr);
+		}
+
 	}
+
+
+	public String getMyIP(){
+		BufferedReader in = null;
+		String ip = " ";
+		try {
+			URL whatismyip = new URL("http://ipv4bot.whatismyipaddress.com/");
+			in = new BufferedReader(new InputStreamReader(whatismyip.openStream()));
+			ip = in.readLine();
+		} catch (MalformedURLException e) {
+			e.printStackTrace();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+		finally {
+			try {
+				in.close();
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
+		}
+
+		return ip;
 	}
+
 }

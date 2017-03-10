@@ -7,6 +7,7 @@ import org.apache.logging.log4j.Logger;
 
 import servers.BootstrapServer;
 import servers.NodeServer;
+import servers.NodeServer1;
 
 import org.apache.logging.log4j.LogManager;
 
@@ -29,23 +30,27 @@ public class Start {
 
 
 
-		if(args[0].equals("Client")){
+		if(args[0].equals("Node")){
 			//    		new NodeServer("127.0.0.1", 4500).run1();
-			String host;
-			int port;
+			String bhost;
+			int bport, nport;
+			
 			System.out.println(args.length);
-			if (args.length > 2) {
-				port = Integer.parseInt(args[2]);
-				host = args[1];
+			if (args.length > 3) {
+				bport = Integer.parseInt(args[2]);
+				nport = Integer.parseInt(args[3]);
+				bhost = args[1];
 			} 
 			else {
-				host = "127.0.0.1";
-				port = 8080;
+				bhost = "127.0.0.1";
+				bport = 4500;
+				nport = 8080;
 			}
-			LOG.info("Host:" + host);
-			LOG.info("Port:" + port);
+			LOG.info("Bootstrap Host: " + bhost);
+			LOG.info("Bootstrap Port: " + bport);
+			LOG.info("Node Port :" + nport);
 
-			new NodeServer(host, port).msgBootstrap();
+			new NodeServer(bhost, bport, nport).run();
 		}
 
 		else if(args[0].equals("Server")){

@@ -10,6 +10,7 @@ import java.io.IOException;
 import java.io.PrintWriter;
 import java.nio.charset.Charset;
 import java.nio.charset.StandardCharsets;
+import java.nio.file.Files;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -25,23 +26,29 @@ import io.netty.util.ReferenceCountUtil;
  */
 public class DiscardServerHandler extends ChannelInboundHandlerAdapter { // (1)
 	private static final Logger LOG = LogManager.getLogger(DiscardServerHandler.class);
-	private final String fileName = "members.txt";
+	private final static String fileName = "members.txt";
 	private final String defaultPort = "8080";
+	static{
+		
+		File file = new File(fileName);
+		try {
+			// if file doesnt exists, then create it
+			if (file.exists()) {
+				
+				file.delete();
+			}
+
+			file.createNewFile();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+		
+
+	}
 	public DiscardServerHandler() {
 		super();
 
-		File file = new File(fileName);
 		
-		// if file doesnt exists, then create it
-//		if (!file.exists()) {
-			try {
-				file.createNewFile();
-			} catch (IOException e) {
-
-				e.printStackTrace();
-			}
-//		}
-
 
 	}
 
@@ -79,7 +86,7 @@ public class DiscardServerHandler extends ChannelInboundHandlerAdapter { // (1)
 			// TODO inform the rest of the servers in config about the new member in the group
 
 		}
-		
+
 		return ret;
 	}
 
@@ -102,7 +109,7 @@ public class DiscardServerHandler extends ChannelInboundHandlerAdapter { // (1)
 				memberList.append(line);
 				memberList.append(",");
 			} 
-			
+
 			bufferedReader.close();
 		} catch (FileNotFoundException e) {
 			// TODO Auto-generated catch block
@@ -116,11 +123,11 @@ public class DiscardServerHandler extends ChannelInboundHandlerAdapter { // (1)
 	}
 
 	public String setMembersList(String member){
-		
+
 		try {
 			FileWriter fileWriter = new FileWriter(fileName,true);
 			BufferedWriter bufferedWriter = new BufferedWriter(fileWriter);
-			
+
 			member = formatMembersName(member);
 			//bufferedWriter.newLine();
 			bufferedWriter.write(member+"\n");
@@ -139,10 +146,12 @@ public class DiscardServerHandler extends ChannelInboundHandlerAdapter { // (1)
 	public void informGroupMembers(){
 
 	}
-	
+
 	public String formatMembersName(String member){
 		String[] array = member.split(" ");
-		
+
+		//TODO check the port range
+
 		if(array[1].indexOf(":")>-1){
 			if(array[1].indexOf(":")!=array[1].trim().length()-1)
 				return array[1].trim();
@@ -153,6 +162,6 @@ public class DiscardServerHandler extends ChannelInboundHandlerAdapter { // (1)
 			return array[1].trim()+":"+defaultPort;
 		}
 	}
-	
+
 
 }
