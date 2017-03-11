@@ -894,3 +894,258 @@ INFO  | 2017-03-10 12:39:47 | [main] Start (Start.java:49) - Bootstrap Host: 152
 INFO  | 2017-03-10 12:39:47 | [main] Start (Start.java:50) - Bootstrap Port: 4500
 INFO  | 2017-03-10 12:39:47 | [main] Start (Start.java:51) - Node Port :9001
 INFO  | 2017-03-10 12:39:48 | [main] servers.NodeServer (NodeServer.java:93) - Connecting with /76.182.86.41:9000
+INFO  | 2017-03-10 16:37:34 | [main] Start (Start.java:49) - Bootstrap Host: 152.46.18.157
+INFO  | 2017-03-10 16:37:34 | [main] Start (Start.java:50) - Bootstrap Port: 4500
+INFO  | 2017-03-10 16:37:34 | [main] Start (Start.java:51) - Node Port :9001
+INFO  | 2017-03-10 16:37:39 | [main] Start (Start.java:49) - Bootstrap Host: 152.46.18.157
+INFO  | 2017-03-10 16:37:39 | [main] Start (Start.java:50) - Bootstrap Port: 4500
+INFO  | 2017-03-10 16:37:39 | [main] Start (Start.java:51) - Node Port :9000
+INFO  | 2017-03-10 16:43:34 | [main] Start (Start.java:49) - Bootstrap Host: 152.46.18.157
+INFO  | 2017-03-10 16:43:34 | [main] Start (Start.java:50) - Bootstrap Port: 4500
+INFO  | 2017-03-10 16:43:34 | [main] Start (Start.java:51) - Node Port :9001
+INFO  | 2017-03-10 16:43:37 | [main] Start (Start.java:49) - Bootstrap Host: 152.46.18.157
+INFO  | 2017-03-10 16:43:37 | [main] Start (Start.java:50) - Bootstrap Port: 4500
+INFO  | 2017-03-10 16:43:37 | [main] Start (Start.java:51) - Node Port :9000
+INFO  | 2017-03-10 16:43:55 | [main] Start (Start.java:49) - Bootstrap Host: 152.46.18.157
+INFO  | 2017-03-10 16:43:55 | [main] Start (Start.java:50) - Bootstrap Port: 4500
+INFO  | 2017-03-10 16:43:55 | [main] Start (Start.java:51) - Node Port :9002
+INFO  | 2017-03-10 16:43:58 | [main] Start (Start.java:49) - Bootstrap Host: 152.46.18.157
+INFO  | 2017-03-10 16:43:58 | [main] Start (Start.java:50) - Bootstrap Port: 4500
+INFO  | 2017-03-10 16:43:58 | [main] Start (Start.java:51) - Node Port :9001
+INFO  | 2017-03-10 16:48:03 | [main] Start (Start.java:49) - Bootstrap Host: 152.46.18.157
+INFO  | 2017-03-10 16:48:03 | [main] Start (Start.java:50) - Bootstrap Port: 4500
+INFO  | 2017-03-10 16:48:03 | [main] Start (Start.java:51) - Node Port :9001
+INFO  | 2017-03-10 16:48:05 | [main] Start (Start.java:49) - Bootstrap Host: 152.46.18.157
+INFO  | 2017-03-10 16:48:05 | [main] Start (Start.java:50) - Bootstrap Port: 4500
+INFO  | 2017-03-10 16:48:05 | [main] Start (Start.java:51) - Node Port :9000
+INFO  | 2017-03-10 16:48:10 | [main] Start (Start.java:49) - Bootstrap Host: 152.46.18.157
+INFO  | 2017-03-10 16:48:10 | [main] Start (Start.java:50) - Bootstrap Port: 4500
+INFO  | 2017-03-10 16:48:10 | [main] Start (Start.java:51) - Node Port :9002
+INFO  | 2017-03-10 16:53:15 | [main] Start (Start.java:49) - Bootstrap Host: 152.46.18.157
+INFO  | 2017-03-10 16:53:15 | [main] Start (Start.java:50) - Bootstrap Port: 4500
+INFO  | 2017-03-10 16:53:15 | [main] Start (Start.java:51) - Node Port :8999
+INFO  | 2017-03-10 16:53:41 | [main] Start (Start.java:49) - Bootstrap Host: 152.46.18.157
+INFO  | 2017-03-10 16:53:41 | [main] Start (Start.java:50) - Bootstrap Port: 4500
+INFO  | 2017-03-10 16:53:41 | [main] Start (Start.java:51) - Node Port :8999
+INFO  | 2017-03-10 16:56:19 | [main] Start (Start.java:49) - Bootstrap Host: 152.46.18.157
+INFO  | 2017-03-10 16:56:19 | [main] Start (Start.java:50) - Bootstrap Port: 4500
+INFO  | 2017-03-10 16:56:19 | [main] Start (Start.java:51) - Node Port :8999
+INFO  | 2017-03-10 16:59:26 | [main] Start (Start.java:49) - Bootstrap Host: 152.46.18.157
+INFO  | 2017-03-10 16:59:26 | [main] Start (Start.java:50) - Bootstrap Port: 4500
+INFO  | 2017-03-10 16:59:26 | [main] Start (Start.java:51) - Node Port :8999
+INFO  | 2017-03-10 16:59:30 | [Thread-1] util.TcpServer (TcpServer.java:26) - Started a TCP server at 8999
+INFO  | 2017-03-10 16:59:44 | [main] Start (Start.java:49) - Bootstrap Host: 152.46.18.157
+INFO  | 2017-03-10 16:59:44 | [main] Start (Start.java:50) - Bootstrap Port: 4500
+INFO  | 2017-03-10 16:59:44 | [main] Start (Start.java:51) - Node Port :9000
+INFO  | 2017-03-10 16:59:44 | [Thread-1] util.TcpServer (TcpServer.java:26) - Started a TCP server at 9000
+INFO  | 2017-03-10 16:59:59 | [main] Start (Start.java:49) - Bootstrap Host: 152.46.18.157
+INFO  | 2017-03-10 16:59:59 | [main] Start (Start.java:50) - Bootstrap Port: 4500
+INFO  | 2017-03-10 16:59:59 | [main] Start (Start.java:51) - Node Port :9002
+INFO  | 2017-03-10 16:59:59 | [Thread-1] util.TcpServer (TcpServer.java:26) - Started a TCP server at 9002
+INFO  | 2017-03-10 17:00:04 | [main] Start (Start.java:49) - Bootstrap Host: 152.46.18.157
+INFO  | 2017-03-10 17:00:04 | [main] Start (Start.java:50) - Bootstrap Port: 4500
+INFO  | 2017-03-10 17:00:04 | [main] Start (Start.java:51) - Node Port :9001
+INFO  | 2017-03-10 17:00:04 | [Thread-1] util.TcpServer (TcpServer.java:26) - Started a TCP server at 9001
+INFO  | 2017-03-10 17:00:24 | [main] Start (Start.java:49) - Bootstrap Host: 152.46.18.157
+INFO  | 2017-03-10 17:00:24 | [main] Start (Start.java:50) - Bootstrap Port: 4500
+INFO  | 2017-03-10 17:00:24 | [main] Start (Start.java:51) - Node Port :8999
+INFO  | 2017-03-10 17:00:28 | [Thread-1] util.TcpServer (TcpServer.java:26) - Started a TCP server at 8999
+INFO  | 2017-03-10 17:03:11 | [main] Start (Start.java:49) - Bootstrap Host: 152.46.18.157
+INFO  | 2017-03-10 17:03:11 | [main] Start (Start.java:50) - Bootstrap Port: 4500
+INFO  | 2017-03-10 17:03:11 | [main] Start (Start.java:51) - Node Port :9001
+INFO  | 2017-03-10 17:03:11 | [Thread-1] util.TcpServer (TcpServer.java:26) - Started a TCP server at 9001
+INFO  | 2017-03-10 17:03:59 | [main] Start (Start.java:49) - Bootstrap Host: 152.46.18.157
+INFO  | 2017-03-10 17:03:59 | [main] Start (Start.java:50) - Bootstrap Port: 4500
+INFO  | 2017-03-10 17:03:59 | [main] Start (Start.java:51) - Node Port :9001
+INFO  | 2017-03-10 17:03:59 | [Thread-1] util.TcpServer (TcpServer.java:26) - Started a TCP server at 9001
+INFO  | 2017-03-10 17:04:04 | [main] Start (Start.java:49) - Bootstrap Host: 152.46.18.157
+INFO  | 2017-03-10 17:04:04 | [main] Start (Start.java:50) - Bootstrap Port: 4500
+INFO  | 2017-03-10 17:04:04 | [main] Start (Start.java:51) - Node Port :9000
+INFO  | 2017-03-10 17:04:04 | [Thread-1] util.TcpServer (TcpServer.java:26) - Started a TCP server at 9000
+INFO  | 2017-03-10 17:04:04 | [Thread-2] util.TcpClient (TcpClient.java:28) - Started a TCP Client 
+INFO  | 2017-03-10 17:04:55 | [main] Start (Start.java:49) - Bootstrap Host: 152.46.18.157
+INFO  | 2017-03-10 17:04:55 | [main] Start (Start.java:50) - Bootstrap Port: 4500
+INFO  | 2017-03-10 17:04:55 | [main] Start (Start.java:51) - Node Port :8999
+INFO  | 2017-03-10 17:04:55 | [Thread-1] util.TcpServer (TcpServer.java:26) - Started a TCP server at 8999
+INFO  | 2017-03-10 17:04:55 | [Thread-2] util.TcpClient (TcpClient.java:28) - Started a TCP Client 
+INFO  | 2017-03-10 17:04:55 | [Thread-3] util.TcpClient (TcpClient.java:28) - Started a TCP Client 
+INFO  | 2017-03-10 17:10:36 | [main] Start (Start.java:49) - Bootstrap Host: 152.46.18.157
+INFO  | 2017-03-10 17:10:36 | [main] Start (Start.java:50) - Bootstrap Port: 4500
+INFO  | 2017-03-10 17:10:36 | [main] Start (Start.java:51) - Node Port :9001
+INFO  | 2017-03-10 17:10:36 | [Thread-1] util.TcpServer (TcpServer.java:26) - Started a TCP server at 9001
+INFO  | 2017-03-10 17:10:36 | [Thread-2] util.TcpClient (TcpClient.java:29) - Started a TCP Client 
+INFO  | 2017-03-10 17:10:36 | [Thread-3] util.TcpClient (TcpClient.java:29) - Started a TCP Client 
+INFO  | 2017-03-10 17:10:38 | [main] Start (Start.java:49) - Bootstrap Host: 152.46.18.157
+INFO  | 2017-03-10 17:10:38 | [main] Start (Start.java:50) - Bootstrap Port: 4500
+INFO  | 2017-03-10 17:10:38 | [main] Start (Start.java:51) - Node Port :9000
+INFO  | 2017-03-10 17:10:38 | [Thread-1] util.TcpServer (TcpServer.java:26) - Started a TCP server at 9000
+INFO  | 2017-03-10 17:10:38 | [Thread-2] util.TcpClient (TcpClient.java:29) - Started a TCP Client 
+INFO  | 2017-03-10 17:10:38 | [Thread-3] util.TcpClient (TcpClient.java:29) - Started a TCP Client 
+INFO  | 2017-03-10 17:10:38 | [Thread-4] util.TcpClient (TcpClient.java:29) - Started a TCP Client 
+INFO  | 2017-03-10 17:10:41 | [main] Start (Start.java:49) - Bootstrap Host: 152.46.18.157
+INFO  | 2017-03-10 17:10:41 | [main] Start (Start.java:50) - Bootstrap Port: 4500
+INFO  | 2017-03-10 17:10:41 | [main] Start (Start.java:51) - Node Port :9002
+INFO  | 2017-03-10 17:10:42 | [Thread-1] util.TcpServer (TcpServer.java:26) - Started a TCP server at 9002
+INFO  | 2017-03-10 17:10:42 | [Thread-2] util.TcpClient (TcpClient.java:29) - Started a TCP Client 
+INFO  | 2017-03-10 17:10:42 | [Thread-3] util.TcpClient (TcpClient.java:29) - Started a TCP Client 
+INFO  | 2017-03-10 17:10:42 | [Thread-4] util.TcpClient (TcpClient.java:29) - Started a TCP Client 
+INFO  | 2017-03-10 17:10:42 | [Thread-5] util.TcpClient (TcpClient.java:29) - Started a TCP Client 
+INFO  | 2017-03-10 17:10:42 | [Thread-6] util.TcpClient (TcpClient.java:29) - Started a TCP Client 
+INFO  | 2017-03-10 17:10:49 | [main] Start (Start.java:49) - Bootstrap Host: 152.46.18.157
+INFO  | 2017-03-10 17:10:49 | [main] Start (Start.java:50) - Bootstrap Port: 4500
+INFO  | 2017-03-10 17:10:49 | [main] Start (Start.java:51) - Node Port :8999
+INFO  | 2017-03-10 17:10:49 | [Thread-1] util.TcpServer (TcpServer.java:26) - Started a TCP server at 8999
+INFO  | 2017-03-10 17:10:49 | [Thread-2] util.TcpClient (TcpClient.java:29) - Started a TCP Client 
+INFO  | 2017-03-10 17:10:49 | [Thread-3] util.TcpClient (TcpClient.java:29) - Started a TCP Client 
+INFO  | 2017-03-10 17:10:49 | [Thread-4] util.TcpClient (TcpClient.java:29) - Started a TCP Client 
+INFO  | 2017-03-10 17:10:49 | [Thread-5] util.TcpClient (TcpClient.java:29) - Started a TCP Client 
+INFO  | 2017-03-10 17:10:49 | [Thread-6] util.TcpClient (TcpClient.java:29) - Started a TCP Client 
+INFO  | 2017-03-10 17:11:35 | [main] Start (Start.java:49) - Bootstrap Host: 152.46.18.157
+INFO  | 2017-03-10 17:11:35 | [main] Start (Start.java:50) - Bootstrap Port: 4500
+INFO  | 2017-03-10 17:11:35 | [main] Start (Start.java:51) - Node Port :8999
+INFO  | 2017-03-10 17:11:38 | [Thread-1] util.TcpServer (TcpServer.java:26) - Started a TCP server at 8999
+INFO  | 2017-03-10 17:11:40 | [Thread-5] util.TcpClient (TcpClient.java:29) - Started a TCP Client 
+INFO  | 2017-03-10 17:11:51 | [Thread-2] util.TcpClient (TcpClient.java:61) - Operation timed out
+INFO  | 2017-03-10 17:11:51 | [Thread-3] util.TcpClient (TcpClient.java:61) - Operation timed out
+INFO  | 2017-03-10 17:11:54 | [Thread-2] util.TcpClient (TcpClient.java:61) - Operation timed out
+INFO  | 2017-03-10 17:11:54 | [Thread-4] util.TcpClient (TcpClient.java:61) - Operation timed out
+INFO  | 2017-03-10 17:11:54 | [Thread-3] util.TcpClient (TcpClient.java:61) - Operation timed out
+INFO  | 2017-03-10 17:11:57 | [Thread-2] util.TcpClient (TcpClient.java:61) - Operation timed out
+INFO  | 2017-03-10 17:11:57 | [Thread-4] util.TcpClient (TcpClient.java:61) - Operation timed out
+INFO  | 2017-03-10 17:11:57 | [Thread-5] util.TcpClient (TcpClient.java:61) - Operation timed out
+INFO  | 2017-03-10 17:11:57 | [Thread-3] util.TcpClient (TcpClient.java:61) - Operation timed out
+INFO  | 2017-03-10 17:11:57 | [Thread-6] util.TcpClient (TcpClient.java:61) - Operation timed out
+INFO  | 2017-03-10 17:13:00 | [main] Start (Start.java:49) - Bootstrap Host: 152.46.18.157
+INFO  | 2017-03-10 17:13:00 | [main] Start (Start.java:50) - Bootstrap Port: 4500
+INFO  | 2017-03-10 17:13:00 | [main] Start (Start.java:51) - Node Port :8999
+INFO  | 2017-03-10 17:13:02 | [Thread-1] util.TcpServer (TcpServer.java:26) - Started a TCP server at 8999
+INFO  | 2017-03-10 17:13:05 | [Thread-2] util.TcpClient (TcpClient.java:29) - Started a TCP Client 
+INFO  | 2017-03-10 17:15:41 | [main] Start (Start.java:49) - Bootstrap Host: 152.46.18.157
+INFO  | 2017-03-10 17:15:41 | [main] Start (Start.java:50) - Bootstrap Port: 4500
+INFO  | 2017-03-10 17:15:41 | [main] Start (Start.java:51) - Node Port :9001
+INFO  | 2017-03-10 17:15:41 | [Thread-1] util.TcpServer (TcpServer.java:26) - Started a TCP server at 9001
+INFO  | 2017-03-10 17:15:48 | [main] Start (Start.java:49) - Bootstrap Host: 152.46.18.157
+INFO  | 2017-03-10 17:15:48 | [main] Start (Start.java:50) - Bootstrap Port: 4500
+INFO  | 2017-03-10 17:15:48 | [main] Start (Start.java:51) - Node Port :8999
+INFO  | 2017-03-10 17:15:52 | [Thread-1] util.TcpServer (TcpServer.java:26) - Started a TCP server at 8999
+INFO  | 2017-03-10 17:15:55 | [Thread-2] util.TcpClient (TcpClient.java:34) - Started a TCP Client 
+INFO  | 2017-03-10 17:15:55 | [Thread-2] util.TcpClient (TcpClient.java:37) - Socket for 71.69.171.88:9001
+INFO  | 2017-03-10 17:17:10 | [main] Start (Start.java:49) - Bootstrap Host: 152.46.18.157
+INFO  | 2017-03-10 17:17:10 | [main] Start (Start.java:50) - Bootstrap Port: 4500
+INFO  | 2017-03-10 17:17:10 | [main] Start (Start.java:51) - Node Port :9001
+INFO  | 2017-03-10 17:17:11 | [Thread-1] util.TcpServer (TcpServer.java:26) - Started a TCP server at 9001
+INFO  | 2017-03-10 17:17:16 | [main] Start (Start.java:49) - Bootstrap Host: 152.46.18.157
+INFO  | 2017-03-10 17:17:16 | [main] Start (Start.java:50) - Bootstrap Port: 4500
+INFO  | 2017-03-10 17:17:16 | [main] Start (Start.java:51) - Node Port :8999
+INFO  | 2017-03-10 17:17:17 | [Thread-1] util.TcpServer (TcpServer.java:26) - Started a TCP server at 8999
+INFO  | 2017-03-10 17:17:20 | [Thread-2] util.TcpClient (TcpClient.java:34) - Started a TCP Client 
+INFO  | 2017-03-10 17:17:20 | [Thread-2] util.TcpClient (TcpClient.java:37) - Socket for 71.69.171.88:9001
+INFO  | 2017-03-10 17:19:06 | [main] Start (Start.java:49) - Bootstrap Host: 152.46.18.157
+INFO  | 2017-03-10 17:19:06 | [main] Start (Start.java:50) - Bootstrap Port: 4500
+INFO  | 2017-03-10 17:19:06 | [main] Start (Start.java:51) - Node Port :9001
+INFO  | 2017-03-10 17:19:07 | [Thread-1] util.TcpServer (TcpServer.java:26) - Started a TCP server at 9001
+INFO  | 2017-03-10 17:19:11 | [Thread-2] util.TcpClient (TcpClient.java:65) - Operation timed out
+INFO  | 2017-03-10 17:19:12 | [Thread-2] util.TcpClient (TcpClient.java:79) - FAtt gyi iski
+INFO  | 2017-03-10 17:19:18 | [main] Start (Start.java:49) - Bootstrap Host: 152.46.18.157
+INFO  | 2017-03-10 17:19:18 | [main] Start (Start.java:50) - Bootstrap Port: 4500
+INFO  | 2017-03-10 17:19:18 | [main] Start (Start.java:51) - Node Port :8999
+INFO  | 2017-03-10 17:19:20 | [Thread-1] util.TcpServer (TcpServer.java:26) - Started a TCP server at 8999
+INFO  | 2017-03-10 17:19:23 | [Thread-2] util.TcpClient (TcpClient.java:34) - Started a TCP Client 
+INFO  | 2017-03-10 17:19:24 | [Thread-2] util.TcpClient (TcpClient.java:37) - Socket for 71.69.171.88:9001
+INFO  | 2017-03-10 17:20:35 | [main] Start (Start.java:49) - Bootstrap Host: 152.46.18.157
+INFO  | 2017-03-10 17:20:35 | [main] Start (Start.java:50) - Bootstrap Port: 4500
+INFO  | 2017-03-10 17:20:35 | [main] Start (Start.java:51) - Node Port :8999
+INFO  | 2017-03-10 17:20:38 | [Thread-1] util.TcpServer (TcpServer.java:26) - Started a TCP server at 8999
+INFO  | 2017-03-10 17:20:39 | [Thread-2] util.TcpClient (TcpClient.java:34) - Started a TCP Client 
+INFO  | 2017-03-10 17:20:39 | [Thread-2] util.TcpClient (TcpClient.java:37) - Socket for 71.69.171.88:9001
+INFO  | 2017-03-10 17:20:42 | [Thread-3] util.TcpClient (TcpClient.java:34) - Started a TCP Client 
+INFO  | 2017-03-10 17:20:43 | [Thread-3] util.TcpClient (TcpClient.java:37) - Socket for bn18-157.dcs.mcnc.org:9009
+INFO  | 2017-03-10 17:20:51 | [Thread-3] util.TcpClient (TcpClient.java:66) - Connection refused
+INFO  | 2017-03-10 17:20:52 | [Thread-3] util.TcpClient (TcpClient.java:85) - FAtt gyi iski
+INFO  | 2017-03-10 17:21:55 | [Thread-2] util.TcpClient (TcpClient.java:66) - Operation timed out
+INFO  | 2017-03-10 17:22:17 | [Thread-2] util.TcpClient (TcpClient.java:85) - FAtt gyi iski
+INFO  | 2017-03-10 17:25:40 | [main] Start (Start.java:49) - Bootstrap Host: 152.46.18.157
+INFO  | 2017-03-10 17:25:40 | [main] Start (Start.java:50) - Bootstrap Port: 4500
+INFO  | 2017-03-10 17:25:40 | [main] Start (Start.java:51) - Node Port :9001
+INFO  | 2017-03-10 17:25:40 | [Thread-1] util.TcpServer (TcpServer.java:26) - Started a TCP server at 9001
+INFO  | 2017-03-10 17:25:40 | [Thread-2] util.TcpClient (TcpClient.java:34) - Started a TCP Client 
+INFO  | 2017-03-10 17:25:40 | [Thread-2] util.TcpClient (TcpClient.java:37) - Socket for bn18-157.dcs.mcnc.org:9000
+INFO  | 2017-03-10 17:25:40 | [Thread-2] util.TcpClient (TcpClient.java:85) - FAtt gyi iski
+INFO  | 2017-03-10 17:26:09 | [main] Start (Start.java:49) - Bootstrap Host: 152.46.18.157
+INFO  | 2017-03-10 17:26:09 | [main] Start (Start.java:50) - Bootstrap Port: 4500
+INFO  | 2017-03-10 17:26:09 | [main] Start (Start.java:51) - Node Port :9005
+INFO  | 2017-03-10 17:26:09 | [Thread-1] util.TcpServer (TcpServer.java:26) - Started a TCP server at 9005
+INFO  | 2017-03-10 17:26:09 | [Thread-2] util.TcpClient (TcpClient.java:34) - Started a TCP Client 
+INFO  | 2017-03-10 17:26:09 | [Thread-2] util.TcpClient (TcpClient.java:37) - Socket for bn18-157.dcs.mcnc.org:9000
+INFO  | 2017-03-10 17:26:09 | [Thread-3] util.TcpClient (TcpClient.java:34) - Started a TCP Client 
+INFO  | 2017-03-10 17:26:09 | [Thread-3] util.TcpClient (TcpClient.java:37) - Socket for 71.69.171.88:9001
+INFO  | 2017-03-10 17:26:09 | [Thread-4] util.TcpClient (TcpClient.java:34) - Started a TCP Client 
+INFO  | 2017-03-10 17:26:09 | [Thread-4] util.TcpClient (TcpClient.java:37) - Socket for bn18-157.dcs.mcnc.org:9002
+INFO  | 2017-03-10 17:26:10 | [Thread-2] util.TcpClient (TcpClient.java:85) - FAtt gyi iski
+INFO  | 2017-03-10 17:26:10 | [Thread-4] util.TcpClient (TcpClient.java:85) - FAtt gyi iski
+INFO  | 2017-03-10 17:28:02 | [main] Start (Start.java:49) - Bootstrap Host: 152.46.18.157
+INFO  | 2017-03-10 17:28:02 | [main] Start (Start.java:50) - Bootstrap Port: 4500
+INFO  | 2017-03-10 17:28:02 | [main] Start (Start.java:51) - Node Port :9001
+INFO  | 2017-03-10 17:28:02 | [Thread-1] util.TcpServer (TcpServer.java:26) - Started a TCP server at 9001
+INFO  | 2017-03-10 17:28:02 | [Thread-2] util.TcpClient (TcpClient.java:34) - Started a TCP Client 
+INFO  | 2017-03-10 17:28:02 | [Thread-2] util.TcpClient (TcpClient.java:37) - Socket for bn18-157.dcs.mcnc.org:8001
+INFO  | 2017-03-10 17:28:02 | [Thread-2] util.TcpClient (TcpClient.java:85) - FAtt gyi iski
+INFO  | 2017-03-10 17:28:23 | [main] Start (Start.java:49) - Bootstrap Host: 152.46.18.157
+INFO  | 2017-03-10 17:28:23 | [main] Start (Start.java:50) - Bootstrap Port: 4500
+INFO  | 2017-03-10 17:28:23 | [main] Start (Start.java:51) - Node Port :9002
+INFO  | 2017-03-10 17:28:24 | [Thread-1] util.TcpServer (TcpServer.java:26) - Started a TCP server at 9002
+INFO  | 2017-03-10 17:28:24 | [Thread-2] util.TcpClient (TcpClient.java:34) - Started a TCP Client 
+INFO  | 2017-03-10 17:28:24 | [Thread-2] util.TcpClient (TcpClient.java:37) - Socket for bn18-157.dcs.mcnc.org:8001
+INFO  | 2017-03-10 17:28:24 | [Thread-3] util.TcpClient (TcpClient.java:34) - Started a TCP Client 
+INFO  | 2017-03-10 17:28:24 | [Thread-3] util.TcpClient (TcpClient.java:37) - Socket for 71.69.171.88:9001
+INFO  | 2017-03-10 17:28:24 | [Thread-4] util.TcpClient (TcpClient.java:34) - Started a TCP Client 
+INFO  | 2017-03-10 17:28:24 | [Thread-4] util.TcpClient (TcpClient.java:37) - Socket for bn18-157.dcs.mcnc.org:8001
+INFO  | 2017-03-10 17:28:24 | [Thread-5] util.TcpClient (TcpClient.java:34) - Started a TCP Client 
+INFO  | 2017-03-10 17:28:24 | [Thread-5] util.TcpClient (TcpClient.java:37) - Socket for bn18-157.dcs.mcnc.org:8002
+INFO  | 2017-03-10 17:28:24 | [Thread-2] util.TcpClient (TcpClient.java:85) - FAtt gyi iski
+INFO  | 2017-03-10 17:28:24 | [Thread-5] util.TcpClient (TcpClient.java:85) - FAtt gyi iski
+INFO  | 2017-03-10 17:28:24 | [Thread-4] util.TcpClient (TcpClient.java:85) - FAtt gyi iski
+INFO  | 2017-03-10 17:29:39 | [Thread-3] util.TcpClient (TcpClient.java:66) - Operation timed out
+INFO  | 2017-03-10 17:29:39 | [Thread-3] util.TcpClient (TcpClient.java:85) - FAtt gyi iski
+INFO  | 2017-03-10 17:39:37 | [main] Start (Start.java:49) - Bootstrap Host: 152.46.18.157
+INFO  | 2017-03-10 17:39:37 | [main] Start (Start.java:50) - Bootstrap Port: 4500
+INFO  | 2017-03-10 17:39:37 | [main] Start (Start.java:51) - Node Port :9001
+INFO  | 2017-03-10 17:39:38 | [Thread-1] util.TcpServer (TcpServer.java:26) - Started a TCP server at 9001
+INFO  | 2017-03-10 17:39:38 | [Thread-2] util.TcpClient (TcpClient.java:34) - Started a TCP Client 
+INFO  | 2017-03-10 17:39:38 | [Thread-2] util.TcpClient (TcpClient.java:37) - Socket for bn18-157.dcs.mcnc.org:8001
+INFO  | 2017-03-10 17:41:38 | [main] Start (Start.java:49) - Bootstrap Host: 152.46.18.157
+INFO  | 2017-03-10 17:41:38 | [main] Start (Start.java:50) - Bootstrap Port: 4500
+INFO  | 2017-03-10 17:41:38 | [main] Start (Start.java:51) - Node Port :9002
+INFO  | 2017-03-10 17:41:39 | [Thread-1] util.TcpServer (TcpServer.java:26) - Started a TCP server at 9002
+INFO  | 2017-03-10 17:41:39 | [Thread-2] util.TcpClient (TcpClient.java:34) - Started a TCP Client 
+INFO  | 2017-03-10 17:41:39 | [Thread-2] util.TcpClient (TcpClient.java:37) - Socket for bn18-157.dcs.mcnc.org:8001
+INFO  | 2017-03-10 17:41:39 | [Thread-3] util.TcpClient (TcpClient.java:34) - Started a TCP Client 
+INFO  | 2017-03-10 17:41:39 | [Thread-4] util.TcpClient (TcpClient.java:34) - Started a TCP Client 
+INFO  | 2017-03-10 17:41:39 | [Thread-3] util.TcpClient (TcpClient.java:37) - Socket for 71.69.171.88:9001
+INFO  | 2017-03-10 17:41:39 | [Thread-4] util.TcpClient (TcpClient.java:37) - Socket for bn18-157.dcs.mcnc.org:8002
+INFO  | 2017-03-10 17:42:24 | [Thread-2] util.TcpClient (TcpClient.java:85) - FAtt gyi iski
+INFO  | 2017-03-10 17:42:31 | [Thread-4] util.TcpClient (TcpClient.java:85) - FAtt gyi iski
+INFO  | 2017-03-10 17:42:51 | [main] Start (Start.java:49) - Bootstrap Host: 152.46.18.157
+INFO  | 2017-03-10 17:42:51 | [main] Start (Start.java:50) - Bootstrap Port: 4500
+INFO  | 2017-03-10 17:42:51 | [main] Start (Start.java:51) - Node Port :9001
+INFO  | 2017-03-10 17:42:51 | [Thread-1] util.TcpServer (TcpServer.java:26) - Started a TCP server at 9001
+INFO  | 2017-03-10 17:42:54 | [Thread-3] util.TcpClient (TcpClient.java:66) - Operation timed out
+INFO  | 2017-03-10 17:42:54 | [Thread-3] util.TcpClient (TcpClient.java:85) - FAtt gyi iski
+INFO  | 2017-03-10 17:54:16 | [main] Start (Start.java:49) - Bootstrap Host: 152.46.18.157
+INFO  | 2017-03-10 17:54:16 | [main] Start (Start.java:50) - Bootstrap Port: 4500
+INFO  | 2017-03-10 17:54:16 | [main] Start (Start.java:51) - Node Port :9001
+INFO  | 2017-03-10 17:54:17 | [Thread-1] util.TcpServer (TcpServer.java:26) - Started a TCP server at 9001
+INFO  | 2017-03-10 17:54:17 | [Thread-2] util.TcpClient (TcpClient.java:34) - Started a TCP Client 
+INFO  | 2017-03-10 17:54:17 | [Thread-2] util.TcpClient (TcpClient.java:37) - Socket for bn18-157.dcs.mcnc.org:8001
+INFO  | 2017-03-10 17:54:17 | [Thread-3] util.TcpClient (TcpClient.java:34) - Started a TCP Client 
+INFO  | 2017-03-10 17:54:17 | [Thread-3] util.TcpClient (TcpClient.java:37) - Socket for bn18-157.dcs.mcnc.org:8002
+INFO  | 2017-03-10 18:00:28 | [main] Start (Start.java:49) - Bootstrap Host: 152.46.18.157
+INFO  | 2017-03-10 18:00:28 | [main] Start (Start.java:50) - Bootstrap Port: 4500
+INFO  | 2017-03-10 18:00:28 | [main] Start (Start.java:51) - Node Port :9001
+INFO  | 2017-03-10 18:00:29 | [Thread-1] util.TcpServer (TcpServer.java:26) - Started a TCP server at 9001
+INFO  | 2017-03-10 18:00:32 | [main] Start (Start.java:49) - Bootstrap Host: 152.46.18.157
+INFO  | 2017-03-10 18:00:32 | [main] Start (Start.java:50) - Bootstrap Port: 4500
+INFO  | 2017-03-10 18:00:32 | [main] Start (Start.java:51) - Node Port :9002
+INFO  | 2017-03-10 18:00:32 | [Thread-1] util.TcpServer (TcpServer.java:26) - Started a TCP server at 9002
+INFO  | 2017-03-10 18:00:32 | [Thread-2] util.TcpClient (TcpClient.java:34) - Started a TCP Client 
+INFO  | 2017-03-10 18:00:32 | [Thread-2] util.TcpClient (TcpClient.java:37) - Socket for 71.69.171.88:9001

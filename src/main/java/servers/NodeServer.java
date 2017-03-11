@@ -67,8 +67,15 @@ public class NodeServer implements Runnable{
 		try {
 			// Start the tcp serve to listen to incoming msgs
 			Thread serverThread = new Thread(new TcpServer(nodePort));
-			Thread serverClient = new Thread(new TcpClient(bootstrapHost, bootstrapPort, myIP));
 			serverThread.start();
+			for(InetSocketAddress member: memberList){
+				
+				Thread serverClient = new Thread(new TcpClient(member.getHostName(), member.getPort(), myIP));
+				serverClient.start();
+				
+			}
+			
+			
 			serverThread.join();
 			
 		} catch (InterruptedException e) {

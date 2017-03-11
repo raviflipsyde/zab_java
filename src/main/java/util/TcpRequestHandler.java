@@ -1,13 +1,18 @@
 package util;
 
 import java.io.BufferedReader;
+import java.io.DataOutputStream;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.PrintWriter;
 import java.net.Socket;
 
-public class TcpRequestHandler implements Runnable {
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
+public class TcpRequestHandler implements Runnable {
+	
+	private static final Logger LOG = LogManager.getLogger(TcpRequestHandler.class);
 	private Socket socket;
 
 	public TcpRequestHandler(Socket socket) {
@@ -19,20 +24,22 @@ public class TcpRequestHandler implements Runnable {
 		BufferedReader in;
 		PrintWriter out;
 		try {
-			System.out.println("A Request Received");
+			
 			in = new BufferedReader(new InputStreamReader(socket.getInputStream()));
 			out = new PrintWriter(socket.getOutputStream(), true);
+			DataOutputStream outToServer = new DataOutputStream(socket.getOutputStream());
 
 			String request = in.readLine();
-			StringBuilder strb = new StringBuilder();
-			while(request!=null && request.length() > 0){
-				strb.append(request);
-				request = in.readLine();
-			}
 			
-			String output = processRequest(strb.toString());
+			LOG.info("Received: "+ request);
+			
+			String output = processRequest(request);
+			
+			LOG.info("Sending response:"+ output);
+			
 			out.println(output+"\r\n");
 			out.flush();
+			
 			in.close();
             out.close();
             socket.close();
@@ -48,7 +55,7 @@ public class TcpRequestHandler implements Runnable {
 	}
 
 	private String processRequest(String input) {
-		return "Wow!! Received "+input;
+		return "Hi back..";
 		
 	}
 

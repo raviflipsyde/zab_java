@@ -7,8 +7,14 @@ import java.io.PrintWriter;
 import java.net.ServerSocket;
 import java.net.Socket;
 
-public class TcpServer implements Runnable {
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
+import servers.NodeServer;
+
+public class TcpServer implements Runnable {
+	
+	private static final Logger LOG = LogManager.getLogger(TcpServer.class);
 	private int port;
 
 	public TcpServer(int port) {
@@ -17,6 +23,7 @@ public class TcpServer implements Runnable {
 	}
 
 	public void run() {
+		LOG.info("Started a TCP server at "+this.port);
 		ServerSocket serverSocket = null;
 		BufferedReader in;
 		PrintWriter out;
@@ -25,6 +32,7 @@ public class TcpServer implements Runnable {
 			while (true) {
 				
 				Socket socket = serverSocket.accept();
+				
 				new Thread(new TcpRequestHandler(socket)).start();
 				
 			}
