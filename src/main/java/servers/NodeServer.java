@@ -18,6 +18,7 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
 import io.netty.bootstrap.Bootstrap;
+import io.netty.bootstrap.ServerBootstrap;
 import io.netty.buffer.Unpooled;
 import io.netty.channel.Channel;
 import io.netty.channel.ChannelFuture;
@@ -26,12 +27,15 @@ import io.netty.channel.ChannelOption;
 import io.netty.channel.EventLoopGroup;
 import io.netty.channel.nio.NioEventLoopGroup;
 import io.netty.channel.socket.SocketChannel;
+import io.netty.channel.socket.nio.NioServerSocketChannel;
 import io.netty.channel.socket.nio.NioSocketChannel;
-import serverHandlers.DiscardServerHandler;
+import serverHandlers.BootStrapServerHandler;
+import serverHandlers.InHandler1;
 import serverHandlers.InHandler2;
 import serverHandlers.NodeInboundHandler;
 import serverHandlers.NodeOutboundHandler;
 import util.TcpClient;
+import util.TcpClient1;
 import util.TcpRequestHandler;
 import util.TcpServer;
 
@@ -66,19 +70,22 @@ public class NodeServer implements Runnable{
 
 		try {
 			// Start the tcp serve to listen to incoming msgs
-			Thread serverThread = new Thread(new TcpServer(nodePort));
-			serverThread.start();
+			//			Thread serverThread = new Thread(new TcpServer(nodePort));
+//			Thread serverThread = new Thread(new NettyServer(nodePort));
+//			serverThread.start();
 			for(InetSocketAddress member: memberList){
 				
-				Thread serverClient = new Thread(new TcpClient(member.getHostName(), member.getPort(), myIP));
-				serverClient.start();
-				
+				String	ret  = new TcpClient1(member.getHostName(), member.getPort()).sendMsg("JOIN_GROUP:"+myIP+":"+nodePort);
+				LOG.info("tcp client recieved "+ ret);	
+		
+
 			}
 			
+			this.runServer(nodePort);
+
 			
-			serverThread.join();
-			
-		} catch (InterruptedException e) {
+
+		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
@@ -139,7 +146,7 @@ public class NodeServer implements Runnable{
 				InetSocketAddress addr = new InetSocketAddress(address[0], Integer.parseInt(address[1]));
 				this.memberList.add(addr);
 			}
-			//	System.out.println(addr);
+			
 		}
 
 	}
@@ -166,6 +173,43 @@ public class NodeServer implements Runnable{
 		}
 
 		return ip;
+	}
+	
+	
+	private void runServer(int port){
+
+        EventLoopGroup bossGroup = new NioEventLoopGroup(); // (1)
+        EventLoopGroup workerGroup = new NioEventLoopGroup();
+        try {
+            ServerBootstrap b = new ServerBootstrap(); // (2)
+            b.group(bossGroup, workerGroup)
+             .channel(NioServerSocketChannel.class) // (3)
+             .childHandler(new ChannelInitializer<SocketChannel>() { // (4)
+                 @Override
+                 public void initChannel(SocketChannel ch) throws Exception {
+                     ch.pipeline().addLast(new InHandler1(memberList));
+                 }
+             })
+             .option(ChannelOption.SO_BACKLOG, 128)          // (5)
+             .childOption(ChannelOption.SO_KEEPALIVE, true); // (6)
+
+            // Bind and start to accept incoming connections.
+            ChannelFuture f = b.bind(port).sync(); // (7)
+            
+            LOG.info("Netty server started on port:"+port);
+            
+            // Wait until the server socket is closed.
+            // In this example, this does not happen, but you can do that to gracefully
+            // shut down your server.
+            f.channel().closeFuture().sync();
+        } catch (InterruptedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} finally {
+            workerGroup.shutdownGracefully();
+            bossGroup.shutdownGracefully();
+        }
+    
 	}
 
 }

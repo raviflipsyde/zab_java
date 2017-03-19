@@ -24,8 +24,8 @@ import io.netty.util.ReferenceCountUtil;
 /**
  * Handles a server-side channel.
  */
-public class DiscardServerHandler extends ChannelInboundHandlerAdapter { // (1)
-	private static final Logger LOG = LogManager.getLogger(DiscardServerHandler.class);
+public class BootStrapServerHandler extends ChannelInboundHandlerAdapter { // (1)
+	private static final Logger LOG = LogManager.getLogger(BootStrapServerHandler.class);
 	private final static String fileName = "members.txt";
 	private final String defaultPort = "8080";
 	static{
@@ -45,7 +45,7 @@ public class DiscardServerHandler extends ChannelInboundHandlerAdapter { // (1)
 		
 
 	}
-	public DiscardServerHandler() {
+	public BootStrapServerHandler() {
 		super();
 
 		

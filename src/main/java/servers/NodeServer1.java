@@ -17,10 +17,13 @@ import io.netty.bootstrap.ServerBootstrap;
 import io.netty.channel.Channel;
 import io.netty.channel.ChannelFuture;
 import io.netty.channel.ChannelFutureListener;
+import io.netty.channel.ChannelInitializer;
 import io.netty.channel.ChannelOption;
 import io.netty.channel.EventLoopGroup;
 import io.netty.channel.nio.NioEventLoopGroup;
+import io.netty.channel.socket.SocketChannel;
 import io.netty.channel.socket.nio.NioServerSocketChannel;
+import serverHandlers.BootStrapServerHandler;
 import serverHandlers.InHandler1;
 import serverHandlers.InHandler2;
 
@@ -51,32 +54,26 @@ public class NodeServer1 {
 		EventLoopGroup workerGroup = new NioEventLoopGroup();
 		ServerBootstrap bootstrap = new ServerBootstrap();
 		try {
-			bootstrap.group(bossGroup, workerGroup)
-			.channel(NioServerSocketChannel.class)
-			.childHandler(new InHandler2())
-			.option(ChannelOption.SO_BACKLOG, 128)          
-            .childOption(ChannelOption.SO_KEEPALIVE, true); 
+            ServerBootstrap b = new ServerBootstrap(); // (2)
+            b.group(bossGroup, workerGroup)
+             .channel(NioServerSocketChannel.class) // (3)
+             .childHandler(new ChannelInitializer<SocketChannel>() { // (4)
+                 @Override
+                 public void initChannel(SocketChannel ch) throws Exception {
+                     ch.pipeline().addLast(new BootStrapServerHandler());
+                 }
+             })
+             .option(ChannelOption.SO_BACKLOG, 128)          // (5)
+             .childOption(ChannelOption.SO_KEEPALIVE, true); // (6)
 
-			ChannelFuture future = bootstrap.bind(new InetSocketAddress(nodePort));
+            // Bind and start to accept incoming connections.
+            ChannelFuture f = b.bind(nodePort).sync(); // (7)
 
-			future.addListener(new ChannelFutureListener() {
-
-				public void operationComplete(ChannelFuture channelFuture) throws Exception {
-
-					if (channelFuture.isSuccess()) {
-						System.out.println("Server bound");
-					} else {
-						System.err.println("Bound attempt failed");
-						channelFuture.cause().printStackTrace();
-					}
-
-
-				}
-			});
-
-
-
-		}
+            // Wait until the server socket is closed.
+            // In this example, this does not happen, but you can do that to gracefully
+            // shut down your server.
+            f.channel().closeFuture().sync();
+        }
 		catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
