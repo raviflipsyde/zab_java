@@ -19,10 +19,11 @@ import serverHandlers.InHandler1;
 
 public class NettyServer implements Runnable {
 	private int port;
-
+	private NodeServer server;
 	private static final Logger LOG = LogManager.getLogger(NettyServer.class);
-    public NettyServer(int port) {
+    public NettyServer(int port, NodeServer server) {
         this.port = port;
+        this.server = server;
     }
     
     
@@ -36,7 +37,7 @@ public class NettyServer implements Runnable {
              .childHandler(new ChannelInitializer<SocketChannel>() { // (4)
                  @Override
                  public void initChannel(SocketChannel ch) throws Exception {
-                     ch.pipeline().addLast(new InHandler1(new ArrayList<InetSocketAddress>()));
+                     ch.pipeline().addLast(new InHandler1(server));
                  }
              })
              .option(ChannelOption.SO_BACKLOG, 128)          // (5)

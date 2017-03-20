@@ -22,6 +22,7 @@ import io.netty.buffer.Unpooled;
 import io.netty.channel.ChannelHandlerContext;
 import io.netty.channel.ChannelInboundHandlerAdapter;
 import io.netty.util.ReferenceCountUtil;
+import servers.NodeServer;
 
 /**
  * Handles a server-side channel.
@@ -29,10 +30,12 @@ import io.netty.util.ReferenceCountUtil;
 public class InHandler1 extends ChannelInboundHandlerAdapter { // (1)
 	private static final Logger LOG = LogManager.getLogger(InHandler1.class);
 	private List<InetSocketAddress> memberList;
-
-	public InHandler1(List<InetSocketAddress> memberList1) {
-		this.memberList = memberList1;
+	private NodeServer server;
+	
+	public InHandler1(NodeServer server) {
+		this.server = server;
 	}
+	
 	
 	@Override
 	public void channelRead(ChannelHandlerContext ctx, Object msg) {
@@ -66,8 +69,9 @@ public class InHandler1 extends ChannelInboundHandlerAdapter { // (1)
 			LOG.info("Server Recieved : "+requestMsg);
 			String[] arr = requestMsg.split(":");
 			LOG.info("InetAddress:"+arr[1]+"-"+arr[2]);
-//			InetSocketAddress addr = new InetSocketAddress(arr[1], Integer.parseInt(arr[2]));
-//			memberList.add(addr);
+			InetSocketAddress addr = new InetSocketAddress(arr[1].trim(), Integer.parseInt(arr[2].trim()));
+			server.addMemberToList(addr);
+			
 			return "OK";
 		}
 		
