@@ -37,7 +37,13 @@ public class NodeServer implements Runnable{
 
 	
 	
-
+public String getMemberList(){
+	StringBuilder strb = new StringBuilder();
+	for(InetSocketAddress addr: memberList){
+		strb.append(addr.toString()+ ", ");
+	}
+	return strb.toString();
+}
 	
 	
 	public synchronized void addMemberToList(InetSocketAddress member) {

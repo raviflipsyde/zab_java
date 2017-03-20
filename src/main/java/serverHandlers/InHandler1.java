@@ -42,9 +42,9 @@ public class InHandler1 extends ChannelInboundHandlerAdapter { // (1)
 
 		ByteBuf in = (ByteBuf) msg;
 		String requestMsg  =in.toString(StandardCharsets.UTF_8 );
-		LOG.info("Server Recieved : "+requestMsg);
+		
 		String response = handleClientRequest(requestMsg);
-		LOG.info("handleClientRequest sentback:"+response);
+		
 		
 		ctx.write(Unpooled.copiedBuffer(response+"\r\n", StandardCharsets.UTF_8));
 		ctx.flush(); // (2)
@@ -66,11 +66,13 @@ public class InHandler1 extends ChannelInboundHandlerAdapter { // (1)
 		if(requestMsg.contains("JOIN_GROUP:")){
 			//add the ip:port to the group member list;
 			
-			LOG.info("Server Recieved : "+requestMsg);
+			
 			String[] arr = requestMsg.split(":");
-			LOG.info("InetAddress:"+arr[1]+"-"+arr[2]);
+			
 			InetSocketAddress addr = new InetSocketAddress(arr[1].trim(), Integer.parseInt(arr[2].trim()));
 			server.addMemberToList(addr);
+			
+			LOG.info(server.getMemberList());
 			
 			return "OK";
 		}
