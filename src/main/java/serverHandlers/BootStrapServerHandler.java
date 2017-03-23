@@ -28,6 +28,7 @@ public class BootStrapServerHandler extends ChannelInboundHandlerAdapter { // (1
 	private static final Logger LOG = LogManager.getLogger(BootStrapServerHandler.class);
 	private final static String fileName = "members.txt";
 	private final String defaultPort = "8080";
+	private static long counter = 0L;
 	static{
 		
 		File file = new File(fileName);
@@ -64,7 +65,7 @@ public class BootStrapServerHandler extends ChannelInboundHandlerAdapter { // (1
 		LOG.info("Member List : "+memberList);
 
 		ctx.write(Unpooled.copiedBuffer(memberList+"\r\n", StandardCharsets.UTF_8));
-
+		ctx.write(Unpooled.copiedBuffer(counter+"\r\n", StandardCharsets.UTF_8));
 		ctx.flush(); // (2)
 
 	}
@@ -82,6 +83,7 @@ public class BootStrapServerHandler extends ChannelInboundHandlerAdapter { // (1
 			// TODO read the client request to fetch parameters and save in the config files.
 			if(setMembersList(requestMsg).equals("ok")){
 				ret = getMembersList();
+				counter++;
 			}
 			// TODO inform the rest of the servers in config about the new member in the group
 

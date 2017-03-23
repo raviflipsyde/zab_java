@@ -24,8 +24,26 @@ public class NodeServer implements Runnable{
 	private int bootstrapPort;
 	private int nodePort;
 	private List<InetSocketAddress> memberList;
-
 	private String myIP;
+
+	private long id;
+	private long lastEpoch;
+	private long currentEpoch;
+	private long lastZxId;
+	
+	
+	
+	public long getId() {
+		return id;
+	}
+
+
+
+	public void setId(long id) {
+		this.id = id;
+	}
+
+
 
 	public NodeServer(String bhost, int bport, int nport){
 		this.bootstrapHost = bhost;
@@ -57,7 +75,9 @@ public String getMemberList(){
 		System.out.println("in Node Server run");
 
 		// send the address to bootstrap
-		msgBootstrap();
+		long id = msgBootstrap();
+		this.setId(id);
+		LOG.info("ID for this node is :"+ id);
 		// get the memberlist
 		// memberlist set after msgBootstrap call
 
@@ -94,7 +114,7 @@ public String getMemberList(){
 	}
 
 
-	public void msgBootstrap(){
+	public long msgBootstrap(){
 		Socket socket;
 		try {
 			socket = new Socket (bootstrapHost, bootstrapPort);
@@ -107,9 +127,12 @@ public String getMemberList(){
 
 
 			String memberList = in.readLine ();
+			String memberId = in.readLine();
+			Long id = Long.parseLong(memberId);
+			
 			//process memberlist
 			parseMemberList(memberList);
-
+			
 			out.close ();
 			in.close();
 			socket.close ();
@@ -122,7 +145,7 @@ public String getMemberList(){
 
 			e.printStackTrace();
 		}
-
+		return id;
 	}
 
 
