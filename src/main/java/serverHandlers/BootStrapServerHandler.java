@@ -63,9 +63,10 @@ public class BootStrapServerHandler extends ChannelInboundHandlerAdapter { // (1
 		LOG.info("Server Recieved : "+requestMsg);
 		String memberList = handleClientRequest(requestMsg);
 		LOG.info("Member List : "+memberList);
+		LOG.info("counter : "+counter);
 
 		ctx.write(Unpooled.copiedBuffer(memberList+"\r\n", StandardCharsets.UTF_8));
-		ctx.write(Unpooled.copiedBuffer(counter+"\r\n", StandardCharsets.UTF_8));
+		ctx.write(Unpooled.copiedBuffer(String.valueOf(counter)+"\r\n", StandardCharsets.UTF_8));
 		ctx.flush(); // (2)
 
 	}

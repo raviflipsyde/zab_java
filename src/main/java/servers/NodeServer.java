@@ -75,8 +75,8 @@ public String getMemberList(){
 		System.out.println("in Node Server run");
 
 		// send the address to bootstrap
-		long id = msgBootstrap();
-		this.setId(id);
+		msgBootstrap();
+		
 		LOG.info("ID for this node is :"+ id);
 		// get the memberlist
 		// memberlist set after msgBootstrap call
@@ -129,8 +129,11 @@ public String getMemberList(){
 			String memberList = in.readLine ();
 			String memberId = in.readLine();
 			Long id = Long.parseLong(memberId);
-			
+			LOG.info("MemberID received:"+ id);
 			//process memberlist
+			
+			this.setId(id);
+			
 			parseMemberList(memberList);
 			
 			out.close ();
