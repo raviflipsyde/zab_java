@@ -24,7 +24,7 @@ public class TimeClientHandler extends ChannelInboundHandlerAdapter {
 	public void channelActive(ChannelHandlerContext ctx) throws Exception {
 		
 		this.ctx = ctx;
-		sendMessage("Join me!!");
+//		sendMessage("Join me!!");
 		
 	}
 	
@@ -36,9 +36,12 @@ public class TimeClientHandler extends ChannelInboundHandlerAdapter {
 		
 		String response = handleClientRequest(requestMsg);
 		
+		if(!response.equals("...")){
+			ctx.write(Unpooled.copiedBuffer(response+"\r\n", StandardCharsets.UTF_8));
+			ctx.flush(); // (2)
+		}
 		
-		ctx.write(Unpooled.copiedBuffer(response+"\r\n", StandardCharsets.UTF_8));
-		ctx.flush(); // (2)
+		
     }
 
     private String handleClientRequest(String requestMsg) {
@@ -74,6 +77,7 @@ public class TimeClientHandler extends ChannelInboundHandlerAdapter {
 	private void sendMessage(String msg) {
 		// TODO Auto-generated method stub
 		ctx.writeAndFlush(Unpooled.copiedBuffer(msg+"\r\n", StandardCharsets.UTF_8)).addListener(listener1);
+		
 	}
 	
 	private final ChannelFutureListener listener1 = new ChannelFutureListener(){
