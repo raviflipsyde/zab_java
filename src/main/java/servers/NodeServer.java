@@ -103,7 +103,7 @@ public String getMemberList(){
 				
 //				LOG.info("tcp client recieved "+ ret);	
 				channelList.add(tc);
-				tc.writeMsg("JOIN_GROUP1:"+myIP+":"+nodePort);
+//				tc.writeMsg("JOIN_GROUP1:"+myIP+":"+nodePort);
 //				f.channel().closeFuture().sync();
 
 			}
