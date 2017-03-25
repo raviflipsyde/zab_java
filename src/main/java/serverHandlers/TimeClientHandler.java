@@ -9,14 +9,27 @@ import org.apache.logging.log4j.Logger;
 
 import io.netty.buffer.ByteBuf;
 import io.netty.buffer.Unpooled;
+import io.netty.channel.ChannelFuture;
+import io.netty.channel.ChannelFutureListener;
 import io.netty.channel.ChannelHandlerContext;
 import io.netty.channel.ChannelInboundHandlerAdapter;
 
 public class TimeClientHandler extends ChannelInboundHandlerAdapter {
 	
 	private static final Logger LOG = LogManager.getLogger(TimeClientHandler.class);
+	private ByteBuf content;
+	private ChannelHandlerContext ctx;
 	
-    @Override
+	@Override
+	public void channelActive(ChannelHandlerContext ctx) throws Exception {
+		
+		this.ctx = ctx;
+		sendMessage("Join me!!");
+		
+	}
+	
+	
+	@Override
     public void channelRead(ChannelHandlerContext ctx, Object msg) {
     	ByteBuf in = (ByteBuf) msg;
 		String requestMsg  =in.toString(StandardCharsets.UTF_8 );
@@ -55,4 +68,26 @@ public class TimeClientHandler extends ChannelInboundHandlerAdapter {
         cause.printStackTrace();
         ctx.close();
     }
+	
+	
+	
+	private void sendMessage(String msg) {
+		// TODO Auto-generated method stub
+		ctx.writeAndFlush(Unpooled.copiedBuffer(msg+"\r\n", StandardCharsets.UTF_8)).addListener(listener1);
+	}
+	
+	private final ChannelFutureListener listener1 = new ChannelFutureListener(){
+
+		public void operationComplete(ChannelFuture future) throws Exception {
+			if(future.isSuccess()){
+				LOG.info("in listener1. op complete success");
+			}
+			else{
+				future.cause().printStackTrace();
+				future.channel().close();
+			}
+			
+		}
+		
+	}; 
 }
