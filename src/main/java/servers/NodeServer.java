@@ -15,6 +15,10 @@ import java.util.List;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
+import io.netty.bootstrap.Bootstrap;
+import io.netty.channel.ChannelFuture;
+import io.netty.channel.EventLoopGroup;
+import io.netty.channel.nio.NioEventLoopGroup;
 import util.TcpClient1;
 
 public class NodeServer implements Runnable{
@@ -24,6 +28,9 @@ public class NodeServer implements Runnable{
 	private int bootstrapPort;
 	private int nodePort;
 	private List<InetSocketAddress> memberList;
+	private List<ChannelFuture> channelList;
+	EventLoopGroup workerGroup = new NioEventLoopGroup();
+	Bootstrap b;
 	private String myIP;
 
 	private long id;
@@ -51,6 +58,8 @@ public class NodeServer implements Runnable{
 		this.nodePort = nport;
 		this.memberList = new ArrayList<InetSocketAddress>();
 		myIP = getMyIP();
+		workerGroup = new NioEventLoopGroup();
+		b = new Bootstrap();
 	}
 
 	
@@ -85,10 +94,12 @@ public String getMemberList(){
 			// Start the tcp serve to listen to incoming msgs
 			//			Thread serverThread = new Thread(new TcpServer(nodePort));
 			for(InetSocketAddress member: memberList){
-				
-				String	ret  = new TcpClient1(member.getHostName(), member.getPort()).sendMsg("JOIN_GROUP:"+myIP+":"+nodePort);
-				LOG.info("tcp client recieved "+ ret);	
-		
+				ChannelFuture f = new TimeClient().getChannelFuture(b, workerGroup, member.getHostName(), member.getPort());
+//				String	ret  = new TcpClient1(member.getHostName(), member.getPort()).sendMsg("JOIN_GROUP:"+myIP+":"+nodePort);
+				LOG.info("netty channel client sending join to "+ member.toString());
+				f.sync().channel().writeAndFlush("JOIN_GROUP:"+myIP+":"+nodePort + "\r\n");
+//				LOG.info("tcp client recieved "+ ret);	
+				channelList.add(f);
 
 			}
 

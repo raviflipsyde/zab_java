@@ -77,6 +77,21 @@ public class InHandler1 extends ChannelInboundHandlerAdapter { // (1)
 			return "OK";
 		}
 		
+		if(requestMsg.contains("OK")){
+			//add the ip:port to the group member list;
+			
+			
+//			String[] arr = requestMsg.split(":");
+//			
+//			InetSocketAddress addr = new InetSocketAddress(arr[1].trim(), Integer.parseInt(arr[2].trim()));
+//			server.addMemberToList(addr);
+			LOG.info("Client rreceived OK!!");
+			LOG.info(server.getMemberList());
+			
+			return "";
+		}
+		
+		
 		return "HMM...";
 		
 	}
