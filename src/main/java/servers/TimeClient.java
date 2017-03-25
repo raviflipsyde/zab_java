@@ -10,13 +10,6 @@ import io.netty.buffer.Unpooled;
 import io.netty.channel.Channel;
 import io.netty.channel.ChannelFuture;
 import io.netty.channel.ChannelFutureListener;
-import io.netty.channel.ChannelInitializer;
-import io.netty.channel.ChannelOption;
-import io.netty.channel.EventLoopGroup;
-import io.netty.channel.nio.NioEventLoopGroup;
-import io.netty.channel.socket.SocketChannel;
-import io.netty.channel.socket.nio.NioSocketChannel;
-import serverHandlers.TimeClientHandler;
 
 public class TimeClient {
 	private static final Logger LOG = LogManager.getLogger(TimeClient.class);
@@ -24,16 +17,7 @@ public class TimeClient {
 	Channel c;
 	
 	
-	public TimeClient(Bootstrap b, EventLoopGroup workerGroup, String host, int port){
-		b.group(workerGroup); // (2)
-        b.channel(NioSocketChannel.class); // (3)
-        b.option(ChannelOption.SO_KEEPALIVE, true); // (4)
-        b.handler(new ChannelInitializer<SocketChannel>() {
-            @Override
-            public void initChannel(SocketChannel ch) throws Exception {
-                ch.pipeline().addLast(new TimeClientHandler());
-            }
-        });
+	public TimeClient(Bootstrap b, String host, int port){
         
         this.cf = b.connect(host, port); // (5)
         
