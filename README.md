@@ -18,3 +18,9 @@ Step2: install maven if not present.
 Step 3: git clone https://github.com/raviflipsyde/zab_java.git
 
 Step 4: mvn clean install package
+
+Starting Bootstrapserver: java -cp zab1-0.0.1.jar Start Server <bootstrap_port>
+
+Starting Node: java -cp zab1-0.0.1.jar Start Node <bootstrap_IP> <bootstrap_port> <node_port>
+
+
