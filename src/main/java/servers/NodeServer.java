@@ -60,6 +60,7 @@ public class NodeServer implements Runnable{
 		myIP = getMyIP();
 		workerGroup = new NioEventLoopGroup();
 		b = new Bootstrap();
+		channelList = new ArrayList<ChannelFuture>();
 	}
 
 	
