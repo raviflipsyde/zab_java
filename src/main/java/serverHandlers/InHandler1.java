@@ -74,7 +74,7 @@ public class InHandler1 extends ChannelInboundHandlerAdapter { // (1)
 			InetSocketAddress addr = new InetSocketAddress(arr[1].trim(), Integer.parseInt(arr[2].trim()));
 			server.addMemberToList(addr);
 			
-			LOG.info(server.getMemberList());
+			LOG.info(server.getMemberListString());
 			
 			return "OK";
 		}

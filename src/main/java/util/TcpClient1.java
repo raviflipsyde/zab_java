@@ -7,6 +7,7 @@ import java.io.InputStreamReader;
 import java.io.PrintWriter;
 import java.net.ServerSocket;
 import java.net.Socket;
+import java.net.UnknownHostException;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -23,7 +24,7 @@ public class TcpClient1 {
 
 	}
 
-	public String sendMsg(String msg) {
+	public String sendMsg(String msg) throws IOException {
 
 		Socket socket = null;
 		BufferedReader in;
@@ -54,17 +55,8 @@ public class TcpClient1 {
 			in.close();
 			out.close();
 			socket.close();
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-			LOG.info(e.getMessage());
-		} catch (Exception e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-			LOG.info(e.getMessage());
-		}
-
-		finally {
+		} 
+				finally {
 			// TODO Auto-generated finally block
 			try {
 				socket.close();

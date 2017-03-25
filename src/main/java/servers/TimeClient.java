@@ -15,12 +15,12 @@ public class TimeClient {
 	private static final Logger LOG = LogManager.getLogger(TimeClient.class);
 	ChannelFuture cf;
 	Channel c;
+	NodeServer server;
 	
-	
-	public TimeClient(Bootstrap b, String host, int port){
+	public TimeClient(Bootstrap b, String host, int port, NodeServer server){
         
         this.cf = b.connect(host, port); // (5)
-        
+        this.server = server;
 	}
 	public ChannelFuture getChannelFuture(){
 		return this.cf;			

@@ -13,13 +13,18 @@ import io.netty.channel.ChannelFuture;
 import io.netty.channel.ChannelFutureListener;
 import io.netty.channel.ChannelHandlerContext;
 import io.netty.channel.ChannelInboundHandlerAdapter;
+import servers.NodeServer;
 
 public class TimeClientHandler extends ChannelInboundHandlerAdapter {
 	
 	private static final Logger LOG = LogManager.getLogger(TimeClientHandler.class);
 	private ByteBuf content;
 	private ChannelHandlerContext ctx;
+	private NodeServer server;
 	
+	public TimeClientHandler(NodeServer server) {
+		this.server = server;
+	}
 	@Override
 	public void channelActive(ChannelHandlerContext ctx) throws Exception {
 		
