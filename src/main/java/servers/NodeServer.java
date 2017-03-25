@@ -98,9 +98,10 @@ public String getMemberList(){
 				ChannelFuture f = new TimeClient().getChannelFuture(b, workerGroup, member.getHostName(), member.getPort());
 //				String	ret  = new TcpClient1(member.getHostName(), member.getPort()).sendMsg("JOIN_GROUP:"+myIP+":"+nodePort);
 				LOG.info("netty channel client sending join to "+ member.toString());
-				f.sync().channel().writeAndFlush("JOIN_GROUP:"+myIP+":"+nodePort + "\r\n");
+				ChannelFuture cf = f.sync().channel().writeAndFlush("JOIN_GROUP:"+myIP+":"+nodePort + "\r\n");
 //				LOG.info("tcp client recieved "+ ret);	
 				channelList.add(f);
+				f.channel().closeFuture().sync();
 
 			}
 

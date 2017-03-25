@@ -39,10 +39,12 @@ public class InHandler1 extends ChannelInboundHandlerAdapter { // (1)
 	
 	@Override
 	public void channelRead(ChannelHandlerContext ctx, Object msg) {
-
+		
+		
+				
 		ByteBuf in = (ByteBuf) msg;
 		String requestMsg  =in.toString(StandardCharsets.UTF_8 );
-		
+		LOG.info("Channel Read:" + requestMsg);
 		String response = handleClientRequest(requestMsg);
 		
 		
@@ -56,7 +58,7 @@ public class InHandler1 extends ChannelInboundHandlerAdapter { // (1)
 		public void channelRegistered(ChannelHandlerContext ctx) throws Exception {
 			
 			super.channelRegistered(ctx);
-			LOG.info("Channel Registered: "+ctx.channel().localAddress());
+			LOG.info("Channel Registered: "+ctx.channel().localAddress() + ":" + ctx.channel().remoteAddress());
 		}
 	
 
