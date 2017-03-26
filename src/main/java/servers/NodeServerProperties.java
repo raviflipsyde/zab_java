@@ -16,6 +16,7 @@ public class NodeServerProperties {
 	private long lastZxId;
 	private boolean isLeader;
 	private State nodestate;
+	private long electionRound;
 
 	private Queue<String> electionQueue;
 	private List<Message> messageList;
@@ -27,10 +28,11 @@ public class NodeServerProperties {
 		currentEpoch = 0;
 		lastZxId = 0;
 		isLeader = false;
+		electionRound = 1;
 		nodestate = State.ELECTION;
 
-		Queue<String> electionQueue = new ConcurrentLinkedQueue<String>();
-		ArrayList<Message> messageList = new ArrayList<Message>();
+		electionQueue = new ConcurrentLinkedQueue<String>();
+		messageList = new ArrayList<Message>();
 	
 	}
 
@@ -112,6 +114,16 @@ public class NodeServerProperties {
 
 	public synchronized void setMessageList(List<Message> messageList) {
 		this.messageList = messageList;
+	}
+
+
+	public long getElectionRound() {
+		return electionRound;
+	}
+
+
+	public void setElectionRound(long electionRound) {
+		this.electionRound = electionRound;
 	}
 	
 	
