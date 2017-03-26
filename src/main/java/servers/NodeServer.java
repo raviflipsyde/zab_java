@@ -99,7 +99,7 @@ public class NodeServer implements Runnable{
 		// send the address to bootstrap, get the member list, get the nodeID
 		msgBootstrap();
 
-		LOG.info("ID for this node is :"+ id);
+		LOG.info("ID for this node is :"+ properties.getId());
 
 		//Start the NettyServer at the nodeport
 		Thread serverThread = new Thread(new NettyServer(nodePort, this));
@@ -143,7 +143,7 @@ public class NodeServer implements Runnable{
 		/*
 		 The logic of changing phases
 		 */
-		if(this.getState().equals("election")){
+		if( properties.getNodestate().equals(NodeServerProperties.State.ELECTION)){
 			startLeaderElection();
 		}
 
@@ -179,6 +179,7 @@ public class NodeServer implements Runnable{
 
 	public long msgBootstrap(){
 		Socket socket;
+		long id = 0;
 		try {
 			socket = new Socket (bootstrapHost, bootstrapPort);
 
@@ -191,11 +192,11 @@ public class NodeServer implements Runnable{
 
 			String memberList = in.readLine ();
 			String memberId = in.readLine();
-			Long id = Long.parseLong(memberId);
+			id = Long.parseLong(memberId);
 			LOG.info("MemberID received:"+ id);
 			//process memberlist
 
-			this.setId(id);
+			this.properties.setId(id);
 
 			parseMemberList(memberList);
 
@@ -211,6 +212,7 @@ public class NodeServer implements Runnable{
 
 			e.printStackTrace();
 		}
+		
 		return id;
 	}
 
@@ -263,7 +265,7 @@ public class NodeServer implements Runnable{
 		try {
 			fos = new FileOutputStream(fout);
 			BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(fos));
-			for(Message m: this.getMessageList()){
+			for(Message m: this.properties.getMessageList()){
 				bw.write(m.toString());
 				bw.newLine();
 			}
@@ -283,7 +285,7 @@ public class NodeServer implements Runnable{
 
 		String fileName = "CommitedHistory_"+this.nodePort+".txt";
 		String line = null;
-
+		List<Message> msgList = this.properties.getMessageList();
 		try {
 
 			FileReader fileReader = new FileReader(fileName );
@@ -291,7 +293,7 @@ public class NodeServer implements Runnable{
 
 			while((line = bufferedReader.readLine()) != null) {
 				Message m = new Message(line);
-				this.getMessageList().add(m);
+				msgList.add(m);
 				System.out.println(m);
 			} 
 
@@ -304,10 +306,11 @@ public class NodeServer implements Runnable{
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		Message lastMsg = this.messageList.get(this.messageList.size()-1);
+		
+		Message lastMsg = msgList.get(msgList.size()-1);
 
-		this.setCurrentEpoch(lastMsg.getEpoch());
-		this.setLastZxId(lastMsg.getTxId());
+		this.properties.setCurrentEpoch(lastMsg.getEpoch());
+		this.properties.setLastZxId(lastMsg.getTxId());
 
 	}
 
