@@ -44,64 +44,13 @@ public class NodeServer implements Runnable{
 	EventLoopGroup workerGroup = new NioEventLoopGroup();
 	Bootstrap b;
 	private String myIP;
-
-	private long id;
-	private long lastEpoch;
-	private long currentEpoch;
-	private long lastZxId;
-	private boolean isLeader;
-	private String state;
-
-	private BlockingQueue<String> electionQueue = new LinkedBlockingQueue<String>();
-	private ArrayList<Message> messageList = new ArrayList<Message>();
-
-	public long getId() {
-		return id;
-	}
-	public void setId(long id) {
-		this.id = id;
-	}
-
-
-	public String getState() {
-		return state;
-	}
-	public void setState(String state) {
-		this.state = state;
-	}
-
-
-	public ArrayList<Message> getMessageList() {
-		return messageList;
-	}
-	public void setMessageList(ArrayList<Message> messageList) {
-		this.messageList = messageList;
-	}
-
-
-	public long getLastEpoch() {
-		return lastEpoch;
-	}
-	public synchronized void setLastEpoch(long lastEpoch) {
-		this.lastEpoch = lastEpoch;
-	}
-	public long getCurrentEpoch() {
-		return currentEpoch;
-	}
-	public synchronized void setCurrentEpoch(long currentEpoch) {
-		this.currentEpoch = currentEpoch;
-	}
-	public long getLastZxId() {
-		return lastZxId;
-	}
-	public synchronized void setLastZxId(long lastZxId) {
-		this.lastZxId = lastZxId;
-	}
+	private NodeServerProperties properties;
 
 	public NodeServer(String bhost, int bport, int nport){
 		this.bootstrapHost = bhost;
 		this.bootstrapPort = bport;
 		this.nodePort = nport;
+		this.properties = new NodeServerProperties();
 		this.memberList = new ArrayList<InetSocketAddress>();
 		final NodeServer this1 = this;
 		myIP = getMyIP();
@@ -118,19 +67,6 @@ public class NodeServer implements Runnable{
 				ch.pipeline().addLast(new TimeClientHandler(this1));
 			}
 		});
-		this.isLeader = false;
-		this.state = "election";
-		this.lastEpoch=0;
-		this.currentEpoch = 0;
-		this.lastZxId = 0;
-		
-		
-		this.messageList.add(new Message(2L,3L,10L));
-		this.messageList.add(new Message(3L,3L,20L));
-		this.messageList.add(new Message(4L,3L,30L));
-		this.messageList.add(new Message(5L,3L,40L));
-		this.messageList.add(new Message(6L,3L,50L));
-
 	}
 
 	public String getMemberListString(){
