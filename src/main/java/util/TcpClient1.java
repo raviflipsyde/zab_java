@@ -38,18 +38,10 @@ public class TcpClient1 {
 			in = new BufferedReader(new InputStreamReader(socket.getInputStream()));
 			out = new PrintWriter(socket.getOutputStream(), true);
 			out.println(msg);
-			// out.println("JOIN_GROUP:"+socket.getInetAddress()+":"+socket.getPort()+"\r\n");
 			out.flush();
 
 			String request = in.readLine();
 
-//			StringBuilder strb = new StringBuilder();
-//			while (request != null && request.length() > 0) {
-//				strb.append(request);
-//				request = in.readLine();
-//			}
-//			retMsg = strb.toString();
-			
 			retMsg = request;
 			
 			in.close();

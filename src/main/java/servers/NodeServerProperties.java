@@ -3,10 +3,7 @@ package servers;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Queue;
-import java.util.concurrent.BlockingQueue;
-import java.util.concurrent.ConcurrentLinkedDeque;
 import java.util.concurrent.ConcurrentLinkedQueue;
-import java.util.concurrent.LinkedBlockingQueue;
 
 public class NodeServerProperties {
 	public enum State {ELECTION,LEADING,FOLLOWING };
@@ -17,8 +14,8 @@ public class NodeServerProperties {
 	private boolean isLeader;
 	private State nodestate;
 	private long electionRound;
-
-	private Queue<String> electionQueue;
+	
+	private Queue<Notification> electionQueue;
 	private List<Message> messageList;
 
 	
@@ -31,7 +28,7 @@ public class NodeServerProperties {
 		electionRound = 1;
 		nodestate = State.ELECTION;
 
-		electionQueue = new ConcurrentLinkedQueue<String>();
+		electionQueue = new ConcurrentLinkedQueue<Notification>();
 		messageList = new ArrayList<Message>();
 	
 	}
@@ -97,12 +94,15 @@ public class NodeServerProperties {
 	}
 
 
-	public synchronized Queue<String> getElectionQueue() {
+
+
+
+	public Queue<Notification> getElectionQueue() {
 		return electionQueue;
 	}
 
 
-	public synchronized void setElectionQueue(Queue<String> electionQueue) {
+	public void setElectionQueue(Queue<Notification> electionQueue) {
 		this.electionQueue = electionQueue;
 	}
 

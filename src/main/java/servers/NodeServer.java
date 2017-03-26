@@ -16,9 +16,10 @@ import java.net.Socket;
 import java.net.URL;
 import java.net.UnknownHostException;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
-import java.util.concurrent.BlockingQueue;
-import java.util.concurrent.LinkedBlockingQueue;
+import java.util.Map.Entry;
+import java.util.Queue;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -45,7 +46,8 @@ public class NodeServer implements Runnable{
 	Bootstrap b;
 	private String myIP;
 	private NodeServerProperties properties;
-
+	private long electionRound;
+	
 	public NodeServer(String bhost, int bport, int nport){
 		this.bootstrapHost = bhost;
 		this.bootstrapPort = bport;
@@ -67,6 +69,7 @@ public class NodeServer implements Runnable{
 				ch.pipeline().addLast(new TimeClientHandler(this1));
 			}
 		});
+		electionRound = 0;
 	}
 
 	public String getMemberListString(){
@@ -143,8 +146,22 @@ public class NodeServer implements Runnable{
 		/*
 		 The logic of changing phases
 		 */
+		long leaderID = properties.getId();
 		if( properties.getNodestate().equals(NodeServerProperties.State.ELECTION)){
-			startLeaderElection();
+			LOG.info("Begin Leader Election---------");
+			Vote leaderVote = startLeaderElection();
+			LOG.info("End Leader Election---------");
+			LOG.info("Leader ID:"+leaderVote.getId() );
+			if(leaderVote.getId() == properties.getId()){
+				properties.setLeader(true);
+				properties.setNodestate(NodeServerProperties.State.LEADING);
+				leaderID = properties.getId();
+			}
+			else{
+				properties.setLeader(true);
+				properties.setNodestate(NodeServerProperties.State.FOLLOWING);
+				leaderID = leaderVote.getId();
+			}
 		}
 
 
@@ -156,20 +173,205 @@ public class NodeServer implements Runnable{
 
 
 
-	private void startLeaderElection() {
+	private Vote startLeaderElection() {
 		// TODO same thread or different thread?
 		memberList = this.getMemberList();
-		int round = 0;
-		//		String myVote = "["++"]";
+		
+		this.electionRound++;
+		HashMap<Long, Vote> receivedVote = new HashMap<Long, Vote>();
+		HashMap<Long, Long> receivedVotesRound = new HashMap<Long, Long>();
+		HashMap<Long, Vote> OutOfElectionVotes = new HashMap<Long, Vote>();
+		HashMap<Long, Long> OutOfElectionVotesRound = new HashMap<Long, Long>();
+		long limit_timeout = 2000;
+		long timeout = 500;
+		
+		Vote myVote = new Vote(this.properties.getLastZxId(), this.properties.getCurrentEpoch(), this.properties.getId());
+		
+		Notification myNotification = new Notification(myVote, this.electionRound, this.properties.getId(), this.properties.getNodestate());
+		LOG.info("My Notification is:"+myNotification.toString());
+		
+		sendNotification(memberList, myNotification); 
 
-//		for(InetSocketAddress member: memberList){
-//
-//			TimeClient tc = new TimeClient(b, member.getHostName(), member.getPort(), this);
-//			LOG.info("netty channel client sending join to "+ member.toString());
-//			tc.writeMsg("JOIN_GROUP:"+myIP+":"+nodePort);
-//			channelList.add(tc);
-//
-//		}
+		while( properties.getNodestate() == NodeServerProperties.State.ELECTION && timeout<limit_timeout ){
+			
+			Notification currentN = properties.getElectionQueue().poll();
+			
+			if(currentN==null){
+				try {
+					Thread.sleep(timeout);
+//					properties.getElectionQueue().wait(timeout);
+					currentN = properties.getElectionQueue().poll();
+					if(currentN==null){
+						timeout = 2*timeout;
+						sendNotification(memberList, myNotification);
+						continue;
+					}
+					
+				} catch (InterruptedException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+				
+			}
+			//CurrentN is not null
+			else if ( currentN.getSenderState() == NodeServerProperties.State.ELECTION ){
+				if(currentN.getSenderRound() < this.electionRound){
+					continue;
+				}else{
+					if(currentN.getSenderRound() > this.electionRound){
+						this.electionRound = currentN.getSenderRound();
+						receivedVote = new HashMap<Long, Vote>();
+						receivedVotesRound = new HashMap<Long, Long>();
+					}
+					if(currentN.getVote().compareTo(myVote) > 0 ){ // if the currentN is bigger thn myvote
+						myVote = currentN.getVote(); // update myvote
+						myNotification.setVote(myVote); // update notification
+						
+					}
+					sendNotification(memberList, myNotification);
+					// update the receivedVote datastructure
+					receivedVote.put(currentN.getSenderId(), currentN.getVote());
+					receivedVotesRound.put(currentN.getSenderId(), currentN.getSenderRound());
+					//TODO shoul i put my vote in the receivedVote
+					receivedVote.put(this.properties.getId(), myVote);
+					receivedVotesRound.put(this.properties.getId(), this.electionRound);
+					
+					if(receivedVote.size() == (memberList.size()+1)){
+						//TODO check for quorum in the receivedvotes and then declare leader
+						break;
+					}
+					else {
+						int myVoteCounter = 0;
+						for( Entry<Long, Vote> v:receivedVote.entrySet()){
+							Vote currVote = v.getValue();
+							if(currVote.equals(myVote)){
+								myVoteCounter++;
+							}
+						}
+						if(myVoteCounter> (memberList.size()+1)/2 ){
+							try {
+//								properties.getElectionQueue().wait(timeout);
+								Thread.sleep(timeout);
+							} catch (InterruptedException e) {
+								// TODO Auto-generated catch block
+								e.printStackTrace();
+							}
+							if(properties.getElectionQueue().size() > 0) continue;
+							else break;
+						}
+						else{
+							continue;
+						}
+					}
+					
+				}
+				
+				
+			
+			
+			} //end of if election
+			
+			// the received vote is either leading or following
+			else{
+				if(currentN.getSenderRound() == this.electionRound){
+					
+					receivedVote.put(currentN.getSenderId(), currentN.getVote());
+					receivedVotesRound.put(currentN.getSenderId(), currentN.getSenderRound());
+					//TODO shoul i put my vote in the receivedVote
+//					receivedVote.put(this.properties.getId(), myVote);
+//					receivedVotesRound.put(this.properties.getId(), this.electionRound);
+					
+					if(currentN.getSenderState() == NodeServerProperties.State.LEADING){
+						myVote = currentN.getVote();
+						break;
+					}
+					else{
+						
+						int myVoteCounter = 0;
+						for( Entry<Long, Vote> v:receivedVote.entrySet()){
+							Vote currVote = v.getValue();
+							if(currVote.equals(myVote)){
+								myVoteCounter++;
+							}
+						}
+						// if the currentN's vote is to me and i achieve quorum in receivedVote then i be the leader
+						
+						if(currentN.getVote().getId()==myVote.getId() && myVoteCounter> (memberList.size()+1)/2 ){
+							
+								myVote = currentN.getVote();
+								break;
+							
+						}
+						else if(myVoteCounter> (memberList.size()+1)/2 ){  //our improvement
+							
+							myVote = currentN.getVote();
+							break;
+						
+						}
+						//wrong condition
+//						else if(myVoteCounter> (memberList.size()+1)/2 
+//								&& OutOfElectionVotes.containsKey(currentN.getVote().getId())){
+//							//TODO this is not 100% sure
+//							myVote = currentN.getVote();
+//							break;
+//						}
+						
+					}
+					
+				}
+				
+				OutOfElectionVotes.put(currentN.getSenderId(), currentN.getVote());
+				OutOfElectionVotesRound.put(currentN.getSenderId(), currentN.getSenderRound());
+				
+				int myVoteCounter = 0;
+				for( Entry<Long, Vote> v:OutOfElectionVotes.entrySet()){
+					Vote currVote = v.getValue();
+					if(currVote.equals(myVote)){
+						myVoteCounter++;
+					}
+				}
+				
+				if(currentN.getVote().getId()==myVote.getId() && myVoteCounter> (memberList.size()+1)/2 ){
+					this.electionRound = currentN.getSenderRound();
+					myVote = currentN.getVote();
+					break;
+				}
+				else if(myVoteCounter> (memberList.size()+1)/2 ){  //our improvement just chekc for the quorum
+					
+					myVote = currentN.getVote();
+					break;
+				
+				}
+				//wrong condition
+//				else if(myVoteCounter> (memberList.size()+1)/2 && OutOfElectionVotes.containsKey(currentN.getVote().getId())){
+//					this.electionRound = currentN.getSenderRound();
+//					
+//				}
+				
+				
+				
+			} //end of else
+			
+			
+			
+			
+			
+		}// end of while
+		// Here the leader is the one pointed by my vote
+		
+		return myVote;
+		
+	}
+
+	private void sendNotification(List<InetSocketAddress> memberList2, Notification myNotification) {
+		if(memberList2.isEmpty()) return;
+		Queue<Notification> PQueue = this.properties.getElectionQueue();
+		
+		for(InetSocketAddress member: memberList2){
+			Thread t = new Thread(new SendNotificationThread(member, myNotification, PQueue));
+			t.start();
+		}
+		
 	}
 
 	// Util functions
