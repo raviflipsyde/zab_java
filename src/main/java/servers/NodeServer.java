@@ -195,7 +195,8 @@ public class NodeServer implements Runnable{
 		long limit_timeout = 2000;
 		long timeout = 500;
 		
-//		Vote myVote = new Vote(this.properties.getLastZxId(), this.properties.getCurrentEpoch(), this.properties.getId());
+		Vote myVote123 = new Vote(this.properties.getLastZxId(), this.properties.getCurrentEpoch(), this.properties.getId());
+		this.properties.setMyVote(myVote123);
 		
 		Notification myNotification = new Notification(this.properties.getMyVote(), this.properties.getElectionRound(), this.properties.getId(), this.properties.getNodestate());
 		LOG.info("My Notification is:"+myNotification.toString());
