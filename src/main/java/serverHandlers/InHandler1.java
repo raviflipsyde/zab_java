@@ -93,6 +93,7 @@ public class InHandler1 extends ChannelInboundHandlerAdapter { // (1)
 			NodeServerProperties serverProp = server.getProperties();
 			if(serverProp.getNodestate() == NodeServerProperties.State.ELECTION){
 				Queue<Notification> currentElectionQueue = server.electionQueue123;
+				LOG.info("Before:"+currentElectionQueue);
 				currentElectionQueue.offer(responseNotification);
 				synchronized (currentElectionQueue) {
 					currentElectionQueue.notifyAll();
@@ -103,6 +104,7 @@ public class InHandler1 extends ChannelInboundHandlerAdapter { // (1)
 						e.printStackTrace();
 					}
 				}
+				LOG.info("After:"+currentElectionQueue);
 
 				if(responseNotification.getSenderState() == NodeServerProperties.State.ELECTION
 						&& responseNotification.getSenderRound() < serverProp.getElectionRound()){

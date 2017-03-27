@@ -58,7 +58,7 @@ public class Vote implements Comparable<Vote>{
 		else if(this.id<o.id)
 			return -1;
 		else if(this.id>o.id)
-			return -1;
+			return 1;
 		else return 0; // shoudn't happen
 		
 	}

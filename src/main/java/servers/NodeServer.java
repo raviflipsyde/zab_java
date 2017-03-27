@@ -212,10 +212,8 @@ public class NodeServer implements Runnable{
 		sendNotification(memberList, myNotification, currentElectionQueue); 
 		Notification currentN = null;
 		while( properties.getNodestate() == NodeServerProperties.State.ELECTION && timeout<limit_timeout ){
-			LOG.info("ElectionQueue:"+ this.getProperties().getElectionQueue());
-			System.out.println(currentElectionQueue.toString());
-			
-				currentN = currentElectionQueue.poll();
+			LOG.info("ElectionQueue:\n"+ this.getProperties().getElectionQueue());
+			currentN = currentElectionQueue.poll();
 			
 			if(currentN==null){
 				LOG.info("Queue is empty!!");
