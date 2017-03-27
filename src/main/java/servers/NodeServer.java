@@ -216,8 +216,9 @@ public class NodeServer implements Runnable{
 			if(currentN==null){
 				LOG.info("Queue is empty!!");
 				try {
-					Thread.sleep(timeout);
-//					properties.getElectionQueue().wait(timeout);
+					synchronized (currentElectionQueue) {
+						currentElectionQueue.wait(timeout);
+	                }
 					currentN = properties.getElectionQueue().poll();
 					if(currentN==null){
 						LOG.info("Queue is empty again!!");
