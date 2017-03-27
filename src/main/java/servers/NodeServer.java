@@ -20,6 +20,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map.Entry;
 import java.util.concurrent.ConcurrentLinkedQueue;
+import java.util.concurrent.CopyOnWriteArrayList;
 import java.util.Queue;
 
 import org.apache.logging.log4j.LogManager;
@@ -55,7 +56,7 @@ public class NodeServer implements Runnable{
 		this.bootstrapPort = bport;
 		this.nodePort = nport;
 		this.properties = new NodeServerProperties();
-		this.memberList = new ArrayList<InetSocketAddress>();
+		this.memberList = new CopyOnWriteArrayList<InetSocketAddress>();
 		final NodeServer this1 = this;
 		myIP = getMyIP();
 		if(bhost.equals("localhost"))
