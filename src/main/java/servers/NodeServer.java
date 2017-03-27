@@ -254,6 +254,9 @@ public class NodeServer implements Runnable{
 						receivedVote = new HashMap<Long, Vote>();
 						receivedVotesRound = new HashMap<Long, Long>();
 					}
+					LOG.info("----------------");
+					LOG.info("vote compare:"+ currentN.getVote().compareTo(this.properties.getMyVote()));
+					LOG.info("----------------");
 					if(currentN.getVote().compareTo(this.properties.getMyVote()) > 0 ){ // if the currentN is bigger thn myvote
 						LOG.info("His vote bigger than mine");
 						this.properties.setMyVote(currentN.getVote()); // update myvote
