@@ -91,16 +91,34 @@ public class InHandler1 extends ChannelInboundHandlerAdapter { // (1)
 			Notification responseNotification = new Notification(arr[1]);
 			NodeServerProperties serverProp = server.getProperties();
 			if(serverProp.getNodestate() == NodeServerProperties.State.ELECTION){
+				
 				serverProp.getElectionQueue().add(responseNotification);
+				
 				if(responseNotification.getSenderState() == NodeServerProperties.State.ELECTION
 						&& responseNotification.getSenderRound() < serverProp.getElectionRound()){
-					Vote myVote = new Vote(serverProp.getLastZxId(), serverProp.getCurrentEpoch(), serverProp.getId());
+					
+					// get my current vote from FLE or when FLE is underway
+					Vote myVote = serverProp.getMyVote();
+					Notification myNotification = new Notification(myVote, serverProp.getElectionRound(), serverProp.getId(), serverProp.getNodestate());
+					return("NOTIFICATION:"+myNotification.toString());
+					
 				}
 			}
+			else{
+				if(responseNotification.getSenderState() == NodeServerProperties.State.ELECTION){
+					// get my current vote from FLE or when FLE is underway
+					Vote myVote = serverProp.getMyVote();
+					Notification myNotification = new Notification(myVote, serverProp.getElectionRound(), serverProp.getId(), serverProp.getNodestate());
+					return("NOTIFICATION:"+myNotification.toString());
+					
+				}
+				
+			}
+			
 						
 			LOG.info(server.getMemberListString());
+			return("ERROR");
 			
-			return "OK";
 		}
 		
 		if(requestMsg.contains("OK")){

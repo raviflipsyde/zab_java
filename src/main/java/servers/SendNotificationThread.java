@@ -15,13 +15,13 @@ public class SendNotificationThread implements Runnable{
 	private InetSocketAddress address;
 	private Notification myNotification;
 	private Queue<Notification> PQueue;
-	
-	
-	
+
+
+
 	public SendNotificationThread(InetSocketAddress address, 
-							Notification myNotification, 
-							Queue<Notification> pQueue) {
-		
+			Notification myNotification, 
+			Queue<Notification> pQueue) {
+
 		this.address = address;
 		this.myNotification = myNotification;
 		this.PQueue = pQueue;
@@ -30,25 +30,30 @@ public class SendNotificationThread implements Runnable{
 
 
 	public void run() {
-		
+
 		LOG.info("Send Notification:"+this.myNotification.toString()+" to "+ this.address);
-		
+
 		TcpClient1 client = new TcpClient1(this.address.getHostName(), this.address.getPort());
 		try {
 			String response = client.sendMsg("NOTIFICATION:"+this.myNotification.toString());
-			String resp[] = response.split(":");
-			Notification responseNotification = new Notification(resp[1]);
-			
-			LOG.info("Received Notification:"+responseNotification.toString()+" from "+ this.address);
-			
-			this.PQueue.add(responseNotification);
-			
+			if(response.equals("ERROR")){
+				//do nothing this is error
+			}else{
+				
+				String resp[] = response.split(":");
+				Notification responseNotification = new Notification(resp[1]);
+
+				LOG.info("Received Notification:"+responseNotification.toString()+" from "+ this.address);
+
+				this.PQueue.add(responseNotification);
+			}
+
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		
+
 	}
 
-	
+
 }
