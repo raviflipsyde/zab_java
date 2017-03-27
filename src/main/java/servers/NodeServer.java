@@ -46,7 +46,7 @@ public class NodeServer implements Runnable{
 	Bootstrap b;
 	private String myIP;
 	private NodeServerProperties properties;
-	private long electionRound;
+	//private long electionRound;
 	
 	public NodeServer(String bhost, int bport, int nport){
 		this.bootstrapHost = bhost;
@@ -69,7 +69,7 @@ public class NodeServer implements Runnable{
 				ch.pipeline().addLast(new TimeClientHandler(this1));
 			}
 		});
-		electionRound = 0;
+		
 	}
 
 	public String getMemberListString(){
@@ -94,6 +94,14 @@ public class NodeServer implements Runnable{
 	public void setMemberList(List<InetSocketAddress> memberList) {
 		this.memberList = memberList;
 	}
+	
+	
+
+	public NodeServerProperties getProperties() {
+		return properties;
+	}
+
+	
 
 	public void run() {
 
@@ -177,7 +185,9 @@ public class NodeServer implements Runnable{
 		// TODO same thread or different thread?
 		memberList = this.getMemberList();
 		
-		this.electionRound++;
+		
+		this.properties.setElectionRound(this.properties.getElectionRound()+1);
+		
 		HashMap<Long, Vote> receivedVote = new HashMap<Long, Vote>();
 		HashMap<Long, Long> receivedVotesRound = new HashMap<Long, Long>();
 		HashMap<Long, Vote> OutOfElectionVotes = new HashMap<Long, Vote>();
@@ -185,9 +195,9 @@ public class NodeServer implements Runnable{
 		long limit_timeout = 2000;
 		long timeout = 500;
 		
-		Vote myVote = new Vote(this.properties.getLastZxId(), this.properties.getCurrentEpoch(), this.properties.getId());
+//		Vote myVote = new Vote(this.properties.getLastZxId(), this.properties.getCurrentEpoch(), this.properties.getId());
 		
-		Notification myNotification = new Notification(myVote, this.electionRound, this.properties.getId(), this.properties.getNodestate());
+		Notification myNotification = new Notification(this.properties.getMyVote(), this.properties.getElectionRound(), this.properties.getId(), this.properties.getNodestate());
 		LOG.info("My Notification is:"+myNotification.toString());
 		
 		sendNotification(memberList, myNotification); 
@@ -215,17 +225,18 @@ public class NodeServer implements Runnable{
 			}
 			//CurrentN is not null
 			else if ( currentN.getSenderState() == NodeServerProperties.State.ELECTION ){
-				if(currentN.getSenderRound() < this.electionRound){
+				if(currentN.getSenderRound() < this.properties.getElectionRound()){
 					continue;
 				}else{
-					if(currentN.getSenderRound() > this.electionRound){
-						this.electionRound = currentN.getSenderRound();
+					if(currentN.getSenderRound() > this.properties.getElectionRound()){
+						this.properties.setElectionRound(currentN.getSenderRound());
+						
 						receivedVote = new HashMap<Long, Vote>();
 						receivedVotesRound = new HashMap<Long, Long>();
 					}
-					if(currentN.getVote().compareTo(myVote) > 0 ){ // if the currentN is bigger thn myvote
-						myVote = currentN.getVote(); // update myvote
-						myNotification.setVote(myVote); // update notification
+					if(currentN.getVote().compareTo(this.properties.getMyVote()) > 0 ){ // if the currentN is bigger thn myvote
+						this.properties.setMyVote(currentN.getVote()); // update myvote
+						myNotification.setVote(this.properties.getMyVote()); // update notification
 						
 					}
 					sendNotification(memberList, myNotification);
@@ -233,8 +244,8 @@ public class NodeServer implements Runnable{
 					receivedVote.put(currentN.getSenderId(), currentN.getVote());
 					receivedVotesRound.put(currentN.getSenderId(), currentN.getSenderRound());
 					//TODO shoul i put my vote in the receivedVote
-					receivedVote.put(this.properties.getId(), myVote);
-					receivedVotesRound.put(this.properties.getId(), this.electionRound);
+					receivedVote.put(this.properties.getId(), this.properties.getMyVote());
+					receivedVotesRound.put(this.properties.getId(), this.properties.getElectionRound());
 					
 					if(receivedVote.size() == (memberList.size()+1)){
 						//TODO check for quorum in the receivedvotes and then declare leader
@@ -244,7 +255,7 @@ public class NodeServer implements Runnable{
 						int myVoteCounter = 0;
 						for( Entry<Long, Vote> v:receivedVote.entrySet()){
 							Vote currVote = v.getValue();
-							if(currVote.equals(myVote)){
+							if(currVote.equals(this.properties.getMyVote())){
 								myVoteCounter++;
 							}
 						}
@@ -273,7 +284,7 @@ public class NodeServer implements Runnable{
 			
 			// the received vote is either leading or following
 			else{
-				if(currentN.getSenderRound() == this.electionRound){
+				if(currentN.getSenderRound() == this.properties.getElectionRound()){
 					
 					receivedVote.put(currentN.getSenderId(), currentN.getVote());
 					receivedVotesRound.put(currentN.getSenderId(), currentN.getSenderRound());
@@ -282,7 +293,7 @@ public class NodeServer implements Runnable{
 //					receivedVotesRound.put(this.properties.getId(), this.electionRound);
 					
 					if(currentN.getSenderState() == NodeServerProperties.State.LEADING){
-						myVote = currentN.getVote();
+						this.properties.setMyVote( currentN.getVote());
 						break;
 					}
 					else{
@@ -290,21 +301,21 @@ public class NodeServer implements Runnable{
 						int myVoteCounter = 0;
 						for( Entry<Long, Vote> v:receivedVote.entrySet()){
 							Vote currVote = v.getValue();
-							if(currVote.equals(myVote)){
+							if(currVote.equals(this.properties.getMyVote())){
 								myVoteCounter++;
 							}
 						}
 						// if the currentN's vote is to me and i achieve quorum in receivedVote then i be the leader
 						
-						if(currentN.getVote().getId()==myVote.getId() && myVoteCounter> (memberList.size()+1)/2 ){
+						if(currentN.getVote().getId()==this.properties.getMyVote().getId() && myVoteCounter> (memberList.size()+1)/2 ){
 							
-								myVote = currentN.getVote();
+							this.properties.setMyVote(currentN.getVote());
 								break;
 							
 						}
 						else if(myVoteCounter> (memberList.size()+1)/2 ){  //our improvement
 							
-							myVote = currentN.getVote();
+							this.properties.setMyVote(currentN.getVote());
 							break;
 						
 						}
@@ -326,19 +337,20 @@ public class NodeServer implements Runnable{
 				int myVoteCounter = 0;
 				for( Entry<Long, Vote> v:OutOfElectionVotes.entrySet()){
 					Vote currVote = v.getValue();
-					if(currVote.equals(myVote)){
+					if(currVote.equals(this.properties.getMyVote())){
 						myVoteCounter++;
 					}
 				}
 				
-				if(currentN.getVote().getId()==myVote.getId() && myVoteCounter> (memberList.size()+1)/2 ){
-					this.electionRound = currentN.getSenderRound();
-					myVote = currentN.getVote();
+				if(currentN.getVote().getId()==this.properties.getMyVote().getId() && myVoteCounter> (memberList.size()+1)/2 ){
+					
+					this.properties.setElectionRound(currentN.getSenderRound());
+					this.properties.setMyVote(currentN.getVote());
 					break;
 				}
 				else if(myVoteCounter> (memberList.size()+1)/2 ){  //our improvement just chekc for the quorum
 					
-					myVote = currentN.getVote();
+					this.properties.setMyVote(currentN.getVote());
 					break;
 				
 				}
@@ -359,7 +371,7 @@ public class NodeServer implements Runnable{
 		}// end of while
 		// Here the leader is the one pointed by my vote
 		
-		return myVote;
+		return this.properties.getMyVote();
 		
 	}
 

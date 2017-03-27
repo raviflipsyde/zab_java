@@ -17,7 +17,8 @@ public class NodeServerProperties {
 	
 	private Queue<Notification> electionQueue;
 	private List<Message> messageList;
-
+	private Vote myVote;
+	
 	
 	public NodeServerProperties() {
 		id = 0;
@@ -25,12 +26,13 @@ public class NodeServerProperties {
 		currentEpoch = 0;
 		lastZxId = 0;
 		isLeader = false;
-		electionRound = 1;
+		electionRound = 0;
 		nodestate = State.ELECTION;
 
 		electionQueue = new ConcurrentLinkedQueue<Notification>();
 		messageList = new ArrayList<Message>();
-	
+		myVote = new Vote(this.getLastZxId(), this.getCurrentEpoch(), this.getId());
+		
 	}
 
 
@@ -124,6 +126,16 @@ public class NodeServerProperties {
 
 	public void setElectionRound(long electionRound) {
 		this.electionRound = electionRound;
+	}
+
+
+	public Vote getMyVote() {
+		return myVote;
+	}
+
+
+	public void setMyVote(Vote myVote) {
+		this.myVote = myVote;
 	}
 	
 	

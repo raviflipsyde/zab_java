@@ -35,8 +35,8 @@ public class SendNotificationThread implements Runnable{
 		
 		TcpClient1 client = new TcpClient1(this.address.getHostName(), this.address.getPort());
 		try {
-			String response = client.sendMsg("NOTIFICATION:::"+this.myNotification.toString());
-			String resp[] = response.split(":::");
+			String response = client.sendMsg("NOTIFICATION:"+this.myNotification.toString());
+			String resp[] = response.split(":");
 			Notification responseNotification = new Notification(resp[1]);
 			
 			LOG.info("Received Notification:"+responseNotification.toString()+" from "+ this.address);

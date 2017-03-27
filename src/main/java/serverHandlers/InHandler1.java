@@ -23,6 +23,9 @@ import io.netty.channel.ChannelHandlerContext;
 import io.netty.channel.ChannelInboundHandlerAdapter;
 import io.netty.util.ReferenceCountUtil;
 import servers.NodeServer;
+import servers.NodeServerProperties;
+import servers.Notification;
+import servers.Vote;
 
 /**
  * Handles a server-side channel.
@@ -74,6 +77,27 @@ public class InHandler1 extends ChannelInboundHandlerAdapter { // (1)
 			InetSocketAddress addr = new InetSocketAddress(arr[1].trim(), Integer.parseInt(arr[2].trim()));
 			server.addMemberToList(addr);
 			
+			LOG.info(server.getMemberListString());
+			
+			return "OK";
+		}
+		
+		if(requestMsg.contains("NOTIFICATION:")){
+			//add the ip:port to the group member list;
+			
+			
+			String[] arr = requestMsg.split(":");
+			
+			Notification responseNotification = new Notification(arr[1]);
+			NodeServerProperties serverProp = server.getProperties();
+			if(serverProp.getNodestate() == NodeServerProperties.State.ELECTION){
+				serverProp.getElectionQueue().add(responseNotification);
+				if(responseNotification.getSenderState() == NodeServerProperties.State.ELECTION
+						&& responseNotification.getSenderRound() < serverProp.getElectionRound()){
+					Vote myVote = new Vote(serverProp.getLastZxId(), serverProp.getCurrentEpoch(), serverProp.getId());
+				}
+			}
+						
 			LOG.info(server.getMemberListString());
 			
 			return "OK";
