@@ -88,7 +88,7 @@ public class InHandler1 extends ChannelInboundHandlerAdapter { // (1)
 			
 			String[] arr = requestMsg.split(":");
 			
-			Notification responseNotification = new Notification(arr[1]);
+			Notification responseNotification = new Notification(arr[1].trim());
 			NodeServerProperties serverProp = server.getProperties();
 			if(serverProp.getNodestate() == NodeServerProperties.State.ELECTION){
 				
