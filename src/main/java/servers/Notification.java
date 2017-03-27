@@ -50,7 +50,9 @@ public class Notification{
 		long voteTxId= Long.parseLong(arr[2]);
 		long senderId= Long.parseLong(arr[3]);
 		long senderRound = Long.parseLong(arr[4]);
+		
 		String senderState = arr[5];
+		System.out.println(senderState);
 		
 		
 		Vote vote1 = new Vote(voteTxId, voteEpoch, voteId);
