@@ -19,6 +19,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map.Entry;
+import java.util.concurrent.ConcurrentLinkedQueue;
 import java.util.Queue;
 
 import org.apache.logging.log4j.LogManager;
@@ -195,17 +196,20 @@ public class NodeServer implements Runnable{
 		long limit_timeout = 10000;
 		long timeout = 1000;
 		
+		Queue<Notification> currentElectionQueue = new ConcurrentLinkedQueue<Notification>();
+		this.getProperties().setElectionQueue(currentElectionQueue);
+		
 		Vote myVote123 = new Vote(this.properties.getLastZxId(), this.properties.getCurrentEpoch(), this.properties.getId());
 		this.properties.setMyVote(myVote123);
 		
 		Notification myNotification = new Notification(this.properties.getMyVote(), this.properties.getElectionRound(), this.properties.getId(), this.properties.getNodestate());
 		LOG.info("My Notification is:"+myNotification.toString());
-		Queue<Notification> currentElectionQueue = this.getProperties().getElectionQueue();
+		
 		sendNotification(memberList, myNotification, currentElectionQueue); 
 
 		while( properties.getNodestate() == NodeServerProperties.State.ELECTION && timeout<limit_timeout ){
 			LOG.info("ElectionQueue:"+ this.getProperties().getElectionQueue());
-			System.out.println(currentElectionQueue);
+			System.out.println(currentElectionQueue.toString());
 			Notification currentN = properties.getElectionQueue().poll();
 			
 			if(currentN==null){
