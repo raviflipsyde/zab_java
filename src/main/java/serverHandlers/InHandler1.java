@@ -50,7 +50,7 @@ public class InHandler1 extends ChannelInboundHandlerAdapter { // (1)
 		String requestMsg  =in.toString(StandardCharsets.UTF_8 );
 		LOG.info("Channel Read:" + requestMsg);
 		String response = handleClientRequest(requestMsg);
-		
+		LOG.info("response:" + response);
 		
 		ctx.write(Unpooled.copiedBuffer(response+"\r\n", StandardCharsets.UTF_8));
 		ctx.flush(); // (2)
@@ -112,7 +112,9 @@ public class InHandler1 extends ChannelInboundHandlerAdapter { // (1)
 				if(responseNotification.getSenderState() == NodeServerProperties.State.ELECTION){
 					// get my current vote from FLE or when FLE is underway
 					Vote myVote = serverProp.getMyVote();
+					
 					Notification myNotification = new Notification(myVote, serverProp.getElectionRound(), serverProp.getId(), serverProp.getNodestate());
+					LOG.info("myNotification:"+myNotification);
 					return("NOTIFICATION:"+myNotification.toString());
 					
 				}
