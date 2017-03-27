@@ -196,8 +196,9 @@ public class NodeServer implements Runnable{
 		long limit_timeout = 10000;
 		long timeout = 1000;
 		
-		Queue<Notification> currentElectionQueue = new ConcurrentLinkedQueue<Notification>();
-		this.getProperties().setElectionQueue(currentElectionQueue);
+		//Queue<Notification> currentElectionQueue = new ConcurrentLinkedQueue<Notification>();
+//		this.getProperties().setElectionQueue(currentElectionQueue);
+		Queue<Notification>  currentElectionQueue = this.getProperties().getElectionQueue();
 		
 		Vote myVote123 = new Vote(this.properties.getLastZxId(), this.properties.getCurrentEpoch(), this.properties.getId());
 		this.properties.setMyVote(myVote123);
