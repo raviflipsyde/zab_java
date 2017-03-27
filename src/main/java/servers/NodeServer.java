@@ -414,7 +414,7 @@ public class NodeServer implements Runnable{
 			Thread t = new Thread(nt0);
 			t.start();
 			try {
-				Thread.sleep(100);
+				Thread.sleep(500);
 			} catch (InterruptedException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();

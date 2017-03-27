@@ -96,6 +96,12 @@ public class InHandler1 extends ChannelInboundHandlerAdapter { // (1)
 				currentElectionQueue.offer(responseNotification);
 				synchronized (currentElectionQueue) {
 					currentElectionQueue.notifyAll();
+					try {
+						Thread.sleep(500);
+					} catch (InterruptedException e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+					}
 				}
 
 				if(responseNotification.getSenderState() == NodeServerProperties.State.ELECTION
