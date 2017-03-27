@@ -92,6 +92,12 @@ public class Vote implements Comparable<Vote>{
 			return false;
 		return true;
 	}
+
+
+	@Override
+	public String toString() {
+		return "Vote [TxId=" + TxId + ", epoch=" + epoch + ", id=" + id + "]";
+	}
 	
 	
 	
