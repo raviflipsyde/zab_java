@@ -13,6 +13,7 @@ import java.nio.charset.Charset;
 import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
 import java.util.List;
+import java.util.Queue;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -91,8 +92,11 @@ public class InHandler1 extends ChannelInboundHandlerAdapter { // (1)
 			Notification responseNotification = new Notification(arr[1].trim());
 			NodeServerProperties serverProp = server.getProperties();
 			if(serverProp.getNodestate() == NodeServerProperties.State.ELECTION){
-				
-				serverProp.getElectionQueue().offer(responseNotification);
+				Queue<Notification> currentElectionQueue = serverProp.getElectionQueue();
+				currentElectionQueue.offer(responseNotification);
+					synchronized (currentElectionQueue) {
+						currentElectionQueue.notify();
+					}
 				
 				if(responseNotification.getSenderState() == NodeServerProperties.State.ELECTION
 						&& responseNotification.getSenderRound() < serverProp.getElectionRound()){
