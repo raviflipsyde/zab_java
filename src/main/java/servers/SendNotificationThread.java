@@ -33,31 +33,27 @@ public class SendNotificationThread implements Runnable{
 
 		LOG.info("Send Notification:"+this.myNotification.toString()+" to "+ this.address);
 		
-		electionQueue1.offer(myNotification);
-		LOG.info("Added notification to electionQueue1 in SendNotification thread");
-		LOG.info("electionQueue1:"+electionQueue1);
-		
 		TcpClient1 client = new TcpClient1(this.address.getHostName(), this.address.getPort());
-//		try {
-//			String response = client.sendMsg("NOTIFICATION:"+this.myNotification.toString());
-//			if(response.equals("ERROR")){
-//				//do nothing this is error
-//			}else{
-//				
-//				String resp[] = response.split(":");
-//				Notification responseNotification = new Notification(resp[1]);
-//
-//				LOG.info("Received Notification:"+responseNotification.toString()+" from "+ this.address);
-//				electionQueue1.offer(responseNotification);
-//				electionQueue1.add(responseNotification);
-//				System.out.println(this.electionQueue1.toString());
-////				this.PQueue.add(responseNotification);
-//			}
-//
-//		} catch (IOException e) {
-//			// TODO Auto-generated catch block
-//			e.printStackTrace();
-//		}
+		try {
+			String response = client.sendMsg("NOTIFICATION:"+this.myNotification.toString());
+			if(response.equals("ERROR")){
+				//do nothing this is error
+			}else{
+				
+				String resp[] = response.split(":");
+				Notification responseNotification = new Notification(resp[1]);
+
+				LOG.info("Received Notification:"+responseNotification.toString()+" from "+ this.address);
+				boolean retVal = electionQueue1.offer(responseNotification);
+				
+				LOG.info("electionQueue1.offer:"+retVal+"\n"+electionQueue1+"\n");
+//				this.PQueue.add(responseNotification);
+			}
+
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 
 	}
 
