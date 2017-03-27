@@ -288,8 +288,8 @@ public class NodeServer implements Runnable{
 						if(myVoteCounter> (memberList.size()+1)/2 ){
 							LOG.info("Found  quorum in received votes");
 							try {
-//								properties.getElectionQueue().wait(timeout);
-								Thread.sleep(timeout);
+								currentElectionQueue.wait(timeout);
+//								Thread.sleep(timeout);
 							} catch (InterruptedException e) {
 								// TODO Auto-generated catch block
 								e.printStackTrace();
