@@ -186,7 +186,6 @@ public class NodeServer implements Runnable{
 		// TODO same thread or different thread?
 		memberList = this.getMemberList();
 		
-		
 		this.properties.setElectionRound(this.properties.getElectionRound()+1);
 		
 		HashMap<Long, Vote> receivedVote = new HashMap<Long, Vote>();
@@ -207,19 +206,22 @@ public class NodeServer implements Runnable{
 		LOG.info("My Notification is:"+myNotification.toString());
 		
 		sendNotification(memberList, myNotification, currentElectionQueue); 
-
+		Notification currentN = null;
 		while( properties.getNodestate() == NodeServerProperties.State.ELECTION && timeout<limit_timeout ){
 			LOG.info("ElectionQueue:"+ this.getProperties().getElectionQueue());
 			System.out.println(currentElectionQueue.toString());
-			Notification currentN = currentElectionQueue.poll();
-			
+			synchronized (currentElectionQueue) {
+				currentN = currentElectionQueue.poll();
+			}
 			if(currentN==null){
 				LOG.info("Queue is empty!!");
 				try {
 					synchronized (currentElectionQueue) {
 						currentElectionQueue.wait(timeout);
+						currentN = currentElectionQueue.poll();
 	                }
-					currentN = properties.getElectionQueue().poll();
+					
+					
 					if(currentN==null){
 						LOG.info("Queue is empty again!!");
 						timeout = 2*timeout;

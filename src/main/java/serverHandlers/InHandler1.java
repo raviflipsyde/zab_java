@@ -93,8 +93,9 @@ public class InHandler1 extends ChannelInboundHandlerAdapter { // (1)
 			NodeServerProperties serverProp = server.getProperties();
 			if(serverProp.getNodestate() == NodeServerProperties.State.ELECTION){
 				Queue<Notification> currentElectionQueue = serverProp.getElectionQueue();
-				currentElectionQueue.offer(responseNotification);
+				
 					synchronized (currentElectionQueue) {
+						currentElectionQueue.offer(responseNotification);
 						currentElectionQueue.notify();
 					}
 				
