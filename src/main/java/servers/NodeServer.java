@@ -204,7 +204,8 @@ public class NodeServer implements Runnable{
 		sendNotification(memberList, myNotification); 
 
 		while( properties.getNodestate() == NodeServerProperties.State.ELECTION && timeout<limit_timeout ){
-			
+			LOG.info("ElectionQueue:"+ this.getProperties().getElectionQueue());
+			LOG.info("ElectionQueue:"+ properties.getElectionQueue());
 			Notification currentN = properties.getElectionQueue().poll();
 			
 			if(currentN==null){
@@ -398,7 +399,7 @@ public class NodeServer implements Runnable{
 		Queue<Notification> PQueue = this.properties.getElectionQueue();
 		
 		for(InetSocketAddress member: memberList2){
-			Thread t = new Thread(new SendNotificationThread(member, myNotification, PQueue));
+			Thread t = new Thread(new SendNotificationThread(member, myNotification, this));
 			t.start();
 		}
 		

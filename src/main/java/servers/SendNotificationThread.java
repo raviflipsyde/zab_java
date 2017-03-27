@@ -14,17 +14,17 @@ public class SendNotificationThread implements Runnable{
 	private static final Logger LOG = LogManager.getLogger(SendNotificationThread.class);
 	private InetSocketAddress address;
 	private Notification myNotification;
-	private Queue<Notification> PQueue;
+	private NodeServer nodeServer;
 
 
 
 	public SendNotificationThread(InetSocketAddress address, 
 			Notification myNotification, 
-			Queue<Notification> pQueue) {
+			NodeServer nodeServer) {
 
 		this.address = address;
 		this.myNotification = myNotification;
-		this.PQueue = pQueue;
+		this.nodeServer = nodeServer;
 	}
 
 
@@ -44,8 +44,9 @@ public class SendNotificationThread implements Runnable{
 				Notification responseNotification = new Notification(resp[1]);
 
 				LOG.info("Received Notification:"+responseNotification.toString()+" from "+ this.address);
-
-				this.PQueue.add(responseNotification);
+				nodeServer.getProperties().getElectionQueue().add(responseNotification);
+				LOG.info("ElectionQueue:"+ nodeServer.getProperties().getElectionQueue());
+//				this.PQueue.add(responseNotification);
 			}
 
 		} catch (IOException e) {
