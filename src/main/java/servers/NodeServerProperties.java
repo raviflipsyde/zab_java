@@ -6,7 +6,7 @@ import java.util.Queue;
 import java.util.concurrent.ConcurrentLinkedQueue;
 
 public class NodeServerProperties {
-	public enum State { ELECTION ,LEADING ,FOLLOWING };
+	public static enum State { ELECTION ,LEADING ,FOLLOWING };
 	private long id;
 	private long lastEpoch;
 	private long currentEpoch;
