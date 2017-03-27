@@ -52,7 +52,7 @@ public class Notification{
 		long senderRound = Long.parseLong(arr[4]);
 		
 		String senderState = arr[5];
-		System.out.println(senderState);
+	
 		
 		
 		Vote vote1 = new Vote(voteTxId, voteEpoch, voteId);

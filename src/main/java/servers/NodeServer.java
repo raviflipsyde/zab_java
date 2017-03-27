@@ -192,8 +192,8 @@ public class NodeServer implements Runnable{
 		HashMap<Long, Long> receivedVotesRound = new HashMap<Long, Long>();
 		HashMap<Long, Vote> OutOfElectionVotes = new HashMap<Long, Vote>();
 		HashMap<Long, Long> OutOfElectionVotesRound = new HashMap<Long, Long>();
-		long limit_timeout = 2000;
-		long timeout = 500;
+		long limit_timeout = 10000;
+		long timeout = 1000;
 		
 		Vote myVote123 = new Vote(this.properties.getLastZxId(), this.properties.getCurrentEpoch(), this.properties.getId());
 		this.properties.setMyVote(myVote123);
@@ -208,12 +208,15 @@ public class NodeServer implements Runnable{
 			Notification currentN = properties.getElectionQueue().poll();
 			
 			if(currentN==null){
+				LOG.info("Queue is empty!!");
 				try {
 					Thread.sleep(timeout);
 //					properties.getElectionQueue().wait(timeout);
 					currentN = properties.getElectionQueue().poll();
 					if(currentN==null){
+						LOG.info("Queue is empty again!!");
 						timeout = 2*timeout;
+						LOG.info("increasing timeout");
 						sendNotification(memberList, myNotification);
 						continue;
 					}
@@ -225,17 +228,22 @@ public class NodeServer implements Runnable{
 				
 			}
 			//CurrentN is not null
+			
 			else if ( currentN.getSenderState() == NodeServerProperties.State.ELECTION ){
+				LOG.info("Received notification is in Election");
 				if(currentN.getSenderRound() < this.properties.getElectionRound()){
+					LOG.info("Disregard vote as round number is smaller than mine");
 					continue;
 				}else{
 					if(currentN.getSenderRound() > this.properties.getElectionRound()){
+						LOG.info("The round number is larger than mine");
 						this.properties.setElectionRound(currentN.getSenderRound());
 						
 						receivedVote = new HashMap<Long, Vote>();
 						receivedVotesRound = new HashMap<Long, Long>();
 					}
 					if(currentN.getVote().compareTo(this.properties.getMyVote()) > 0 ){ // if the currentN is bigger thn myvote
+						LOG.info("His vote bigger than mine");
 						this.properties.setMyVote(currentN.getVote()); // update myvote
 						myNotification.setVote(this.properties.getMyVote()); // update notification
 						
@@ -250,9 +258,11 @@ public class NodeServer implements Runnable{
 					
 					if(receivedVote.size() == (memberList.size()+1)){
 						//TODO check for quorum in the receivedvotes and then declare leader
+						LOG.info("received votes from all the members");
 						break;
 					}
 					else {
+						LOG.info("checking for quorum in received votes");
 						int myVoteCounter = 0;
 						for( Entry<Long, Vote> v:receivedVote.entrySet()){
 							Vote currVote = v.getValue();
@@ -261,6 +271,7 @@ public class NodeServer implements Runnable{
 							}
 						}
 						if(myVoteCounter> (memberList.size()+1)/2 ){
+							LOG.info("Found  quorum in received votes");
 							try {
 //								properties.getElectionQueue().wait(timeout);
 								Thread.sleep(timeout);
@@ -268,8 +279,13 @@ public class NodeServer implements Runnable{
 								// TODO Auto-generated catch block
 								e.printStackTrace();
 							}
-							if(properties.getElectionQueue().size() > 0) continue;
-							else break;
+							if(properties.getElectionQueue().size() > 0) {
+								LOG.info("Still have notifications in ElectionQueue");
+								continue; }
+							else {
+								LOG.info("No notifications in ElectionQueue");
+								break;
+							}
 						}
 						else{
 							continue;
@@ -286,7 +302,7 @@ public class NodeServer implements Runnable{
 			// the received vote is either leading or following
 			else{
 				if(currentN.getSenderRound() == this.properties.getElectionRound()){
-					
+					LOG.info("notification is not in election, round number are same");
 					receivedVote.put(currentN.getSenderId(), currentN.getVote());
 					receivedVotesRound.put(currentN.getSenderId(), currentN.getSenderRound());
 					//TODO shoul i put my vote in the receivedVote
@@ -294,11 +310,12 @@ public class NodeServer implements Runnable{
 //					receivedVotesRound.put(this.properties.getId(), this.electionRound);
 					
 					if(currentN.getSenderState() == NodeServerProperties.State.LEADING){
+						LOG.info("notification is not in Leading state");
 						this.properties.setMyVote( currentN.getVote());
 						break;
 					}
 					else{
-						
+						LOG.info("notification is not in Followinf state");
 						int myVoteCounter = 0;
 						for( Entry<Long, Vote> v:receivedVote.entrySet()){
 							Vote currVote = v.getValue();
