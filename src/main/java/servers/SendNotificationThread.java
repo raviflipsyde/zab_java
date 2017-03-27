@@ -44,7 +44,7 @@ public class SendNotificationThread implements Runnable{
 				Notification responseNotification = new Notification(resp[1]);
 
 				LOG.info("Received Notification:"+responseNotification.toString()+" from "+ this.address);
-				electionQueue1.add(responseNotification);
+				electionQueue1.offer(responseNotification);
 				System.out.println(this.electionQueue1.toString());
 //				this.PQueue.add(responseNotification);
 			}
