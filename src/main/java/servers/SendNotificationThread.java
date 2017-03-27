@@ -59,7 +59,7 @@ public class SendNotificationThread implements Runnable{
 				boolean retVal = electionQueue1.offer(responseNotification);
 				
 				synchronized (electionQueue1) {
-					electionQueue1.notify();
+					electionQueue1.notifyAll();
 		        }
 				
 				LOG.info("electionQueue1.offer:"+retVal+"\n"+electionQueue1+"\n");
