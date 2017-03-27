@@ -15,16 +15,16 @@ public class SendNotificationThread implements Runnable{
 	private InetSocketAddress address;
 	private Notification myNotification;
 	private NodeServer nodeServer;
-
+	private Queue<Notification> electionQueue1;
 
 
 	public SendNotificationThread(InetSocketAddress address, 
 			Notification myNotification, 
-			NodeServer nodeServer) {
+			Queue<Notification> currentElectionQueue) {
 
 		this.address = address;
 		this.myNotification = myNotification;
-		this.nodeServer = nodeServer;
+		this.electionQueue1 = currentElectionQueue;
 	}
 
 
@@ -44,8 +44,8 @@ public class SendNotificationThread implements Runnable{
 				Notification responseNotification = new Notification(resp[1]);
 
 				LOG.info("Received Notification:"+responseNotification.toString()+" from "+ this.address);
-				nodeServer.getProperties().getElectionQueue().add(responseNotification);
-				LOG.info("ElectionQueue:"+ nodeServer.getProperties().getElectionQueue());
+				electionQueue1.add(responseNotification);
+				System.out.println(this.electionQueue1);
 //				this.PQueue.add(responseNotification);
 			}
 

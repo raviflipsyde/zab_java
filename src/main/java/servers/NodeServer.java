@@ -200,12 +200,12 @@ public class NodeServer implements Runnable{
 		
 		Notification myNotification = new Notification(this.properties.getMyVote(), this.properties.getElectionRound(), this.properties.getId(), this.properties.getNodestate());
 		LOG.info("My Notification is:"+myNotification.toString());
-		
-		sendNotification(memberList, myNotification); 
+		Queue<Notification> currentElectionQueue = this.getProperties().getElectionQueue();
+		sendNotification(memberList, myNotification, currentElectionQueue); 
 
 		while( properties.getNodestate() == NodeServerProperties.State.ELECTION && timeout<limit_timeout ){
 			LOG.info("ElectionQueue:"+ this.getProperties().getElectionQueue());
-			LOG.info("ElectionQueue:"+ properties.getElectionQueue());
+			System.out.println(currentElectionQueue);
 			Notification currentN = properties.getElectionQueue().poll();
 			
 			if(currentN==null){
@@ -218,7 +218,7 @@ public class NodeServer implements Runnable{
 						LOG.info("Queue is empty again!!");
 						timeout = 2*timeout;
 						LOG.info("increasing timeout");
-						sendNotification(memberList, myNotification);
+						sendNotification(memberList, myNotification, currentElectionQueue);
 						continue;
 					}
 					
@@ -249,7 +249,7 @@ public class NodeServer implements Runnable{
 						myNotification.setVote(this.properties.getMyVote()); // update notification
 						
 					}
-					sendNotification(memberList, myNotification);
+					sendNotification(memberList, myNotification, currentElectionQueue);
 					// update the receivedVote datastructure
 					receivedVote.put(currentN.getSenderId(), currentN.getVote());
 					receivedVotesRound.put(currentN.getSenderId(), currentN.getSenderRound());
@@ -394,12 +394,12 @@ public class NodeServer implements Runnable{
 		
 	}
 
-	private void sendNotification(List<InetSocketAddress> memberList2, Notification myNotification) {
+	private void sendNotification(List<InetSocketAddress> memberList2, Notification myNotification, Queue<Notification> currentElectionQueue) {
 		if(memberList2.isEmpty()) return;
-		Queue<Notification> PQueue = this.properties.getElectionQueue();
+		
 		
 		for(InetSocketAddress member: memberList2){
-			Thread t = new Thread(new SendNotificationThread(member, myNotification, this));
+			Thread t = new Thread(new SendNotificationThread(member, myNotification, currentElectionQueue));
 			t.start();
 		}
 		
