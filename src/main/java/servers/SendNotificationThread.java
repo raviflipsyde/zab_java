@@ -4,6 +4,7 @@ import java.io.IOException;
 import java.net.InetSocketAddress;
 import java.util.List;
 import java.util.Queue;
+import java.util.concurrent.ConcurrentLinkedQueue;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -15,7 +16,7 @@ public class SendNotificationThread implements Runnable{
 	private InetSocketAddress address;
 	private Notification myNotification;
 	private NodeServer nodeServer;
-	private Queue<Notification> electionQueue1;
+	private ConcurrentLinkedQueue<Notification> electionQueue1;
 
 	
 
@@ -25,7 +26,7 @@ public class SendNotificationThread implements Runnable{
 
 
 
-	public void setElectionQueue1(Queue<Notification> electionQueue1) {
+	public void setElectionQueue1(ConcurrentLinkedQueue<Notification> electionQueue1) {
 		this.electionQueue1 = electionQueue1;
 	}
 
@@ -58,8 +59,9 @@ public class SendNotificationThread implements Runnable{
 				LOG.info("Received Notification:"+responseNotification.toString()+" from "+ this.address);
 				boolean retVal;
 				
+				retVal = electionQueue1.offer(responseNotification);
+				
 				synchronized (electionQueue1) {
-					retVal = electionQueue1.offer(responseNotification);
 					electionQueue1.notifyAll();
 		        }
 				

@@ -47,6 +47,7 @@ public class NodeServer implements Runnable{
 	Bootstrap b;
 	private String myIP;
 	private NodeServerProperties properties;
+	public static ConcurrentLinkedQueue<Notification> electionQueue123 = new ConcurrentLinkedQueue<Notification>();
 	//private long electionRound;
 	
 	public NodeServer(String bhost, int bport, int nport){
@@ -57,6 +58,8 @@ public class NodeServer implements Runnable{
 		this.memberList = new ArrayList<InetSocketAddress>();
 		final NodeServer this1 = this;
 		myIP = getMyIP();
+		if(bhost.equals("localhost"))
+			myIP = "localhost";
 		workerGroup = new NioEventLoopGroup();
 		b = new Bootstrap();
 		channelList = new ArrayList<TimeClient>();
@@ -197,7 +200,7 @@ public class NodeServer implements Runnable{
 		
 		//Queue<Notification> currentElectionQueue = new ConcurrentLinkedQueue<Notification>();
 //		this.getProperties().setElectionQueue(currentElectionQueue);
-		Queue<Notification>  currentElectionQueue = this.getProperties().getElectionQueue();
+		ConcurrentLinkedQueue<Notification>  currentElectionQueue = electionQueue123;
 		
 		Vote myVote123 = new Vote(this.properties.getLastZxId(), this.properties.getCurrentEpoch(), this.properties.getId());
 		this.properties.setMyVote(myVote123);
@@ -210,17 +213,16 @@ public class NodeServer implements Runnable{
 		while( properties.getNodestate() == NodeServerProperties.State.ELECTION && timeout<limit_timeout ){
 			LOG.info("ElectionQueue:"+ this.getProperties().getElectionQueue());
 			System.out.println(currentElectionQueue.toString());
-			synchronized (currentElectionQueue) {
+			
 				currentN = currentElectionQueue.poll();
-			}
+			
 			if(currentN==null){
 				LOG.info("Queue is empty!!");
 				try {
 					synchronized (currentElectionQueue) {
 						currentElectionQueue.wait(timeout);
-						currentN = currentElectionQueue.poll();
 	                }
-					
+					currentN = currentElectionQueue.poll();
 					
 					if(currentN==null){
 						LOG.info("Queue is empty again!!");
@@ -402,7 +404,7 @@ public class NodeServer implements Runnable{
 		
 	}
 
-	private void sendNotification(List<InetSocketAddress> memberList2, Notification myNotification, Queue<Notification> currentElectionQueue) {
+	private void sendNotification(List<InetSocketAddress> memberList2, Notification myNotification, ConcurrentLinkedQueue<Notification> currentElectionQueue) {
 		if(memberList2.isEmpty()) return;
 		
 		
@@ -412,7 +414,7 @@ public class NodeServer implements Runnable{
 			Thread t = new Thread(nt0);
 			t.start();
 			try {
-				Thread.sleep(1);
+				Thread.sleep(100);
 			} catch (InterruptedException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();

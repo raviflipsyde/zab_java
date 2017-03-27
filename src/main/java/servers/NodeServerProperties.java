@@ -1,8 +1,6 @@
 package servers;
 
 import java.util.ArrayList;
-import java.util.Collections;
-import java.util.LinkedList;
 import java.util.List;
 import java.util.Queue;
 import java.util.concurrent.ConcurrentLinkedQueue;
@@ -31,7 +29,7 @@ public class NodeServerProperties {
 		electionRound = 0;
 		nodestate = State.ELECTION;
 
-		electionQueue =  (Queue<Notification>) Collections.synchronizedList(new LinkedList<Notification>());
+		electionQueue = new ConcurrentLinkedQueue<Notification>();
 		messageList = new ArrayList<Message>();
 		myVote = new Vote(this.getLastZxId(), this.getCurrentEpoch(), this.getId());
 		

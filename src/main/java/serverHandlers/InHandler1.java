@@ -35,116 +35,115 @@ public class InHandler1 extends ChannelInboundHandlerAdapter { // (1)
 	private static final Logger LOG = LogManager.getLogger(InHandler1.class);
 	private List<InetSocketAddress> memberList;
 	private NodeServer server;
-	
+
 	public InHandler1(NodeServer server) {
 		this.server = server;
 	}
-	
-	
+
+
 	@Override
 	public void channelRead(ChannelHandlerContext ctx, Object msg) {
-		
-		
-				
+
+
+
 		ByteBuf in = (ByteBuf) msg;
 		String requestMsg  =in.toString(StandardCharsets.UTF_8 );
 		LOG.info("Channel Read:" + requestMsg);
 		String response = handleClientRequest(requestMsg);
 		LOG.info("response:" + response);
-		
+
 		ctx.write(Unpooled.copiedBuffer(response+"\r\n", StandardCharsets.UTF_8));
 		ctx.flush(); // (2)
-		
+
 
 	}
 
 	@Override
-		public void channelRegistered(ChannelHandlerContext ctx) throws Exception {
-			
-			super.channelRegistered(ctx);
-			LOG.info("Channel Registered: "+ctx.channel().localAddress() + ":" + ctx.channel().remoteAddress());
-		}
-	
+	public void channelRegistered(ChannelHandlerContext ctx) throws Exception {
+
+		super.channelRegistered(ctx);
+		LOG.info("Channel Registered: "+ctx.channel().localAddress() + ":" + ctx.channel().remoteAddress());
+	}
+
 
 	private String handleClientRequest(String requestMsg) {
-//		LOG.info("handleClientRequest:"+requestMsg);
-		
+		//		LOG.info("handleClientRequest:"+requestMsg);
+
 		if(requestMsg.contains("JOIN_GROUP:")){
 			//add the ip:port to the group member list;
-			
-			
+
+
 			String[] arr = requestMsg.split(":");
-			
+
 			InetSocketAddress addr = new InetSocketAddress(arr[1].trim(), Integer.parseInt(arr[2].trim()));
 			server.addMemberToList(addr);
-			
+
 			LOG.info(server.getMemberListString());
-			
+
 			return "OK";
 		}
-		
+
 		if(requestMsg.contains("NOTIFICATION:")){
 			//add the ip:port to the group member list;
-			
-			
+
+
 			String[] arr = requestMsg.split(":");
-			
+
 			Notification responseNotification = new Notification(arr[1].trim());
 			NodeServerProperties serverProp = server.getProperties();
 			if(serverProp.getNodestate() == NodeServerProperties.State.ELECTION){
-				Queue<Notification> currentElectionQueue = serverProp.getElectionQueue();
-				
-					synchronized (currentElectionQueue) {
-						currentElectionQueue.offer(responseNotification);
-						currentElectionQueue.notify();
-					}
-				
+				Queue<Notification> currentElectionQueue = server.electionQueue123;
+				currentElectionQueue.offer(responseNotification);
+				synchronized (currentElectionQueue) {
+					currentElectionQueue.notifyAll();
+				}
+
 				if(responseNotification.getSenderState() == NodeServerProperties.State.ELECTION
 						&& responseNotification.getSenderRound() < serverProp.getElectionRound()){
-					
+
 					// get my current vote from FLE or when FLE is underway
 					Vote myVote = serverProp.getMyVote();
 					Notification myNotification = new Notification(myVote, serverProp.getElectionRound(), serverProp.getId(), serverProp.getNodestate());
 					return("NOTIFICATION:"+myNotification.toString());
-					
+
 				}
 			}
 			else{
 				if(responseNotification.getSenderState() == NodeServerProperties.State.ELECTION){
 					// get my current vote from FLE or when FLE is underway
 					Vote myVote = serverProp.getMyVote();
-					
+
 					Notification myNotification = new Notification(myVote, serverProp.getElectionRound(), serverProp.getId(), serverProp.getNodestate());
 					LOG.info("myNotification:"+myNotification);
 					return("NOTIFICATION:"+myNotification.toString());
-					
+
 				}
-				
+
 			}
-			
-						
+
+
 			LOG.info(server.getMemberListString());
 			return("ERROR");
-			
+
 		}
-		
+
 		if(requestMsg.contains("OK")){
 			//add the ip:port to the group member list;
-			
-			
-//			String[] arr = requestMsg.split(":");
-//			
-//			InetSocketAddress addr = new InetSocketAddress(arr[1].trim(), Integer.parseInt(arr[2].trim()));
-//			server.addMemberToList(addr);
+
+
+			//			String[] arr = requestMsg.split(":");
+			//			
+			//			InetSocketAddress addr = new InetSocketAddress(arr[1].trim(), Integer.parseInt(arr[2].trim()));
+			//			server.addMemberToList(addr);
 			LOG.info("Client rreceived OK!!");
 			LOG.info(server.getMemberList());
-			
+
 			return "";
 		}
-		
-		
+
+
 		return "HMM...";
-		
+
 	}
 
 
@@ -156,7 +155,7 @@ public class InHandler1 extends ChannelInboundHandlerAdapter { // (1)
 		ctx.close();
 	}
 
-	
+
 
 
 }
