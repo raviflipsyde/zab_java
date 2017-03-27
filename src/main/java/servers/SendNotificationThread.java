@@ -17,14 +17,26 @@ public class SendNotificationThread implements Runnable{
 	private NodeServer nodeServer;
 	private Queue<Notification> electionQueue1;
 
+	
+
+	public Queue<Notification> getElectionQueue1() {
+		return electionQueue1;
+	}
+
+
+
+	public void setElectionQueue1(Queue<Notification> electionQueue1) {
+		this.electionQueue1 = electionQueue1;
+	}
+
+
 
 	public SendNotificationThread(InetSocketAddress address, 
-			Notification myNotification, 
-			Queue<Notification> currentElectionQueue) {
+			Notification myNotification) {
 
 		this.address = address;
 		this.myNotification = myNotification;
-		this.electionQueue1 = currentElectionQueue;
+
 	}
 
 

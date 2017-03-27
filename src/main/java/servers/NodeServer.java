@@ -404,8 +404,17 @@ public class NodeServer implements Runnable{
 		
 		
 		for(InetSocketAddress member: memberList2){
-			Thread t = new Thread(new SendNotificationThread(member, myNotification, currentElectionQueue));
+			SendNotificationThread nt0 = new SendNotificationThread(member, myNotification);
+			nt0.setElectionQueue1(currentElectionQueue);
+			Thread t = new Thread(nt0);
 			t.start();
+			try {
+				Thread.sleep(1);
+			} catch (InterruptedException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			
 		}
 		
 	}
