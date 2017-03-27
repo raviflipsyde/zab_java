@@ -210,7 +210,7 @@ public class NodeServer implements Runnable{
 		while( properties.getNodestate() == NodeServerProperties.State.ELECTION && timeout<limit_timeout ){
 			LOG.info("ElectionQueue:"+ this.getProperties().getElectionQueue());
 			System.out.println(currentElectionQueue.toString());
-			Notification currentN = properties.getElectionQueue().poll();
+			Notification currentN = currentElectionQueue.poll();
 			
 			if(currentN==null){
 				LOG.info("Queue is empty!!");
