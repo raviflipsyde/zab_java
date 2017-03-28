@@ -72,7 +72,7 @@ public class UdpServer implements Runnable{
 					if(currentTime - lastTimeEntry > 1000){
 						String addr[] = sentence.split(":");
 						String dedadhost = addr[0].trim();
-						int deadPort = Integer.parseInt(addr[0]); 
+						int deadPort = Integer.parseInt(addr[1]); 
 						InetSocketAddress socketAddr = new InetSocketAddress(dedadhost, deadPort);
 						LOG.info("Removing "+socketAddr.toString()+" from memberlist");
 						nodeServer.getMemberList().remove(socketAddr);
