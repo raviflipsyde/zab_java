@@ -39,7 +39,7 @@ public class UdpServer implements Runnable{
 		    	for(Entry<String, Long> entry:heartBeatMap.entrySet()){
 		    		String key = entry.getKey();
 					long lastTimeEntry = entry.getValue();
-					if(currentTime - lastTimeEntry > 1000){
+					if(currentTime - lastTimeEntry > 10000){
 						String addr[] = key.split(":");
 						String dedadhost = addr[0].trim();
 						int deadPort = Integer.parseInt(addr[1]); 
