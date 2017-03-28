@@ -9,13 +9,16 @@ import java.net.SocketException;
 import java.util.HashMap;
 import java.util.Map.Entry;
 
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
+
 import servers.NodeServer;
 
 //import servers.NodeServer;
 
 
 public class UdpServer implements Runnable{
-
+	private static final Logger LOG = LogManager.getLogger(UdpServer.class);
 	private static final String HELLO = "U OK?";
 	private static final String REPLY = "I M OK";
 	private NodeServer nodeServer;
@@ -48,21 +51,25 @@ public class UdpServer implements Runnable{
 				InetAddress IPAddress = receivePacket.getAddress();
 				int port = receivePacket.getPort();
 				InetSocketAddress recvAddress = new InetSocketAddress(IPAddress, port);
-				System.out.println("RECEIVED: " + sentence
+				
+				long currentTime = System.currentTimeMillis();
+				LOG.info("RECEIVED: " + sentence
 						+ " from "+ recvAddress.toString() 
-						+" at "+ System.currentTimeMillis());
+						+" at "+ currentTime);
+			
 				
 				String returnSentence = sentence.toUpperCase();
 				sendData = returnSentence.getBytes();
 				DatagramPacket sendPacket =
 						new DatagramPacket(sendData, sendData.length, IPAddress, port);
 				serverSocket.send(sendPacket);
-				long currentTime = System.currentTimeMillis();
+				
 				heartBeatMap.put(recvAddress, currentTime);
 				for(Entry<InetSocketAddress, Long> entry:heartBeatMap.entrySet()){
 					long lastTimeEntry = entry.getValue();
 					if(currentTime - lastTimeEntry > 1000){
 						InetSocketAddress addr = entry.getKey();
+						LOG.info("Removing "+addr.toString()+" from memberlist");
 						nodeServer.getMemberList().remove(addr);
 					}
 				}

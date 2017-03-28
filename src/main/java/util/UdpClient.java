@@ -9,9 +9,13 @@ import java.net.SocketException;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
+
 import servers.NodeServer;
 
 public class UdpClient implements Runnable{
+	private static final Logger LOG = LogManager.getLogger(UdpClient.class);
 	private static final String HELLO = "U OK?";
 	private static final String REPLY = "I M OK";
 	private NodeServer nodeServer;
@@ -39,7 +43,7 @@ public class UdpClient implements Runnable{
 				
 					DatagramPacket sendPacket = new DatagramPacket(sendData, sendData.length, IPAddress, port);
 					
-					System.out.println("Sending to:" + addr.toString());
+					LOG.info("Sending to:" + addr.toString());
 					clientSocket.send(sendPacket);
 					clientSocket.close();
 				}
