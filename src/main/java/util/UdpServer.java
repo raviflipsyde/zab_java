@@ -23,11 +23,11 @@ public class UdpServer implements Runnable{
 	private static final String REPLY = "I M OK";
 	private NodeServer nodeServer;
 	private int port;
-	private HashMap<InetSocketAddress, Long> heartBeatMap;
+	private HashMap<String, Long> heartBeatMap;
 	
 	public UdpServer(NodeServer ns){
 		this.nodeServer = ns;
-		heartBeatMap = new HashMap<InetSocketAddress, Long>();
+		heartBeatMap = new HashMap<String, Long>();
 	} 
 	
 	public UdpServer(int port){
@@ -35,7 +35,7 @@ public class UdpServer implements Runnable{
 	} 
 	
 	public void run() {
-
+		LOG.info("--------------STARTING UDP SERVER--------------"+ nodeServer.getMemberList().size());
 		DatagramSocket serverSocket = null;
 		try {
 			
@@ -48,6 +48,8 @@ public class UdpServer implements Runnable{
 				DatagramPacket receivePacket = new DatagramPacket(receiveData, receiveData.length);
 				serverSocket.receive(receivePacket);
 				String sentence = new String( receivePacket.getData());
+				sentence = sentence.trim();
+				
 				InetAddress IPAddress = receivePacket.getAddress();
 				int port = receivePacket.getPort();
 				InetSocketAddress recvAddress = new InetSocketAddress(IPAddress, port);
@@ -64,13 +66,16 @@ public class UdpServer implements Runnable{
 						new DatagramPacket(sendData, sendData.length, IPAddress, port);
 				serverSocket.send(sendPacket);
 				
-				heartBeatMap.put(recvAddress, currentTime);
-				for(Entry<InetSocketAddress, Long> entry:heartBeatMap.entrySet()){
+				heartBeatMap.put(sentence, currentTime);
+				for(Entry<String, Long> entry:heartBeatMap.entrySet()){
 					long lastTimeEntry = entry.getValue();
 					if(currentTime - lastTimeEntry > 1000){
-						InetSocketAddress addr = entry.getKey();
-						LOG.info("Removing "+addr.toString()+" from memberlist");
-						nodeServer.getMemberList().remove(addr);
+						String addr[] = sentence.split(":");
+						String dedadhost = addr[0].trim();
+						int deadPort = Integer.parseInt(addr[0]); 
+						InetSocketAddress socketAddr = new InetSocketAddress(dedadhost, deadPort);
+						LOG.info("Removing "+socketAddr.toString()+" from memberlist");
+						nodeServer.getMemberList().remove(socketAddr);
 					}
 				}
 

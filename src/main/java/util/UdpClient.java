@@ -16,10 +16,9 @@ import servers.NodeServer;
 
 public class UdpClient implements Runnable{
 	private static final Logger LOG = LogManager.getLogger(UdpClient.class);
-	private static final String HELLO = "U OK?";
-	private static final String REPLY = "I M OK";
+	
 	private NodeServer nodeServer;
-	static List<InetSocketAddress>  memberList = new ArrayList<InetSocketAddress>();
+	
 	
 	public UdpClient(NodeServer ns){
 		this.nodeServer = ns;
@@ -28,17 +27,19 @@ public class UdpClient implements Runnable{
 	
 	
 	public void run() {
-
+		LOG.info("--------------STARTING UDP CLIENT--------------"+ nodeServer.getMemberList().size());
 		while(true){
 			try {
 				byte[] receiveData = new byte[100];
 				byte[] sendData = new byte[100];
 				
-				for(InetSocketAddress addr: memberList){
+				for(InetSocketAddress addr: nodeServer.getMemberList()){
 					DatagramSocket clientSocket = new DatagramSocket();
 					
 					InetAddress IPAddress = InetAddress.getByName(addr.getHostName());
 					int port = addr.getPort()+123;
+					String HELLO = nodeServer.getMyIP()+":"+nodeServer.getNodePort() ;
+					
 					sendData = HELLO.getBytes();
 				
 					DatagramPacket sendPacket = new DatagramPacket(sendData, sendData.length, IPAddress, port);
