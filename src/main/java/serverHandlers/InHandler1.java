@@ -96,7 +96,7 @@ public class InHandler1 extends ChannelInboundHandlerAdapter { // (1)
 				LOG.info("Before:"+currentElectionQueue);
 				currentElectionQueue.offer(responseNotification);
 				synchronized (currentElectionQueue) {
-					currentElectionQueue.notifyAll();
+					currentElectionQueue.notify();
 					try {
 						Thread.sleep(500);
 					} catch (InterruptedException e) {

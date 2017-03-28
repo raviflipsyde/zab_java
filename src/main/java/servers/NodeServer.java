@@ -35,6 +35,8 @@ import io.netty.channel.socket.SocketChannel;
 import io.netty.channel.socket.nio.NioSocketChannel;
 import serverHandlers.TimeClientHandler;
 import util.TcpClient1;
+import util.UdpClient;
+import util.UdpServer;
 
 public class NodeServer implements Runnable{
 
@@ -102,6 +104,12 @@ public class NodeServer implements Runnable{
 	
 	
 
+	public int getNodePort() {
+		return nodePort;
+	}
+
+
+
 	public NodeServerProperties getProperties() {
 		return properties;
 	}
@@ -117,9 +125,16 @@ public class NodeServer implements Runnable{
 
 		LOG.info("ID for this node is :"+ properties.getId());
 
+		
+		Thread udpserverThread = new Thread(new UdpServer(this));
+		udpserverThread.start();
+		
 		//Start the NettyServer at the nodeport
 		Thread serverThread = new Thread(new NettyServer(nodePort, this));
 		serverThread.start();
+		
+		Thread udpClientThread = new Thread(new UdpClient(this));
+		udpClientThread.start();
 
 		informGroupMembers();
 
@@ -289,7 +304,7 @@ public class NodeServer implements Runnable{
 							LOG.info("Found  quorum in received votes");
 							try {
 								synchronized (currentElectionQueue) {
-									currentElectionQueue.wait(timeout);
+									currentElectionQueue.wait(2*timeout);
 				                }
 								
 //								Thread.sleep(timeout);
