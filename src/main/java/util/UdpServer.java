@@ -8,6 +8,8 @@ import java.net.InetSocketAddress;
 import java.net.SocketException;
 import java.util.HashMap;
 import java.util.Map.Entry;
+import java.util.Timer;
+import java.util.TimerTask;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -28,6 +30,27 @@ public class UdpServer implements Runnable{
 	public UdpServer(NodeServer ns){
 		this.nodeServer = ns;
 		heartBeatMap = new HashMap<String, Long>();
+		
+		Timer t = new Timer();
+		t.schedule(new TimerTask() {
+		    @Override
+		    public void run() {
+		    	long currentTime = System.currentTimeMillis();
+		    	for(Entry<String, Long> entry:heartBeatMap.entrySet()){
+		    		String key = entry.getKey();
+					long lastTimeEntry = entry.getValue();
+					if(currentTime - lastTimeEntry > 1000){
+						String addr[] = key.split(":");
+						String dedadhost = addr[0].trim();
+						int deadPort = Integer.parseInt(addr[1]); 
+						InetSocketAddress socketAddr = new InetSocketAddress(dedadhost, deadPort);
+						LOG.info("Removing "+socketAddr.toString()+" from memberlist");
+						nodeServer.getMemberList().remove(socketAddr);
+					}
+				}
+		    }
+		}, 0, 5000);
+		
 	} 
 	
 	public UdpServer(int port){
@@ -67,17 +90,7 @@ public class UdpServer implements Runnable{
 				serverSocket.send(sendPacket);
 				
 				heartBeatMap.put(sentence, currentTime);
-				for(Entry<String, Long> entry:heartBeatMap.entrySet()){
-					long lastTimeEntry = entry.getValue();
-					if(currentTime - lastTimeEntry > 1000){
-						String addr[] = sentence.split(":");
-						String dedadhost = addr[0].trim();
-						int deadPort = Integer.parseInt(addr[1]); 
-						InetSocketAddress socketAddr = new InetSocketAddress(dedadhost, deadPort);
-						LOG.info("Removing "+socketAddr.toString()+" from memberlist");
-						nodeServer.getMemberList().remove(socketAddr);
-					}
-				}
+				
 
 			}
 
