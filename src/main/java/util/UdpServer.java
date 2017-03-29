@@ -89,7 +89,9 @@ public class UdpServer implements Runnable{
 						new DatagramPacket(sendData, sendData.length, IPAddress, port);
 				serverSocket.send(sendPacket);
 				
-				heartBeatMap.put(sentence, currentTime);
+				String[] addr = sentence.split("::");
+				String fulladdr1 = addr[1];
+				heartBeatMap.put(fulladdr1, currentTime);
 				
 
 			}

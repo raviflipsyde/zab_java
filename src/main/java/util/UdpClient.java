@@ -39,7 +39,7 @@ public class UdpClient implements Runnable{
 					InetAddress IPAddress = InetAddress.getByName(addr.getHostName());
 					int port = addr.getPort()+123;
 					String HELLO = nodeServer.getMyIP()+":"+nodeServer.getNodePort() ;
-					
+					HELLO = HELLO + "::"+ HELLO+ "::"+ HELLO+ "::"+ HELLO;
 					sendData = HELLO.getBytes();
 				
 					DatagramPacket sendPacket = new DatagramPacket(sendData, sendData.length, IPAddress, port);
