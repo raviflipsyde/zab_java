@@ -19,24 +19,13 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map.Entry;
-import java.util.concurrent.ConcurrentLinkedQueue;
 import java.util.concurrent.CopyOnWriteArrayList;
-import java.util.Queue;
-
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
-import io.netty.bootstrap.Bootstrap;
-import io.netty.channel.ChannelInitializer;
-import io.netty.channel.ChannelOption;
-import io.netty.channel.EventLoopGroup;
-import io.netty.channel.nio.NioEventLoopGroup;
-import io.netty.channel.socket.SocketChannel;
-import io.netty.channel.socket.nio.NioSocketChannel;
 import io.netty.util.internal.shaded.org.jctools.queues.MpscArrayQueue;
 import netty.NettyClient;
-import serverHandlers.TimeClientHandler;
-import util.TcpClient1;
+import netty.NettyServer;
 import util.UdpClient;
 import util.UdpServer;
 
@@ -47,7 +36,7 @@ public class NodeServer implements Runnable{
 	private int bootstrapPort;
 	private int nodePort;
 	private List<InetSocketAddress> memberList;
-	private List<TimeClient> channelList;
+	
 	private String myIP;
 	private NodeServerProperties properties;
 //	public static ConcurrentLinkedQueue<Notification> electionQueue123 = new ConcurrentLinkedQueue<Notification>();
@@ -61,11 +50,10 @@ public class NodeServer implements Runnable{
 		this.nodePort = nport;
 		this.properties = new NodeServerProperties();
 		this.memberList = new CopyOnWriteArrayList<InetSocketAddress>();
-		final NodeServer this1 = this;
 		myIP = getMyIP();
 		if(bhost.equals("localhost"))
 			myIP = "localhost";
-		channelList = new ArrayList<TimeClient>();
+	
 		this.commClient = new NettyClient(this);
 	}
 
@@ -152,7 +140,7 @@ public class NodeServer implements Runnable{
 
 
 		for(InetSocketAddress member: memberList){
-			String ret;
+			
 			try {
 				commClient.sendMessage(member.getHostName(), member.getPort(), "JOIN_GROUP:"+myIP+":"+nodePort );
 			} catch (Exception e) {

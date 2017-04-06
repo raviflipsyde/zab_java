@@ -1,4 +1,4 @@
-package serverHandlers;
+package netty;
 
 import java.io.BufferedReader;
 import java.io.BufferedWriter;

@@ -17,7 +17,7 @@ import io.netty.channel.EventLoopGroup;
 import io.netty.channel.nio.NioEventLoopGroup;
 import io.netty.channel.socket.SocketChannel;
 import io.netty.channel.socket.nio.NioSocketChannel;
-import serverHandlers.InHandler1;
+import netty.InHandler1;
 import servers.NodeServer;
 import util.SyncDataStructs;
 
