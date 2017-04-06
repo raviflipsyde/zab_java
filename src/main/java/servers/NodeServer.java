@@ -33,6 +33,8 @@ import io.netty.channel.EventLoopGroup;
 import io.netty.channel.nio.NioEventLoopGroup;
 import io.netty.channel.socket.SocketChannel;
 import io.netty.channel.socket.nio.NioSocketChannel;
+import io.netty.util.internal.shaded.org.jctools.queues.MpscArrayQueue;
+import netty.NettyClient;
 import serverHandlers.TimeClientHandler;
 import util.TcpClient1;
 import util.UdpClient;
@@ -46,12 +48,12 @@ public class NodeServer implements Runnable{
 	private int nodePort;
 	private List<InetSocketAddress> memberList;
 	private List<TimeClient> channelList;
-	EventLoopGroup workerGroup = new NioEventLoopGroup();
-	Bootstrap b;
 	private String myIP;
 	private NodeServerProperties properties;
-	public static ConcurrentLinkedQueue<Notification> electionQueue123 = new ConcurrentLinkedQueue<Notification>();
+//	public static ConcurrentLinkedQueue<Notification> electionQueue123 = new ConcurrentLinkedQueue<Notification>();
+	public MpscArrayQueue<Notification> electionQueue123 = new MpscArrayQueue<Notification>(100);
 	//private long electionRound;
+	private NettyClient commClient;
 	
 	public NodeServer(String bhost, int bport, int nport){
 		this.bootstrapHost = bhost;
@@ -63,20 +65,8 @@ public class NodeServer implements Runnable{
 		myIP = getMyIP();
 		if(bhost.equals("localhost"))
 			myIP = "localhost";
-		workerGroup = new NioEventLoopGroup();
-		b = new Bootstrap();
 		channelList = new ArrayList<TimeClient>();
-
-		b.group(workerGroup); // (2)
-		b.channel(NioSocketChannel.class); // (3)
-		b.option(ChannelOption.SO_KEEPALIVE, true); // (4)
-		b.handler(new ChannelInitializer<SocketChannel>() {
-			@Override
-			public void initChannel(SocketChannel ch) throws Exception {
-				ch.pipeline().addLast(new TimeClientHandler(this1));
-			}
-		});
-		
+		this.commClient = new NettyClient(this);
 	}
 
 	public String getMemberListString(){
@@ -135,9 +125,16 @@ public class NodeServer implements Runnable{
 		
 		Thread udpClientThread = new Thread(new UdpClient(this));
 		udpClientThread.start();
+		
 
 		informGroupMembers();
-
+		
+		try {
+			Thread.sleep(100);
+		} catch (InterruptedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 //		writeHistory();
 		readHistory();
 
@@ -154,9 +151,8 @@ public class NodeServer implements Runnable{
 		for(InetSocketAddress member: memberList){
 			String ret;
 			try {
-				ret = new TcpClient1(member.getHostName(), member.getPort()).sendMsg("JOIN_GROUP:"+myIP+":"+nodePort);
-				LOG.info("tcp client recieved "+ ret);	
-			} catch (IOException e) {
+				commClient.sendMessage(member.getHostName(), member.getPort(), "JOIN_GROUP:"+myIP+":"+nodePort );
+			} catch (Exception e) {
 				unreachablelist.add(member);
 				e.printStackTrace();
 			}
@@ -166,7 +162,6 @@ public class NodeServer implements Runnable{
 		for(InetSocketAddress member: unreachablelist){
 			this.removeMemberFromList(member);
 		}
-
 
 	}
 
@@ -216,7 +211,7 @@ public class NodeServer implements Runnable{
 		
 		//Queue<Notification> currentElectionQueue = new ConcurrentLinkedQueue<Notification>();
 //		this.getProperties().setElectionQueue(currentElectionQueue);
-		ConcurrentLinkedQueue<Notification>  currentElectionQueue = electionQueue123;
+		MpscArrayQueue<Notification> currentElectionQueue = electionQueue123;
 		
 		Vote myVote123 = new Vote(this.properties.getLastZxId(), this.properties.getCurrentEpoch(), this.properties.getId());
 		this.properties.setMyVote(myVote123);
@@ -224,10 +219,10 @@ public class NodeServer implements Runnable{
 		Notification myNotification = new Notification(this.properties.getMyVote(), this.properties.getElectionRound(), this.properties.getId(), this.properties.getNodestate());
 		LOG.info("My Notification is:"+myNotification.toString());
 		
-		sendNotification(memberList, myNotification, currentElectionQueue); 
+		sendNotification(memberList, myNotification); 
 		Notification currentN = null;
 		while( properties.getNodestate() == NodeServerProperties.State.ELECTION && timeout<limit_timeout ){
-			LOG.info("ElectionQueue:\n"+ this.getProperties().getElectionQueue());
+			LOG.info("Fetching from CurrentElectionQueue:\n");
 			currentN = currentElectionQueue.poll();
 			
 			if(currentN==null){
@@ -242,8 +237,8 @@ public class NodeServer implements Runnable{
 						LOG.info("Queue is empty again!!");
 						timeout = 2*timeout;
 						LOG.info("increasing timeout");
-						sendNotification(memberList, myNotification, currentElectionQueue);
-						continue;
+						sendNotification(memberList, myNotification);
+						
 					}
 					
 				} catch (InterruptedException e) {
@@ -278,7 +273,7 @@ public class NodeServer implements Runnable{
 						myNotification.setVote(this.properties.getMyVote()); // update notification
 						
 					}
-					sendNotification(memberList, myNotification, currentElectionQueue);
+					sendNotification(memberList, myNotification);
 					// update the receivedVote datastructure
 					receivedVote.put(currentN.getSenderId(), currentN.getVote());
 					receivedVotesRound.put(currentN.getSenderId(), currentN.getSenderRound());
@@ -288,11 +283,11 @@ public class NodeServer implements Runnable{
 					
 					if(receivedVote.size() == (memberList.size()+1)){
 						//TODO check for quorum in the receivedvotes and then declare leader
-						LOG.info("received votes from all the members");
+						LOG.info("***received votes from all the members");
 						break;
 					}
 					else {
-						LOG.info("checking for quorum in received votes");
+						LOG.info("*checking for quorum in received votes");
 						int myVoteCounter = 0;
 						for( Entry<Long, Vote> v:receivedVote.entrySet()){
 							Vote currVote = v.getValue();
@@ -301,10 +296,11 @@ public class NodeServer implements Runnable{
 							}
 						}
 						if(myVoteCounter> (memberList.size()+1)/2 ){
-							LOG.info("Found  quorum in received votes");
+							LOG.info("**Found  quorum in received votes");
 							try {
 								synchronized (currentElectionQueue) {
-									currentElectionQueue.wait(2*timeout);
+									currentElectionQueue.wait(timeout);
+									Thread.sleep(timeout);
 				                }
 								
 //								Thread.sleep(timeout);
@@ -312,7 +308,7 @@ public class NodeServer implements Runnable{
 								// TODO Auto-generated catch block
 								e.printStackTrace();
 							}
-							if(properties.getElectionQueue().size() > 0) {
+							if(currentElectionQueue.size() > 0) {
 								LOG.info("Still have notifications in ElectionQueue");
 								continue; }
 							else {
@@ -426,21 +422,22 @@ public class NodeServer implements Runnable{
 		
 	}
 
-	private void sendNotification(List<InetSocketAddress> memberList2, Notification myNotification, ConcurrentLinkedQueue<Notification> currentElectionQueue) {
+	private void sendNotification(List<InetSocketAddress> memberList2, Notification myNotification) {
 		if(memberList2.isEmpty()) return;
 		
 		
 		for(InetSocketAddress member: memberList2){
-			SendNotificationThread nt0 = new SendNotificationThread(member, myNotification);
-			nt0.setElectionQueue1(currentElectionQueue);
-			Thread t = new Thread(nt0);
-			t.start();
-			try {
-				Thread.sleep(500);
-			} catch (InterruptedException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
+			commClient.sendMessage(member.getHostName(), member.getPort(), "CNOTIFICATION:"+myNotification.toString());
+//			SendNotificationThread nt0 = new SendNotificationThread(member, myNotification);
+//			nt0.setElectionQueue1(currentElectionQueue);
+//			Thread t = new Thread(nt0);
+//			t.start();
+//			try {
+//				Thread.sleep(500);
+//			} catch (InterruptedException e) {
+//				// TODO Auto-generated catch block
+//				e.printStackTrace();
+//			}
 			
 		}
 		

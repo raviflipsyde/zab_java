@@ -23,6 +23,7 @@ import io.netty.buffer.Unpooled;
 import io.netty.channel.ChannelHandlerContext;
 import io.netty.channel.ChannelInboundHandlerAdapter;
 import io.netty.util.ReferenceCountUtil;
+import io.netty.util.internal.shaded.org.jctools.queues.MpscArrayQueue;
 import servers.NodeServer;
 import servers.NodeServerProperties;
 import servers.Notification;
@@ -51,9 +52,11 @@ public class InHandler1 extends ChannelInboundHandlerAdapter { // (1)
 		LOG.info("Channel Read:" + requestMsg);
 		String response = handleClientRequest(requestMsg);
 		LOG.info("response:" + response);
-
-		ctx.write(Unpooled.copiedBuffer(response+"\r\n", StandardCharsets.UTF_8));
-		ctx.flush(); // (2)
+		if(response.length()>0){
+			ctx.write(Unpooled.copiedBuffer(response+"\r\n", StandardCharsets.UTF_8));
+			ctx.flush(); // (2)
+		}
+		
 
 
 	}
@@ -83,7 +86,7 @@ public class InHandler1 extends ChannelInboundHandlerAdapter { // (1)
 			return "OK";
 		}
 
-		if(requestMsg.contains("NOTIFICATION:")){
+		if(requestMsg.contains("CNOTIFICATION:")){
 			//add the ip:port to the group member list;
 
 
@@ -92,19 +95,19 @@ public class InHandler1 extends ChannelInboundHandlerAdapter { // (1)
 			Notification responseNotification = new Notification(arr[1].trim());
 			NodeServerProperties serverProp = server.getProperties();
 			if(serverProp.getNodestate() == NodeServerProperties.State.ELECTION){
-				Queue<Notification> currentElectionQueue = server.electionQueue123;
-				LOG.info("Before:"+currentElectionQueue);
+				MpscArrayQueue<Notification> currentElectionQueue = server.electionQueue123;
+				LOG.info("Before:"+currentElectionQueue.currentProducerIndex());
 				currentElectionQueue.offer(responseNotification);
 				synchronized (currentElectionQueue) {
 					currentElectionQueue.notify();
 					try {
-						Thread.sleep(500);
+						Thread.sleep(100);
 					} catch (InterruptedException e) {
 						// TODO Auto-generated catch block
 						e.printStackTrace();
 					}
 				}
-				LOG.info("After:"+currentElectionQueue);
+				LOG.info("After:"+currentElectionQueue.currentProducerIndex());
 
 				if(responseNotification.getSenderState() == NodeServerProperties.State.ELECTION
 						&& responseNotification.getSenderRound() < serverProp.getElectionRound()){
@@ -112,7 +115,7 @@ public class InHandler1 extends ChannelInboundHandlerAdapter { // (1)
 					// get my current vote from FLE or when FLE is underway
 					Vote myVote = serverProp.getMyVote();
 					Notification myNotification = new Notification(myVote, serverProp.getElectionRound(), serverProp.getId(), serverProp.getNodestate());
-					return("NOTIFICATION:"+myNotification.toString());
+					return("SNOTIFICATION:"+myNotification.toString());
 
 				}
 			}
@@ -123,18 +126,50 @@ public class InHandler1 extends ChannelInboundHandlerAdapter { // (1)
 
 					Notification myNotification = new Notification(myVote, serverProp.getElectionRound(), serverProp.getId(), serverProp.getNodestate());
 					LOG.info("myNotification:"+myNotification);
-					return("NOTIFICATION:"+myNotification.toString());
+					return("SNOTIFICATION:"+myNotification.toString());
 
 				}
 
 			}
+			
+			return("");
+
+		}
+		
+		
+		if(requestMsg.contains("SNOTIFICATION:")){
+			//add the ip:port to the group member list;
+
+
+			String[] arr = requestMsg.split(":");
+
+			Notification responseNotification = new Notification(arr[1].trim());
+			NodeServerProperties serverProp = server.getProperties();
+			if(serverProp.getNodestate() == NodeServerProperties.State.ELECTION){
+				MpscArrayQueue<Notification> currentElectionQueue = server.electionQueue123;
+				LOG.info("Before:"+currentElectionQueue.currentProducerIndex());
+				currentElectionQueue.offer(responseNotification);
+				synchronized (currentElectionQueue) {
+					currentElectionQueue.notify();
+					try {
+						Thread.sleep(100);
+					} catch (InterruptedException e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+					}
+				}
+				LOG.info("After:"+currentElectionQueue.currentProducerIndex());
+
+
+			}
+			
 
 
 			LOG.info(server.getMemberListString());
 			return("ERROR");
 
 		}
-
+		
 		if(requestMsg.contains("OK")){
 			//add the ip:port to the group member list;
 
@@ -150,7 +185,7 @@ public class InHandler1 extends ChannelInboundHandlerAdapter { // (1)
 		}
 
 
-		return "HMM...";
+		return "";
 
 	}
 

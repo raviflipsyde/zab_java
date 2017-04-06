@@ -44,7 +44,7 @@ public class UdpClient implements Runnable{
 				
 					DatagramPacket sendPacket = new DatagramPacket(sendData, sendData.length, IPAddress, port);
 					
-					LOG.info("Sending to:" + addr.toString());
+//					LOG.info("Sending to:" + addr.toString());
 					clientSocket.send(sendPacket);
 					clientSocket.close();
 				}

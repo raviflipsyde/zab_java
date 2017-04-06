@@ -78,9 +78,9 @@ public class UdpServer implements Runnable{
 				InetSocketAddress recvAddress = new InetSocketAddress(IPAddress, port);
 				
 				long currentTime = System.currentTimeMillis();
-				LOG.info("RECEIVED: " + sentence
-						+ " from "+ recvAddress.toString() 
-						+" at "+ currentTime);
+//				LOG.info("RECEIVED: " + sentence
+//						+ " from "+ recvAddress.toString() 
+//						+" at "+ currentTime);
 			
 				
 				String returnSentence = sentence.toUpperCase();
