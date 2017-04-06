@@ -107,7 +107,7 @@ public class NodeServer implements Runnable{
 	
 
 	public void run() {
-
+		
 		System.out.println("Start Node Server");
 
 		// send the address to bootstrap, get the member list, get the nodeID
@@ -117,13 +117,16 @@ public class NodeServer implements Runnable{
 
 		
 		Thread udpserverThread = new Thread(new UdpServer(this));
+		udpserverThread.setPriority(Thread.MIN_PRIORITY);
 		udpserverThread.start();
 		
 		//Start the NettyServer at the nodeport
 		Thread serverThread = new Thread(new NettyServer(nodePort, this));
+		serverThread.setPriority(Thread.MIN_PRIORITY);
 		serverThread.start();
 		
 		Thread udpClientThread = new Thread(new UdpClient(this));
+		udpClientThread.setPriority(Thread.MIN_PRIORITY);
 		udpClientThread.start();
 		
 

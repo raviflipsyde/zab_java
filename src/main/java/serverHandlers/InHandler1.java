@@ -101,7 +101,7 @@ public class InHandler1 extends ChannelInboundHandlerAdapter { // (1)
 				synchronized (currentElectionQueue) {
 					currentElectionQueue.notify();
 					try {
-						Thread.sleep(100);
+						Thread.sleep(200);
 					} catch (InterruptedException e) {
 						// TODO Auto-generated catch block
 						e.printStackTrace();
@@ -152,7 +152,7 @@ public class InHandler1 extends ChannelInboundHandlerAdapter { // (1)
 				synchronized (currentElectionQueue) {
 					currentElectionQueue.notify();
 					try {
-						Thread.sleep(100);
+						Thread.sleep(200);
 					} catch (InterruptedException e) {
 						// TODO Auto-generated catch block
 						e.printStackTrace();
