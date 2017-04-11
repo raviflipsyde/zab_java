@@ -7,12 +7,14 @@ import java.util.concurrent.CopyOnWriteArrayList;
 import io.netty.util.internal.shaded.org.jctools.queues.MpscArrayQueue;
 import servers.Message;
 import servers.Notification;
+import servers.Vote;
 
 public class SyncDataStructs {
 
 	private static SyncDataStructs instance = null;
 	private MpscArrayQueue<Notification> electionQueue = null;
 	private List<InetSocketAddress> memberList = null;
+	private Vote myVote; 
 	
 	private SyncDataStructs(){
 		electionQueue = new MpscArrayQueue<Notification>(100);
@@ -32,6 +34,14 @@ public class SyncDataStructs {
 	public List<InetSocketAddress> getMemberList() {
 		return getInstance().memberList;
 	}
+	
+	public synchronized Vote getMyVote() {
+		return myVote;
+	}
+	public synchronized void setMyVote(Vote myVote) {
+		this.myVote = myVote;
+	}
+	
 	
 	
 	

@@ -10,7 +10,6 @@ import java.net.UnknownHostException;
 
 
 public class HeartBeatServer {
-	NodeServer nodeServer;
 	
 	public static void main(String args[]){
 		try {

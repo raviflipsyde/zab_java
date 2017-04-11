@@ -1,13 +1,13 @@
 package servers;
 
-import servers.NodeServerProperties.State;
+import servers.NodeServerProperties1.State;
 
 public class Notification{
 	
 	private Vote vote;
 	private long senderRound;
 	private long senderId;
-	private NodeServerProperties.State senderState;
+	private State senderState;
 	
 	public Vote getVote() {
 		return vote;
@@ -27,19 +27,19 @@ public class Notification{
 	public void setSenderId(long senderId) {
 		this.senderId = senderId;
 	}
-	public NodeServerProperties.State getSenderState() {
+	public NodeServerProperties1.State getSenderState() {
 		return senderState;
 	}
-	public void setSenderState(NodeServerProperties.State senderState) {
+	public void setSenderState(NodeServerProperties1.State senderState) {
 		this.senderState = senderState;
 	}
 	
-	public Notification(Vote vote, long senderRound, long senderId, State senderState) {
+	public Notification(Vote vote, long senderRound, long senderId, servers.NodeServerProperties1.State state) {
 		super();
 		this.vote = vote;
 		this.senderRound = senderRound;
 		this.senderId = senderId;
-		this.senderState = senderState;
+		this.senderState = state;
 	}
 	
 	
@@ -60,7 +60,7 @@ public class Notification{
 		this.senderRound = senderRound;
 		this.senderId = senderId;
 		this.senderRound = senderRound;
-		this.senderState = NodeServerProperties.State.valueOf(senderState);
+		this.senderState = NodeServerProperties1.State.valueOf(senderState);
 		
 	}
 	

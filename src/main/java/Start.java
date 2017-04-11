@@ -6,7 +6,7 @@
 import org.apache.logging.log4j.Logger;
 
 import servers.BootstrapServer;
-import servers.NodeServer;
+import servers.NodeServer1;
 
 
 import org.apache.logging.log4j.LogManager;
@@ -50,7 +50,7 @@ public class Start {
 			LOG.info("Bootstrap Port: " + bport);
 			LOG.info("Node Port :" + nport);
 
-			new NodeServer(bhost, bport, nport).run();
+			new NodeServer1(bhost, bport, nport).init();
 		}
 
 		else if(args[0].equals("Server")){
