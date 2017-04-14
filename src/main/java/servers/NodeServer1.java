@@ -236,7 +236,7 @@ public class NodeServer1 {
 					this.properties.setMyVote(currentN.getVote());
 					break;
 				}
-				else if(myVoteCounter> (memberList.size()+1)/2 ){  //our improvement just chekc for the quorum
+				else if(myVoteCounter> (memberList.size()+1)/2 ){  //our improvement just check for the quorum
 					
 					this.properties.setMyVote(currentN.getVote());
 					break;
@@ -256,7 +256,17 @@ public class NodeServer1 {
 			
 		}// end of while
 //		// Here the leader is the one pointed by my vote
-//		
+//
+		if(this.properties.getMyVote().getId() == this.properties.getNodeId()){
+			this.properties.setLeader(true);
+			this.properties.setLeaderId(this.properties.getNodeId());
+			this.properties.setNodestate(NodeServerProperties1.State.LEADING);
+		} else {
+			this.properties.setLeader(false);
+			this.properties.setLeaderId(this.properties.getMyVote().getId());
+			this.properties.setNodestate(NodeServerProperties1.State.FOLLOWING);
+		}
+
 		return this.properties.getMyVote();
 //		
 	}
@@ -292,15 +302,7 @@ public class NodeServer1 {
 
 
 	private void changePhase() {
-		try {
-			Runnable target = new Runnable() {
 
-				public void run() {
-					// TODO Auto-generated method stub
-
-				}
-			};
-			// TODO Auto-generated method stub
 			while(true){
 			/*Thread leaderElectionThread = new Thread(target);
 			leaderElectionThread.start();
@@ -314,15 +316,9 @@ public class NodeServer1 {
 			broadcastThread.start();
 			broadcastThread.join();*/
 				
-			startLeaderElection();
+			Vote leaderVote = startLeaderElection();
 			
 			}
-		} 
-
-		catch (InterruptedException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
 	}
 
 	public long msgBootstrap() {
