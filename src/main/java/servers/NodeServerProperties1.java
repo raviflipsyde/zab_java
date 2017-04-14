@@ -30,7 +30,10 @@ public class NodeServerProperties1 {
 
 	private long nodeId;
 	private long lastEpoch;
+	private long acceptedEpoch;
 	private long currentEpoch;
+	private long newEpoch;
+	private long counter;
 	private ZxId lastZxId;
 	private boolean isLeader;
 	private State nodestate;
@@ -67,6 +70,30 @@ public class NodeServerProperties1 {
 		myVote = new Vote(this.getLastZxId(), this.getNodeId());
 		synData = SyncDataStructs.getInstance();
 		memberList = new CopyOnWriteArrayList<InetSocketAddress>();
+	}
+
+	public long getCounter() {
+		return counter;
+	}
+
+	public void setCounter(long counter) {
+		this.counter = counter;
+	}
+
+	public long getNewEpoch() {
+		return newEpoch;
+	}
+
+	public void setNewEpoch(long newEpoch) {
+		this.newEpoch = newEpoch;
+	}
+
+	public long getAcceptedEpoch() {
+		return acceptedEpoch;
+	}
+
+	public void setAcceptedEpoch(long acceptedEpoch) {
+		this.acceptedEpoch = acceptedEpoch;
 	}
 
 	public synchronized Vote getMyVote() {

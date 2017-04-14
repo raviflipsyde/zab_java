@@ -14,11 +14,15 @@ public class SyncDataStructs {
 	private static SyncDataStructs instance = null;
 	private MpscArrayQueue<Notification> electionQueue = null;
 	private List<InetSocketAddress> memberList = null;
-	private Vote myVote; 
+	private List<Long> acceptedEpochList = null;
+	private Vote myVote;
+	private long newEpoch;
 	
 	private SyncDataStructs(){
 		electionQueue = new MpscArrayQueue<Notification>(100);
 		memberList  = new CopyOnWriteArrayList<InetSocketAddress>();
+		acceptedEpochList = new CopyOnWriteArrayList<Long>();
+
 	}
 	public static SyncDataStructs getInstance(){
 		if(instance == null){
@@ -26,7 +30,23 @@ public class SyncDataStructs {
 		}
 		return instance;
 	}
-	
+
+	public long getNewEpoch() {
+		return newEpoch;
+	}
+
+	public void setNewEpoch(long newEpoch) {
+		this.newEpoch = newEpoch;
+	}
+
+	public List<Long> getAcceptedEpochList() {
+		return acceptedEpochList;
+	}
+
+	public void setAcceptedEpochList(List<Long> acceptedEpochList) {
+		this.acceptedEpochList = acceptedEpochList;
+	}
+
 	public MpscArrayQueue<Notification> getElectionQueue() {
 		return getInstance().electionQueue;
 	}

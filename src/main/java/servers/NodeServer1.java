@@ -267,8 +267,54 @@ public class NodeServer1 {
 			this.properties.setNodestate(NodeServerProperties1.State.FOLLOWING);
 		}
 
+		this.properties.setAcceptedEpoch(this.properties.getLastZxId().getEpoch());
 		return this.properties.getMyVote();
 //		
+	}
+
+	private void Recovery() {
+
+		if (this.properties.isLeader() == true){
+			// Leader
+			List<Long> acceptedEpochList =  this.properties.getSynData().getAcceptedEpochList();
+			long max = acceptedEpochList.get(0);
+			for (long accEpoch : acceptedEpochList){
+				if (accEpoch > max){
+					max = accEpoch;
+				}
+			}
+
+			this.properties.setNewEpoch(max + 1);
+
+			String newEpochmsg = "NEWEPOCH:" + this.properties.getNewEpoch();
+			this.broadcast(newEpochmsg);
+
+
+
+
+		} else {
+			// Follower
+			String followerinfomsg = "FOLLOWERINFO:" + this.properties.getAcceptedEpoch();
+			this.nettyClient.sendMessage(leaderip, leaderport, followerinfomsg);
+			long newEpoch = this.properties.getSynData().getNewEpoch();
+			long acceptedEpoch = this.properties.getAcceptedEpoch();
+
+			if (newEpoch > acceptedEpoch){
+				this.properties.setAcceptedEpoch(newEpoch);
+				this.properties.setCounter(0);
+				String ackepochmsg = "ACKEPOCH:"; // TODO: currentepoch, history, lastZxid
+				this.nettyClient.sendMessage(leaderip, leaderport, ackepochmsg);
+			} else {
+				this.properties.setNodestate(NodeServerProperties1.State.ELECTION);
+				changePhase();
+			}
+
+			// Receive SNAP, DIFF and TRUNC messages
+
+
+
+		}
+
 	}
 	
 	
@@ -329,7 +375,7 @@ public class NodeServer1 {
 
 			PrintWriter out = new PrintWriter(socket.getOutputStream(), true);
 			BufferedReader in = new BufferedReader(new InputStreamReader(socket.getInputStream()));
-			// set self_ip:port to bootsstrap
+			// set self_ip:port to bootstrap
 
 			out.println("set " + properties.getNodeHost() + ":" + properties.getNodePort());
 
@@ -412,7 +458,7 @@ public class NodeServer1 {
 		for (InetSocketAddress member : properties.getMemberList()) {
 			try {
 				
-				this.nettyClient.sendMessage(member.getHostName(), member.getPort(),message);
+				this.nettyClient.sendMessage(member.getHostName(), member.getPort(), message);
 			}
 			catch (Exception e) {
 				unreachablelist.add(member);

@@ -2,6 +2,8 @@ package netty;
 
 import java.net.InetSocketAddress;
 import java.nio.charset.StandardCharsets;
+import java.util.List;
+
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
@@ -34,7 +36,7 @@ public class InHandler2 extends ChannelInboundHandlerAdapter { // (1)
 
 
 		ByteBuf in = (ByteBuf) msg;
-		String requestMsg  =in.toString(StandardCharsets.UTF_8 );
+		String requestMsg  = in.toString(StandardCharsets.UTF_8 );
 		LOG.info("Channel Read:" + requestMsg);
 		String response = handleClientRequest(requestMsg);
 		LOG.info("response:" + response);
@@ -166,12 +168,27 @@ public class InHandler2 extends ChannelInboundHandlerAdapter { // (1)
 			//			
 			//			InetSocketAddress addr = new InetSocketAddress(arr[1].trim(), Integer.parseInt(arr[2].trim()));
 			//			server.addMemberToList(addr);
-			LOG.info("Client rreceived OK!!");
+			LOG.info("Client received OK!!");
 			LOG.info(properties.getMemberList());
 
 			return "";
 		}
 
+		if (requestMsg.contains("FOLLOWERINFO")){
+			String[] accEpoch = requestMsg.split(":");
+			long acceptedEpoch = Long.parseLong(accEpoch[1]);
+
+			List<Long> acceptedEpochList = properties.getSynData().getAcceptedEpochList();
+			acceptedEpochList.add(acceptedEpoch);
+			properties.getSynData().setAcceptedEpochList(acceptedEpochList);
+
+			return "";
+		}
+
+		if (requestMsg.contains("NEWEPOCH")){
+			String[] newEpocharr = requestMsg.split(":");
+			long newEpoch = Long.parseLong(newEpocharr[1]);
+		}
 
 		return "";
 

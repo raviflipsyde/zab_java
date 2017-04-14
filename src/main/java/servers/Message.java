@@ -7,7 +7,7 @@ public class Message implements Serializable{
 	private long data;
 	
 	public Message(ZxId zxid, long data) {
-		this.zxid = zxid;;
+		this.zxid = zxid;
 		this.data = data;
 	}
 	
