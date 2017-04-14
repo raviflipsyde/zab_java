@@ -101,7 +101,8 @@ public class InHandler2 extends ChannelInboundHandlerAdapter { // (1)
 
 					// get my current vote from FLE or when FLE is underway
 					Vote myVote = properties.getSynData().getMyVote();
-					Notification myNotification = new Notification(myVote, properties.getElectionRound(), properties.getNodeId(), properties.getNodestate());
+					//public Notification(Vote vote, long id, servers.NodeServerProperties1.State state, long round)
+					Notification myNotification = new Notification(myVote, properties.getNodeId(), properties.getNodestate(), properties.getElectionRound());
 					return("SNOTIFICATION:"+myNotification.toString());
 
 				}
@@ -111,7 +112,7 @@ public class InHandler2 extends ChannelInboundHandlerAdapter { // (1)
 					// get my current vote from FLE or when FLE is underway
 					Vote myVote = properties.getSynData().getMyVote();
 
-					Notification myNotification = new Notification(myVote, properties.getElectionRound(), properties.getNodeId(), properties.getNodestate());
+					Notification myNotification = new Notification(myVote, properties.getNodeId(), properties.getNodestate(), properties.getElectionRound());
 					LOG.info("myNotification:"+myNotification);
 					return("SNOTIFICATION:"+myNotification.toString());
 

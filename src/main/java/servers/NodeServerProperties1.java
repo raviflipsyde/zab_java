@@ -1,6 +1,7 @@
 package servers;
 
 import java.io.BufferedReader;
+
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.net.InetSocketAddress;
@@ -12,6 +13,7 @@ import java.util.Queue;
 import java.util.concurrent.ConcurrentLinkedQueue;
 import java.util.concurrent.CopyOnWriteArrayList;
 
+import io.netty.util.internal.shaded.org.jctools.queues.MpscArrayQueue;
 import util.SyncDataStructs;
 
 public class NodeServerProperties1 {
@@ -29,7 +31,7 @@ public class NodeServerProperties1 {
 	private long nodeId;
 	private long lastEpoch;
 	private long currentEpoch;
-	private long lastZxId;
+	private ZxId lastZxId;
 	private boolean isLeader;
 	private State nodestate;
 	private long electionRound;
@@ -40,12 +42,17 @@ public class NodeServerProperties1 {
 	private Queue<Message> requestQueue;
 	private Queue<Message> commitQueue;
 	private SyncDataStructs synData;
+	private MpscArrayQueue<Notification> electionQueue;
+	private Vote myVote;
 
 	public NodeServerProperties1() {
+		//TODO: acceptedEpoch = 0;
 		nodeId = 0;
 		lastEpoch = 0;
 		currentEpoch = 0;
-		lastZxId = 0;
+		lastZxId = new ZxId(0, 0);
+//		lastZxId.setEpoch(0);
+//		lastZxId.setCounter(0);
 		isLeader = false;
 		electionRound = 0;
 		nodestate = State.ELECTION;
@@ -53,17 +60,25 @@ public class NodeServerProperties1 {
 		leaderAddress = null;
 		requestQueue = new ConcurrentLinkedQueue<Message>();
 		commitQueue = new ConcurrentLinkedQueue<Message>();
+		electionQueue = new MpscArrayQueue<Notification>(100);
 		nodeHost = getMyIP();
 		myAddress = new InetSocketAddress(nodeHost, nodePort);
 		// messageList = new ArrayList<Message>();
-		// myVote = new Vote(this.getLastZxId(), this.getCurrentEpoch(),
-		// this.getId());
+		myVote = new Vote(this.getLastZxId(), this.getNodeId());
 		synData = SyncDataStructs.getInstance();
 		memberList = new CopyOnWriteArrayList<InetSocketAddress>();
 	}
 
+	public synchronized Vote getMyVote() {
+		return myVote;
+	}
+
+	public synchronized void setMyVote(Vote myVote) {
+		this.myVote = myVote;
+	}
+
 	public synchronized String getBootstrapHost() {
-		return bootstrapHost;
+		return this.bootstrapHost;
 	}
 
 	public synchronized void setBootstrapHost(String bootstrapHost) {
@@ -71,7 +86,7 @@ public class NodeServerProperties1 {
 	}
 
 	public synchronized int getBootstrapPort() {
-		return bootstrapPort;
+		return this.bootstrapPort;
 	}
 
 	public synchronized void setBootstrapPort(int bootstrapPort) {
@@ -79,7 +94,7 @@ public class NodeServerProperties1 {
 	}
 
 	public synchronized int getNodePort() {
-		return nodePort;
+		return this.nodePort;
 	}
 
 	public synchronized void setNodePort(int nodePort) {
@@ -87,7 +102,7 @@ public class NodeServerProperties1 {
 	}
 
 	public synchronized List<InetSocketAddress> getMemberList() {
-		return memberList;
+		return this.memberList;
 	}
 
 	public synchronized void setMemberList(List<InetSocketAddress> memberList) {
@@ -95,7 +110,7 @@ public class NodeServerProperties1 {
 	}
 
 	public synchronized long getNodeId() {
-		return nodeId;
+		return this.nodeId;
 	}
 
 	public synchronized void setNodeId(long nodeId) {
@@ -103,7 +118,7 @@ public class NodeServerProperties1 {
 	}
 
 	public synchronized long getLastEpoch() {
-		return lastEpoch;
+		return this.lastEpoch;
 	}
 
 	public synchronized void setLastEpoch(long lastEpoch) {
@@ -118,14 +133,15 @@ public class NodeServerProperties1 {
 		this.currentEpoch = currentEpoch;
 	}
 
-	public synchronized long getLastZxId() {
+	public synchronized ZxId getLastZxId() {
 		return lastZxId;
 	}
 
-	public synchronized void setLastZxId(long lastZxId) {
+	public synchronized void setLastZxId(ZxId lastZxId) {
 		this.lastZxId = lastZxId;
 	}
 
+	
 	public synchronized boolean isLeader() {
 		return isLeader;
 	}
@@ -232,6 +248,14 @@ public class NodeServerProperties1 {
 	public synchronized void removeMemberFromList(InetSocketAddress addr) {
 		this.memberList.remove(addr);
 
+	}
+
+	public MpscArrayQueue<Notification> getElectionQueue() {
+		return electionQueue;
+	}
+
+	public void setElectionQueue(MpscArrayQueue<Notification> electionQueue) {
+		this.electionQueue = electionQueue;
 	}
 
 }

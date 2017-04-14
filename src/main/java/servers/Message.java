@@ -3,24 +3,21 @@ package servers;
 import java.io.Serializable;
 
 public class Message implements Serializable{
-	private long txId;
-	private long epoch;
+	private ZxId zxid;
 	private long data;
 	
-	public Message(long id, long epoch, long data) {
-		this.txId = id;
-		this.epoch = epoch;
+	public Message(ZxId zxid, long data) {
+		this.zxid = zxid;;
 		this.data = data;
 	}
 	
 	public Message(String msg) {
 		String[] strArray = msg.split(",");
-		long id= Long.parseLong(strArray[0]);
-		long epoch= Long.parseLong(strArray[1]);
-		long data= Long.parseLong(strArray[2]);
+		long epoch = Long.parseLong(strArray[0]);
+		long counter = Long.parseLong(strArray[1]);
+		long data = Long.parseLong(strArray[2]);
 		
-		this.txId = id;
-		this.epoch = epoch;
+		this.zxid = new ZxId(epoch,counter);
 		this.data = data;
 		
 		
@@ -28,15 +25,11 @@ public class Message implements Serializable{
 	
 	@Override
 	public String toString() {
-		return txId + "," + epoch + "," + data ;
+		return  zxid.getEpoch() + "," + zxid.getCounter() + "," + data;
 	}
 
-	public long getTxId() {
-		return txId;
-	}
-
-	public long getEpoch() {
-		return epoch;
+	public ZxId getZxid() {
+		return zxid;
 	}
 
 	public long getData() {
