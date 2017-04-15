@@ -185,12 +185,12 @@ public class NodeServer1 {
 //					receivedVotesRound.put(this.properties.getId(), this.electionRound);
 					
 					if(currentN.getSenderState() == NodeServerProperties1.State.LEADING){ //This is notification from leader
-						LOG.info("This notification is from the Leader");
+						LOG.info("This Notification is from the Leader");
 						this.properties.setMyVote( currentN.getVote());
 						break;
 					}
 					else{
-						LOG.info("This notification is from a Follower");
+						LOG.info("This Notification is from a Follower. Now,checking if my vote has a Quorum ");
 						int myVoteCounter = 0;
 						for( Entry<Long, Vote> v:receivedVote.entrySet()){
 							Vote currVote = v.getValue();
@@ -198,16 +198,21 @@ public class NodeServer1 {
 								myVoteCounter++;
 							}
 						}
-						// if the currentN's vote is to me and i achieve quorum in receivedVote then i be the leader
+						// if the currentN's vote is to me and I achieve quorum in receivedVote then let me be the leader
 						
-						if(currentN.getVote().getId()==this.properties.getMyVote().getId() && myVoteCounter> (memberList.size()+1)/2 ){
+						//TODO: change this back, if doesn't work
+						/*if(currentN.getVote().getId()==this.properties.getMyVote().getId() && myVoteCounter> (memberList.size()+1)/2 ){
 							this.properties.setMyVote(currentN.getVote());
 							break;					
 						}
 						else if(myVoteCounter> (memberList.size()+1)/2 ){  //our improvement
 							this.properties.setMyVote(currentN.getVote());
 							break;						
-						}
+						}*/
+						 if(myVoteCounter > (memberList.size()+1)/2 ){  //our improvement
+								this.properties.setMyVote(currentN.getVote());
+								break;
+						 }
 						//wrong condition
 //						else if(myVoteCounter> (memberList.size()+1)/2 
 //								&& OutOfElectionVotes.containsKey(currentN.getVote().getId())){
