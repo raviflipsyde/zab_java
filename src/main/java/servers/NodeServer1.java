@@ -66,7 +66,6 @@ public class NodeServer1 {
 		Notification myNotification = new Notification(this.properties.getMyVote(), this.properties.getNodeId(), this.properties.getNodestate(), this.properties.getElectionRound());
 		LOG.info("My Notification is:"+myNotification.toString());
 		
-		//TODO: Verify
 		sendNotificationToAll(myNotification.toString()); 
 		
 		while(this.properties.getNodestate() == NodeServerProperties1.State.ELECTION && timeout<limit_timeout ){
@@ -74,7 +73,7 @@ public class NodeServer1 {
 			Notification currentN = currentElectionQueue.poll();
 			
 			if(currentN==null){
-				LOG.info("Notification Queue is empty!!");
+				LOG.info("Notification Queue is empty...Let's wait and poll again!!");
 				try {
 					synchronized (currentElectionQueue) {
 						currentElectionQueue.wait(timeout);
@@ -82,10 +81,8 @@ public class NodeServer1 {
 					currentN = currentElectionQueue.poll();
 					
 					if(currentN==null){
-						LOG.info("Notification Queue is empty again!!");
+						LOG.info("Notification Queue is empty again, increasing the timeout!!");
 						timeout = 2*timeout;
-						LOG.info("increasing timeout");
-						//TODO: verify
 						sendNotificationToAll(myNotification.toString()); 
 						
 					}
@@ -99,13 +96,14 @@ public class NodeServer1 {
 			//CurrentN is not null
 			
 			else if ( currentN.getSenderState() == NodeServerProperties1.State.ELECTION ){
-				LOG.info("Received notification is in Election");
+				LOG.info("Dequeued Notification is:"+ currentN);
+				LOG.info("Received Notification is in 'Election' state");
 				if(currentN.getSenderRound() < this.properties.getElectionRound()){
-					LOG.info("Disregard vote as round number is smaller than mine");
+					LOG.info("Disregarding this Vote, since the round number is smaller than mine");
 					continue;
 				}else{
 					if(currentN.getSenderRound() > this.properties.getElectionRound()){
-						LOG.info("The round number is larger than mine");
+						LOG.info("The round number is greater than mine");
 						this.properties.setElectionRound(currentN.getSenderRound());
 						
 						receivedVote = new HashMap<Long, Vote>();
@@ -122,7 +120,7 @@ public class NodeServer1 {
 						myNotification.setVote(this.properties.getMyVote()); // update notification
 						
 					}
-					//TODO: verify
+
 					sendNotificationToAll(myNotification.toString());
 					
 					// update the receivedVote datastructure
@@ -177,6 +175,7 @@ public class NodeServer1 {
 			} //end of if election
 			
 			else {	// the received vote is either leading or following
+				LOG.info("Dequeued Notification is:"+ currentN);
 				if(currentN.getSenderRound() == this.properties.getElectionRound()){
 					LOG.info("Notification is not in election, round numbers of current node and current notification are same");
 					receivedVote.put(currentN.getSenderId(), currentN.getVote());
