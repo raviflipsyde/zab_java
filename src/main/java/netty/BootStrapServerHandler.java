@@ -133,7 +133,7 @@ public class BootStrapServerHandler extends ChannelInboundHandlerAdapter { // (1
 
 			member = formatMembersName(member);
 			//bufferedWriter.newLine();
-			bufferedWriter.write(member+"\n");
+			bufferedWriter.write( (counter+1) +":"+member+"\n");
 			bufferedWriter.flush();
 			bufferedWriter.close();
 

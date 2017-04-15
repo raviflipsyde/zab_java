@@ -9,7 +9,9 @@ import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 import java.util.Queue;
+import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.ConcurrentLinkedQueue;
 import java.util.concurrent.CopyOnWriteArrayList;
 
@@ -26,7 +28,8 @@ public class NodeServerProperties1 {
 	private String nodeHost;
 	private int nodePort;
 
-	private List<InetSocketAddress> memberList;
+	private Map<Long, InetSocketAddress> memberList;
+
 
 	private long nodeId;
 	private long lastEpoch;
@@ -47,6 +50,8 @@ public class NodeServerProperties1 {
 	private SyncDataStructs synData;
 	private MpscArrayQueue<Notification> electionQueue;
 	private Vote myVote;
+	
+	private Map<String, String> DataMap;
 
 	public NodeServerProperties1() {
 		//TODO: acceptedEpoch = 0;
@@ -69,7 +74,7 @@ public class NodeServerProperties1 {
 		// messageList = new ArrayList<Message>();
 		myVote = new Vote(this.getLastZxId(), this.getNodeId());
 		synData = SyncDataStructs.getInstance();
-		memberList = new CopyOnWriteArrayList<InetSocketAddress>();
+		memberList = new ConcurrentHashMap<Long, InetSocketAddress>();
 	}
 
 	public long getCounter() {
@@ -128,11 +133,20 @@ public class NodeServerProperties1 {
 		this.nodePort = nodePort;
 	}
 
-	public synchronized List<InetSocketAddress> getMemberList() {
-		return this.memberList;
+	
+	public synchronized Map<String, String> getDataMap() {
+		return DataMap;
 	}
 
-	public synchronized void setMemberList(List<InetSocketAddress> memberList) {
+	public synchronized void setDataMap(Map<String, String> dataMap) {
+		DataMap = dataMap;
+	}
+
+	public synchronized Map<Long, InetSocketAddress> getMemberList() {
+		return memberList;
+	}
+
+	public synchronized void setMemberList(Map<Long, InetSocketAddress> memberList) {
 		this.memberList = memberList;
 	}
 
@@ -267,13 +281,14 @@ public class NodeServerProperties1 {
 		return ip;
 	}
 
-	public synchronized void addMemberToList(InetSocketAddress addr) {
-		this.memberList.add(addr);
+	public synchronized void addMemberToList(long nodeid, InetSocketAddress addr) {
+
+		this.memberList.put(nodeId, addr);
 
 	}
 
-	public synchronized void removeMemberFromList(InetSocketAddress addr) {
-		this.memberList.remove(addr);
+	public synchronized void removeMemberFromList(Long nodeId) {
+		this.memberList.remove(nodeId);
 
 	}
 

@@ -12,6 +12,7 @@ import java.net.Socket;
 import java.net.UnknownHostException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 import java.util.Map.Entry;
 import java.util.Queue;
 import io.netty.util.internal.shaded.org.jctools.queues.MpscArrayQueue;
@@ -48,16 +49,16 @@ public class NodeServer1 {
 
 	private Vote startLeaderElection() {
 		
-		List<InetSocketAddress> memberList = this.properties.getMemberList();
+		Map<Long, InetSocketAddress> memberList = this.properties.getMemberList();
 		HashMap<Long, Vote> receivedVote = new HashMap<Long, Vote>();
 		HashMap<Long, Long> receivedVotesRound = new HashMap<Long, Long>();
 		HashMap<Long, Vote> OutOfElectionVotes = new HashMap<Long, Vote>();
 		HashMap<Long, Long> OutOfElectionVotesRound = new HashMap<Long, Long>();
-		MpscArrayQueue<Notification> currentElectionQueue = this.properties.getElectionQueue();
+		MpscArrayQueue<Notification> currentElectionQueue = this.properties.getSynData().getElectionQueue();
 		Vote myVote = new Vote(this.properties.getLastZxId(),this.properties.getNodeId());
 		
-		long limit_timeout = 10000;
-		long timeout = 1000;
+		long limit_timeout = 25000;
+		long timeout = 2000;
 		
 		this.properties.setElectionRound(this.properties.getElectionRound()+1);
 		this.properties.setMyVote(myVote);
@@ -272,99 +273,117 @@ public class NodeServer1 {
 //		
 	}
 
-	private void Recovery() {
-
-		if (this.properties.isLeader() == true){
-			// Leader
-			List<Long> acceptedEpochList =  this.properties.getSynData().getAcceptedEpochList();
-			long max = acceptedEpochList.get(0);
-			for (long accEpoch : acceptedEpochList){
-				if (accEpoch > max){
-					max = accEpoch;
-				}
-			}
-
-			this.properties.setNewEpoch(max + 1);
-
-			String newEpochmsg = "NEWEPOCH:" + this.properties.getNewEpoch();
-			this.broadcast(newEpochmsg);
-
-
-
-
-		} else {
-			// Follower
-			String followerinfomsg = "FOLLOWERINFO:" + this.properties.getAcceptedEpoch();
-			this.nettyClient.sendMessage(leaderip, leaderport, followerinfomsg);
-			long newEpoch = this.properties.getSynData().getNewEpoch();
-			long acceptedEpoch = this.properties.getAcceptedEpoch();
-
-			if (newEpoch > acceptedEpoch){
-				this.properties.setAcceptedEpoch(newEpoch);
-				this.properties.setCounter(0);
-				String ackepochmsg = "ACKEPOCH:"; // TODO: currentepoch, history, lastZxid
-				this.nettyClient.sendMessage(leaderip, leaderport, ackepochmsg);
-			} else {
-				this.properties.setNodestate(NodeServerProperties1.State.ELECTION);
-				changePhase();
-			}
-
-			// Receive SNAP, DIFF and TRUNC messages
-
-
-
-		}
-
-	}
+//	private void Recovery() {
+//
+//		if (this.properties.isLeader() == true){
+//			// Leader
+//			List<Long> acceptedEpochList =  this.properties.getSynData().getAcceptedEpochList();
+//			long max = acceptedEpochList.get(0);
+//			for (long accEpoch : acceptedEpochList){
+//				if (accEpoch > max){
+//					max = accEpoch;
+//				}
+//			}
+//
+//			this.properties.setNewEpoch(max + 1);
+//
+//			String newEpochmsg = "NEWEPOCH:" + this.properties.getNewEpoch();
+//			this.broadcast(newEpochmsg);
+//
+//
+//
+//
+//		} else {
+//			// Follower
+//			String followerinfomsg = "FOLLOWERINFO:" + this.properties.getAcceptedEpoch();
+//			this.nettyClient.sendMessage(leaderip, leaderport, followerinfomsg);
+//			long newEpoch = this.properties.getSynData().getNewEpoch();
+//			long acceptedEpoch = this.properties.getAcceptedEpoch();
+//
+//			if (newEpoch > acceptedEpoch){
+//				this.properties.setAcceptedEpoch(newEpoch);
+//				this.properties.setCounter(0);
+//				String ackepochmsg = "ACKEPOCH:"; // TODO: currentepoch, history, lastZxid
+//				this.nettyClient.sendMessage(leaderip, leaderport, ackepochmsg);
+//			} else {
+//				this.properties.setNodestate(NodeServerProperties1.State.ELECTION);
+//				changePhase();
+//			}
+//
+//			// Receive SNAP, DIFF and TRUNC messages
+//
+//
+//
+//		}
+//
+//	}
 	
 	
 	public void init() {
 		LOG.info("Starting the Node server");
 
 		msgBootstrap();
-
-		LOG.info("ID for this node is :" + properties.getNodeId());
-
-		this.udpServerThread = new Thread(new UdpServer1(properties));
-		this.udpServerThread.setPriority(Thread.MIN_PRIORITY);
-		this.udpServerThread.start();
+		
+		for(Entry<Long, InetSocketAddress> entry : properties.getMemberList().entrySet()){
+			LOG.info(entry.getKey() +":::"+ entry.getValue().getHostName() + ":"+ entry.getValue().getPort());
+		}
+		
+		LOG.info("\n**ID for this node is :" + properties.getNodeId());
 
 		this.nettyServerThread = new Thread(new NettyServer1(properties.getNodePort(), properties));
 		this.nettyServerThread.setPriority(Thread.MIN_PRIORITY);
 		this.nettyServerThread.start();
-
-		this.udpClientThread = new Thread(new UdpClient1(properties));
-		this.udpClientThread.setPriority(Thread.MIN_PRIORITY);
-		this.udpClientThread.start();
+		try {
+			Thread.sleep(500);
+		} catch (InterruptedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+//		this.udpServerThread = new Thread(new UdpServer1(properties));
+//		this.udpServerThread.setPriority(Thread.MIN_PRIORITY);
+//		this.udpServerThread.start();
+//
+//		
+//
+//		this.udpClientThread = new Thread(new UdpClient1(properties));
+//		this.udpClientThread.setPriority(Thread.MIN_PRIORITY);
+//		this.udpClientThread.start();
 
 		this.nettyClient = new NettyClient1(properties);
 		joinGroup();
 
 		readHistory();
-		startLeaderElection();
-		//changePhase();
+//		startLeaderElection();
+		changePhase();
 
 	}
 
 
 	private void changePhase() {
-
-			while(true){
-			/*Thread leaderElectionThread = new Thread(target);
-			leaderElectionThread.start();
-			leaderElectionThread.join();
-			
-			Thread recoveryThread = new Thread(target);
-			recoveryThread.start();
-			recoveryThread.join();
-			
-			Thread broadcastThread = new Thread(target);
-			broadcastThread.start();
-			broadcastThread.join();*/
-				
+		/*
+		 The logic of changing phases
+		 */
+		long leaderID = properties.getNodeId();
+		if( properties.getNodestate().equals(NodeServerProperties1.State.ELECTION)){
+			LOG.info("Begin Leader Election---------");
 			Vote leaderVote = startLeaderElection();
-			
+			LOG.info("End Leader Election---------");
+			LOG.info("Leader ID:"+leaderVote.getId() );
+			if(leaderVote.getId() == properties.getNodeId()){
+				properties.setLeader(true);
+				properties.setNodestate(NodeServerProperties1.State.LEADING);
+				leaderID = properties.getNodeId();
 			}
+			else{
+				properties.setLeader(true);
+				properties.setNodestate(NodeServerProperties1.State.FOLLOWING);
+				leaderID = leaderVote.getId();
+			}
+		}
+
+
+		//startRecovery();
+		//startBroadcast();
 	}
 
 	public long msgBootstrap() {
@@ -388,7 +407,8 @@ public class NodeServer1 {
 			this.properties.setNodeId(id);
 
 			parseMemberList(memberList);
-
+			
+			
 			out.close();
 			in.close();
 			socket.close();
@@ -410,12 +430,13 @@ public class NodeServer1 {
 		System.out.println("Members");
 		for (String s : list) {
 			String[] address = s.split(":");
-			String ip = address[0];
-			int port = Integer.parseInt(address[1]);
+			long nodeId = Integer.parseInt(address[0]);
+			String ip = address[1];
+			int port = Integer.parseInt(address[2]);
 			if (properties.getNodeHost().equals(ip) && properties.getNodePort() == port) {
 			} else {
-				InetSocketAddress addr = new InetSocketAddress(address[0], Integer.parseInt(address[1]));
-				properties.addMemberToList(addr);
+				InetSocketAddress addr = new InetSocketAddress(address[1], Integer.parseInt(address[2]));
+				properties.addMemberToList(nodeId, addr);
 
 			}
 
@@ -430,7 +451,7 @@ public class NodeServer1 {
 	
 	private void joinGroup() {
 		
-		broadcast("JOIN_GROUP:"+ properties.getNodeHost() + ":" + properties.getNodePort());
+		broadcast("JOIN_GROUP:"+ properties.getNodeId() +":"+properties.getNodeHost() + ":" + properties.getNodePort());
 //		List<InetSocketAddress> unreachablelist = new ArrayList<InetSocketAddress>();
 //		
 //		for (InetSocketAddress member : properties.getMemberList()) {
@@ -453,21 +474,23 @@ public class NodeServer1 {
 
 	private void broadcast(String message) {
 
-		LOG.info("Broadcast"+ message);
-		List<InetSocketAddress> unreachablelist = new ArrayList<InetSocketAddress>();
-		for (InetSocketAddress member : properties.getMemberList()) {
+		
+		Map<Long, InetSocketAddress> unreachablelist = new HashMap<Long, InetSocketAddress>();
+		for (Entry<Long, InetSocketAddress> member : properties.getMemberList().entrySet()) {
 			try {
-				
-				this.nettyClient.sendMessage(member.getHostName(), member.getPort(), message);
+				LOG.info("Sending "+message+" to: "+ member.getValue().getHostName() + ":"+ member.getValue().getPort());
+				this.nettyClient.sendMessage(member.getValue().getHostName(), member.getValue().getPort(), message);
 			}
 			catch (Exception e) {
-				unreachablelist.add(member);
+				unreachablelist.put(member.getKey(), member.getValue());
+				LOG.error(e.getMessage());
 				e.printStackTrace();
 			}
 		}
 
-		for (InetSocketAddress member : unreachablelist) {
-			properties.removeMemberFromList(member);
+		for (Entry<Long, InetSocketAddress> member : unreachablelist.entrySet()) {
+			LOG.info("Removing from memberlist"+member.getKey()+":"+member.getValue());
+			properties.removeMemberFromList(member.getKey());
 		}
 	}
 	

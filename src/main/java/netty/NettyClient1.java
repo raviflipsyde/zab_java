@@ -11,6 +11,7 @@ import io.netty.bootstrap.Bootstrap;
 import io.netty.buffer.Unpooled;
 import io.netty.channel.Channel;
 import io.netty.channel.ChannelFuture;
+import io.netty.channel.ChannelFutureListener;
 import io.netty.channel.ChannelInitializer;
 import io.netty.channel.ChannelOption;
 import io.netty.channel.EventLoopGroup;
@@ -81,7 +82,7 @@ public class NettyClient1 {
 			Channel ch = f.channel();
 			ChannelFuture lastWriteFuture = ch
 					.writeAndFlush(Unpooled.copiedBuffer(msg + "\r\n", StandardCharsets.UTF_8));
-
+			lastWriteFuture.channel().closeFuture().sync();
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();

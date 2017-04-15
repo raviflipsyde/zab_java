@@ -37,12 +37,14 @@ public class InHandler2 extends ChannelInboundHandlerAdapter { // (1)
 
 		ByteBuf in = (ByteBuf) msg;
 		String requestMsg  = in.toString(StandardCharsets.UTF_8 );
-		LOG.info("Channel Read:" + requestMsg);
+		LOG.info(">>>Channel Read:" + requestMsg);
 		String response = handleClientRequest(requestMsg);
-		LOG.info("response:" + response);
+		LOG.info("<<<Response:" + response);
+		
 		if(response.length()>0){
 			ctx.write(Unpooled.copiedBuffer(response+"\r\n", StandardCharsets.UTF_8));
 			ctx.flush(); // (2)
+			ctx.close();
 		}
 		
 
@@ -65,9 +67,9 @@ public class InHandler2 extends ChannelInboundHandlerAdapter { // (1)
 
 
 			String[] arr = requestMsg.split(":");
-
-			InetSocketAddress addr = new InetSocketAddress(arr[1].trim(), Integer.parseInt(arr[2].trim()));
-			properties.addMemberToList(addr);
+			long nodeId = Integer.parseInt(arr[1].trim());
+			InetSocketAddress addr = new InetSocketAddress(arr[2].trim(), Integer.parseInt(arr[3].trim()));
+			properties.addMemberToList(nodeId, addr);
 
 			LOG.info(properties.getMemberList());
 
@@ -76,7 +78,7 @@ public class InHandler2 extends ChannelInboundHandlerAdapter { // (1)
 
 		if(requestMsg.contains("CNOTIFICATION:")){
 			//add the ip:port to the group member list;
-
+			
 
 			String[] arr = requestMsg.split(":");
 
@@ -90,29 +92,31 @@ public class InHandler2 extends ChannelInboundHandlerAdapter { // (1)
 				synchronized (currentElectionQueue) {
 					currentElectionQueue.notify();
 					try {
-						Thread.sleep(200);
+						Thread.sleep(700);
 					} catch (InterruptedException e) {
 						// TODO Auto-generated catch block
 						e.printStackTrace();
 					}
 				}
 				LOG.info("After:"+currentElectionQueue.currentProducerIndex());
-
-				if(responseNotification.getSenderState() == NodeServerProperties1.State.ELECTION
-						&& responseNotification.getSenderRound() < properties.getElectionRound()){
+				LOG.info("NODE is in STATE: "+ properties.getNodestate());
+				LOG.info("My Election ROUND: "+ properties.getElectionRound());
+				LOG.info("his Election ROUND: "+ responseNotification.getSenderRound());
+				
+			if(responseNotification.getSenderState() == NodeServerProperties1.State.ELECTION
+						&& responseNotification.getSenderRound() <= properties.getElectionRound()){
 
 					// get my current vote from FLE or when FLE is underway
-					Vote myVote = properties.getSynData().getMyVote();
+					Vote myVote = properties.getMyVote();
 					//public Notification(Vote vote, long id, servers.NodeServerProperties1.State state, long round)
 					Notification myNotification = new Notification(myVote, properties.getNodeId(), properties.getNodestate(), properties.getElectionRound());
 					return("SNOTIFICATION:"+myNotification.toString());
 
 				}
 			}
-			else{
-				if(responseNotification.getSenderState() == NodeServerProperties1.State.ELECTION){
+			else if(responseNotification.getSenderState() == NodeServerProperties1.State.ELECTION){
 					// get my current vote from FLE or when FLE is underway
-					Vote myVote = properties.getSynData().getMyVote();
+					Vote myVote = properties.getMyVote();
 
 					Notification myNotification = new Notification(myVote, properties.getNodeId(), properties.getNodestate(), properties.getElectionRound());
 					LOG.info("myNotification:"+myNotification);
@@ -120,7 +124,7 @@ public class InHandler2 extends ChannelInboundHandlerAdapter { // (1)
 
 				}
 
-			}
+			
 			
 			return("");
 
@@ -142,7 +146,7 @@ public class InHandler2 extends ChannelInboundHandlerAdapter { // (1)
 				synchronized (currentElectionQueue) {
 					currentElectionQueue.notify();
 					try {
-						Thread.sleep(200);
+						Thread.sleep(700);
 					} catch (InterruptedException e) {
 						// TODO Auto-generated catch block
 						e.printStackTrace();

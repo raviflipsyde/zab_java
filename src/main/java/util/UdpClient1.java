@@ -6,6 +6,8 @@ import java.net.DatagramSocket;
 import java.net.InetAddress;
 import java.net.InetSocketAddress;
 import java.net.SocketException;
+import java.util.Map.Entry;
+
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
@@ -30,11 +32,11 @@ public class UdpClient1 implements Runnable{
 				byte[] receiveData = new byte[100];
 				byte[] sendData = new byte[100];
 				
-				for(InetSocketAddress addr: properties.getMemberList()){
+				for(Entry<Long, InetSocketAddress> addr: properties.getMemberList().entrySet()){
 					DatagramSocket clientSocket = new DatagramSocket();
 					
-					InetAddress IPAddress = InetAddress.getByName(addr.getHostName());
-					int port = addr.getPort()+123;
+					InetAddress IPAddress = InetAddress.getByName(addr.getValue().getHostName());
+					int port = addr.getValue().getPort()+123;
 					String HELLO = properties.getNodeHost()+":"+properties.getNodePort() ;
 					HELLO = HELLO + "::"+ HELLO+ "::"+ HELLO+ "::"+ HELLO;
 					sendData = HELLO.getBytes();
