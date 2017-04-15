@@ -2,7 +2,7 @@ package netty;
 
 import java.net.InetSocketAddress;
 import java.nio.charset.StandardCharsets;
-import java.util.List;
+import java.util.concurrent.ConcurrentHashMap;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -16,6 +16,7 @@ import io.netty.util.internal.shaded.org.jctools.queues.MpscArrayQueue;
 import servers.NodeServerProperties1;
 import servers.Notification;
 import servers.Vote;
+import servers.ZxId;
 
 /**
  * Handles a server-side channel.
@@ -176,11 +177,20 @@ public class InHandler2 extends ChannelInboundHandlerAdapter { // (1)
 
 		if (requestMsg.contains("FOLLOWERINFO")){
 			String[] accEpoch = requestMsg.split(":");
-			long acceptedEpoch = Long.parseLong(accEpoch[1]);
+			long nodeId = Long.parseLong(accEpoch[1]);
+			long acceptedEpoch = Long.parseLong(accEpoch[2]);
+			long currentEpoch = Long.parseLong(accEpoch[3]);
+			long currentCounter = Long.parseLong(accEpoch[4]);
 
-			List<Long> acceptedEpochList = properties.getSynData().getAcceptedEpochList();
-			acceptedEpochList.add(acceptedEpoch);
-			properties.getSynData().setAcceptedEpochList(acceptedEpochList);
+			ZxId followerLastCommittedZxid = new ZxId(currentEpoch, currentCounter);
+
+			ConcurrentHashMap<Long, Long> acceptedEpochMap = properties.getSynData().getAcceptedEpochMap();
+			ConcurrentHashMap<Long, ZxId> currentEpochMap = properties.getSynData().getCurrentEpochMap();
+			acceptedEpochMap.put(nodeId, acceptedEpoch);
+			currentEpochMap.put(nodeId, followerLastCommittedZxid);
+
+			properties.getSynData().setAcceptedEpochMap(acceptedEpochMap);
+			properties.getSynData().setCurrentEpochMap(currentEpochMap);
 
 			return "";
 		}

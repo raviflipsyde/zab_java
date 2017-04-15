@@ -31,9 +31,10 @@ public class Vote implements Comparable<Vote>{
 
 
 	public int compareTo(Vote o) {
+
 		if(this.zxid.getEpoch() < o.zxid.getEpoch())
 			return -1;
-		if(this.zxid.getEpoch() > o.zxid.getEpoch())
+		else if(this.zxid.getEpoch() > o.zxid.getEpoch())
 			return 1;
 		else if(this.zxid.getCounter() < o.zxid.getCounter())
 			return -1;

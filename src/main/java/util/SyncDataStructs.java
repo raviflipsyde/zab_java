@@ -2,26 +2,29 @@ package util;
 
 import java.net.InetSocketAddress;
 import java.util.List;
+import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.CopyOnWriteArrayList;
 
 import io.netty.util.internal.shaded.org.jctools.queues.MpscArrayQueue;
-import servers.Message;
 import servers.Notification;
 import servers.Vote;
+import servers.ZxId;
 
 public class SyncDataStructs {
 
 	private static SyncDataStructs instance = null;
 	private MpscArrayQueue<Notification> electionQueue = null;
 	private List<InetSocketAddress> memberList = null;
-	private List<Long> acceptedEpochList = null;
+	private ConcurrentHashMap<Long, Long> acceptedEpochMap = null;
+	private ConcurrentHashMap<Long, ZxId> currentEpochMap = null;
 	private Vote myVote;
 	private long newEpoch;
 	
 	private SyncDataStructs(){
 		electionQueue = new MpscArrayQueue<Notification>(100);
 		memberList  = new CopyOnWriteArrayList<InetSocketAddress>();
-		acceptedEpochList = new CopyOnWriteArrayList<Long>();
+		acceptedEpochMap = new ConcurrentHashMap<Long, Long>();
+		currentEpochMap = new ConcurrentHashMap<Long, ZxId>();
 
 	}
 	public static SyncDataStructs getInstance(){
@@ -39,12 +42,20 @@ public class SyncDataStructs {
 		this.newEpoch = newEpoch;
 	}
 
-	public List<Long> getAcceptedEpochList() {
-		return acceptedEpochList;
+	public ConcurrentHashMap<Long, Long> getAcceptedEpochMap() {
+		return acceptedEpochMap;
 	}
 
-	public void setAcceptedEpochList(List<Long> acceptedEpochList) {
-		this.acceptedEpochList = acceptedEpochList;
+	public void setAcceptedEpochMap(ConcurrentHashMap<Long, Long> acceptedEpochMap) {
+		this.acceptedEpochMap = acceptedEpochMap;
+	}
+
+	public ConcurrentHashMap<Long, ZxId> getCurrentEpochMap() {
+		return currentEpochMap;
+	}
+
+	public void setCurrentEpochMap(ConcurrentHashMap<Long, ZxId> currentEpochMap) {
+		this.currentEpochMap = currentEpochMap;
 	}
 
 	public MpscArrayQueue<Notification> getElectionQueue() {

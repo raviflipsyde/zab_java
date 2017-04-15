@@ -33,8 +33,15 @@ public class ZxId implements Comparable<ZxId>{
 		return "ZxID [ Epoch = " + this.epoch + ",Counter = " + this.counter + "]";
 	}
 	public int compareTo(ZxId o) {
-		// TODO Auto-generated method stub
-		return 0;
+		if(this.getEpoch() < o.getEpoch())
+			return -1;
+		else if(this.getEpoch() > o.getEpoch())
+			return 1;
+		else if(this.getCounter() < o.getCounter())
+			return -1;
+		else if(this.getCounter() > o.getCounter())
+			return 1;
+		else return 0;
 	}
 	
 	
