@@ -59,7 +59,7 @@ public class Notification{
 		
 		this.vote = vote1;
 		this.senderRound = senderRound;
-		this.senderId = senderId;
+		this.senderId = senderID;
 		this.senderRound = senderRound;
 		this.senderState = SenderState;
 		

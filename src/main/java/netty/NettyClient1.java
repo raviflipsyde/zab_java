@@ -82,7 +82,7 @@ public class NettyClient1 {
 			Channel ch = f.channel();
 			ChannelFuture lastWriteFuture = ch
 					.writeAndFlush(Unpooled.copiedBuffer(msg + "\r\n", StandardCharsets.UTF_8));
-			lastWriteFuture.channel().closeFuture().sync();
+//			lastWriteFuture.channel().closeFuture().sync();
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();

@@ -77,7 +77,6 @@ public class InHandler2 extends ChannelInboundHandlerAdapter { // (1)
 			return "OK";
 		}
 
-		
 		if(requestMsg.contains("CNOTIFICATION:")){
 			//add the ip:port to the group member list;
 			
@@ -90,30 +89,29 @@ public class InHandler2 extends ChannelInboundHandlerAdapter { // (1)
 				
 				MpscArrayQueue<Notification> currentElectionQueue = properties.getSynData().getElectionQueue();
 				LOG.info("Before:"+currentElectionQueue.currentProducerIndex());
+				LOG.info("adding notification to the queue"+ responseNotification.toString());
 				currentElectionQueue.offer(responseNotification);
-				synchronized (currentElectionQueue) {
-					currentElectionQueue.notify();
+				
 					try {
-						Thread.sleep(700);
+						Thread.sleep(1000);
 					} catch (InterruptedException e) {
 						// TODO Auto-generated catch block
 						e.printStackTrace();
 					}
-				}
-				/*LOG.info("After:"+currentElectionQueue.currentProducerIndex());
+				
+				LOG.info("After:"+currentElectionQueue.currentProducerIndex());
 				LOG.info("NODE is in STATE: "+ properties.getNodestate());
 				LOG.info("My Election ROUND: "+ properties.getElectionRound());
-				LOG.info("his Election ROUND: "+ responseNotification.getSenderRound());*/
+				LOG.info("his Election ROUND: "+ responseNotification.getSenderRound());
 				
 			if(responseNotification.getSenderState() == NodeServerProperties1.State.ELECTION
-						&& responseNotification.getSenderRound() < properties.getElectionRound()){
+						&& responseNotification.getSenderRound() <= properties.getElectionRound()){
 
 					// get my current vote from FLE or when FLE is underway
 					Vote myVote = properties.getMyVote();
 					//public Notification(Vote vote, long id, servers.NodeServerProperties1.State state, long round)
 					Notification myNotification = new Notification(myVote, properties.getNodeId(), properties.getNodestate(), properties.getElectionRound());
-					//TODO: change back to SNOTIFICATION if doesn't work
-					return("CNOTIFICATION:"+myNotification.toString());
+					return("SNOTIFICATION:"+myNotification.toString());
 
 				}
 			}
@@ -123,8 +121,7 @@ public class InHandler2 extends ChannelInboundHandlerAdapter { // (1)
 
 					Notification myNotification = new Notification(myVote, properties.getNodeId(), properties.getNodestate(), properties.getElectionRound());
 					LOG.info("myNotification:"+myNotification);
-					//TODO: change back to SNOTIFICATION if doesn't work
-					return("CNOTIFICATION:"+myNotification.toString());
+					return("SNOTIFICATION:"+myNotification.toString());
 
 				}
 
@@ -134,8 +131,8 @@ public class InHandler2 extends ChannelInboundHandlerAdapter { // (1)
 
 		}
 		
-		//TODO: uncomment the code if doensn't work
-		/*if(requestMsg.contains("SNOTIFICATION:")){
+		
+		if(requestMsg.contains("SNOTIFICATION:")){
 			//add the ip:port to the group member list;
 
 
@@ -147,15 +144,14 @@ public class InHandler2 extends ChannelInboundHandlerAdapter { // (1)
 				MpscArrayQueue<Notification> currentElectionQueue = properties.getSynData().getElectionQueue();
 				LOG.info("Before:"+currentElectionQueue.currentProducerIndex());
 				currentElectionQueue.offer(responseNotification);
-				synchronized (currentElectionQueue) {
-					currentElectionQueue.notify();
+				
 					try {
-						Thread.sleep(700);
+						Thread.sleep(1000);
 					} catch (InterruptedException e) {
 						// TODO Auto-generated catch block
 						e.printStackTrace();
 					}
-				}
+				
 				LOG.info("After:"+currentElectionQueue.currentProducerIndex());
 
 
@@ -166,7 +162,7 @@ public class InHandler2 extends ChannelInboundHandlerAdapter { // (1)
 			LOG.info(properties.getMemberList());
 			return("ERROR");
 
-		}*/
+		}
 		
 		if(requestMsg.contains("OK")){
 			//add the ip:port to the group member list;

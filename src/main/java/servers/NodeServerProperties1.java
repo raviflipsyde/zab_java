@@ -75,6 +75,7 @@ public class NodeServerProperties1 {
 		myVote = new Vote(this.getLastZxId(), this.getNodeId());
 		synData = SyncDataStructs.getInstance();
 		memberList = new ConcurrentHashMap<Long, InetSocketAddress>();
+		DataMap = new ConcurrentHashMap<String, String>();
 	}
 
 	public long getCounter() {
@@ -283,7 +284,7 @@ public class NodeServerProperties1 {
 
 	public synchronized void addMemberToList(long nodeid, InetSocketAddress addr) {
 
-		this.memberList.put(nodeId, addr);
+		this.memberList.put(nodeid, addr);
 
 	}
 

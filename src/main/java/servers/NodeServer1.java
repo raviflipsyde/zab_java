@@ -54,7 +54,7 @@ public class NodeServer1 {
 		HashMap<Long, Long> receivedVotesRound = new HashMap<Long, Long>();
 		HashMap<Long, Vote> OutOfElectionVotes = new HashMap<Long, Vote>();
 		HashMap<Long, Long> OutOfElectionVotesRound = new HashMap<Long, Long>();
-		MpscArrayQueue<Notification> currentElectionQueue = this.properties.getSynData().getElectionQueue();
+		MpscArrayQueue<Notification> currentElectionQueue = properties.getSynData().getElectionQueue();
 		Vote myVote = new Vote(this.properties.getLastZxId(),this.properties.getNodeId());
 		
 		long limit_timeout = 25000;
@@ -66,6 +66,7 @@ public class NodeServer1 {
 		Notification myNotification = new Notification(this.properties.getMyVote(), this.properties.getNodeId(), this.properties.getNodestate(), this.properties.getElectionRound());
 		LOG.info("My Notification is:"+myNotification.toString());
 		
+		//TODO: Verify
 		sendNotificationToAll(myNotification.toString()); 
 		
 		while(this.properties.getNodestate() == NodeServerProperties1.State.ELECTION && timeout<limit_timeout ){
@@ -73,7 +74,7 @@ public class NodeServer1 {
 			Notification currentN = currentElectionQueue.poll();
 			
 			if(currentN==null){
-				LOG.info("Notification Queue is empty...Let's wait and poll again!!");
+				LOG.info("Notification Queue is empty!!");
 				try {
 					synchronized (currentElectionQueue) {
 						currentElectionQueue.wait(timeout);
@@ -81,8 +82,10 @@ public class NodeServer1 {
 					currentN = currentElectionQueue.poll();
 					
 					if(currentN==null){
-						LOG.info("Notification Queue is empty again, increasing the timeout!!");
+						LOG.info("Notification Queue is empty again!!");
 						timeout = 2*timeout;
+						LOG.info("increasing timeout");
+						//TODO: verify
 						sendNotificationToAll(myNotification.toString()); 
 						
 					}
@@ -96,14 +99,13 @@ public class NodeServer1 {
 			//CurrentN is not null
 			
 			else if ( currentN.getSenderState() == NodeServerProperties1.State.ELECTION ){
-				LOG.info("Dequeued Notification is:"+ currentN);
-				LOG.info("Received Notification is in 'Election' state");
+				LOG.info("Received notification is in Election");
 				if(currentN.getSenderRound() < this.properties.getElectionRound()){
-					LOG.info("Disregarding this Vote, since the round number is smaller than mine");
+					LOG.info("Disregard vote as round number is smaller than mine");
 					continue;
 				}else{
 					if(currentN.getSenderRound() > this.properties.getElectionRound()){
-						LOG.info("The round number is greater than mine");
+						LOG.info("The round number is larger than mine");
 						this.properties.setElectionRound(currentN.getSenderRound());
 						
 						receivedVote = new HashMap<Long, Vote>();
@@ -120,16 +122,18 @@ public class NodeServer1 {
 						myNotification.setVote(this.properties.getMyVote()); // update notification
 						
 					}
-
+					//TODO: verify
 					sendNotificationToAll(myNotification.toString());
 					
 					// update the receivedVote datastructure
+					LOG.info("*****Vote for NodeID:"+ currentN.getSenderId() + ":::"+currentN.getVote());
 					receivedVote.put(currentN.getSenderId(), currentN.getVote());
 					receivedVotesRound.put(currentN.getSenderId(), currentN.getSenderRound());
 					//TODO should I put my vote in the receivedVote
 					receivedVote.put(this.properties.getNodeId(), this.properties.getMyVote());
 					receivedVotesRound.put(this.properties.getNodeId(), this.properties.getElectionRound());
-					
+					LOG.info("*****receivedVote.size:"+ receivedVote.size());
+					LOG.info("*****memberList.size:"+ memberList.size());
 					if(receivedVote.size() == (memberList.size()+1)){
 						//TODO check for Quorum in the receivedvotes and then declare leader
 						LOG.info("***Received Votes from all the members");
@@ -175,7 +179,6 @@ public class NodeServer1 {
 			} //end of if election
 			
 			else {	// the received vote is either leading or following
-				LOG.info("Dequeued Notification is:"+ currentN);
 				if(currentN.getSenderRound() == this.properties.getElectionRound()){
 					LOG.info("Notification is not in election, round numbers of current node and current notification are same");
 					receivedVote.put(currentN.getSenderId(), currentN.getVote());
@@ -185,12 +188,12 @@ public class NodeServer1 {
 //					receivedVotesRound.put(this.properties.getId(), this.electionRound);
 					
 					if(currentN.getSenderState() == NodeServerProperties1.State.LEADING){ //This is notification from leader
-						LOG.info("This Notification is from the Leader");
+						LOG.info("This notification is from the Leader");
 						this.properties.setMyVote( currentN.getVote());
 						break;
 					}
 					else{
-						LOG.info("This Notification is from a Follower. Now,checking if my vote has a Quorum ");
+						LOG.info("This notification is from a Follower");
 						int myVoteCounter = 0;
 						for( Entry<Long, Vote> v:receivedVote.entrySet()){
 							Vote currVote = v.getValue();
@@ -198,21 +201,16 @@ public class NodeServer1 {
 								myVoteCounter++;
 							}
 						}
-						// if the currentN's vote is to me and I achieve quorum in receivedVote then let me be the leader
+						// if the currentN's vote is to me and i achieve quorum in receivedVote then i be the leader
 						
-						//TODO: change this back, if doesn't work
-						/*if(currentN.getVote().getId()==this.properties.getMyVote().getId() && myVoteCounter> (memberList.size()+1)/2 ){
+						if(currentN.getVote().getId()==this.properties.getMyVote().getId() && myVoteCounter> (memberList.size()+1)/2 ){
 							this.properties.setMyVote(currentN.getVote());
 							break;					
 						}
 						else if(myVoteCounter> (memberList.size()+1)/2 ){  //our improvement
 							this.properties.setMyVote(currentN.getVote());
 							break;						
-						}*/
-						 if(myVoteCounter > (memberList.size()+1)/2 ){  //our improvement
-								this.properties.setMyVote(currentN.getVote());
-								break;
-						 }
+						}
 						//wrong condition
 //						else if(myVoteCounter> (memberList.size()+1)/2 
 //								&& OutOfElectionVotes.containsKey(currentN.getVote().getId())){
@@ -430,6 +428,7 @@ public class NodeServer1 {
 
 	private void parseMemberList(String memberList) {
 
+		LOG.info("------------MembersList:----------\n"+memberList);
 		String[] list = memberList.split(",");
 		System.out.println("Members");
 		for (String s : list) {
@@ -440,11 +439,13 @@ public class NodeServer1 {
 			if (properties.getNodeHost().equals(ip) && properties.getNodePort() == port) {
 			} else {
 				InetSocketAddress addr = new InetSocketAddress(address[1], Integer.parseInt(address[2]));
+				LOG.info("Adding"+ nodeId + ":::"+ addr);
 				properties.addMemberToList(nodeId, addr);
 
 			}
 
 		}
+		LOG.info("-----------MemberListSize:"+properties.getMemberList().size());
 
 	}
 
@@ -478,7 +479,7 @@ public class NodeServer1 {
 
 	private void broadcast(String message) {
 
-		
+		LOG.info("*******MemberlistSize:"+properties.getMemberList().size());
 		Map<Long, InetSocketAddress> unreachablelist = new HashMap<Long, InetSocketAddress>();
 		for (Entry<Long, InetSocketAddress> member : properties.getMemberList().entrySet()) {
 			try {
