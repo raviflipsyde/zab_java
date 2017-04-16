@@ -8,7 +8,7 @@ import java.nio.charset.Charset;
 import java.util.Map;
 import java.util.Properties;
 
-//import org.apache.commons.io.input.ReversedLinesFileReader;
+import org.apache.commons.io.input.ReversedLinesFileReader;
 
 import servers.NodeServerProperties1;
 import servers.ZxId;
@@ -47,15 +47,15 @@ public class FileOps {
 
 	public static String readLastLine(File file ){
 		String ret = null;
-//		
-//		try {
-//			ReversedLinesFileReader reveFileReader = new ReversedLinesFileReader(file, Charset.defaultCharset());
-//			ret = reveFileReader.readLine();
-//			reveFileReader.close();
-//		} catch (IOException e) {
-//			// TODO Auto-generated catch block
-//			e.printStackTrace();
-//		}
+		
+		try {
+			ReversedLinesFileReader reveFileReader = new ReversedLinesFileReader(file, Charset.defaultCharset());
+			ret = reveFileReader.readLine();
+			reveFileReader.close();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		
 		return ret;
 		
@@ -70,21 +70,21 @@ public class FileOps {
 		String key;
 		String value;
 		
-//		try {
-//			ReversedLinesFileReader reveFileReader = new ReversedLinesFileReader(file, Charset.defaultCharset());
-//			ret = reveFileReader.readLine();
-//			String[] arr = ret.split(",");
-//			epoch = Long.parseLong(arr[0].trim());
-//			counter = Long.parseLong(arr[1].trim());
-//			key = arr[2].trim();
-//			value = arr[3].trim();
-//			
-//			reveFileReader.close();
-//		} catch (IOException e) {
-//			// TODO Auto-generated catch block
-//			e.printStackTrace();
-//		}
-//		
+		try {
+			ReversedLinesFileReader reveFileReader = new ReversedLinesFileReader(file, Charset.defaultCharset());
+			ret = reveFileReader.readLine();
+			String[] arr = ret.split(",");
+			epoch = Long.parseLong(arr[0].trim());
+			counter = Long.parseLong(arr[1].trim());
+			key = arr[2].trim();
+			value = arr[3].trim();
+			
+			reveFileReader.close();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
 		return ret;
 		
 	}

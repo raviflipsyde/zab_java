@@ -25,31 +25,30 @@ public class UdpServer1 implements Runnable{
 	private static final String REPLY = "I M OK";
 	private NodeServerProperties1 properties;
 	private int port;
-	private HashMap<String, Long> heartBeatMap;
 	
 	public UdpServer1(NodeServerProperties1 nodeProperties){
 		this.properties = nodeProperties;
-		heartBeatMap = new HashMap<String, Long>();
 		
-		Timer t = new Timer();
-		t.schedule(new TimerTask() {
-		    @Override
-		    public void run() {
-		    	long currentTime = System.currentTimeMillis();
-		    	for(Entry<String, Long> entry:heartBeatMap.entrySet()){
-		    		String key = entry.getKey();
-					long lastTimeEntry = entry.getValue();
-					if(currentTime - lastTimeEntry > 10000){
-						String addr[] = key.split(":");
-						String dedadhost = addr[0].trim();
-						int deadPort = Integer.parseInt(addr[1]); 
-						InetSocketAddress socketAddr = new InetSocketAddress(dedadhost, deadPort);
-						LOG.info("Removing "+socketAddr.toString()+" from memberlist");
-						properties.getMemberList().remove(socketAddr);
-					}
-				}
-		    }
-		}, 0, 20000);
+		
+//		Timer t = new Timer();
+//		t.schedule(new TimerTask() {
+//		    @Override
+//		    public void run() {
+//		    	long currentTime = System.currentTimeMillis();
+//		    	for(Entry<String, Long> entry:heartBeatMap.entrySet()){
+//		    		String key = entry.getKey();
+//					long lastTimeEntry = entry.getValue();
+//					if(currentTime - lastTimeEntry > 10000){
+//						String addr[] = key.split(":");
+//						String dedadhost = addr[0].trim();
+//						int deadPort = Integer.parseInt(addr[1]); 
+//						InetSocketAddress socketAddr = new InetSocketAddress(dedadhost, deadPort);
+//						LOG.info("Removing "+socketAddr.toString()+" from memberlist");
+//						properties.getMemberList().remove(socketAddr);
+//					}
+//				}
+//		    }
+//		}, 0, 20000);
 		
 	} 
 	
@@ -75,7 +74,7 @@ public class UdpServer1 implements Runnable{
 				
 				InetAddress IPAddress = receivePacket.getAddress();
 				int port = receivePacket.getPort();
-				InetSocketAddress recvAddress = new InetSocketAddress(IPAddress, port);
+//				InetSocketAddress recvAddress = new InetSocketAddress(IPAddress, port);
 				
 				long currentTime = System.currentTimeMillis();
 //				LOG.info("RECEIVED: " + sentence
@@ -89,9 +88,9 @@ public class UdpServer1 implements Runnable{
 						new DatagramPacket(sendData, sendData.length, IPAddress, port);
 				serverSocket.send(sendPacket);
 				
-				String[] addr = sentence.split("::");
-				String fulladdr1 = addr[1];
-				heartBeatMap.put(fulladdr1, currentTime);
+//				String[] addr = sentence.split("::");
+//				String fulladdr1 = addr[1];
+//				heartBeatMap.put(fulladdr1, currentTime);
 				
 
 			}
@@ -110,9 +109,5 @@ public class UdpServer1 implements Runnable{
 
 	}
 
-	public static void main(String args[]){
-		
-		int port = Integer.parseInt(args[0]);
-		new UdpServer1(port).run();
-	}
+
 }
