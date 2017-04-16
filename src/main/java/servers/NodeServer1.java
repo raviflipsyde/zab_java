@@ -76,9 +76,7 @@ public class NodeServer1 {
 			if(currentN==null){
 				LOG.info("Notification Queue is empty!!");
 				try {
-					synchronized (currentElectionQueue) {
-						currentElectionQueue.wait(timeout);
-	                }
+					Thread.sleep(timeout);
 					currentN = currentElectionQueue.poll();
 					
 					if(currentN==null){
@@ -134,9 +132,14 @@ public class NodeServer1 {
 					receivedVotesRound.put(this.properties.getNodeId(), this.properties.getElectionRound());
 					LOG.info("*****receivedVote.size:"+ receivedVote.size());
 					LOG.info("*****memberList.size:"+ memberList.size());
+					
 					if(receivedVote.size() == (memberList.size()+1)){
 						//TODO check for Quorum in the receivedvotes and then declare leader
 						LOG.info("***Received Votes from all the members");
+						for(Entry<Long, Vote> entries: receivedVote.entrySet()){
+							LOG.info(entries.getKey()+"::"+entries.getValue());
+						}
+						
 						break;
 					}
 					else {
@@ -151,10 +154,10 @@ public class NodeServer1 {
 						if(myVoteCounter> (memberList.size()+1)/2 ){
 							LOG.info("**Found Quorum in received votes");
 							try {
-								synchronized (currentElectionQueue) {
-									currentElectionQueue.wait(timeout);
-									Thread.sleep(timeout);
-				                }
+								
+									
+									Thread.sleep(2*timeout);
+				                
 								
 //								Thread.sleep(timeout);
 							} catch (InterruptedException e) {

@@ -151,7 +151,7 @@ public class InHandler2 extends ChannelInboundHandlerAdapter { // (1)
 						// TODO Auto-generated catch block
 						e.printStackTrace();
 					}
-				
+			
 				LOG.info("After:"+currentElectionQueue.currentProducerIndex());
 
 
