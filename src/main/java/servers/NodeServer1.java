@@ -494,7 +494,9 @@ public class NodeServer1 {
 				
 			}
 		}
-
+		LOG.info("Begin Recovery---------");
+		Recovery();
+		LOG.info("END Recovery---------");
 		
 		while(true){
 			
