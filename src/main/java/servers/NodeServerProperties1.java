@@ -39,7 +39,7 @@ public class NodeServerProperties1 {
 	private long counter;
 	private ZxId lastZxId;
 	private boolean isLeader;
-	private State nodestate;
+	private volatile State nodestate;
 	private long electionRound;
 	private long leaderId;
 	private InetSocketAddress leaderAddress;

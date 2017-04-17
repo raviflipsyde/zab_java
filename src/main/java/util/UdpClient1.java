@@ -14,61 +14,74 @@ import org.apache.logging.log4j.Logger;
 import servers.NodeServerProperties1;
 
 public class UdpClient1 implements Runnable{
-	
+
 	private static final Logger LOG = LogManager.getLogger(UdpClient1.class);
 	private NodeServerProperties1 properties;
-	
-	
+
+
 	public UdpClient1(NodeServerProperties1 nodeProperties){
 		this.properties = nodeProperties;
-		
+
 	}
-	
-	
+
+
 	public void run() {
 		LOG.info("--------------STARTING UDP CLIENT--------------:::"+ properties.getMemberList().size());
-		while(true){
-			try {
-				byte[] receiveData = new byte[100];
-				byte[] sendData = new byte[100];
-				
-				for(Entry<Long, InetSocketAddress> addr: properties.getMemberList().entrySet()){
-					DatagramSocket clientSocket = new DatagramSocket();
-					
-					InetAddress IPAddress = InetAddress.getByName(addr.getValue().getHostName());
-					int port = addr.getValue().getPort()+123;
-					String HELLO = properties.getNodeHost()+":"+properties.getNodePort() ;
-					HELLO = HELLO + "::"+ HELLO+ "::"+ HELLO+ "::"+ HELLO;
-					sendData = HELLO.getBytes();
-				
-					DatagramPacket sendPacket = new DatagramPacket(sendData, sendData.length, IPAddress, port);
-					
-//					LOG.info("Sending to:" + addr.toString());
-					clientSocket.send(sendPacket);
-					clientSocket.close();
-				}
-				
-//				DatagramPacket receivePacket = new DatagramPacket(receiveData, receiveData.length);
-//				clientSocket.receive(receivePacket);
-//				String modifiedSentence = new String(receivePacket.getData());
-//				System.out.println("FROM SERVER:" + modifiedSentence);
-//				
-				
-			Thread.sleep(4000);
+		int counter =5;
 
+		while(counter>0){
+
+
+			byte[] receiveData = new byte[100];
+			byte[] sendData = new byte[100];
+
+			DatagramSocket clientSocket;
+			
+			try {
+				clientSocket = new DatagramSocket();
+
+				InetSocketAddress leaderAddr = properties.getLeaderAddress();
+				InetAddress IPAddress = leaderAddr.getAddress();
+				int port = leaderAddr.getPort()+123;
+
+				String HELLO = properties.getNodeHost()+":"+properties.getNodePort() ;
+				HELLO = HELLO + "::"+ HELLO+ "::"+ HELLO+ "::"+ HELLO;
+				sendData = HELLO.getBytes();
+
+				DatagramPacket sendPacket = new DatagramPacket(sendData, sendData.length, IPAddress, port);
+
+				//			LOG.info("Sending to:" + addr.toString());
+				clientSocket.send(sendPacket);
+				clientSocket.setSoTimeout(4000);
+				DatagramPacket receivePacket = new DatagramPacket(receiveData, receiveData.length);
+				clientSocket.receive(receivePacket);
+				counter =5;
+				clientSocket.close();
+				Thread.sleep(4000);
+				
 			} catch (SocketException e) {
-				// TODO Auto-generated catch block
 				e.printStackTrace();
+					
 			} catch (IOException e) {
 				// TODO Auto-generated catch block
-				e.printStackTrace();
+				LOG.info(e.getMessage());
+				counter--;
+				continue;	
+				
 			} catch (InterruptedException e) {
 				// TODO Auto-generated catch block
-				e.printStackTrace();
+				LOG.info(e.getMessage());
 			}
-			
+
+
 		}
-		
+		LOG.info("Throwing runtime exception");
+		properties.removeMemberFromList(properties.getLeaderId());
+		LOG.info("Removing leader from memberlist");
+		properties.setLeaderId(0);
+		properties.setNodestate(NodeServerProperties1.State.ELECTION);
+		throw new RuntimeException();
+
 
 	}
 

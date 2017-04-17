@@ -344,9 +344,7 @@ public class NodeServer1 {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-//		this.udpServerThread = new Thread(new UdpServer1(properties));
-//		this.udpServerThread.setPriority(Thread.MIN_PRIORITY);
-//		this.udpServerThread.start();
+
 //
 //		
 //
@@ -363,6 +361,17 @@ public class NodeServer1 {
 
 	}
 
+	Thread.UncaughtExceptionHandler h = new Thread.UncaughtExceptionHandler() {
+	    public void uncaughtException(Thread th, Throwable ex) {
+	    	LOG.info(th.getName());
+	    	LOG.info(th.getId());
+	    	LOG.info(ex);
+	    	changePhase();
+	    	System.out.println("Uncaught exception: " + ex);
+	        
+	    }
+	};
+	
 
 	private void changePhase() {
 		/*
@@ -378,14 +387,46 @@ public class NodeServer1 {
 				properties.setLeader(true);
 				properties.setNodestate(NodeServerProperties1.State.LEADING);
 				leaderID = properties.getNodeId();
+				
+				this.udpServerThread = new Thread(new UdpServer1(properties));
+				this.udpServerThread.setPriority(Thread.MIN_PRIORITY);
+				this.udpServerThread.setUncaughtExceptionHandler(h);
+				this.udpServerThread.start();
+
 			}
 			else{
-				properties.setLeader(true);
+				properties.setLeader(false);
 				properties.setNodestate(NodeServerProperties1.State.FOLLOWING);
 				leaderID = leaderVote.getId();
+				properties.setLeaderId(leaderID);
+				InetSocketAddress leaderis = properties.getMemberList().get(leaderID);
+				properties.setLeaderAddress(leaderis);
+	
+				this.udpClientThread = new Thread(new UdpClient1(properties));
+				this.udpClientThread.setPriority(Thread.MIN_PRIORITY);
+				this.udpClientThread.setUncaughtExceptionHandler(h);
+				this.udpClientThread.start();
+				
+				
+				
 			}
 		}
 
+		
+		while(true){
+			
+			if(properties.getNodestate() != NodeServerProperties1.State.ELECTION ){
+				try {
+					Thread.sleep(4000);
+				} catch (InterruptedException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+			}
+			else{
+				changePhase();
+			}
+		}
 
 		//startRecovery();
 		//startBroadcast();
