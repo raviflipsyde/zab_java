@@ -2,9 +2,8 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="899d576a-2f27-4b55-be0b-6f91e1aa5d70" name="Default" comment="">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/netty/InHandler2.java" afterPath="$PROJECT_DIR$/src/main/java/netty/InHandler2.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/servers/NodeServer1.java" afterPath="$PROJECT_DIR$/src/main/java/servers/NodeServer1.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/zab1.iml" afterPath="$PROJECT_DIR$/zab1.iml" />
     </list>
     <ignored path="zab_java.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -28,17 +27,14 @@
       <file leaf-file-name="NodeServer1.java" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/main/java/servers/NodeServer1.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="36">
-              <caret line="2" column="7" selection-start-line="2" selection-start-column="7" selection-end-line="2" selection-end-column="7" />
+            <state relative-caret-position="-5">
+              <caret line="341" column="90" selection-start-line="341" selection-start-column="90" selection-end-line="341" selection-end-column="90" />
               <folding>
                 <element signature="imports" expanded="true" />
                 <element signature="e#1561#1573#0" expanded="true" />
                 <element signature="e#1631#1643#0" expanded="true" />
                 <element signature="e#1701#1713#0" expanded="true" />
                 <element signature="e#1776#1788#0" expanded="true" />
-                <element signature="e#14931#15206#0" expanded="true" />
-                <element signature="e#15205#15206#0" expanded="true" />
-                <element signature="e#19518#19543#0" expanded="true" />
               </folding>
             </state>
           </provider>
@@ -47,7 +43,7 @@
       <file leaf-file-name="Vote.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/main/java/servers/Vote.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="450">
+            <state relative-caret-position="612">
               <caret line="42" column="31" selection-start-line="42" selection-start-column="31" selection-end-line="42" selection-end-column="31" />
               <folding />
             </state>
@@ -57,7 +53,7 @@
       <file leaf-file-name="ZxId.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/main/java/servers/ZxId.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="504">
+            <state relative-caret-position="666">
               <caret line="47" column="4" selection-start-line="47" selection-start-column="4" selection-end-line="47" selection-end-column="4" />
               <folding />
             </state>
@@ -67,8 +63,8 @@
       <file leaf-file-name="InHandler2.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/main/java/netty/InHandler2.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="184">
-              <caret line="186" column="0" selection-start-line="186" selection-start-column="0" selection-end-line="186" selection-end-column="0" />
+            <state relative-caret-position="508">
+              <caret line="210" column="56" selection-start-line="210" selection-start-column="56" selection-end-line="210" selection-end-column="56" />
               <folding>
                 <element signature="imports" expanded="true" />
               </folding>
@@ -99,7 +95,7 @@
       <file leaf-file-name="NodeServerProperties1.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/main/java/servers/NodeServerProperties1.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="1368">
+            <state relative-caret-position="1188">
               <caret line="85" column="30" selection-start-line="85" selection-start-column="30" selection-end-line="85" selection-end-column="30" />
               <folding />
             </state>
@@ -170,9 +166,9 @@
         <option value="$PROJECT_DIR$/src/main/java/servers/Message.java" />
         <option value="$PROJECT_DIR$/src/main/java/servers/NodeServerProperties1.java" />
         <option value="$PROJECT_DIR$/src/main/java/util/SyncDataStructs.java" />
-        <option value="$PROJECT_DIR$/src/main/java/netty/InHandler2.java" />
         <option value="$PROJECT_DIR$/src/main/java/servers/Vote.java" />
         <option value="$PROJECT_DIR$/src/main/java/servers/ZxId.java" />
+        <option value="$PROJECT_DIR$/src/main/java/netty/InHandler2.java" />
         <option value="$PROJECT_DIR$/src/main/java/servers/NodeServer1.java" />
       </list>
     </option>
@@ -217,8 +213,6 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
-      <pane id="PackagesPane" />
-      <pane id="Scratches" />
       <pane id="ProjectPane">
         <subPane>
           <PATH>
@@ -372,6 +366,8 @@
         </subPane>
       </pane>
       <pane id="Scope" />
+      <pane id="Scratches" />
+      <pane id="PackagesPane" />
     </panes>
   </component>
   <component name="RunManager">
@@ -1016,25 +1012,15 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/servers/NodeServerProperties1.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1368">
+        <state relative-caret-position="1188">
           <caret line="85" column="30" selection-start-line="85" selection-start-column="30" selection-end-line="85" selection-end-column="30" />
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/netty/InHandler2.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="184">
-          <caret line="186" column="0" selection-start-line="186" selection-start-column="0" selection-end-line="186" selection-end-column="0" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/servers/Vote.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="450">
+        <state relative-caret-position="612">
           <caret line="42" column="31" selection-start-line="42" selection-start-column="31" selection-end-line="42" selection-end-column="31" />
           <folding />
         </state>
@@ -1042,7 +1028,7 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/servers/ZxId.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="504">
+        <state relative-caret-position="666">
           <caret line="47" column="4" selection-start-line="47" selection-start-column="4" selection-end-line="47" selection-end-column="4" />
           <folding />
         </state>
@@ -1056,19 +1042,26 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/netty/InHandler2.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="508">
+          <caret line="210" column="56" selection-start-line="210" selection-start-column="56" selection-end-line="210" selection-end-column="56" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/servers/NodeServer1.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="36">
-          <caret line="2" column="7" selection-start-line="2" selection-start-column="7" selection-end-line="2" selection-end-column="7" />
+        <state relative-caret-position="-5">
+          <caret line="341" column="90" selection-start-line="341" selection-start-column="90" selection-end-line="341" selection-end-column="90" />
           <folding>
             <element signature="imports" expanded="true" />
             <element signature="e#1561#1573#0" expanded="true" />
             <element signature="e#1631#1643#0" expanded="true" />
             <element signature="e#1701#1713#0" expanded="true" />
             <element signature="e#1776#1788#0" expanded="true" />
-            <element signature="e#14931#15206#0" expanded="true" />
-            <element signature="e#15205#15206#0" expanded="true" />
-            <element signature="e#19518#19543#0" expanded="true" />
           </folding>
         </state>
       </provider>

@@ -288,6 +288,7 @@ public class NodeServer1 {
 		InetSocketAddress leaderAddr = properties.getMemberList().get(leaderID);
 		String leaderIp = leaderAddr.getHostName();
 		int leaderPort = leaderAddr.getPort();
+
 		
 		if (this.properties.isLeader() == true){
 			// Leader
@@ -338,6 +339,7 @@ public class NodeServer1 {
 			}
 
 			for (long nodeId : currentEpochMap.keySet()){
+				Map<Long, InetSocketAddress> memberList = this.properties.getMemberList();
 				ZxId followerLastCommittedZxid = currentEpochMap.get(nodeId);
 
 				if (leaderLastCommittedZxid.getEpoch() == followerLastCommittedZxid.getEpoch()){
@@ -345,7 +347,10 @@ public class NodeServer1 {
 					if (followerLastCommittedZxid.getCounter() < leaderLastCommittedZxid.getCounter()){
 
 						// TODO: Send DIFF message
-						// Iterate through CommitHistory (refer readHistory()), stringify and send
+
+						this.nettyClient.sendMessage(memberList.get(nodeId).getHostName(), memberList.get(nodeId).getPort(), "DIFF");
+
+						// TODO: Iterate through CommitHistory (refer readHistory()), stringify and send
 
 					} else if (followerLastCommittedZxid.getCounter() == leaderLastCommittedZxid.getCounter()){
 						continue;
@@ -358,6 +363,7 @@ public class NodeServer1 {
 				} else if (followerLastCommittedZxid.getEpoch() < leaderLastCommittedZxid.getEpoch()){
 
 					// TODO: Send SNAP message
+					this.nettyClient.sendMessage(memberList.get(nodeId).getHostName(), memberList.get(nodeId).getPort(), "SNAP");
 					// Iterate through the Map, stringify each entry and then send
 
 				} else if (followerLastCommittedZxid.getEpoch() > leaderLastCommittedZxid.getEpoch()){

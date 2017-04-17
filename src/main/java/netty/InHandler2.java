@@ -203,6 +203,14 @@ public class InHandler2 extends ChannelInboundHandlerAdapter { // (1)
 			long newEpoch = Long.parseLong(newEpocharr[1]);
 		}
 
+		if (requestMsg.contains("DIFF")){
+			System.out.println("DIFF message received");
+		}
+
+		if (requestMsg.contains("SNAP")){
+			System.out.println("SNAP message received");
+		}
+
 		return "";
 
 	}
