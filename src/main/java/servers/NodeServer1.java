@@ -281,9 +281,7 @@ public class NodeServer1 {
 	}
 
 	private void Recovery() {
-		
-		
-		
+		LOG.info("Starting Recovery phase");
 		long leaderID = properties.getLeaderId();
 		InetSocketAddress leaderAddr = properties.getMemberList().get(leaderID);
 		String leaderIp = leaderAddr.getHostName();
@@ -292,6 +290,7 @@ public class NodeServer1 {
 		
 		if (this.properties.isLeader() == true){
 			// Leader
+			LOG.info("I am Leader");
 			ConcurrentHashMap<Long, Long> acceptedEpochMap =  this.properties.getSynData().getAcceptedEpochMap();
 			ConcurrentHashMap<Long, ZxId> currentEpochMap =  this.properties.getSynData().getCurrentEpochMap();
 
@@ -375,6 +374,7 @@ public class NodeServer1 {
 
 		} else {
 			// Follower
+			LOG.info("I am Follower");
 			ZxId followerLastCommittedZxid = readHistory();
 			long currentEpoch = followerLastCommittedZxid.getEpoch();
 			this.properties.setCurrentEpoch(currentEpoch);
@@ -466,6 +466,9 @@ public class NodeServer1 {
 			Vote leaderVote = startLeaderElection();
 			LOG.info("End Leader Election---------");
 			LOG.info("Leader ID:"+leaderVote.getId() );
+			LOG.info("Begin Recovery---------");
+			Recovery();
+			LOG.info("END Recovery---------");
 			if(leaderVote.getId() == properties.getNodeId()){
 				properties.setLeader(true);
 				properties.setNodestate(NodeServerProperties1.State.LEADING);
@@ -494,9 +497,7 @@ public class NodeServer1 {
 				
 			}
 		}
-		LOG.info("Begin Recovery---------");
-		Recovery();
-		LOG.info("END Recovery---------");
+
 		
 		while(true){
 			
