@@ -17,6 +17,8 @@ import java.util.Map.Entry;
 import java.util.Queue;
 import io.netty.util.internal.shaded.org.jctools.queues.MpscArrayQueue;
 import java.util.HashMap;
+import java.util.concurrent.ConcurrentHashMap;
+
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
@@ -278,50 +280,118 @@ public class NodeServer1 {
 //		
 	}
 
-//	private void Recovery() {
-//
-//		if (this.properties.isLeader() == true){
-//			// Leader
-//			List<Long> acceptedEpochList =  this.properties.getSynData().getAcceptedEpochList();
-//			long max = acceptedEpochList.get(0);
-//			for (long accEpoch : acceptedEpochList){
-//				if (accEpoch > max){
-//					max = accEpoch;
-//				}
-//			}
-//
-//			this.properties.setNewEpoch(max + 1);
-//
-//			String newEpochmsg = "NEWEPOCH:" + this.properties.getNewEpoch();
-//			this.broadcast(newEpochmsg);
-//
-//
-//
-//
-//		} else {
-//			// Follower
-//			String followerinfomsg = "FOLLOWERINFO:" + this.properties.getAcceptedEpoch();
-//			this.nettyClient.sendMessage(leaderip, leaderport, followerinfomsg);
-//			long newEpoch = this.properties.getSynData().getNewEpoch();
-//			long acceptedEpoch = this.properties.getAcceptedEpoch();
-//
-//			if (newEpoch > acceptedEpoch){
-//				this.properties.setAcceptedEpoch(newEpoch);
-//				this.properties.setCounter(0);
-//				String ackepochmsg = "ACKEPOCH:"; // TODO: currentepoch, history, lastZxid
-//				this.nettyClient.sendMessage(leaderip, leaderport, ackepochmsg);
-//			} else {
-//				this.properties.setNodestate(NodeServerProperties1.State.ELECTION);
-//				changePhase();
-//			}
-//
-//			// Receive SNAP, DIFF and TRUNC messages
-//
-//
-//
-//		}
-//
-//	}
+	private void Recovery() {
+
+		if (this.properties.isLeader() == true){
+			// Leader
+			ConcurrentHashMap<Long, Long> acceptedEpochMap =  this.properties.getSynData().getAcceptedEpochMap();
+			ConcurrentHashMap<Long, ZxId> currentEpochMap =  this.properties.getSynData().getCurrentEpochMap();
+
+			acceptedEpochMap.clear();
+			currentEpochMap.clear();
+
+			this.properties.getSynData().setAcceptedEpochMap(acceptedEpochMap);
+			this.properties.getSynData().setCurrentEpochMap(currentEpochMap);
+
+			acceptedEpochMap =  this.properties.getSynData().getAcceptedEpochMap();
+
+			while(acceptedEpochMap.size() < this.properties.getMemberList().size()/2 ){
+				//TODO: Figure out how to update memberlist size
+				try {
+					Thread.sleep(10);
+				} catch (InterruptedException e){
+					e.printStackTrace();
+				}
+			}
+
+			long max = this.properties.getAcceptedEpoch();
+			for(long nodeId : acceptedEpochMap.keySet()){
+				long accEpoch =  acceptedEpochMap.get(nodeId);
+				if (accEpoch > max){
+					max = accEpoch;
+				}
+			}
+
+			this.properties.setNewEpoch(max + 1);
+
+			String newEpochmsg = "NEWEPOCH:" + this.properties.getNewEpoch();
+			this.broadcast(newEpochmsg);
+
+			ZxId leaderLastCommittedZxid = readHistory();
+
+			currentEpochMap =  this.properties.getSynData().getCurrentEpochMap();
+
+			while(currentEpochMap.size() < this.properties.getMemberList().size()/2 ){
+				//TODO: Figure out how to update memberlist size
+				try {
+					Thread.sleep(10);
+				} catch (InterruptedException e){
+					e.printStackTrace();
+				}
+			}
+
+			for (long nodeId : currentEpochMap.keySet()){
+				ZxId followerLastCommittedZxid = currentEpochMap.get(nodeId);
+
+				if (leaderLastCommittedZxid.getEpoch() == followerLastCommittedZxid.getEpoch()){
+
+					if (followerLastCommittedZxid.getCounter() < leaderLastCommittedZxid.getCounter()){
+
+						// TODO: Send DIFF message
+						// Iterate through CommitHistory (refer readHistory()), stringify and send
+
+					} else if (followerLastCommittedZxid.getCounter() == leaderLastCommittedZxid.getCounter()){
+						continue;
+					} else if (followerLastCommittedZxid.getCounter() > leaderLastCommittedZxid.getCounter()){
+						// Go to Leader Election. Ideally, shouldn't happen
+						this.properties.setNodestate(NodeServerProperties1.State.ELECTION);
+						changePhase();
+					}
+
+				} else if (followerLastCommittedZxid.getEpoch() < leaderLastCommittedZxid.getEpoch()){
+
+					// TODO: Send SNAP message
+					// Iterate through the Map, stringify each entry and then send
+
+				} else if (followerLastCommittedZxid.getEpoch() > leaderLastCommittedZxid.getEpoch()){
+					// Go to Leader Election. Ideally, shouldn't happen
+					this.properties.setNodestate(NodeServerProperties1.State.ELECTION);
+					changePhase();
+				}
+			}
+
+		} else {
+			// Follower
+			ZxId followerLastCommittedZxid = readHistory();
+			long currentEpoch = followerLastCommittedZxid.getEpoch();
+			this.properties.setCurrentEpoch(currentEpoch);
+
+			String followerinfomsg = "FOLLOWERINFO:" + this.properties.getNodeId() + ":"
+					+ this.properties.getAcceptedEpoch() + ":"
+					+ readHistory().getEpoch() + ":" + readHistory().getCounter();
+			this.nettyClient.sendMessage(leaderip, leaderport, followerinfomsg);
+			//TODO: Figure out how follower received newEpoch
+			long newEpoch = this.properties.getSynData().getNewEpoch();
+			long acceptedEpoch = this.properties.getAcceptedEpoch();
+
+
+			if (newEpoch > acceptedEpoch){
+				this.properties.setAcceptedEpoch(newEpoch);
+				this.properties.setCounter(0);
+				String ackepochmsg = "ACKEPOCH:" + this.properties.getCurrentEpoch(); // TODO: currentepoch, history, lastZxid
+				this.nettyClient.sendMessage(leaderip, leaderport, ackepochmsg);
+			} else {
+				this.properties.setNodestate(NodeServerProperties1.State.ELECTION);
+				changePhase();
+			}
+
+			// Receive SNAP, DIFF and TRUNC messages
+
+
+
+		}
+
+	}
 	
 	
 	public void init() {
@@ -543,7 +613,7 @@ public class NodeServer1 {
 		}
 	}
 	
-	private void readHistory() {
+	private ZxId readHistory() {
 
 		String fileName = "CommitedHistory_" + properties.getNodePort() + ".txt";
 		String line = null;
@@ -576,6 +646,8 @@ public class NodeServer1 {
 
 		this.properties.setCurrentEpoch(lastMsg.getZxid().getEpoch());
 		this.properties.setLastZxId(lastMsg.getZxid());
+
+		return this.properties.getLastZxId();
 
 	}
 
