@@ -281,7 +281,14 @@ public class NodeServer1 {
 	}
 
 	private void Recovery() {
-
+		
+		
+		
+		long leaderID = properties.getLeaderId();
+		InetSocketAddress leaderAddr = properties.getMemberList().get(leaderID);
+		String leaderIp = leaderAddr.getHostName();
+		int leaderPort = leaderAddr.getPort();
+		
 		if (this.properties.isLeader() == true){
 			// Leader
 			ConcurrentHashMap<Long, Long> acceptedEpochMap =  this.properties.getSynData().getAcceptedEpochMap();
@@ -290,10 +297,10 @@ public class NodeServer1 {
 			acceptedEpochMap.clear();
 			currentEpochMap.clear();
 
-			this.properties.getSynData().setAcceptedEpochMap(acceptedEpochMap);
-			this.properties.getSynData().setCurrentEpochMap(currentEpochMap);
-
-			acceptedEpochMap =  this.properties.getSynData().getAcceptedEpochMap();
+//			this.properties.getSynData().setAcceptedEpochMap(acceptedEpochMap);
+//			this.properties.getSynData().setCurrentEpochMap(currentEpochMap);
+//
+//			acceptedEpochMap =  this.properties.getSynData().getAcceptedEpochMap();
 
 			while(acceptedEpochMap.size() < this.properties.getMemberList().size()/2 ){
 				//TODO: Figure out how to update memberlist size
@@ -369,7 +376,7 @@ public class NodeServer1 {
 			String followerinfomsg = "FOLLOWERINFO:" + this.properties.getNodeId() + ":"
 					+ this.properties.getAcceptedEpoch() + ":"
 					+ readHistory().getEpoch() + ":" + readHistory().getCounter();
-			this.nettyClient.sendMessage(leaderip, leaderport, followerinfomsg);
+			this.nettyClient.sendMessage(leaderIp, leaderPort, followerinfomsg);
 			//TODO: Figure out how follower received newEpoch
 			long newEpoch = this.properties.getSynData().getNewEpoch();
 			long acceptedEpoch = this.properties.getAcceptedEpoch();
@@ -379,7 +386,7 @@ public class NodeServer1 {
 				this.properties.setAcceptedEpoch(newEpoch);
 				this.properties.setCounter(0);
 				String ackepochmsg = "ACKEPOCH:" + this.properties.getCurrentEpoch(); // TODO: currentepoch, history, lastZxid
-				this.nettyClient.sendMessage(leaderip, leaderport, ackepochmsg);
+				this.nettyClient.sendMessage(leaderIp, leaderPort, ackepochmsg);
 			} else {
 				this.properties.setNodestate(NodeServerProperties1.State.ELECTION);
 				changePhase();

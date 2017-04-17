@@ -10,6 +10,7 @@ import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
+import java.util.Properties;
 import java.util.Queue;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.ConcurrentLinkedQueue;
@@ -51,7 +52,7 @@ public class NodeServerProperties1 {
 	private MpscArrayQueue<Notification> electionQueue;
 	private Vote myVote;
 	
-	private Map<String, String> DataMap;
+	private Properties dataMap;
 
 	public NodeServerProperties1() {
 		//TODO: acceptedEpoch = 0;
@@ -75,7 +76,7 @@ public class NodeServerProperties1 {
 		myVote = new Vote(this.getLastZxId(), this.getNodeId());
 		synData = SyncDataStructs.getInstance();
 		memberList = new ConcurrentHashMap<Long, InetSocketAddress>();
-		DataMap = new ConcurrentHashMap<String, String>();
+		dataMap = new Properties();
 	}
 
 	public long getCounter() {
@@ -134,13 +135,12 @@ public class NodeServerProperties1 {
 		this.nodePort = nodePort;
 	}
 
-	
-	public synchronized Map<String, String> getDataMap() {
-		return DataMap;
+	public synchronized Properties getDataMap() {
+		return dataMap;
 	}
 
-	public synchronized void setDataMap(Map<String, String> dataMap) {
-		DataMap = dataMap;
+	public synchronized void setDataMap(Properties dataMap) {
+		this.dataMap = dataMap;
 	}
 
 	public synchronized Map<Long, InetSocketAddress> getMemberList() {

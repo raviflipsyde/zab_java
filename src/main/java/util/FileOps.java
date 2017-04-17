@@ -20,11 +20,12 @@ public class FileOps {
 	public static void readHistory(NodeServerProperties1 properties) {
 		
 		String fileName = "CommitedHistory_" + properties.getNodePort() + ".properties";
-		Map<String, String> map = properties.getDataMap();
-		Properties dataMap = new Properties();
+		
+		Properties dataMap = properties.getDataMap();
 		String line = null;
 		long epoch=0, counter=0;
 		String key,value;
+		dataMap.clear();
 		try {
 
 			FileReader fileReader = new FileReader(fileName);

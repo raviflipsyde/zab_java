@@ -25,10 +25,11 @@ public class UdpServer1 implements Runnable{
 	private static final String REPLY = "I M OK";
 	private NodeServerProperties1 properties;
 	private int port;
+	private HashMap<String, Long> heartBeatMap;
 	
 	public UdpServer1(NodeServerProperties1 nodeProperties){
 		this.properties = nodeProperties;
-		
+		heartBeatMap = new HashMap<String, Long>();
 		
 //		Timer t = new Timer();
 //		t.schedule(new TimerTask() {
@@ -88,9 +89,9 @@ public class UdpServer1 implements Runnable{
 						new DatagramPacket(sendData, sendData.length, IPAddress, port);
 				serverSocket.send(sendPacket);
 				
-//				String[] addr = sentence.split("::");
-//				String fulladdr1 = addr[1];
-//				heartBeatMap.put(fulladdr1, currentTime);
+				String[] addr = sentence.split("::");
+				String fulladdr1 = addr[1];
+				heartBeatMap.put(fulladdr1, currentTime);
 				
 
 			}
