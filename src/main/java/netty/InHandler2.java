@@ -204,11 +204,11 @@ public class InHandler2 extends ChannelInboundHandlerAdapter { // (1)
 		}
 
 		if (requestMsg.contains("DIFF")){
-			System.out.println("DIFF message received");
+			LOG.info("DIFF message received");
 		}
 
 		if (requestMsg.contains("SNAP")){
-			System.out.println("SNAP message received");
+			LOG.info("SNAP message received");
 		}
 
 		return "";

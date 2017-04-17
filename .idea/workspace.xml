@@ -2,10 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="899d576a-2f27-4b55-be0b-6f91e1aa5d70" name="Default" comment="">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/CommitedHistory_9001.txt" afterPath="$PROJECT_DIR$/CommitedHistory_9001.txt" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/CommitedHistory_9002.txt" afterPath="$PROJECT_DIR$/CommitedHistory_9002.txt" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/CommitedHistory_9003.txt" afterPath="$PROJECT_DIR$/CommitedHistory_9003.txt" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/servers/NodeServer1.java" afterPath="$PROJECT_DIR$/src/main/java/servers/NodeServer1.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/netty/InHandler2.java" afterPath="$PROJECT_DIR$/src/main/java/netty/InHandler2.java" />
     </list>
     <ignored path="zab_java.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -62,7 +59,7 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="CommitedHistory_9003.txt" pinned="false" current-in-tab="true">
+      <file leaf-file-name="CommitedHistory_9003.txt" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/CommitedHistory_9003.txt">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="54">
@@ -92,11 +89,11 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="InHandler2.java" pinned="false" current-in-tab="false">
+      <file leaf-file-name="InHandler2.java" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/main/java/netty/InHandler2.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="508">
-              <caret line="210" column="56" selection-start-line="210" selection-start-column="56" selection-end-line="210" selection-end-column="56" />
+            <state relative-caret-position="1372">
+              <caret line="216" column="0" selection-start-line="216" selection-start-column="0" selection-end-line="216" selection-end-column="0" />
               <folding>
                 <element signature="imports" expanded="true" />
               </folding>
@@ -168,11 +165,11 @@
         <option value="$PROJECT_DIR$/src/main/java/util/SyncDataStructs.java" />
         <option value="$PROJECT_DIR$/src/main/java/servers/Vote.java" />
         <option value="$PROJECT_DIR$/src/main/java/servers/ZxId.java" />
-        <option value="$PROJECT_DIR$/src/main/java/netty/InHandler2.java" />
         <option value="$PROJECT_DIR$/src/main/java/servers/NodeServer1.java" />
         <option value="$PROJECT_DIR$/CommitedHistory_9001.txt" />
         <option value="$PROJECT_DIR$/CommitedHistory_9002.txt" />
         <option value="$PROJECT_DIR$/CommitedHistory_9003.txt" />
+        <option value="$PROJECT_DIR$/src/main/java/netty/InHandler2.java" />
       </list>
     </option>
   </component>
@@ -1022,16 +1019,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/netty/InHandler2.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="508">
-          <caret line="210" column="56" selection-start-line="210" selection-start-column="56" selection-end-line="210" selection-end-column="56" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/servers/NodeServer1.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="-3267">
@@ -1067,6 +1054,16 @@
         <state relative-caret-position="54">
           <caret line="3" column="6" selection-start-line="3" selection-start-column="6" selection-end-line="3" selection-end-column="6" />
           <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/netty/InHandler2.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1372">
+          <caret line="216" column="0" selection-start-line="216" selection-start-column="0" selection-end-line="216" selection-end-column="0" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
