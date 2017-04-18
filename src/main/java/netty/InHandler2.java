@@ -179,11 +179,12 @@ public class InHandler2 extends ChannelInboundHandlerAdapter { // (1)
 		}
 
 		if (requestMsg.contains("FOLLOWERINFO")){
+			LOG.info("Request msg is = " + requestMsg);
 			String[] accEpoch = requestMsg.split(":");
-			long nodeId = Long.parseLong(accEpoch[1]);
-			long acceptedEpoch = Long.parseLong(accEpoch[2]);
-			long currentEpoch = Long.parseLong(accEpoch[3]);
-			long currentCounter = Long.parseLong(accEpoch[4]);
+			long nodeId = Long.parseLong(accEpoch[1].trim());
+			long acceptedEpoch = Long.parseLong(accEpoch[2].trim());
+			long currentEpoch = Long.parseLong(accEpoch[3].trim());
+			long currentCounter = Long.parseLong(accEpoch[4].trim());
 
 			ZxId followerLastCommittedZxid = new ZxId(currentEpoch, currentCounter);
 
@@ -200,7 +201,7 @@ public class InHandler2 extends ChannelInboundHandlerAdapter { // (1)
 
 		if (requestMsg.contains("NEWEPOCH")){
 			String[] newEpocharr = requestMsg.split(":");
-			long newEpoch = Long.parseLong(newEpocharr[1]);
+			long newEpoch = Long.parseLong(newEpocharr[1].trim());
 		}
 
 		if (requestMsg.contains("DIFF")){

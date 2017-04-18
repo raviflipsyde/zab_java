@@ -298,7 +298,10 @@ public class NodeServer1 {
 //
 //			acceptedEpochMap =  this.properties.getSynData().getAcceptedEpochMap();
 
-			while(acceptedEpochMap.size() < this.properties.getMemberList().size()/2 ){
+			LOG.info("Member List size before while is = " + properties.getMemberList().size());
+			LOG.info ("Accepted Epoch Map Size before while is = " + acceptedEpochMap.size());
+
+			while(acceptedEpochMap.size() <= this.properties.getMemberList().size()/2 ){
 				//TODO: Figure out how to update memberlist size
 				try {
 					Thread.sleep(10);
@@ -306,6 +309,10 @@ public class NodeServer1 {
 					e.printStackTrace();
 				}
 			}
+
+			LOG.info("Member List size after while is = " + properties.getMemberList().size());
+			LOG.info ("Accepted Epoch Map Size after while is = " + acceptedEpochMap.size());
+
 
 			long max = this.properties.getAcceptedEpoch();
 			for(long nodeId : acceptedEpochMap.keySet()){
@@ -318,6 +325,7 @@ public class NodeServer1 {
 			this.properties.setNewEpoch(max + 1);
 
 			String newEpochmsg = "NEWEPOCH:" + this.properties.getNewEpoch();
+			LOG.info("NEWEPOCH msg is = " + newEpochmsg);
 			this.broadcast(newEpochmsg);
 
 			ZxId leaderLastCommittedZxid = readHistory();
@@ -381,8 +389,22 @@ public class NodeServer1 {
 			String followerinfomsg = "FOLLOWERINFO:" + this.properties.getNodeId() + ":"
 					+ this.properties.getAcceptedEpoch() + ":"
 					+ readHistory().getEpoch() + ":" + readHistory().getCounter();
+
+			LOG.info("Follower info msg is = " + followerinfomsg);
+
 			this.nettyClient.sendMessage(leaderIp, leaderPort, followerinfomsg);
 			//TODO: Figure out how follower received newEpoch
+
+			this.properties.getSynData().setNewEpoch(0L);
+			LOG.info("New Epoch before while is = " + properties.getSynData().getNewEpoch());
+			while (this.properties.getSynData().getNewEpoch() == 0){
+				try {
+					Thread.sleep(10);
+				} catch (InterruptedException e){
+					e.printStackTrace();
+				}
+			}
+			LOG.info("New Epoch before while is = " + properties.getSynData().getNewEpoch());
 			long newEpoch = this.properties.getSynData().getNewEpoch();
 			long acceptedEpoch = this.properties.getAcceptedEpoch();
 
@@ -497,20 +519,20 @@ public class NodeServer1 {
 		}
 
 		
-		while(true){
-			
-			if(properties.getNodestate() != NodeServerProperties1.State.ELECTION ){
-				try {
-					Thread.sleep(4000);
-				} catch (InterruptedException e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
-				}
-			}
-			else{
-				changePhase();
-			}
-		}
+//		while(true){
+//
+//			if(properties.getNodestate() != NodeServerProperties1.State.ELECTION ){
+//				try {
+//					Thread.sleep(4000);
+//				} catch (InterruptedException e) {
+//					// TODO Auto-generated catch block
+//					e.printStackTrace();
+//				}
+//			}
+//			else{
+//				changePhase();
+//			}
+//		}
 
 		//startRecovery();
 		//startBroadcast();
