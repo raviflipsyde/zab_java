@@ -126,6 +126,7 @@ public class NodeServer implements Runnable{
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+		initHistory();
 //		writeHistory();
 		readHistory();
 
@@ -154,6 +155,18 @@ public class NodeServer implements Runnable{
 			this.removeMemberFromList(member);
 		}
 
+	}
+	
+	void initHistory() {
+	    String fileName = "CommitedHistory_" + this.nodePort + ".txt";
+	    File history = new File(fileName);
+	    if (!history.exists()) {
+	      try {
+	        history.createNewFile();
+	      } catch (IOException e) {
+	        e.printStackTrace();
+	      }
+	    }
 	}
 
 	private void changePhase() {
@@ -568,11 +581,11 @@ public class NodeServer implements Runnable{
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		
-		Message lastMsg = msgList.get(msgList.size()-1);
-
-		this.properties.setCurrentEpoch(lastMsg.getEpoch());
-		this.properties.setLastZxId(lastMsg.getTxId());
+		if (msgList.size() > 0) {
+	      Message lastMsg = msgList.get(msgList.size() - 1);
+	      this.properties.setCurrentEpoch(lastMsg.getEpoch());
+	      this.properties.setLastZxId(lastMsg.getTxId());
+	    }
 
 	}
 
