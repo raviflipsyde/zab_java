@@ -283,11 +283,7 @@ public class NodeServer1 {
 	private void Recovery() {
 		LOG.info("Starting Recovery phase");
 		long leaderID = properties.getLeaderId();
-		InetSocketAddress leaderAddr = properties.getMemberList().get(leaderID);
-		String leaderIp = leaderAddr.getHostName();
-		int leaderPort = leaderAddr.getPort();
 
-		
 		if (this.properties.isLeader() == true){
 			// Leader
 			LOG.info("I am Leader");
@@ -328,7 +324,7 @@ public class NodeServer1 {
 
 			currentEpochMap =  this.properties.getSynData().getCurrentEpochMap();
 
-			while(currentEpochMap.size() < this.properties.getMemberList().size()/2 ){
+			while(currentEpochMap.size() <= this.properties.getMemberList().size()/2 ){
 				//TODO: Figure out how to update memberlist size
 				try {
 					Thread.sleep(10);
@@ -375,6 +371,9 @@ public class NodeServer1 {
 		} else {
 			// Follower
 			LOG.info("I am Follower");
+			InetSocketAddress leaderAddr = properties.getMemberList().get(leaderID);
+			String leaderIp = leaderAddr.getHostName();
+			int leaderPort = leaderAddr.getPort();
 			ZxId followerLastCommittedZxid = readHistory();
 			long currentEpoch = followerLastCommittedZxid.getEpoch();
 			this.properties.setCurrentEpoch(currentEpoch);
@@ -467,7 +466,7 @@ public class NodeServer1 {
 			LOG.info("End Leader Election---------");
 			LOG.info("Leader ID:"+leaderVote.getId() );
 			LOG.info("Begin Recovery---------");
-			Recovery();
+			//Recovery();
 			LOG.info("END Recovery---------");
 			if(leaderVote.getId() == properties.getNodeId()){
 				properties.setLeader(true);
@@ -479,8 +478,7 @@ public class NodeServer1 {
 				this.udpServerThread.setUncaughtExceptionHandler(h);
 				this.udpServerThread.start();
 
-			}
-			else{
+			} else{
 				properties.setLeader(false);
 				properties.setNodestate(NodeServerProperties1.State.FOLLOWING);
 				leaderID = leaderVote.getId();
@@ -527,6 +525,8 @@ public class NodeServer1 {
 			PrintWriter out = new PrintWriter(socket.getOutputStream(), true);
 			BufferedReader in = new BufferedReader(new InputStreamReader(socket.getInputStream()));
 			// set self_ip:port to bootstrap
+			LOG.info("set " + properties.getBootstrapHost() + ":" + properties.getBootstrapPort());
+			LOG.info("set " + properties.getNodeHost() + ":" + properties.getNodePort());
 
 			out.println("set " + properties.getNodeHost() + ":" + properties.getNodePort());
 
@@ -567,6 +567,7 @@ public class NodeServer1 {
 			String ip = address[1];
 			int port = Integer.parseInt(address[2]);
 			if (properties.getNodeHost().equals(ip) && properties.getNodePort() == port) {
+
 			} else {
 				InetSocketAddress addr = new InetSocketAddress(address[1], Integer.parseInt(address[2]));
 				LOG.info("Adding"+ nodeId + ":::"+ addr);
@@ -662,6 +663,7 @@ public class NodeServer1 {
 
 		this.properties.setCurrentEpoch(lastMsg.getZxid().getEpoch());
 		this.properties.setLastZxId(lastMsg.getZxid());
+		LOG.info("ZxId of last message is = Epoch: " + lastMsg.getZxid().getEpoch() + "	Counter: " + lastMsg.getZxid().getCounter());
 
 		return this.properties.getLastZxId();
 
