@@ -3,7 +3,6 @@
   <component name="ChangeListManager">
     <list default="true" id="899d576a-2f27-4b55-be0b-6f91e1aa5d70" name="Default" comment="">
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/members.txt" afterPath="$PROJECT_DIR$/members.txt" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/servers/NodeServer1.java" afterPath="$PROJECT_DIR$/src/main/java/servers/NodeServer1.java" />
     </list>
     <ignored path="zab_java.iws" />
@@ -28,8 +27,8 @@
       <file leaf-file-name="NodeServer1.java" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/main/java/servers/NodeServer1.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-1616">
-              <caret line="326" column="43" selection-start-line="326" selection-start-column="43" selection-end-line="326" selection-end-column="43" />
+            <state relative-caret-position="472">
+              <caret line="468" column="12" selection-start-line="468" selection-start-column="12" selection-end-line="468" selection-end-column="12" />
               <folding>
                 <element signature="imports" expanded="true" />
                 <element signature="e#1561#1573#0" expanded="true" />
@@ -37,6 +36,36 @@
                 <element signature="e#1701#1713#0" expanded="true" />
                 <element signature="e#1776#1788#0" expanded="true" />
               </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name=".gitignore" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/.gitignore">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="573">
+              <caret line="199" column="5" selection-start-line="199" selection-start-column="5" selection-end-line="199" selection-end-column="5" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="CommitedHistory_9001.txt" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/CommitedHistory_9001.txt">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="144">
+              <caret line="8" column="6" selection-start-line="8" selection-start-column="6" selection-end-line="8" selection-end-column="6" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="CommitedHistory_9002.txt" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/CommitedHistory_9002.txt">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="90">
+              <caret line="5" column="6" selection-start-line="5" selection-start-column="6" selection-end-line="5" selection-end-column="6" />
+              <folding />
             </state>
           </provider>
         </entry>
@@ -76,36 +105,6 @@
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="72">
               <caret line="15" column="13" selection-start-line="15" selection-start-column="13" selection-end-line="15" selection-end-column="13" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="HeartBeatServer.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/java/servers/HeartBeatServer.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="108">
-              <caret line="11" column="13" selection-start-line="11" selection-start-column="13" selection-end-line="11" selection-end-column="13" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="members.txt" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/members.txt">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-36">
-              <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="CommitedHistory_9003.txt" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/CommitedHistory_9003.txt">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="54">
-              <caret line="3" column="6" selection-start-line="3" selection-start-column="6" selection-end-line="3" selection-end-column="6" />
               <folding />
             </state>
           </provider>
@@ -162,7 +161,6 @@
     <option name="CHANGED_PATHS">
       <list>
         <option value="$PROJECT_DIR$/src/main/java/Start.java" />
-        <option value="$PROJECT_DIR$/.gitignore" />
         <option value="$PROJECT_DIR$/src/main/java/servers/NodeServer.java" />
         <option value="$PROJECT_DIR$/src/main/java/servers/NodeServerProperties.java" />
         <option value="$PROJECT_DIR$/src/main/java/servers/Message.java" />
@@ -175,6 +173,7 @@
         <option value="$PROJECT_DIR$/CommitedHistory_9003.txt" />
         <option value="$PROJECT_DIR$/src/main/java/netty/InHandler2.java" />
         <option value="$PROJECT_DIR$/src/main/java/servers/NodeServer1.java" />
+        <option value="$PROJECT_DIR$/.gitignore" />
       </list>
     </option>
   </component>
@@ -906,13 +905,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/.gitignore">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/servers/NodeServerProperties.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="18">
@@ -961,29 +953,13 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/CommitedHistory_9001.txt">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="3" selection-end-column="6" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/netty/InHandler2.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="1372">
           <caret line="216" column="0" selection-start-line="216" selection-start-column="0" selection-end-line="216" selection-end-column="0" />
           <folding>
-            <element signature="imports" expanded="true" />
+            <element signature="imports" expanded="false" />
           </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/CommitedHistory_9002.txt">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="90">
-          <caret line="5" column="6" selection-start-line="5" selection-start-column="6" selection-end-line="5" selection-end-column="6" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -1064,10 +1040,34 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/CommitedHistory_9001.txt">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="144">
+          <caret line="8" column="6" selection-start-line="8" selection-start-column="6" selection-end-line="8" selection-end-column="6" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/CommitedHistory_9002.txt">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="90">
+          <caret line="5" column="6" selection-start-line="5" selection-start-column="6" selection-end-line="5" selection-end-column="6" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/.gitignore">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="573">
+          <caret line="199" column="5" selection-start-line="199" selection-start-column="5" selection-end-line="199" selection-end-column="5" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/servers/NodeServer1.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-1616">
-          <caret line="326" column="43" selection-start-line="326" selection-start-column="43" selection-end-line="326" selection-end-column="43" />
+        <state relative-caret-position="472">
+          <caret line="468" column="12" selection-start-line="468" selection-start-column="12" selection-end-line="468" selection-end-column="12" />
           <folding>
             <element signature="imports" expanded="true" />
             <element signature="e#1561#1573#0" expanded="true" />

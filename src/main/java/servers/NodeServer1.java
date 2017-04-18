@@ -466,7 +466,7 @@ public class NodeServer1 {
 			LOG.info("End Leader Election---------");
 			LOG.info("Leader ID:"+leaderVote.getId() );
 			LOG.info("Begin Recovery---------");
-			//Recovery();
+			Recovery();
 			LOG.info("END Recovery---------");
 			if(leaderVote.getId() == properties.getNodeId()){
 				properties.setLeader(true);
