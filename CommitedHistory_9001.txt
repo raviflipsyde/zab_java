@@ -1,9 +1,8 @@
-3,2,10
-3,3,20
-3,4,30
-3,5,40
-3,6,50
-4,1,60
-4,2,70
-4,3,80
-4,4,90
+3,1,property1,Value1
+3,2,property2,Value2
+3,3,property3,Value3
+3,4,property1,Value1
+4,1,property2,Value2
+4,2,property3,Value3
+4,3,property1,Value4
+4,4,property2,Value5

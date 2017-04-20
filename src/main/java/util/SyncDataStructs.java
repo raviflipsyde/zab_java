@@ -4,6 +4,8 @@ import java.net.InetSocketAddress;
 import java.util.List;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.CopyOnWriteArrayList;
+import java.util.concurrent.atomic.AtomicInteger;
+import java.util.concurrent.atomic.AtomicLong;
 
 import io.netty.util.internal.shaded.org.jctools.queues.MpscArrayQueue;
 import servers.Notification;
@@ -19,12 +21,15 @@ public class SyncDataStructs {
 	private ConcurrentHashMap<Long, ZxId> currentEpochMap = null;
 	private Vote myVote;
 	private long newEpoch;
+	private boolean newEpochFlag;
+	private AtomicInteger quorumCount;
 	
 	private SyncDataStructs(){
 		electionQueue = new MpscArrayQueue<Notification>(100);
 		memberList  = new CopyOnWriteArrayList<InetSocketAddress>();
 		acceptedEpochMap = new ConcurrentHashMap<Long, Long>();
 		currentEpochMap = new ConcurrentHashMap<Long, ZxId>();
+		newEpochFlag = false;
 
 	}
 	public static SyncDataStructs getInstance(){
@@ -32,6 +37,26 @@ public class SyncDataStructs {
 			instance = new SyncDataStructs();
 		}
 		return instance;
+	}
+
+	public AtomicInteger getQuorumCount() {
+		return quorumCount;
+	}
+
+	public synchronized void incrementQuorumCount(){
+		quorumCount.getAndIncrement();
+	}
+
+	public void setQuorumCount(AtomicInteger quorumCounter) {
+		this.quorumCount = quorumCounter;
+	}
+
+	public boolean isNewEpochFlag() {
+		return newEpochFlag;
+	}
+
+	public void setNewEpochFlag(boolean newEpochFlag) {
+		this.newEpochFlag = newEpochFlag;
 	}
 
 	public long getNewEpoch() {
@@ -46,17 +71,17 @@ public class SyncDataStructs {
 		return acceptedEpochMap;
 	}
 
-	public void setAcceptedEpochMap(ConcurrentHashMap<Long, Long> acceptedEpochMap) {
-		this.acceptedEpochMap = acceptedEpochMap;
-	}
+//	public void setAcceptedEpochMap(ConcurrentHashMap<Long, Long> acceptedEpochMap) {
+//		this.acceptedEpochMap = acceptedEpochMap;
+//	}
 
 	public ConcurrentHashMap<Long, ZxId> getCurrentEpochMap() {
 		return currentEpochMap;
 	}
 
-	public void setCurrentEpochMap(ConcurrentHashMap<Long, ZxId> currentEpochMap) {
-		this.currentEpochMap = currentEpochMap;
-	}
+//	public void setCurrentEpochMap(ConcurrentHashMap<Long, ZxId> currentEpochMap) {
+//		this.currentEpochMap = currentEpochMap;
+//	}
 
 	public MpscArrayQueue<Notification> getElectionQueue() {
 		return getInstance().electionQueue;
@@ -69,11 +94,9 @@ public class SyncDataStructs {
 	public synchronized Vote getMyVote() {
 		return myVote;
 	}
+
 	public synchronized void setMyVote(Vote myVote) {
 		this.myVote = myVote;
 	}
-	
-	
-	
-	
+
 }

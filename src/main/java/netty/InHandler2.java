@@ -2,6 +2,7 @@ package netty;
 
 import java.net.InetSocketAddress;
 import java.nio.charset.StandardCharsets;
+import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
 
 import org.apache.logging.log4j.LogManager;
@@ -13,10 +14,8 @@ import io.netty.channel.ChannelHandlerContext;
 import io.netty.channel.ChannelInboundHandlerAdapter;
 import io.netty.util.internal.shaded.org.jctools.queues.MpscArrayQueue;
 
-import servers.NodeServerProperties1;
-import servers.Notification;
-import servers.Vote;
-import servers.ZxId;
+import servers.*;
+import util.FileOps;
 
 /**
  * Handles a server-side channel.
@@ -25,16 +24,17 @@ public class InHandler2 extends ChannelInboundHandlerAdapter { // (1)
 	private static final Logger LOG = LogManager.getLogger(InHandler2.class);
 	
 	private NodeServerProperties1 properties;
+	private NettyClient1 nettyClientInhandler;
+
 
 	public InHandler2(NodeServerProperties1 nsProperties) {
 		this.properties = nsProperties;
+		this.nettyClientInhandler = new NettyClient1(this.properties);
 	}
 
 
 	@Override
 	public void channelRead(ChannelHandlerContext ctx, Object msg) {
-
-
 
 		ByteBuf in = (ByteBuf) msg;
 		String requestMsg  = in.toString(StandardCharsets.UTF_8 );
@@ -47,9 +47,6 @@ public class InHandler2 extends ChannelInboundHandlerAdapter { // (1)
 			ctx.flush(); // (2)
 			ctx.close();
 		}
-		
-
-
 	}
 
 	@Override
@@ -183,33 +180,157 @@ public class InHandler2 extends ChannelInboundHandlerAdapter { // (1)
 			String[] accEpoch = requestMsg.split(":");
 			long nodeId = Long.parseLong(accEpoch[1].trim());
 			long acceptedEpoch = Long.parseLong(accEpoch[2].trim());
-			long currentEpoch = Long.parseLong(accEpoch[3].trim());
-			long currentCounter = Long.parseLong(accEpoch[4].trim());
+//			long currentEpoch = Long.parseLong(accEpoch[3].trim());
+//			long currentCounter = Long.parseLong(accEpoch[4].trim());
 
-			ZxId followerLastCommittedZxid = new ZxId(currentEpoch, currentCounter);
+			//ZxId followerLastCommittedZxid = new ZxId(currentEpoch, currentCounter);
 
-			ConcurrentHashMap<Long, Long> acceptedEpochMap = properties.getSynData().getAcceptedEpochMap();
-			ConcurrentHashMap<Long, ZxId> currentEpochMap = properties.getSynData().getCurrentEpochMap();
+			ConcurrentHashMap<Long, Long> acceptedEpochMap = this.properties.getSynData().getAcceptedEpochMap();
+			//ConcurrentHashMap<Long, ZxId> currentEpochMap = properties.getSynData().getCurrentEpochMap();
+
 			acceptedEpochMap.put(nodeId, acceptedEpoch);
-			currentEpochMap.put(nodeId, followerLastCommittedZxid);
+			//currentEpochMap.put(nodeId, followerLastCommittedZxid);
 
-			properties.getSynData().setAcceptedEpochMap(acceptedEpochMap);
-			properties.getSynData().setCurrentEpochMap(currentEpochMap);
+			if (acceptedEpochMap.size() < (this.properties.getMemberList().size() / 2) ){
+				synchronized (acceptedEpochMap){
+					try {
+						acceptedEpochMap.wait();
+						Thread.sleep(10);
+					} catch (InterruptedException e){
+						e.printStackTrace();
+					}
+				}
+			}
 
-			return "";
+			while (!this.properties.getSynData().isNewEpochFlag()){
+				try {
+					Thread.sleep(10);
+				} catch (InterruptedException e){
+					e.printStackTrace();
+				}
+			}
+
+			return "NEWEPOCH:" + properties.getNewEpoch() + ":" + this.properties.getNodeId();
 		}
 
 		if (requestMsg.contains("NEWEPOCH")){
+
+			Map<Long, InetSocketAddress> memberList = this.properties.getMemberList();
+			LOG.info("Member List is = " + memberList);
+
+			String ackepochmsg = "";
 			String[] newEpocharr = requestMsg.split(":");
 			long newEpoch = Long.parseLong(newEpocharr[1].trim());
+			long nodeId = Long.parseLong(newEpocharr[2].trim());
+			properties.getSynData().setNewEpoch(newEpoch);
+			LOG.info("New Epoch received is = " + newEpoch);
+			this.properties.setNewEpoch(newEpoch);
+			long acceptedEpoch = this.properties.getAcceptedEpoch();
+
+			if (newEpoch > acceptedEpoch){
+
+				this.properties.setAcceptedEpoch(newEpoch);
+				this.properties.setCounter(0);
+
+				String myLastLog = FileOps.readLastLog(properties);
+				String[] arr = myLastLog.split(",");
+				long currentEpoch = Long.parseLong(arr[0].trim());
+				long currentCounter = Long.parseLong(arr[1].trim());
+
+				ackepochmsg = "ACKEPOCH:" + this.properties.getNodeId()
+						+ ":" + currentEpoch + ":" + currentCounter;
+
+				this.nettyClientInhandler.sendMessage(memberList.get(nodeId).getHostName(), memberList.get(nodeId).getPort(), ackepochmsg);
+
+				return "";
+
+			} else {
+
+				this.properties.setNodestate(NodeServerProperties1.State.ELECTION);
+				LOG.info("Going to Leader Election");
+
+			}
+
+		}
+
+		if (requestMsg.contains("ACKEPOCH")){
+			LOG.info("Ack new epoch message received = " + requestMsg);
+			Map<Long, InetSocketAddress> memberList = this.properties.getMemberList();
+			String[] currEpochArr = requestMsg.split(":");
+			long nodeId = Long.parseLong(currEpochArr[1].trim());
+			long currentEpoch = Long.parseLong(currEpochArr[2].trim());
+			long currentCounter = Long.parseLong(currEpochArr[3].trim());
+
+			ZxId followerLastCommittedZxid = new ZxId(currentEpoch, currentCounter);
+			LOG.info("follower last committed zxid = " + followerLastCommittedZxid.getEpoch()
+					+ "	" + followerLastCommittedZxid.getCounter());
+
+//			ConcurrentHashMap<Long, ZxId> currentEpochMap = properties.getSynData().getCurrentEpochMap();
+//			currentEpochMap.put(nodeId, followerLastCommittedZxid);
+
+			String leaderLastLog = FileOps.readLastLog(properties);
+			LOG.info("Leader last log = " + leaderLastLog);
+			String[] arr1 = leaderLastLog.split(",");
+			long epoch = Long.parseLong(arr1[0].trim());
+			long counter = Long.parseLong(arr1[1].trim());
+
+			ZxId leaderLastCommittedZxid = new ZxId(epoch, counter);
+			LOG.info("leader last committed zxid = " + leaderLastCommittedZxid.getEpoch()
+					+ "	" + leaderLastCommittedZxid.getCounter());
+
+			if (leaderLastCommittedZxid.getEpoch() == followerLastCommittedZxid.getEpoch()){
+
+				if (followerLastCommittedZxid.getCounter() < leaderLastCommittedZxid.getCounter()){
+
+					// TODO: Send DIFF message
+
+					this.nettyClientInhandler.sendMessage(memberList.get(nodeId).getHostName(), memberList.get(nodeId).getPort(), "DIFF");
+
+
+					// TODO: Iterate through CommitHistory (refer readHistory()), stringify and send
+
+				} else if (followerLastCommittedZxid.getCounter() == leaderLastCommittedZxid.getCounter()){
+					// Do nothing
+				} else if (followerLastCommittedZxid.getCounter() > leaderLastCommittedZxid.getCounter()){
+					// Go to Leader Election. Ideally, shouldn't happen
+					this.properties.setNodestate(NodeServerProperties1.State.ELECTION);
+					LOG.info("Going to Leader Election");
+					// change phase
+				}
+
+			} else if (followerLastCommittedZxid.getEpoch() < leaderLastCommittedZxid.getEpoch()){
+
+				// TODO: Send SNAP message
+				this.nettyClientInhandler.sendMessage(memberList.get(nodeId).getHostName(), memberList.get(nodeId).getPort(), "SNAP");
+
+				// TODO: Iterate through the Map, stringify each entry and then send
+
+			} else if (followerLastCommittedZxid.getEpoch() > leaderLastCommittedZxid.getEpoch()){
+				// Go to Leader Election. Ideally, shouldn't happen
+				this.properties.setNodestate(NodeServerProperties1.State.ELECTION);
+				LOG.info("Going to Leader Election");
+				//changePhase();
+			}
+
+			return "";
+
 		}
 
 		if (requestMsg.contains("DIFF")){
 			LOG.info("DIFF message received");
+			LOG.info("Follower ready for Broadcast");
+			return "ACKACTION:" + this.properties.getNodeId();
 		}
 
 		if (requestMsg.contains("SNAP")){
 			LOG.info("SNAP message received");
+			LOG.info("Follower ready for Broadcast");
+			return "ACKACTION:" + this.properties.getNodeId();
+		}
+
+		if (requestMsg.contains("ACKACTION")){
+
+			properties.getSynData().incrementQuorumCount();
 		}
 
 		return "";

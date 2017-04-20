@@ -60,7 +60,7 @@ public class FileOps {
 		
 	}
 	
-	public static String readLastLog(NodeServerProperties1 properties ){
+	public static String readLastLog(NodeServerProperties1 properties){
 		String ret = null;
 		String fileName = "CommitedHistory_" + properties.getNodePort() + ".log";
 		File file = new File(fileName);

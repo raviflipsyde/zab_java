@@ -18,12 +18,15 @@ import java.util.Queue;
 import io.netty.util.internal.shaded.org.jctools.queues.MpscArrayQueue;
 import java.util.HashMap;
 import java.util.concurrent.ConcurrentHashMap;
+import java.util.concurrent.atomic.AtomicInteger;
+import java.util.concurrent.atomic.AtomicLong;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
 import netty.NettyClient1;
 import netty.NettyServer1;
+import util.FileOps;
 import util.UdpClient1;
 import util.UdpServer1;
 
@@ -69,7 +72,7 @@ public class NodeServer1 {
 		LOG.info("My Notification is:"+myNotification.toString());
 		
 		//TODO: Verify
-		sendNotificationToAll(myNotification.toString()); 
+		sendNotificationToAll(myNotification.toString());
 		
 		while(this.properties.getNodestate() == NodeServerProperties1.State.ELECTION && timeout<limit_timeout ){
 			LOG.info("Fetching from CurrentElectionQueue:\n");
@@ -276,6 +279,17 @@ public class NodeServer1 {
 		}
 
 		this.properties.setAcceptedEpoch(this.properties.getLastZxId().getEpoch());
+
+		ConcurrentHashMap<Long, Long> acceptedEpochMap =  this.properties.getSynData().getAcceptedEpochMap();
+		ConcurrentHashMap<Long, ZxId> currentEpochMap =  this.properties.getSynData().getCurrentEpochMap();
+
+		acceptedEpochMap.clear();
+		currentEpochMap.clear();
+
+		AtomicInteger quorumCount = new AtomicInteger(0);
+		this.properties.getSynData().setQuorumCount(quorumCount);
+		this.properties.getSynData().setNewEpochFlag(false);
+
 		return this.properties.getMyVote();
 //		
 	}
@@ -287,21 +301,16 @@ public class NodeServer1 {
 		if (this.properties.isLeader() == true){
 			// Leader
 			LOG.info("I am Leader");
-			ConcurrentHashMap<Long, Long> acceptedEpochMap =  this.properties.getSynData().getAcceptedEpochMap();
-			ConcurrentHashMap<Long, ZxId> currentEpochMap =  this.properties.getSynData().getCurrentEpochMap();
 
-			acceptedEpochMap.clear();
-			currentEpochMap.clear();
+			ConcurrentHashMap<Long, Long> acceptedEpochMap =  this.properties.getSynData().getAcceptedEpochMap();
 
 //			this.properties.getSynData().setAcceptedEpochMap(acceptedEpochMap);
 //			this.properties.getSynData().setCurrentEpochMap(currentEpochMap);
 //
-//			acceptedEpochMap =  this.properties.getSynData().getAcceptedEpochMap();
-
 			LOG.info("Member List size before while is = " + properties.getMemberList().size());
 			LOG.info ("Accepted Epoch Map Size before while is = " + acceptedEpochMap.size());
 
-			while(acceptedEpochMap.size() <= this.properties.getMemberList().size()/2 ){
+			while(acceptedEpochMap.size() < this.properties.getMemberList().size()/2 ){
 				//TODO: Figure out how to update memberlist size
 				try {
 					Thread.sleep(10);
@@ -313,8 +322,9 @@ public class NodeServer1 {
 			LOG.info("Member List size after while is = " + properties.getMemberList().size());
 			LOG.info ("Accepted Epoch Map Size after while is = " + acceptedEpochMap.size());
 
-
 			long max = this.properties.getAcceptedEpoch();
+			LOG.info("Accepted Epoch before max = " + max);
+
 			for(long nodeId : acceptedEpochMap.keySet()){
 				long accEpoch =  acceptedEpochMap.get(nodeId);
 				if (accEpoch > max){
@@ -322,18 +332,71 @@ public class NodeServer1 {
 				}
 			}
 
+			LOG.info("New max = " + max);
 			this.properties.setNewEpoch(max + 1);
 
-			String newEpochmsg = "NEWEPOCH:" + this.properties.getNewEpoch();
-			LOG.info("NEWEPOCH msg is = " + newEpochmsg);
-			this.broadcast(newEpochmsg);
+			synchronized (acceptedEpochMap){
+				acceptedEpochMap.notifyAll();
+			}
 
-			ZxId leaderLastCommittedZxid = readHistory();
+			this.properties.getSynData().setNewEpochFlag(true);
 
-			currentEpochMap =  this.properties.getSynData().getCurrentEpochMap();
 
-			while(currentEpochMap.size() <= this.properties.getMemberList().size()/2 ){
-				//TODO: Figure out how to update memberlist size
+//			String leaderLastLog = FileOps.readLastLog(properties);
+//			String[] arr = leaderLastLog.split(",");
+//			long epoch = Long.parseLong(arr[0].trim());
+//			long counter = Long.parseLong(arr[1].trim());
+//			ZxId leaderLastCommittedZxid = new ZxId(epoch, counter);
+//
+//			ConcurrentHashMap<Long, ZxId> currentEpochMap =  this.properties.getSynData().getCurrentEpochMap();
+//
+//			while(currentEpochMap.size() <= this.properties.getMemberList().size()/2 ){
+//				//TODO: Figure out how to update memberlist size
+//				try {
+//					Thread.sleep(10);
+//				} catch (InterruptedException e){
+//					e.printStackTrace();
+//				}
+//			}
+//
+//			for (long nodeId : currentEpochMap.keySet()){
+//				Map<Long, InetSocketAddress> memberList = this.properties.getMemberList();
+//				ZxId followerLastCommittedZxid = currentEpochMap.get(nodeId);
+//
+//				if (leaderLastCommittedZxid.getEpoch() == followerLastCommittedZxid.getEpoch()){
+//
+//					if (followerLastCommittedZxid.getCounter() < leaderLastCommittedZxid.getCounter()){
+//
+//						// TODO: Send DIFF message
+//
+//						this.nettyClient.sendMessage(memberList.get(nodeId).getHostName(), memberList.get(nodeId).getPort(), "DIFF");
+//
+//						// TODO: Iterate through CommitHistory (refer readHistory()), stringify and send
+//
+//					} else if (followerLastCommittedZxid.getCounter() == leaderLastCommittedZxid.getCounter()){
+//						continue;
+//					} else if (followerLastCommittedZxid.getCounter() > leaderLastCommittedZxid.getCounter()){
+//						// Go to Leader Election. Ideally, shouldn't happen
+//						this.properties.setNodestate(NodeServerProperties1.State.ELECTION);
+//						changePhase();
+//					}
+//
+//				} else if (followerLastCommittedZxid.getEpoch() < leaderLastCommittedZxid.getEpoch()){
+//
+//					// TODO: Send SNAP message
+//					this.nettyClient.sendMessage(memberList.get(nodeId).getHostName(), memberList.get(nodeId).getPort(), "SNAP");
+//					// Iterate through the Map, stringify each entry and then send
+//
+//				} else if (followerLastCommittedZxid.getEpoch() > leaderLastCommittedZxid.getEpoch()){
+//					// Go to Leader Election. Ideally, shouldn't happen
+//					this.properties.setNodestate(NodeServerProperties1.State.ELECTION);
+//					changePhase();
+//				}
+//			}
+
+			AtomicInteger quorumCount = this.properties.getSynData().getQuorumCount();
+
+			while (quorumCount.intValue() < (this.properties.getMemberList().size() / 2)){
 				try {
 					Thread.sleep(10);
 				} catch (InterruptedException e){
@@ -341,38 +404,13 @@ public class NodeServer1 {
 				}
 			}
 
-			for (long nodeId : currentEpochMap.keySet()){
-				Map<Long, InetSocketAddress> memberList = this.properties.getMemberList();
-				ZxId followerLastCommittedZxid = currentEpochMap.get(nodeId);
+			LOG.info("Leader ready for Broadcast");
 
-				if (leaderLastCommittedZxid.getEpoch() == followerLastCommittedZxid.getEpoch()){
-
-					if (followerLastCommittedZxid.getCounter() < leaderLastCommittedZxid.getCounter()){
-
-						// TODO: Send DIFF message
-
-						this.nettyClient.sendMessage(memberList.get(nodeId).getHostName(), memberList.get(nodeId).getPort(), "DIFF");
-
-						// TODO: Iterate through CommitHistory (refer readHistory()), stringify and send
-
-					} else if (followerLastCommittedZxid.getCounter() == leaderLastCommittedZxid.getCounter()){
-						continue;
-					} else if (followerLastCommittedZxid.getCounter() > leaderLastCommittedZxid.getCounter()){
-						// Go to Leader Election. Ideally, shouldn't happen
-						this.properties.setNodestate(NodeServerProperties1.State.ELECTION);
-						changePhase();
-					}
-
-				} else if (followerLastCommittedZxid.getEpoch() < leaderLastCommittedZxid.getEpoch()){
-
-					// TODO: Send SNAP message
-					this.nettyClient.sendMessage(memberList.get(nodeId).getHostName(), memberList.get(nodeId).getPort(), "SNAP");
-					// Iterate through the Map, stringify each entry and then send
-
-				} else if (followerLastCommittedZxid.getEpoch() > leaderLastCommittedZxid.getEpoch()){
-					// Go to Leader Election. Ideally, shouldn't happen
-					this.properties.setNodestate(NodeServerProperties1.State.ELECTION);
-					changePhase();
+			while (true){
+				try {
+					Thread.sleep(10);
+				} catch (InterruptedException e){
+					e.printStackTrace();
 				}
 			}
 
@@ -382,45 +420,68 @@ public class NodeServer1 {
 			InetSocketAddress leaderAddr = properties.getMemberList().get(leaderID);
 			String leaderIp = leaderAddr.getHostName();
 			int leaderPort = leaderAddr.getPort();
-			ZxId followerLastCommittedZxid = readHistory();
-			long currentEpoch = followerLastCommittedZxid.getEpoch();
-			this.properties.setCurrentEpoch(currentEpoch);
+//			ZxId followerLastCommittedZxid = readHistory();
+//			long currentEpoch = followerLastCommittedZxid.getEpoch();
+//			this.properties.setCurrentEpoch(currentEpoch);
 
 			String followerinfomsg = "FOLLOWERINFO:" + this.properties.getNodeId() + ":"
-					+ this.properties.getAcceptedEpoch() + ":"
-					+ readHistory().getEpoch() + ":" + readHistory().getCounter();
+					+ this.properties.getAcceptedEpoch();
 
 			LOG.info("Follower info msg is = " + followerinfomsg);
 
 			this.nettyClient.sendMessage(leaderIp, leaderPort, followerinfomsg);
 			//TODO: Figure out how follower received newEpoch
 
-			this.properties.getSynData().setNewEpoch(0L);
-			LOG.info("New Epoch before while is = " + properties.getSynData().getNewEpoch());
-			while (this.properties.getSynData().getNewEpoch() == 0){
+//			while (!properties.getSynData().isNewEpochReceived()){
+//				try {
+//					Thread.sleep(10);
+//				} catch (InterruptedException e){
+//					e.printStackTrace();
+//				}
+//			}
+
+			//this.properties.getSynData().setNewEpoch(0L);
+//			LOG.info("New Epoch before while is = " + properties.getSynData().getNewEpoch());
+//			while (this.properties.getSynData().getNewEpoch() == 0){
+//				try {
+//					Thread.sleep(10);
+//				} catch (InterruptedException e){
+//					e.printStackTrace();
+//				}
+//			}
+//			LOG.info("New Epoch before while is = " + properties.getSynData().getNewEpoch());
+
+//			long newEpoch = this.properties.getSynData().getNewEpoch();
+//			long acceptedEpoch = this.properties.getAcceptedEpoch();
+////
+////
+//			if (newEpoch > acceptedEpoch){
+//				this.properties.setAcceptedEpoch(newEpoch);
+//				this.properties.setCounter(0);
+//
+//				String myLastLog = FileOps.readLastLog(properties);
+//				String[] arr = myLastLog.split(",");
+//				long currentEpoch = Long.parseLong(arr[0].trim());
+//				long currentCounter = Long.parseLong(arr[1].trim());
+//
+//				String ackepochmsg = "ACKNEWEPOCH:" + this.properties.getNodeId()
+//						+ ":" + currentEpoch + ":" + currentCounter; // TODO: currentepoch, history, lastZxid
+//
+//				this.nettyClient.sendMessage(leaderIp, leaderPort, ackepochmsg);
+//
+//			} else {
+//				this.properties.setNodestate(NodeServerProperties1.State.ELECTION);
+//				changePhase();
+//			}
+
+			// Receive SNAP, DIFF and TRUNC messages
+			while (true){
 				try {
 					Thread.sleep(10);
 				} catch (InterruptedException e){
 					e.printStackTrace();
 				}
 			}
-			LOG.info("New Epoch before while is = " + properties.getSynData().getNewEpoch());
-			long newEpoch = this.properties.getSynData().getNewEpoch();
-			long acceptedEpoch = this.properties.getAcceptedEpoch();
-
-
-			if (newEpoch > acceptedEpoch){
-				this.properties.setAcceptedEpoch(newEpoch);
-				this.properties.setCounter(0);
-				String ackepochmsg = "ACKEPOCH:" + this.properties.getCurrentEpoch(); // TODO: currentepoch, history, lastZxid
-				this.nettyClient.sendMessage(leaderIp, leaderPort, ackepochmsg);
-			} else {
-				this.properties.setNodestate(NodeServerProperties1.State.ELECTION);
-				changePhase();
-			}
-
-			// Receive SNAP, DIFF and TRUNC messages
-
 
 
 		}
@@ -459,7 +520,15 @@ public class NodeServer1 {
 		this.nettyClient = new NettyClient1(properties);
 		joinGroup();
 
-		readHistory();
+		//readHistory();
+		String readLastLog = FileOps.readLastLog(properties);
+		String[] lastLogArr = readLastLog.split(",");
+		long epoch = Long.parseLong(lastLogArr[0].trim());
+		long counter = Long.parseLong(lastLogArr[1].trim());
+
+		ZxId lastZxid = new ZxId(epoch, counter);
+		this.properties.setLastZxId(lastZxid);
+
 //		startLeaderElection();
 		changePhase();
 
@@ -652,43 +721,43 @@ public class NodeServer1 {
 		}
 	}
 	
-	private ZxId readHistory() {
-
-		String fileName = "CommitedHistory_" + properties.getNodePort() + ".txt";
-		String line = null;
-		Queue<Message> msgList = properties.getCommitQueue();
-		try {
-
-			FileReader fileReader = new FileReader(fileName);
-			BufferedReader bufferedReader = new BufferedReader(fileReader);
-
-			while ((line = bufferedReader.readLine()) != null) {
-				Message m = new Message(line);
-				msgList.add(m);
-				System.out.println(m);
-			}
-
-			bufferedReader.close();
-			fileReader.close();
-		} catch (FileNotFoundException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-
-		Message[] msgArr = new Message[msgList.size()];
-		msgList.toArray(msgArr);
-
-		Message lastMsg = msgArr[msgArr.length - 1];
-
-		this.properties.setCurrentEpoch(lastMsg.getZxid().getEpoch());
-		this.properties.setLastZxId(lastMsg.getZxid());
-		LOG.info("ZxId of last message is = Epoch: " + lastMsg.getZxid().getEpoch() + "	Counter: " + lastMsg.getZxid().getCounter());
-
-		return this.properties.getLastZxId();
-
-	}
+//	private ZxId readHistory() {
+//
+//		String fileName = "CommitedHistory_" + properties.getNodePort() + ".txt";
+//		String line = null;
+//		Queue<Message> msgList = properties.getCommitQueue();
+//		try {
+//
+//			FileReader fileReader = new FileReader(fileName);
+//			BufferedReader bufferedReader = new BufferedReader(fileReader);
+//
+//			while ((line = bufferedReader.readLine()) != null) {
+//				Message m = new Message(line);
+//				msgList.add(m);
+//				System.out.println(m);
+//			}
+//
+//			bufferedReader.close();
+//			fileReader.close();
+//		} catch (FileNotFoundException e) {
+//			// TODO Auto-generated catch block
+//			e.printStackTrace();
+//		} catch (IOException e) {
+//			// TODO Auto-generated catch block
+//			e.printStackTrace();
+//		}
+//
+//		Message[] msgArr = new Message[msgList.size()];
+//		msgList.toArray(msgArr);
+//
+//		Message lastMsg = msgArr[msgArr.length - 1];
+//
+//		this.properties.setCurrentEpoch(lastMsg.getZxid().getEpoch());
+//		this.properties.setLastZxId(lastMsg.getZxid());
+//		LOG.info("ZxId of last message is = Epoch: " + lastMsg.getZxid().getEpoch() + "	Counter: " + lastMsg.getZxid().getCounter());
+//
+//		return this.properties.getLastZxId();
+//
+//	}
 
 }
