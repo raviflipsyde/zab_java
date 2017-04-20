@@ -1114,3 +1114,1319 @@ INFO  | 2017-04-17 22:51:16 | [main] servers.NodeServer1 (NodeServer1.java:467) 
 INFO  | 2017-04-17 22:51:16 | [main] servers.NodeServer1 (NodeServer1.java:468) - Begin Recovery---------
 INFO  | 2017-04-17 22:51:16 | [main] servers.NodeServer1 (NodeServer1.java:470) - END Recovery---------
 INFO  | 2017-04-17 22:51:16 | [Thread-2] util.UdpServer1 (UdpServer1.java:61) - --------------STARTING UDP SERVER--------------1
+INFO  | 2017-04-20 17:37:25 | [main] Start (Start.java:65) - Port:4500
+INFO  | 2017-04-20 17:38:08 | [main] Start (Start.java:49) - Bootstrap Host: 152.1.13.119
+INFO  | 2017-04-20 17:38:08 | [main] Start (Start.java:50) - Bootstrap Port: 4500
+INFO  | 2017-04-20 17:38:08 | [main] Start (Start.java:51) - Node Port :9001
+INFO  | 2017-04-20 17:38:09 | [main] servers.NodeServer1 (NodeServer1.java:493) - Starting the Node server
+INFO  | 2017-04-20 17:38:09 | [main] servers.NodeServer1 (NodeServer1.java:619) - set 152.1.13.119:4500
+INFO  | 2017-04-20 17:38:09 | [main] servers.NodeServer1 (NodeServer1.java:620) - set 152.1.13.119:9001
+INFO  | 2017-04-20 17:38:09 | [nioEventLoopGroup-3-1] netty.BootStrapServerHandler (BootStrapServerHandler.java:63) - Server Recieved : set 152.1.13.119:9001
+
+INFO  | 2017-04-20 17:38:09 | [nioEventLoopGroup-3-1] netty.BootStrapServerHandler (BootStrapServerHandler.java:65) - Member List : 1:152.1.13.119:9001,
+INFO  | 2017-04-20 17:38:09 | [nioEventLoopGroup-3-1] netty.BootStrapServerHandler (BootStrapServerHandler.java:66) - counter : 1
+INFO  | 2017-04-20 17:38:09 | [main] servers.NodeServer1 (NodeServer1.java:627) - MemberID received:1
+INFO  | 2017-04-20 17:38:09 | [main] servers.NodeServer1 (NodeServer1.java:652) - ------------MembersList:----------
+1:152.1.13.119:9001,
+INFO  | 2017-04-20 17:38:09 | [main] servers.NodeServer1 (NodeServer1.java:670) - -----------MemberListSize:0
+INFO  | 2017-04-20 17:38:09 | [main] servers.NodeServer1 (NodeServer1.java:501) - 
+**ID for this node is :1
+INFO  | 2017-04-20 17:38:09 | [Thread-1] netty.NettyServer1 (NettyServer1.java:49) - Netty server started on port:9001
+INFO  | 2017-04-20 17:38:09 | [main] servers.NodeServer1 (NodeServer1.java:704) - *******MemberlistSize:0
+INFO  | 2017-04-20 17:38:09 | [main] servers.NodeServer1 (NodeServer1.java:555) - Begin Leader Election---------
+INFO  | 2017-04-20 17:38:09 | [main] servers.NodeServer1 (NodeServer1.java:72) - My Notification is:1,1,4,4,ELECTION,1
+INFO  | 2017-04-20 17:38:09 | [main] servers.NodeServer1 (NodeServer1.java:675) - SendNotificationToAll()1,1,4,4,ELECTION,1
+INFO  | 2017-04-20 17:38:09 | [main] servers.NodeServer1 (NodeServer1.java:704) - *******MemberlistSize:0
+INFO  | 2017-04-20 17:38:09 | [main] servers.NodeServer1 (NodeServer1.java:78) - Fetching from CurrentElectionQueue:
+
+INFO  | 2017-04-20 17:38:09 | [main] servers.NodeServer1 (NodeServer1.java:82) - Notification Queue is empty!!
+INFO  | 2017-04-20 17:38:09 | [main] Start (Start.java:49) - Bootstrap Host: 152.1.13.119
+INFO  | 2017-04-20 17:38:09 | [main] Start (Start.java:50) - Bootstrap Port: 4500
+INFO  | 2017-04-20 17:38:09 | [main] Start (Start.java:51) - Node Port :9002
+INFO  | 2017-04-20 17:38:09 | [main] servers.NodeServer1 (NodeServer1.java:493) - Starting the Node server
+INFO  | 2017-04-20 17:38:09 | [main] servers.NodeServer1 (NodeServer1.java:619) - set 152.1.13.119:4500
+INFO  | 2017-04-20 17:38:09 | [main] servers.NodeServer1 (NodeServer1.java:620) - set 152.1.13.119:9002
+INFO  | 2017-04-20 17:38:09 | [nioEventLoopGroup-3-2] netty.BootStrapServerHandler (BootStrapServerHandler.java:63) - Server Recieved : set 152.1.13.119:9002
+
+INFO  | 2017-04-20 17:38:09 | [nioEventLoopGroup-3-2] netty.BootStrapServerHandler (BootStrapServerHandler.java:65) - Member List : 1:152.1.13.119:9001,2:152.1.13.119:9002,
+INFO  | 2017-04-20 17:38:09 | [nioEventLoopGroup-3-2] netty.BootStrapServerHandler (BootStrapServerHandler.java:66) - counter : 2
+INFO  | 2017-04-20 17:38:09 | [main] servers.NodeServer1 (NodeServer1.java:627) - MemberID received:2
+INFO  | 2017-04-20 17:38:09 | [main] servers.NodeServer1 (NodeServer1.java:652) - ------------MembersList:----------
+1:152.1.13.119:9001,2:152.1.13.119:9002,
+INFO  | 2017-04-20 17:38:09 | [main] servers.NodeServer1 (NodeServer1.java:664) - Adding1:::/152.1.13.119:9001
+INFO  | 2017-04-20 17:38:09 | [main] servers.NodeServer1 (NodeServer1.java:670) - -----------MemberListSize:1
+INFO  | 2017-04-20 17:38:09 | [main] servers.NodeServer1 (NodeServer1.java:498) - 1:::vclv13-119.hpc.ncsu.edu:9001
+INFO  | 2017-04-20 17:38:09 | [main] servers.NodeServer1 (NodeServer1.java:501) - 
+**ID for this node is :2
+INFO  | 2017-04-20 17:38:10 | [Thread-1] netty.NettyServer1 (NettyServer1.java:49) - Netty server started on port:9002
+INFO  | 2017-04-20 17:38:10 | [main] servers.NodeServer1 (NodeServer1.java:704) - *******MemberlistSize:1
+INFO  | 2017-04-20 17:38:10 | [main] servers.NodeServer1 (NodeServer1.java:708) - Sending JOIN_GROUP:2:152.1.13.119:9002 to: vclv13-119.hpc.ncsu.edu:9001
+INFO  | 2017-04-20 17:38:10 | [nioEventLoopGroup-4-1] netty.InHandler2 (InHandler2.java:56) - Channel Registered: null:null
+INFO  | 2017-04-20 17:38:10 | [nioEventLoopGroup-3-1] netty.InHandler2 (InHandler2.java:56) - Channel Registered: /152.1.13.119:9001:/152.1.13.119:44061
+INFO  | 2017-04-20 17:38:10 | [main] servers.NodeServer1 (NodeServer1.java:555) - Begin Leader Election---------
+INFO  | 2017-04-20 17:38:10 | [main] servers.NodeServer1 (NodeServer1.java:72) - My Notification is:2,2,4,5,ELECTION,1
+INFO  | 2017-04-20 17:38:10 | [main] servers.NodeServer1 (NodeServer1.java:675) - SendNotificationToAll()2,2,4,5,ELECTION,1
+INFO  | 2017-04-20 17:38:10 | [main] servers.NodeServer1 (NodeServer1.java:704) - *******MemberlistSize:1
+INFO  | 2017-04-20 17:38:10 | [main] servers.NodeServer1 (NodeServer1.java:708) - Sending CNOTIFICATION:2,2,4,5,ELECTION,1 to: vclv13-119.hpc.ncsu.edu:9001
+INFO  | 2017-04-20 17:38:10 | [nioEventLoopGroup-5-1] netty.InHandler2 (InHandler2.java:56) - Channel Registered: null:null
+INFO  | 2017-04-20 17:38:10 | [main] servers.NodeServer1 (NodeServer1.java:78) - Fetching from CurrentElectionQueue:
+
+INFO  | 2017-04-20 17:38:10 | [main] servers.NodeServer1 (NodeServer1.java:82) - Notification Queue is empty!!
+INFO  | 2017-04-20 17:38:10 | [nioEventLoopGroup-3-2] netty.InHandler2 (InHandler2.java:56) - Channel Registered: /152.1.13.119:9001:/152.1.13.119:44062
+INFO  | 2017-04-20 17:38:10 | [nioEventLoopGroup-3-1] netty.InHandler2 (InHandler2.java:41) - >>>Channel Read:JOIN_GROUP:2:152.1.13.119:9002
+
+INFO  | 2017-04-20 17:38:10 | [nioEventLoopGroup-3-2] netty.InHandler2 (InHandler2.java:41) - >>>Channel Read:CNOTIFICATION:2,2,4,5,ELECTION,1
+
+INFO  | 2017-04-20 17:38:10 | [nioEventLoopGroup-3-2] netty.InHandler2 (InHandler2.java:88) - Before:0
+INFO  | 2017-04-20 17:38:10 | [nioEventLoopGroup-3-1] netty.InHandler2 (InHandler2.java:72) - {2=/152.1.13.119:9002}
+INFO  | 2017-04-20 17:38:10 | [nioEventLoopGroup-3-2] netty.InHandler2 (InHandler2.java:89) - adding notification to the queue2,2,4,5,ELECTION,1
+INFO  | 2017-04-20 17:38:10 | [nioEventLoopGroup-3-1] netty.InHandler2 (InHandler2.java:43) - <<<Response:OK
+INFO  | 2017-04-20 17:38:10 | [nioEventLoopGroup-4-1] netty.InHandler2 (InHandler2.java:41) - >>>Channel Read:OK
+
+INFO  | 2017-04-20 17:38:10 | [nioEventLoopGroup-4-1] netty.InHandler2 (InHandler2.java:172) - Client received OK!!
+INFO  | 2017-04-20 17:38:10 | [nioEventLoopGroup-4-1] netty.InHandler2 (InHandler2.java:173) - {1=vclv13-119.hpc.ncsu.edu/152.1.13.119:9001}
+INFO  | 2017-04-20 17:38:10 | [nioEventLoopGroup-4-1] netty.InHandler2 (InHandler2.java:43) - <<<Response:
+INFO  | 2017-04-20 17:38:11 | [nioEventLoopGroup-3-2] netty.InHandler2 (InHandler2.java:99) - After:1
+INFO  | 2017-04-20 17:38:11 | [nioEventLoopGroup-3-2] netty.InHandler2 (InHandler2.java:100) - NODE is in STATE: ELECTION
+INFO  | 2017-04-20 17:38:11 | [nioEventLoopGroup-3-2] netty.InHandler2 (InHandler2.java:101) - My Election ROUND: 1
+INFO  | 2017-04-20 17:38:11 | [nioEventLoopGroup-3-2] netty.InHandler2 (InHandler2.java:102) - his Election ROUND: 1
+INFO  | 2017-04-20 17:38:11 | [nioEventLoopGroup-3-2] netty.InHandler2 (InHandler2.java:43) - <<<Response:SNOTIFICATION:1,1,4,4,ELECTION,1
+INFO  | 2017-04-20 17:38:11 | [nioEventLoopGroup-5-1] netty.InHandler2 (InHandler2.java:41) - >>>Channel Read:SNOTIFICATION:1,1,4,4,ELECTION,1
+
+INFO  | 2017-04-20 17:38:11 | [nioEventLoopGroup-5-1] netty.InHandler2 (InHandler2.java:142) - Before:0
+INFO  | 2017-04-20 17:38:11 | [main] servers.NodeServer1 (NodeServer1.java:78) - Fetching from CurrentElectionQueue:
+
+INFO  | 2017-04-20 17:38:11 | [main] servers.NodeServer1 (NodeServer1.java:82) - Notification Queue is empty!!
+INFO  | 2017-04-20 17:38:12 | [main] servers.NodeServer1 (NodeServer1.java:78) - Fetching from CurrentElectionQueue:
+
+INFO  | 2017-04-20 17:38:12 | [main] servers.NodeServer1 (NodeServer1.java:82) - Notification Queue is empty!!
+INFO  | 2017-04-20 17:38:12 | [nioEventLoopGroup-5-1] netty.InHandler2 (InHandler2.java:152) - After:1
+INFO  | 2017-04-20 17:38:12 | [nioEventLoopGroup-5-1] netty.InHandler2 (InHandler2.java:159) - {1=vclv13-119.hpc.ncsu.edu/152.1.13.119:9001}
+INFO  | 2017-04-20 17:38:12 | [nioEventLoopGroup-5-1] netty.InHandler2 (InHandler2.java:43) - <<<Response:ERROR
+INFO  | 2017-04-20 17:38:13 | [main] servers.NodeServer1 (NodeServer1.java:88) - Notification Queue is empty again!!
+INFO  | 2017-04-20 17:38:13 | [main] servers.NodeServer1 (NodeServer1.java:90) - increasing timeout
+INFO  | 2017-04-20 17:38:13 | [main] servers.NodeServer1 (NodeServer1.java:675) - SendNotificationToAll()1,1,4,4,ELECTION,1
+INFO  | 2017-04-20 17:38:13 | [main] servers.NodeServer1 (NodeServer1.java:704) - *******MemberlistSize:1
+INFO  | 2017-04-20 17:38:13 | [main] servers.NodeServer1 (NodeServer1.java:708) - Sending CNOTIFICATION:1,1,4,4,ELECTION,1 to: vclv13-119.hpc.ncsu.edu:9002
+INFO  | 2017-04-20 17:38:13 | [nioEventLoopGroup-6-1] netty.InHandler2 (InHandler2.java:56) - Channel Registered: null:null
+INFO  | 2017-04-20 17:38:13 | [main] servers.NodeServer1 (NodeServer1.java:78) - Fetching from CurrentElectionQueue:
+
+INFO  | 2017-04-20 17:38:13 | [nioEventLoopGroup-3-1] netty.InHandler2 (InHandler2.java:56) - Channel Registered: /152.1.13.119:9002:/152.1.13.119:36301
+INFO  | 2017-04-20 17:38:13 | [main] servers.NodeServer1 (NodeServer1.java:82) - Notification Queue is empty!!
+INFO  | 2017-04-20 17:38:13 | [nioEventLoopGroup-3-1] netty.InHandler2 (InHandler2.java:41) - >>>Channel Read:CNOTIFICATION:1,1,4,4,ELECTION,1
+
+INFO  | 2017-04-20 17:38:13 | [nioEventLoopGroup-3-1] netty.InHandler2 (InHandler2.java:88) - Before:1
+INFO  | 2017-04-20 17:38:13 | [nioEventLoopGroup-3-1] netty.InHandler2 (InHandler2.java:89) - adding notification to the queue1,1,4,4,ELECTION,1
+INFO  | 2017-04-20 17:38:14 | [main] servers.NodeServer1 (NodeServer1.java:78) - Fetching from CurrentElectionQueue:
+
+INFO  | 2017-04-20 17:38:14 | [main] servers.NodeServer1 (NodeServer1.java:82) - Notification Queue is empty!!
+INFO  | 2017-04-20 17:38:14 | [nioEventLoopGroup-3-1] netty.InHandler2 (InHandler2.java:99) - After:2
+INFO  | 2017-04-20 17:38:14 | [nioEventLoopGroup-3-1] netty.InHandler2 (InHandler2.java:100) - NODE is in STATE: ELECTION
+INFO  | 2017-04-20 17:38:14 | [nioEventLoopGroup-3-1] netty.InHandler2 (InHandler2.java:101) - My Election ROUND: 1
+INFO  | 2017-04-20 17:38:14 | [nioEventLoopGroup-3-1] netty.InHandler2 (InHandler2.java:102) - his Election ROUND: 1
+INFO  | 2017-04-20 17:38:14 | [nioEventLoopGroup-3-1] netty.InHandler2 (InHandler2.java:43) - <<<Response:SNOTIFICATION:2,2,4,5,ELECTION,1
+INFO  | 2017-04-20 17:38:14 | [nioEventLoopGroup-6-1] netty.InHandler2 (InHandler2.java:41) - >>>Channel Read:SNOTIFICATION:2,2,4,5,ELECTION,1
+
+INFO  | 2017-04-20 17:38:14 | [nioEventLoopGroup-6-1] netty.InHandler2 (InHandler2.java:142) - Before:1
+INFO  | 2017-04-20 17:38:15 | [nioEventLoopGroup-6-1] netty.InHandler2 (InHandler2.java:152) - After:2
+INFO  | 2017-04-20 17:38:15 | [nioEventLoopGroup-6-1] netty.InHandler2 (InHandler2.java:159) - {2=vclv13-119.hpc.ncsu.edu/152.1.13.119:9002}
+INFO  | 2017-04-20 17:38:15 | [nioEventLoopGroup-6-1] netty.InHandler2 (InHandler2.java:43) - <<<Response:ERROR
+INFO  | 2017-04-20 17:38:17 | [main] servers.NodeServer1 (NodeServer1.java:78) - Fetching from CurrentElectionQueue:
+
+INFO  | 2017-04-20 17:38:17 | [main] servers.NodeServer1 (NodeServer1.java:82) - Notification Queue is empty!!
+INFO  | 2017-04-20 17:38:49 | [main] Start (Start.java:65) - Port:4500
+INFO  | 2017-04-20 17:38:58 | [main] Start (Start.java:49) - Bootstrap Host: 152.1.13.119
+INFO  | 2017-04-20 17:38:58 | [main] Start (Start.java:50) - Bootstrap Port: 4500
+INFO  | 2017-04-20 17:38:58 | [main] Start (Start.java:51) - Node Port :9001
+INFO  | 2017-04-20 17:38:59 | [main] servers.NodeServer1 (NodeServer1.java:493) - Starting the Node server
+INFO  | 2017-04-20 17:38:59 | [main] servers.NodeServer1 (NodeServer1.java:619) - set 152.1.13.119:4500
+INFO  | 2017-04-20 17:38:59 | [main] servers.NodeServer1 (NodeServer1.java:620) - set 152.1.13.119:9001
+INFO  | 2017-04-20 17:38:59 | [nioEventLoopGroup-3-1] netty.BootStrapServerHandler (BootStrapServerHandler.java:63) - Server Recieved : set 152.1.13.119:9001
+
+INFO  | 2017-04-20 17:38:59 | [nioEventLoopGroup-3-1] netty.BootStrapServerHandler (BootStrapServerHandler.java:65) - Member List : 1:152.1.13.119:9001,
+INFO  | 2017-04-20 17:38:59 | [nioEventLoopGroup-3-1] netty.BootStrapServerHandler (BootStrapServerHandler.java:66) - counter : 1
+INFO  | 2017-04-20 17:38:59 | [main] servers.NodeServer1 (NodeServer1.java:627) - MemberID received:1
+INFO  | 2017-04-20 17:38:59 | [main] servers.NodeServer1 (NodeServer1.java:652) - ------------MembersList:----------
+1:152.1.13.119:9001,
+INFO  | 2017-04-20 17:38:59 | [main] servers.NodeServer1 (NodeServer1.java:670) - -----------MemberListSize:0
+INFO  | 2017-04-20 17:38:59 | [main] servers.NodeServer1 (NodeServer1.java:501) - 
+**ID for this node is :1
+INFO  | 2017-04-20 17:38:59 | [Thread-1] netty.NettyServer1 (NettyServer1.java:49) - Netty server started on port:9001
+INFO  | 2017-04-20 17:38:59 | [main] Start (Start.java:49) - Bootstrap Host: 152.1.13.119
+INFO  | 2017-04-20 17:38:59 | [main] Start (Start.java:50) - Bootstrap Port: 4500
+INFO  | 2017-04-20 17:38:59 | [main] Start (Start.java:51) - Node Port :9002
+INFO  | 2017-04-20 17:38:59 | [main] servers.NodeServer1 (NodeServer1.java:704) - *******MemberlistSize:0
+INFO  | 2017-04-20 17:38:59 | [main] servers.NodeServer1 (NodeServer1.java:555) - Begin Leader Election---------
+INFO  | 2017-04-20 17:38:59 | [main] servers.NodeServer1 (NodeServer1.java:72) - My Notification is:1,1,4,4,ELECTION,1
+INFO  | 2017-04-20 17:38:59 | [main] servers.NodeServer1 (NodeServer1.java:675) - SendNotificationToAll()1,1,4,4,ELECTION,1
+INFO  | 2017-04-20 17:38:59 | [main] servers.NodeServer1 (NodeServer1.java:704) - *******MemberlistSize:0
+INFO  | 2017-04-20 17:38:59 | [main] servers.NodeServer1 (NodeServer1.java:78) - Fetching from CurrentElectionQueue:
+
+INFO  | 2017-04-20 17:38:59 | [main] servers.NodeServer1 (NodeServer1.java:82) - Notification Queue is empty!!
+INFO  | 2017-04-20 17:38:59 | [main] servers.NodeServer1 (NodeServer1.java:493) - Starting the Node server
+INFO  | 2017-04-20 17:38:59 | [main] servers.NodeServer1 (NodeServer1.java:619) - set 152.1.13.119:4500
+INFO  | 2017-04-20 17:38:59 | [main] servers.NodeServer1 (NodeServer1.java:620) - set 152.1.13.119:9002
+INFO  | 2017-04-20 17:38:59 | [nioEventLoopGroup-3-2] netty.BootStrapServerHandler (BootStrapServerHandler.java:63) - Server Recieved : set 152.1.13.119:9002
+
+INFO  | 2017-04-20 17:38:59 | [nioEventLoopGroup-3-2] netty.BootStrapServerHandler (BootStrapServerHandler.java:65) - Member List : 1:152.1.13.119:9001,2:152.1.13.119:9002,
+INFO  | 2017-04-20 17:38:59 | [nioEventLoopGroup-3-2] netty.BootStrapServerHandler (BootStrapServerHandler.java:66) - counter : 2
+INFO  | 2017-04-20 17:38:59 | [main] servers.NodeServer1 (NodeServer1.java:627) - MemberID received:2
+INFO  | 2017-04-20 17:38:59 | [main] servers.NodeServer1 (NodeServer1.java:652) - ------------MembersList:----------
+1:152.1.13.119:9001,2:152.1.13.119:9002,
+INFO  | 2017-04-20 17:38:59 | [main] servers.NodeServer1 (NodeServer1.java:664) - Adding1:::/152.1.13.119:9001
+INFO  | 2017-04-20 17:38:59 | [main] servers.NodeServer1 (NodeServer1.java:670) - -----------MemberListSize:1
+INFO  | 2017-04-20 17:38:59 | [main] servers.NodeServer1 (NodeServer1.java:498) - 1:::vclv13-119.hpc.ncsu.edu:9001
+INFO  | 2017-04-20 17:38:59 | [main] servers.NodeServer1 (NodeServer1.java:501) - 
+**ID for this node is :2
+INFO  | 2017-04-20 17:39:00 | [Thread-1] netty.NettyServer1 (NettyServer1.java:49) - Netty server started on port:9002
+INFO  | 2017-04-20 17:39:00 | [main] servers.NodeServer1 (NodeServer1.java:704) - *******MemberlistSize:1
+INFO  | 2017-04-20 17:39:00 | [main] servers.NodeServer1 (NodeServer1.java:708) - Sending JOIN_GROUP:2:152.1.13.119:9002 to: vclv13-119.hpc.ncsu.edu:9001
+INFO  | 2017-04-20 17:39:00 | [nioEventLoopGroup-4-1] netty.InHandler2 (InHandler2.java:56) - Channel Registered: null:null
+INFO  | 2017-04-20 17:39:00 | [nioEventLoopGroup-3-1] netty.InHandler2 (InHandler2.java:56) - Channel Registered: /152.1.13.119:9001:/152.1.13.119:44068
+INFO  | 2017-04-20 17:39:00 | [main] servers.NodeServer1 (NodeServer1.java:555) - Begin Leader Election---------
+INFO  | 2017-04-20 17:39:00 | [main] servers.NodeServer1 (NodeServer1.java:72) - My Notification is:2,2,4,5,ELECTION,1
+INFO  | 2017-04-20 17:39:00 | [main] servers.NodeServer1 (NodeServer1.java:675) - SendNotificationToAll()2,2,4,5,ELECTION,1
+INFO  | 2017-04-20 17:39:00 | [main] servers.NodeServer1 (NodeServer1.java:704) - *******MemberlistSize:1
+INFO  | 2017-04-20 17:39:00 | [main] servers.NodeServer1 (NodeServer1.java:708) - Sending CNOTIFICATION:2,2,4,5,ELECTION,1 to: vclv13-119.hpc.ncsu.edu:9001
+INFO  | 2017-04-20 17:39:00 | [nioEventLoopGroup-5-1] netty.InHandler2 (InHandler2.java:56) - Channel Registered: null:null
+INFO  | 2017-04-20 17:39:00 | [main] servers.NodeServer1 (NodeServer1.java:78) - Fetching from CurrentElectionQueue:
+
+INFO  | 2017-04-20 17:39:00 | [main] servers.NodeServer1 (NodeServer1.java:82) - Notification Queue is empty!!
+INFO  | 2017-04-20 17:39:00 | [nioEventLoopGroup-3-2] netty.InHandler2 (InHandler2.java:56) - Channel Registered: /152.1.13.119:9001:/152.1.13.119:44069
+INFO  | 2017-04-20 17:39:00 | [main] Start (Start.java:49) - Bootstrap Host: 152.1.13.119
+INFO  | 2017-04-20 17:39:00 | [main] Start (Start.java:50) - Bootstrap Port: 4500
+INFO  | 2017-04-20 17:39:00 | [main] Start (Start.java:51) - Node Port :9003
+INFO  | 2017-04-20 17:39:00 | [nioEventLoopGroup-3-2] netty.InHandler2 (InHandler2.java:41) - >>>Channel Read:CNOTIFICATION:2,2,4,5,ELECTION,1
+
+INFO  | 2017-04-20 17:39:00 | [nioEventLoopGroup-3-1] netty.InHandler2 (InHandler2.java:41) - >>>Channel Read:JOIN_GROUP:2:152.1.13.119:9002
+
+INFO  | 2017-04-20 17:39:00 | [nioEventLoopGroup-3-1] netty.InHandler2 (InHandler2.java:72) - {2=/152.1.13.119:9002}
+INFO  | 2017-04-20 17:39:00 | [nioEventLoopGroup-3-1] netty.InHandler2 (InHandler2.java:43) - <<<Response:OK
+INFO  | 2017-04-20 17:39:00 | [nioEventLoopGroup-3-2] netty.InHandler2 (InHandler2.java:88) - Before:0
+INFO  | 2017-04-20 17:39:00 | [nioEventLoopGroup-3-2] netty.InHandler2 (InHandler2.java:89) - adding notification to the queue2,2,4,5,ELECTION,1
+INFO  | 2017-04-20 17:39:00 | [nioEventLoopGroup-4-1] netty.InHandler2 (InHandler2.java:41) - >>>Channel Read:OK
+
+INFO  | 2017-04-20 17:39:00 | [nioEventLoopGroup-4-1] netty.InHandler2 (InHandler2.java:172) - Client received OK!!
+INFO  | 2017-04-20 17:39:00 | [nioEventLoopGroup-4-1] netty.InHandler2 (InHandler2.java:173) - {1=vclv13-119.hpc.ncsu.edu/152.1.13.119:9001}
+INFO  | 2017-04-20 17:39:00 | [nioEventLoopGroup-4-1] netty.InHandler2 (InHandler2.java:43) - <<<Response:
+INFO  | 2017-04-20 17:39:00 | [main] servers.NodeServer1 (NodeServer1.java:493) - Starting the Node server
+INFO  | 2017-04-20 17:39:00 | [main] servers.NodeServer1 (NodeServer1.java:619) - set 152.1.13.119:4500
+INFO  | 2017-04-20 17:39:00 | [main] servers.NodeServer1 (NodeServer1.java:620) - set 152.1.13.119:9003
+INFO  | 2017-04-20 17:39:00 | [nioEventLoopGroup-3-3] netty.BootStrapServerHandler (BootStrapServerHandler.java:63) - Server Recieved : set 152.1.13.119:9003
+
+INFO  | 2017-04-20 17:39:00 | [nioEventLoopGroup-3-3] netty.BootStrapServerHandler (BootStrapServerHandler.java:65) - Member List : 1:152.1.13.119:9001,2:152.1.13.119:9002,3:152.1.13.119:9003,
+INFO  | 2017-04-20 17:39:00 | [nioEventLoopGroup-3-3] netty.BootStrapServerHandler (BootStrapServerHandler.java:66) - counter : 3
+INFO  | 2017-04-20 17:39:00 | [main] servers.NodeServer1 (NodeServer1.java:627) - MemberID received:3
+INFO  | 2017-04-20 17:39:00 | [main] servers.NodeServer1 (NodeServer1.java:652) - ------------MembersList:----------
+1:152.1.13.119:9001,2:152.1.13.119:9002,3:152.1.13.119:9003,
+INFO  | 2017-04-20 17:39:00 | [main] servers.NodeServer1 (NodeServer1.java:664) - Adding1:::/152.1.13.119:9001
+INFO  | 2017-04-20 17:39:00 | [main] servers.NodeServer1 (NodeServer1.java:664) - Adding2:::/152.1.13.119:9002
+INFO  | 2017-04-20 17:39:00 | [main] servers.NodeServer1 (NodeServer1.java:670) - -----------MemberListSize:2
+INFO  | 2017-04-20 17:39:00 | [main] servers.NodeServer1 (NodeServer1.java:498) - 2:::vclv13-119.hpc.ncsu.edu:9002
+INFO  | 2017-04-20 17:39:00 | [main] servers.NodeServer1 (NodeServer1.java:498) - 1:::vclv13-119.hpc.ncsu.edu:9001
+INFO  | 2017-04-20 17:39:00 | [main] servers.NodeServer1 (NodeServer1.java:501) - 
+**ID for this node is :3
+INFO  | 2017-04-20 17:39:00 | [Thread-1] netty.NettyServer1 (NettyServer1.java:49) - Netty server started on port:9003
+INFO  | 2017-04-20 17:39:01 | [main] servers.NodeServer1 (NodeServer1.java:704) - *******MemberlistSize:2
+INFO  | 2017-04-20 17:39:01 | [main] servers.NodeServer1 (NodeServer1.java:708) - Sending JOIN_GROUP:3:152.1.13.119:9003 to: vclv13-119.hpc.ncsu.edu:9002
+INFO  | 2017-04-20 17:39:01 | [nioEventLoopGroup-4-1] netty.InHandler2 (InHandler2.java:56) - Channel Registered: null:null
+INFO  | 2017-04-20 17:39:01 | [nioEventLoopGroup-3-1] netty.InHandler2 (InHandler2.java:56) - Channel Registered: /152.1.13.119:9002:/152.1.13.119:36310
+INFO  | 2017-04-20 17:39:01 | [main] servers.NodeServer1 (NodeServer1.java:708) - Sending JOIN_GROUP:3:152.1.13.119:9003 to: vclv13-119.hpc.ncsu.edu:9001
+INFO  | 2017-04-20 17:39:01 | [nioEventLoopGroup-5-1] netty.InHandler2 (InHandler2.java:56) - Channel Registered: null:null
+INFO  | 2017-04-20 17:39:01 | [nioEventLoopGroup-3-3] netty.InHandler2 (InHandler2.java:56) - Channel Registered: /152.1.13.119:9001:/152.1.13.119:44073
+INFO  | 2017-04-20 17:39:01 | [main] servers.NodeServer1 (NodeServer1.java:555) - Begin Leader Election---------
+INFO  | 2017-04-20 17:39:01 | [main] servers.NodeServer1 (NodeServer1.java:72) - My Notification is:3,3,4,6,ELECTION,1
+INFO  | 2017-04-20 17:39:01 | [main] servers.NodeServer1 (NodeServer1.java:675) - SendNotificationToAll()3,3,4,6,ELECTION,1
+INFO  | 2017-04-20 17:39:01 | [main] servers.NodeServer1 (NodeServer1.java:704) - *******MemberlistSize:2
+INFO  | 2017-04-20 17:39:01 | [main] servers.NodeServer1 (NodeServer1.java:708) - Sending CNOTIFICATION:3,3,4,6,ELECTION,1 to: vclv13-119.hpc.ncsu.edu:9002
+INFO  | 2017-04-20 17:39:01 | [nioEventLoopGroup-6-1] netty.InHandler2 (InHandler2.java:56) - Channel Registered: null:null
+INFO  | 2017-04-20 17:39:01 | [nioEventLoopGroup-3-2] netty.InHandler2 (InHandler2.java:56) - Channel Registered: /152.1.13.119:9002:/152.1.13.119:36312
+INFO  | 2017-04-20 17:39:01 | [main] servers.NodeServer1 (NodeServer1.java:708) - Sending CNOTIFICATION:3,3,4,6,ELECTION,1 to: vclv13-119.hpc.ncsu.edu:9001
+INFO  | 2017-04-20 17:39:01 | [nioEventLoopGroup-8-1] netty.InHandler2 (InHandler2.java:56) - Channel Registered: null:null
+INFO  | 2017-04-20 17:39:01 | [nioEventLoopGroup-3-2] netty.InHandler2 (InHandler2.java:41) - >>>Channel Read:CNOTIFICATION:3,3,4,6,ELECTION,1
+
+INFO  | 2017-04-20 17:39:01 | [nioEventLoopGroup-3-2] netty.InHandler2 (InHandler2.java:88) - Before:0
+INFO  | 2017-04-20 17:39:01 | [nioEventLoopGroup-3-2] netty.InHandler2 (InHandler2.java:89) - adding notification to the queue3,3,4,6,ELECTION,1
+INFO  | 2017-04-20 17:39:01 | [nioEventLoopGroup-3-4] netty.InHandler2 (InHandler2.java:56) - Channel Registered: /152.1.13.119:9001:/152.1.13.119:44075
+INFO  | 2017-04-20 17:39:01 | [nioEventLoopGroup-3-3] netty.InHandler2 (InHandler2.java:41) - >>>Channel Read:JOIN_GROUP:3:152.1.13.119:9003
+
+INFO  | 2017-04-20 17:39:01 | [main] servers.NodeServer1 (NodeServer1.java:78) - Fetching from CurrentElectionQueue:
+
+INFO  | 2017-04-20 17:39:01 | [main] servers.NodeServer1 (NodeServer1.java:82) - Notification Queue is empty!!
+INFO  | 2017-04-20 17:39:01 | [nioEventLoopGroup-3-3] netty.InHandler2 (InHandler2.java:72) - {2=/152.1.13.119:9002, 3=/152.1.13.119:9003}
+INFO  | 2017-04-20 17:39:01 | [nioEventLoopGroup-3-3] netty.InHandler2 (InHandler2.java:43) - <<<Response:OK
+INFO  | 2017-04-20 17:39:01 | [nioEventLoopGroup-3-1] netty.InHandler2 (InHandler2.java:41) - >>>Channel Read:JOIN_GROUP:3:152.1.13.119:9003
+
+INFO  | 2017-04-20 17:39:01 | [nioEventLoopGroup-3-1] netty.InHandler2 (InHandler2.java:72) - {1=vclv13-119.hpc.ncsu.edu/152.1.13.119:9001, 3=/152.1.13.119:9003}
+INFO  | 2017-04-20 17:39:01 | [nioEventLoopGroup-3-1] netty.InHandler2 (InHandler2.java:43) - <<<Response:OK
+INFO  | 2017-04-20 17:39:01 | [nioEventLoopGroup-5-1] netty.InHandler2 (InHandler2.java:41) - >>>Channel Read:OK
+
+INFO  | 2017-04-20 17:39:01 | [nioEventLoopGroup-5-1] netty.InHandler2 (InHandler2.java:172) - Client received OK!!
+INFO  | 2017-04-20 17:39:01 | [nioEventLoopGroup-3-4] netty.InHandler2 (InHandler2.java:41) - >>>Channel Read:CNOTIFICATION:3,3,4,6,ELECTION,1
+
+INFO  | 2017-04-20 17:39:01 | [nioEventLoopGroup-3-4] netty.InHandler2 (InHandler2.java:88) - Before:1
+INFO  | 2017-04-20 17:39:01 | [nioEventLoopGroup-3-4] netty.InHandler2 (InHandler2.java:89) - adding notification to the queue3,3,4,6,ELECTION,1
+INFO  | 2017-04-20 17:39:01 | [nioEventLoopGroup-4-1] netty.InHandler2 (InHandler2.java:41) - >>>Channel Read:OK
+
+INFO  | 2017-04-20 17:39:01 | [nioEventLoopGroup-5-1] netty.InHandler2 (InHandler2.java:173) - {2=vclv13-119.hpc.ncsu.edu/152.1.13.119:9002, 1=vclv13-119.hpc.ncsu.edu/152.1.13.119:9001}
+INFO  | 2017-04-20 17:39:01 | [nioEventLoopGroup-4-1] netty.InHandler2 (InHandler2.java:172) - Client received OK!!
+INFO  | 2017-04-20 17:39:01 | [nioEventLoopGroup-5-1] netty.InHandler2 (InHandler2.java:43) - <<<Response:
+INFO  | 2017-04-20 17:39:01 | [nioEventLoopGroup-4-1] netty.InHandler2 (InHandler2.java:173) - {2=vclv13-119.hpc.ncsu.edu/152.1.13.119:9002, 1=vclv13-119.hpc.ncsu.edu/152.1.13.119:9001}
+INFO  | 2017-04-20 17:39:01 | [nioEventLoopGroup-4-1] netty.InHandler2 (InHandler2.java:43) - <<<Response:
+INFO  | 2017-04-20 17:39:01 | [nioEventLoopGroup-3-2] netty.InHandler2 (InHandler2.java:99) - After:2
+INFO  | 2017-04-20 17:39:01 | [nioEventLoopGroup-3-2] netty.InHandler2 (InHandler2.java:100) - NODE is in STATE: ELECTION
+INFO  | 2017-04-20 17:39:01 | [nioEventLoopGroup-3-2] netty.InHandler2 (InHandler2.java:101) - My Election ROUND: 1
+INFO  | 2017-04-20 17:39:01 | [nioEventLoopGroup-3-2] netty.InHandler2 (InHandler2.java:102) - his Election ROUND: 1
+INFO  | 2017-04-20 17:39:01 | [nioEventLoopGroup-3-2] netty.InHandler2 (InHandler2.java:43) - <<<Response:SNOTIFICATION:1,1,4,4,ELECTION,1
+INFO  | 2017-04-20 17:39:01 | [nioEventLoopGroup-5-1] netty.InHandler2 (InHandler2.java:41) - >>>Channel Read:SNOTIFICATION:1,1,4,4,ELECTION,1
+
+INFO  | 2017-04-20 17:39:01 | [nioEventLoopGroup-5-1] netty.InHandler2 (InHandler2.java:142) - Before:1
+INFO  | 2017-04-20 17:39:01 | [main] servers.NodeServer1 (NodeServer1.java:78) - Fetching from CurrentElectionQueue:
+
+INFO  | 2017-04-20 17:39:01 | [main] servers.NodeServer1 (NodeServer1.java:105) - Received notification is in Election
+INFO  | 2017-04-20 17:39:01 | [main] servers.NodeServer1 (NodeServer1.java:117) - -------------------------
+INFO  | 2017-04-20 17:39:01 | [main] servers.NodeServer1 (NodeServer1.java:118) - myvote:Vote [ Id =1,Epoch = 4,Counter = 4]
+INFO  | 2017-04-20 17:39:01 | [main] servers.NodeServer1 (NodeServer1.java:119) - othervote:Vote [ Id =3,Epoch = 4,Counter = 6]
+INFO  | 2017-04-20 17:39:01 | [main] servers.NodeServer1 (NodeServer1.java:120) - vote compare:1
+INFO  | 2017-04-20 17:39:01 | [main] servers.NodeServer1 (NodeServer1.java:121) - -------------------------
+INFO  | 2017-04-20 17:39:01 | [main] servers.NodeServer1 (NodeServer1.java:123) - His vote bigger than mine
+INFO  | 2017-04-20 17:39:01 | [main] servers.NodeServer1 (NodeServer1.java:675) - SendNotificationToAll()1,3,4,6,ELECTION,1
+INFO  | 2017-04-20 17:39:01 | [main] servers.NodeServer1 (NodeServer1.java:704) - *******MemberlistSize:2
+INFO  | 2017-04-20 17:39:01 | [main] servers.NodeServer1 (NodeServer1.java:708) - Sending CNOTIFICATION:1,3,4,6,ELECTION,1 to: vclv13-119.hpc.ncsu.edu:9002
+INFO  | 2017-04-20 17:39:01 | [nioEventLoopGroup-9-1] netty.InHandler2 (InHandler2.java:56) - Channel Registered: null:null
+INFO  | 2017-04-20 17:39:01 | [nioEventLoopGroup-3-3] netty.InHandler2 (InHandler2.java:56) - Channel Registered: /152.1.13.119:9002:/152.1.13.119:36314
+INFO  | 2017-04-20 17:39:01 | [nioEventLoopGroup-3-3] netty.InHandler2 (InHandler2.java:41) - >>>Channel Read:CNOTIFICATION:1,3,4,6,ELECTION,1
+
+INFO  | 2017-04-20 17:39:01 | [main] servers.NodeServer1 (NodeServer1.java:708) - Sending CNOTIFICATION:1,3,4,6,ELECTION,1 to: vclv13-119.hpc.ncsu.edu:9003
+INFO  | 2017-04-20 17:39:01 | [nioEventLoopGroup-3-3] netty.InHandler2 (InHandler2.java:88) - Before:2
+INFO  | 2017-04-20 17:39:01 | [nioEventLoopGroup-3-3] netty.InHandler2 (InHandler2.java:89) - adding notification to the queue1,3,4,6,ELECTION,1
+INFO  | 2017-04-20 17:39:01 | [nioEventLoopGroup-10-1] netty.InHandler2 (InHandler2.java:56) - Channel Registered: null:null
+INFO  | 2017-04-20 17:39:01 | [main] servers.NodeServer1 (NodeServer1.java:132) - *****Vote for NodeID:3:::Vote [ Id =3,Epoch = 4,Counter = 6]
+INFO  | 2017-04-20 17:39:01 | [main] servers.NodeServer1 (NodeServer1.java:138) - *****receivedVote.size:2
+INFO  | 2017-04-20 17:39:01 | [main] servers.NodeServer1 (NodeServer1.java:139) - *****memberList.size:2
+INFO  | 2017-04-20 17:39:01 | [main] servers.NodeServer1 (NodeServer1.java:151) - *Checking for Quorum in received votes
+INFO  | 2017-04-20 17:39:01 | [main] servers.NodeServer1 (NodeServer1.java:160) - **Found Quorum in received votes
+INFO  | 2017-04-20 17:39:01 | [nioEventLoopGroup-3-1] netty.InHandler2 (InHandler2.java:56) - Channel Registered: /152.1.13.119:9003:/152.1.13.119:58450
+INFO  | 2017-04-20 17:39:01 | [nioEventLoopGroup-3-1] netty.InHandler2 (InHandler2.java:41) - >>>Channel Read:CNOTIFICATION:1,3,4,6,ELECTION,1
+
+INFO  | 2017-04-20 17:39:01 | [nioEventLoopGroup-3-1] netty.InHandler2 (InHandler2.java:88) - Before:0
+INFO  | 2017-04-20 17:39:01 | [nioEventLoopGroup-3-1] netty.InHandler2 (InHandler2.java:89) - adding notification to the queue1,3,4,6,ELECTION,1
+INFO  | 2017-04-20 17:39:02 | [nioEventLoopGroup-3-2] netty.InHandler2 (InHandler2.java:99) - After:3
+INFO  | 2017-04-20 17:39:02 | [nioEventLoopGroup-3-2] netty.InHandler2 (InHandler2.java:100) - NODE is in STATE: ELECTION
+INFO  | 2017-04-20 17:39:02 | [nioEventLoopGroup-3-2] netty.InHandler2 (InHandler2.java:101) - My Election ROUND: 1
+INFO  | 2017-04-20 17:39:02 | [nioEventLoopGroup-3-2] netty.InHandler2 (InHandler2.java:102) - his Election ROUND: 1
+INFO  | 2017-04-20 17:39:02 | [nioEventLoopGroup-3-2] netty.InHandler2 (InHandler2.java:43) - <<<Response:SNOTIFICATION:2,2,4,5,ELECTION,1
+INFO  | 2017-04-20 17:39:02 | [nioEventLoopGroup-6-1] netty.InHandler2 (InHandler2.java:41) - >>>Channel Read:SNOTIFICATION:2,2,4,5,ELECTION,1
+
+INFO  | 2017-04-20 17:39:02 | [nioEventLoopGroup-6-1] netty.InHandler2 (InHandler2.java:142) - Before:1
+INFO  | 2017-04-20 17:39:02 | [nioEventLoopGroup-3-4] netty.InHandler2 (InHandler2.java:99) - After:2
+INFO  | 2017-04-20 17:39:02 | [nioEventLoopGroup-3-4] netty.InHandler2 (InHandler2.java:100) - NODE is in STATE: ELECTION
+INFO  | 2017-04-20 17:39:02 | [nioEventLoopGroup-3-4] netty.InHandler2 (InHandler2.java:101) - My Election ROUND: 1
+INFO  | 2017-04-20 17:39:02 | [nioEventLoopGroup-3-4] netty.InHandler2 (InHandler2.java:102) - his Election ROUND: 1
+INFO  | 2017-04-20 17:39:02 | [nioEventLoopGroup-3-4] netty.InHandler2 (InHandler2.java:43) - <<<Response:SNOTIFICATION:1,3,4,6,ELECTION,1
+INFO  | 2017-04-20 17:39:02 | [nioEventLoopGroup-8-1] netty.InHandler2 (InHandler2.java:41) - >>>Channel Read:SNOTIFICATION:1,3,4,6,ELECTION,1
+
+INFO  | 2017-04-20 17:39:02 | [nioEventLoopGroup-8-1] netty.InHandler2 (InHandler2.java:142) - Before:2
+INFO  | 2017-04-20 17:39:02 | [main] servers.NodeServer1 (NodeServer1.java:78) - Fetching from CurrentElectionQueue:
+
+INFO  | 2017-04-20 17:39:02 | [main] servers.NodeServer1 (NodeServer1.java:105) - Received notification is in Election
+INFO  | 2017-04-20 17:39:02 | [main] servers.NodeServer1 (NodeServer1.java:117) - -------------------------
+INFO  | 2017-04-20 17:39:02 | [main] servers.NodeServer1 (NodeServer1.java:118) - myvote:Vote [ Id =2,Epoch = 4,Counter = 5]
+INFO  | 2017-04-20 17:39:02 | [main] servers.NodeServer1 (NodeServer1.java:119) - othervote:Vote [ Id =1,Epoch = 4,Counter = 4]
+INFO  | 2017-04-20 17:39:02 | [main] servers.NodeServer1 (NodeServer1.java:120) - vote compare:-1
+INFO  | 2017-04-20 17:39:02 | [main] servers.NodeServer1 (NodeServer1.java:121) - -------------------------
+INFO  | 2017-04-20 17:39:02 | [main] servers.NodeServer1 (NodeServer1.java:675) - SendNotificationToAll()2,2,4,5,ELECTION,1
+INFO  | 2017-04-20 17:39:02 | [main] servers.NodeServer1 (NodeServer1.java:704) - *******MemberlistSize:2
+INFO  | 2017-04-20 17:39:02 | [main] servers.NodeServer1 (NodeServer1.java:708) - Sending CNOTIFICATION:2,2,4,5,ELECTION,1 to: vclv13-119.hpc.ncsu.edu:9001
+INFO  | 2017-04-20 17:39:02 | [nioEventLoopGroup-10-1] netty.InHandler2 (InHandler2.java:56) - Channel Registered: null:null
+INFO  | 2017-04-20 17:39:02 | [nioEventLoopGroup-3-1] netty.InHandler2 (InHandler2.java:56) - Channel Registered: /152.1.13.119:9001:/152.1.13.119:44078
+INFO  | 2017-04-20 17:39:02 | [main] servers.NodeServer1 (NodeServer1.java:708) - Sending CNOTIFICATION:2,2,4,5,ELECTION,1 to: vclv13-119.hpc.ncsu.edu:9003
+INFO  | 2017-04-20 17:39:02 | [nioEventLoopGroup-3-1] netty.InHandler2 (InHandler2.java:41) - >>>Channel Read:CNOTIFICATION:2,2,4,5,ELECTION,1
+
+INFO  | 2017-04-20 17:39:02 | [nioEventLoopGroup-3-1] netty.InHandler2 (InHandler2.java:88) - Before:2
+INFO  | 2017-04-20 17:39:02 | [nioEventLoopGroup-3-1] netty.InHandler2 (InHandler2.java:89) - adding notification to the queue2,2,4,5,ELECTION,1
+INFO  | 2017-04-20 17:39:02 | [nioEventLoopGroup-11-1] netty.InHandler2 (InHandler2.java:56) - Channel Registered: null:null
+INFO  | 2017-04-20 17:39:02 | [main] servers.NodeServer1 (NodeServer1.java:132) - *****Vote for NodeID:1:::Vote [ Id =1,Epoch = 4,Counter = 4]
+INFO  | 2017-04-20 17:39:02 | [main] servers.NodeServer1 (NodeServer1.java:138) - *****receivedVote.size:2
+INFO  | 2017-04-20 17:39:02 | [main] servers.NodeServer1 (NodeServer1.java:139) - *****memberList.size:2
+INFO  | 2017-04-20 17:39:02 | [main] servers.NodeServer1 (NodeServer1.java:151) - *Checking for Quorum in received votes
+INFO  | 2017-04-20 17:39:02 | [nioEventLoopGroup-3-2] netty.InHandler2 (InHandler2.java:56) - Channel Registered: /152.1.13.119:9003:/152.1.13.119:58452
+INFO  | 2017-04-20 17:39:02 | [main] servers.NodeServer1 (NodeServer1.java:78) - Fetching from CurrentElectionQueue:
+
+INFO  | 2017-04-20 17:39:02 | [main] servers.NodeServer1 (NodeServer1.java:105) - Received notification is in Election
+INFO  | 2017-04-20 17:39:02 | [main] servers.NodeServer1 (NodeServer1.java:117) - -------------------------
+INFO  | 2017-04-20 17:39:02 | [main] servers.NodeServer1 (NodeServer1.java:118) - myvote:Vote [ Id =2,Epoch = 4,Counter = 5]
+INFO  | 2017-04-20 17:39:02 | [main] servers.NodeServer1 (NodeServer1.java:119) - othervote:Vote [ Id =3,Epoch = 4,Counter = 6]
+INFO  | 2017-04-20 17:39:02 | [main] servers.NodeServer1 (NodeServer1.java:120) - vote compare:1
+INFO  | 2017-04-20 17:39:02 | [nioEventLoopGroup-3-2] netty.InHandler2 (InHandler2.java:41) - >>>Channel Read:CNOTIFICATION:2,2,4,5,ELECTION,1
+
+INFO  | 2017-04-20 17:39:02 | [main] servers.NodeServer1 (NodeServer1.java:121) - -------------------------
+INFO  | 2017-04-20 17:39:02 | [main] servers.NodeServer1 (NodeServer1.java:123) - His vote bigger than mine
+INFO  | 2017-04-20 17:39:02 | [nioEventLoopGroup-3-2] netty.InHandler2 (InHandler2.java:88) - Before:3
+INFO  | 2017-04-20 17:39:02 | [main] servers.NodeServer1 (NodeServer1.java:675) - SendNotificationToAll()2,3,4,6,ELECTION,1
+INFO  | 2017-04-20 17:39:02 | [nioEventLoopGroup-3-2] netty.InHandler2 (InHandler2.java:89) - adding notification to the queue2,2,4,5,ELECTION,1
+INFO  | 2017-04-20 17:39:02 | [main] servers.NodeServer1 (NodeServer1.java:704) - *******MemberlistSize:2
+INFO  | 2017-04-20 17:39:02 | [main] servers.NodeServer1 (NodeServer1.java:708) - Sending CNOTIFICATION:2,3,4,6,ELECTION,1 to: vclv13-119.hpc.ncsu.edu:9001
+INFO  | 2017-04-20 17:39:02 | [nioEventLoopGroup-12-1] netty.InHandler2 (InHandler2.java:56) - Channel Registered: null:null
+INFO  | 2017-04-20 17:39:02 | [nioEventLoopGroup-3-2] netty.InHandler2 (InHandler2.java:56) - Channel Registered: /152.1.13.119:9001:/152.1.13.119:44080
+INFO  | 2017-04-20 17:39:02 | [main] servers.NodeServer1 (NodeServer1.java:708) - Sending CNOTIFICATION:2,3,4,6,ELECTION,1 to: vclv13-119.hpc.ncsu.edu:9003
+INFO  | 2017-04-20 17:39:02 | [nioEventLoopGroup-3-2] netty.InHandler2 (InHandler2.java:41) - >>>Channel Read:CNOTIFICATION:2,3,4,6,ELECTION,1
+
+INFO  | 2017-04-20 17:39:02 | [nioEventLoopGroup-3-2] netty.InHandler2 (InHandler2.java:88) - Before:3
+INFO  | 2017-04-20 17:39:02 | [nioEventLoopGroup-3-2] netty.InHandler2 (InHandler2.java:89) - adding notification to the queue2,3,4,6,ELECTION,1
+INFO  | 2017-04-20 17:39:02 | [nioEventLoopGroup-13-1] netty.InHandler2 (InHandler2.java:56) - Channel Registered: null:null
+INFO  | 2017-04-20 17:39:02 | [main] servers.NodeServer1 (NodeServer1.java:132) - *****Vote for NodeID:1:::Vote [ Id =3,Epoch = 4,Counter = 6]
+INFO  | 2017-04-20 17:39:02 | [main] servers.NodeServer1 (NodeServer1.java:138) - *****receivedVote.size:2
+INFO  | 2017-04-20 17:39:02 | [main] servers.NodeServer1 (NodeServer1.java:139) - *****memberList.size:2
+INFO  | 2017-04-20 17:39:02 | [main] servers.NodeServer1 (NodeServer1.java:151) - *Checking for Quorum in received votes
+INFO  | 2017-04-20 17:39:02 | [main] servers.NodeServer1 (NodeServer1.java:160) - **Found Quorum in received votes
+INFO  | 2017-04-20 17:39:02 | [nioEventLoopGroup-3-3] netty.InHandler2 (InHandler2.java:56) - Channel Registered: /152.1.13.119:9003:/152.1.13.119:58454
+INFO  | 2017-04-20 17:39:02 | [nioEventLoopGroup-3-3] netty.InHandler2 (InHandler2.java:41) - >>>Channel Read:CNOTIFICATION:2,3,4,6,ELECTION,1
+
+INFO  | 2017-04-20 17:39:02 | [nioEventLoopGroup-3-3] netty.InHandler2 (InHandler2.java:88) - Before:4
+INFO  | 2017-04-20 17:39:02 | [nioEventLoopGroup-3-3] netty.InHandler2 (InHandler2.java:89) - adding notification to the queue2,3,4,6,ELECTION,1
+INFO  | 2017-04-20 17:39:02 | [nioEventLoopGroup-5-1] netty.InHandler2 (InHandler2.java:152) - After:3
+INFO  | 2017-04-20 17:39:02 | [nioEventLoopGroup-5-1] netty.InHandler2 (InHandler2.java:159) - {1=vclv13-119.hpc.ncsu.edu/152.1.13.119:9001, 3=vclv13-119.hpc.ncsu.edu/152.1.13.119:9003}
+INFO  | 2017-04-20 17:39:02 | [nioEventLoopGroup-5-1] netty.InHandler2 (InHandler2.java:43) - <<<Response:ERROR
+INFO  | 2017-04-20 17:39:02 | [nioEventLoopGroup-3-3] netty.InHandler2 (InHandler2.java:99) - After:3
+INFO  | 2017-04-20 17:39:02 | [nioEventLoopGroup-3-3] netty.InHandler2 (InHandler2.java:100) - NODE is in STATE: ELECTION
+INFO  | 2017-04-20 17:39:02 | [nioEventLoopGroup-3-3] netty.InHandler2 (InHandler2.java:101) - My Election ROUND: 1
+INFO  | 2017-04-20 17:39:02 | [nioEventLoopGroup-3-3] netty.InHandler2 (InHandler2.java:102) - his Election ROUND: 1
+INFO  | 2017-04-20 17:39:02 | [nioEventLoopGroup-3-3] netty.InHandler2 (InHandler2.java:43) - <<<Response:SNOTIFICATION:2,3,4,6,ELECTION,1
+INFO  | 2017-04-20 17:39:02 | [nioEventLoopGroup-9-1] netty.InHandler2 (InHandler2.java:41) - >>>Channel Read:SNOTIFICATION:2,3,4,6,ELECTION,1
+
+INFO  | 2017-04-20 17:39:02 | [nioEventLoopGroup-9-1] netty.InHandler2 (InHandler2.java:142) - Before:4
+INFO  | 2017-04-20 17:39:02 | [nioEventLoopGroup-3-1] netty.InHandler2 (InHandler2.java:99) - After:5
+INFO  | 2017-04-20 17:39:02 | [nioEventLoopGroup-3-1] netty.InHandler2 (InHandler2.java:100) - NODE is in STATE: ELECTION
+INFO  | 2017-04-20 17:39:02 | [nioEventLoopGroup-3-1] netty.InHandler2 (InHandler2.java:101) - My Election ROUND: 1
+INFO  | 2017-04-20 17:39:02 | [nioEventLoopGroup-3-1] netty.InHandler2 (InHandler2.java:102) - his Election ROUND: 1
+INFO  | 2017-04-20 17:39:02 | [nioEventLoopGroup-3-1] netty.InHandler2 (InHandler2.java:43) - <<<Response:SNOTIFICATION:3,3,4,6,ELECTION,1
+INFO  | 2017-04-20 17:39:02 | [nioEventLoopGroup-10-1] netty.InHandler2 (InHandler2.java:41) - >>>Channel Read:SNOTIFICATION:3,3,4,6,ELECTION,1
+
+INFO  | 2017-04-20 17:39:02 | [nioEventLoopGroup-10-1] netty.InHandler2 (InHandler2.java:142) - Before:5
+INFO  | 2017-04-20 17:39:03 | [main] servers.NodeServer1 (NodeServer1.java:78) - Fetching from CurrentElectionQueue:
+
+INFO  | 2017-04-20 17:39:03 | [main] servers.NodeServer1 (NodeServer1.java:105) - Received notification is in Election
+INFO  | 2017-04-20 17:39:03 | [nioEventLoopGroup-6-1] netty.InHandler2 (InHandler2.java:152) - After:5
+INFO  | 2017-04-20 17:39:03 | [main] servers.NodeServer1 (NodeServer1.java:117) - -------------------------
+INFO  | 2017-04-20 17:39:03 | [nioEventLoopGroup-6-1] netty.InHandler2 (InHandler2.java:159) - {2=vclv13-119.hpc.ncsu.edu/152.1.13.119:9002, 1=vclv13-119.hpc.ncsu.edu/152.1.13.119:9001}
+INFO  | 2017-04-20 17:39:03 | [main] servers.NodeServer1 (NodeServer1.java:118) - myvote:Vote [ Id =3,Epoch = 4,Counter = 6]
+INFO  | 2017-04-20 17:39:03 | [nioEventLoopGroup-6-1] netty.InHandler2 (InHandler2.java:43) - <<<Response:ERROR
+INFO  | 2017-04-20 17:39:03 | [main] servers.NodeServer1 (NodeServer1.java:119) - othervote:Vote [ Id =2,Epoch = 4,Counter = 5]
+INFO  | 2017-04-20 17:39:03 | [main] servers.NodeServer1 (NodeServer1.java:120) - vote compare:-1
+INFO  | 2017-04-20 17:39:03 | [main] servers.NodeServer1 (NodeServer1.java:121) - -------------------------
+INFO  | 2017-04-20 17:39:03 | [main] servers.NodeServer1 (NodeServer1.java:675) - SendNotificationToAll()3,3,4,6,ELECTION,1
+INFO  | 2017-04-20 17:39:03 | [main] servers.NodeServer1 (NodeServer1.java:704) - *******MemberlistSize:2
+INFO  | 2017-04-20 17:39:03 | [main] servers.NodeServer1 (NodeServer1.java:708) - Sending CNOTIFICATION:3,3,4,6,ELECTION,1 to: vclv13-119.hpc.ncsu.edu:9002
+INFO  | 2017-04-20 17:39:03 | [nioEventLoopGroup-12-1] netty.InHandler2 (InHandler2.java:56) - Channel Registered: null:null
+INFO  | 2017-04-20 17:39:03 | [main] servers.NodeServer1 (NodeServer1.java:708) - Sending CNOTIFICATION:3,3,4,6,ELECTION,1 to: vclv13-119.hpc.ncsu.edu:9001
+INFO  | 2017-04-20 17:39:03 | [nioEventLoopGroup-13-1] netty.InHandler2 (InHandler2.java:56) - Channel Registered: null:null
+INFO  | 2017-04-20 17:39:03 | [nioEventLoopGroup-3-3] netty.InHandler2 (InHandler2.java:56) - Channel Registered: /152.1.13.119:9001:/152.1.13.119:44083
+INFO  | 2017-04-20 17:39:03 | [main] servers.NodeServer1 (NodeServer1.java:132) - *****Vote for NodeID:2:::Vote [ Id =2,Epoch = 4,Counter = 5]
+INFO  | 2017-04-20 17:39:03 | [main] servers.NodeServer1 (NodeServer1.java:138) - *****receivedVote.size:2
+INFO  | 2017-04-20 17:39:03 | [main] servers.NodeServer1 (NodeServer1.java:139) - *****memberList.size:2
+INFO  | 2017-04-20 17:39:03 | [main] servers.NodeServer1 (NodeServer1.java:151) - *Checking for Quorum in received votes
+INFO  | 2017-04-20 17:39:03 | [main] servers.NodeServer1 (NodeServer1.java:78) - Fetching from CurrentElectionQueue:
+
+INFO  | 2017-04-20 17:39:03 | [main] servers.NodeServer1 (NodeServer1.java:105) - Received notification is in Election
+INFO  | 2017-04-20 17:39:03 | [main] servers.NodeServer1 (NodeServer1.java:117) - -------------------------
+INFO  | 2017-04-20 17:39:03 | [main] servers.NodeServer1 (NodeServer1.java:118) - myvote:Vote [ Id =3,Epoch = 4,Counter = 6]
+INFO  | 2017-04-20 17:39:03 | [main] servers.NodeServer1 (NodeServer1.java:119) - othervote:Vote [ Id =3,Epoch = 4,Counter = 6]
+INFO  | 2017-04-20 17:39:03 | [main] servers.NodeServer1 (NodeServer1.java:120) - vote compare:0
+INFO  | 2017-04-20 17:39:03 | [main] servers.NodeServer1 (NodeServer1.java:121) - -------------------------
+INFO  | 2017-04-20 17:39:03 | [main] servers.NodeServer1 (NodeServer1.java:675) - SendNotificationToAll()3,3,4,6,ELECTION,1
+INFO  | 2017-04-20 17:39:03 | [main] servers.NodeServer1 (NodeServer1.java:704) - *******MemberlistSize:2
+INFO  | 2017-04-20 17:39:03 | [main] servers.NodeServer1 (NodeServer1.java:708) - Sending CNOTIFICATION:3,3,4,6,ELECTION,1 to: vclv13-119.hpc.ncsu.edu:9002
+INFO  | 2017-04-20 17:39:03 | [nioEventLoopGroup-3-3] netty.InHandler2 (InHandler2.java:41) - >>>Channel Read:CNOTIFICATION:3,3,4,6,ELECTION,1
+
+INFO  | 2017-04-20 17:39:03 | [nioEventLoopGroup-3-3] netty.InHandler2 (InHandler2.java:88) - Before:6
+INFO  | 2017-04-20 17:39:03 | [nioEventLoopGroup-3-3] netty.InHandler2 (InHandler2.java:89) - adding notification to the queue3,3,4,6,ELECTION,1
+INFO  | 2017-04-20 17:39:03 | [nioEventLoopGroup-14-1] netty.InHandler2 (InHandler2.java:56) - Channel Registered: null:null
+INFO  | 2017-04-20 17:39:03 | [main] servers.NodeServer1 (NodeServer1.java:708) - Sending CNOTIFICATION:3,3,4,6,ELECTION,1 to: vclv13-119.hpc.ncsu.edu:9001
+INFO  | 2017-04-20 17:39:03 | [nioEventLoopGroup-8-1] netty.InHandler2 (InHandler2.java:152) - After:5
+INFO  | 2017-04-20 17:39:03 | [nioEventLoopGroup-15-1] netty.InHandler2 (InHandler2.java:56) - Channel Registered: null:null
+INFO  | 2017-04-20 17:39:03 | [nioEventLoopGroup-8-1] netty.InHandler2 (InHandler2.java:159) - {2=vclv13-119.hpc.ncsu.edu/152.1.13.119:9002, 1=vclv13-119.hpc.ncsu.edu/152.1.13.119:9001}
+INFO  | 2017-04-20 17:39:03 | [main] servers.NodeServer1 (NodeServer1.java:132) - *****Vote for NodeID:1:::Vote [ Id =3,Epoch = 4,Counter = 6]
+INFO  | 2017-04-20 17:39:03 | [nioEventLoopGroup-3-4] netty.InHandler2 (InHandler2.java:56) - Channel Registered: /152.1.13.119:9001:/152.1.13.119:44085
+INFO  | 2017-04-20 17:39:03 | [main] servers.NodeServer1 (NodeServer1.java:138) - *****receivedVote.size:3
+INFO  | 2017-04-20 17:39:03 | [nioEventLoopGroup-8-1] netty.InHandler2 (InHandler2.java:43) - <<<Response:ERROR
+INFO  | 2017-04-20 17:39:03 | [main] servers.NodeServer1 (NodeServer1.java:139) - *****memberList.size:2
+INFO  | 2017-04-20 17:39:03 | [nioEventLoopGroup-3-4] netty.InHandler2 (InHandler2.java:41) - >>>Channel Read:CNOTIFICATION:3,3,4,6,ELECTION,1
+
+INFO  | 2017-04-20 17:39:03 | [nioEventLoopGroup-3-4] netty.InHandler2 (InHandler2.java:88) - Before:7
+INFO  | 2017-04-20 17:39:03 | [nioEventLoopGroup-3-4] netty.InHandler2 (InHandler2.java:89) - adding notification to the queue3,3,4,6,ELECTION,1
+INFO  | 2017-04-20 17:39:03 | [main] servers.NodeServer1 (NodeServer1.java:143) - ***Received Votes from all the members
+INFO  | 2017-04-20 17:39:03 | [nioEventLoopGroup-3-1] netty.InHandler2 (InHandler2.java:56) - Channel Registered: /152.1.13.119:9002:/152.1.13.119:36322
+INFO  | 2017-04-20 17:39:03 | [main] servers.NodeServer1 (NodeServer1.java:145) - 1::Vote [ Id =3,Epoch = 4,Counter = 6]
+INFO  | 2017-04-20 17:39:03 | [main] servers.NodeServer1 (NodeServer1.java:145) - 2::Vote [ Id =2,Epoch = 4,Counter = 5]
+INFO  | 2017-04-20 17:39:03 | [nioEventLoopGroup-3-1] netty.InHandler2 (InHandler2.java:41) - >>>Channel Read:CNOTIFICATION:3,3,4,6,ELECTION,1
+
+INFO  | 2017-04-20 17:39:03 | [main] servers.NodeServer1 (NodeServer1.java:145) - 3::Vote [ Id =3,Epoch = 4,Counter = 6]
+INFO  | 2017-04-20 17:39:03 | [nioEventLoopGroup-3-1] netty.InHandler2 (InHandler2.java:88) - Before:3
+INFO  | 2017-04-20 17:39:03 | [main] servers.NodeServer1 (NodeServer1.java:557) - End Leader Election---------
+INFO  | 2017-04-20 17:39:03 | [nioEventLoopGroup-3-1] netty.InHandler2 (InHandler2.java:89) - adding notification to the queue3,3,4,6,ELECTION,1
+INFO  | 2017-04-20 17:39:03 | [main] servers.NodeServer1 (NodeServer1.java:558) - Leader ID:3
+INFO  | 2017-04-20 17:39:03 | [nioEventLoopGroup-3-4] netty.InHandler2 (InHandler2.java:56) - Channel Registered: /152.1.13.119:9002:/152.1.13.119:36320
+INFO  | 2017-04-20 17:39:03 | [main] servers.NodeServer1 (NodeServer1.java:559) - Begin Recovery---------
+INFO  | 2017-04-20 17:39:03 | [main] servers.NodeServer1 (NodeServer1.java:298) - Starting Recovery phase
+INFO  | 2017-04-20 17:39:03 | [nioEventLoopGroup-3-4] netty.InHandler2 (InHandler2.java:41) - >>>Channel Read:CNOTIFICATION:3,3,4,6,ELECTION,1
+
+INFO  | 2017-04-20 17:39:03 | [main] servers.NodeServer1 (NodeServer1.java:303) - I am Leader
+INFO  | 2017-04-20 17:39:03 | [main] servers.NodeServer1 (NodeServer1.java:310) - Member List size before while is = 2
+INFO  | 2017-04-20 17:39:03 | [nioEventLoopGroup-3-4] netty.InHandler2 (InHandler2.java:88) - Before:4
+INFO  | 2017-04-20 17:39:03 | [main] servers.NodeServer1 (NodeServer1.java:311) - Accepted Epoch Map Size before while is = 0
+INFO  | 2017-04-20 17:39:03 | [nioEventLoopGroup-3-4] netty.InHandler2 (InHandler2.java:89) - adding notification to the queue3,3,4,6,ELECTION,1
+INFO  | 2017-04-20 17:39:03 | [nioEventLoopGroup-3-1] netty.InHandler2 (InHandler2.java:99) - After:8
+INFO  | 2017-04-20 17:39:03 | [nioEventLoopGroup-3-1] netty.InHandler2 (InHandler2.java:100) - NODE is in STATE: ELECTION
+INFO  | 2017-04-20 17:39:03 | [nioEventLoopGroup-3-1] netty.InHandler2 (InHandler2.java:101) - My Election ROUND: 1
+INFO  | 2017-04-20 17:39:03 | [nioEventLoopGroup-3-1] netty.InHandler2 (InHandler2.java:102) - his Election ROUND: 1
+INFO  | 2017-04-20 17:39:03 | [nioEventLoopGroup-3-1] netty.InHandler2 (InHandler2.java:43) - <<<Response:SNOTIFICATION:1,3,4,6,ELECTION,1
+INFO  | 2017-04-20 17:39:03 | [nioEventLoopGroup-10-1] netty.InHandler2 (InHandler2.java:41) - >>>Channel Read:SNOTIFICATION:1,3,4,6,ELECTION,1
+
+INFO  | 2017-04-20 17:39:03 | [nioEventLoopGroup-10-1] netty.InHandler2 (InHandler2.java:142) - Before:5
+INFO  | 2017-04-20 17:39:03 | [nioEventLoopGroup-3-2] netty.InHandler2 (InHandler2.java:99) - After:5
+INFO  | 2017-04-20 17:39:03 | [nioEventLoopGroup-3-2] netty.InHandler2 (InHandler2.java:100) - NODE is in STATE: LEADING
+INFO  | 2017-04-20 17:39:03 | [nioEventLoopGroup-3-2] netty.InHandler2 (InHandler2.java:101) - My Election ROUND: 1
+INFO  | 2017-04-20 17:39:03 | [nioEventLoopGroup-3-2] netty.InHandler2 (InHandler2.java:102) - his Election ROUND: 1
+INFO  | 2017-04-20 17:39:03 | [nioEventLoopGroup-3-2] netty.InHandler2 (InHandler2.java:43) - <<<Response:SNOTIFICATION:3,3,4,6,LEADING,1
+INFO  | 2017-04-20 17:39:03 | [nioEventLoopGroup-11-1] netty.InHandler2 (InHandler2.java:41) - >>>Channel Read:SNOTIFICATION:3,3,4,6,LEADING,1
+
+INFO  | 2017-04-20 17:39:03 | [nioEventLoopGroup-11-1] netty.InHandler2 (InHandler2.java:142) - Before:6
+INFO  | 2017-04-20 17:39:03 | [nioEventLoopGroup-3-2] netty.InHandler2 (InHandler2.java:99) - After:8
+INFO  | 2017-04-20 17:39:03 | [nioEventLoopGroup-3-2] netty.InHandler2 (InHandler2.java:100) - NODE is in STATE: ELECTION
+INFO  | 2017-04-20 17:39:03 | [nioEventLoopGroup-3-2] netty.InHandler2 (InHandler2.java:101) - My Election ROUND: 1
+INFO  | 2017-04-20 17:39:03 | [nioEventLoopGroup-3-2] netty.InHandler2 (InHandler2.java:102) - his Election ROUND: 1
+INFO  | 2017-04-20 17:39:03 | [nioEventLoopGroup-3-2] netty.InHandler2 (InHandler2.java:43) - <<<Response:SNOTIFICATION:1,3,4,6,ELECTION,1
+INFO  | 2017-04-20 17:39:03 | [nioEventLoopGroup-12-1] netty.InHandler2 (InHandler2.java:41) - >>>Channel Read:SNOTIFICATION:1,3,4,6,ELECTION,1
+
+INFO  | 2017-04-20 17:39:03 | [nioEventLoopGroup-12-1] netty.InHandler2 (InHandler2.java:142) - Before:7
+INFO  | 2017-04-20 17:39:03 | [nioEventLoopGroup-3-3] netty.InHandler2 (InHandler2.java:99) - After:5
+INFO  | 2017-04-20 17:39:03 | [nioEventLoopGroup-3-3] netty.InHandler2 (InHandler2.java:100) - NODE is in STATE: LEADING
+INFO  | 2017-04-20 17:39:03 | [nioEventLoopGroup-3-3] netty.InHandler2 (InHandler2.java:101) - My Election ROUND: 1
+INFO  | 2017-04-20 17:39:03 | [nioEventLoopGroup-3-3] netty.InHandler2 (InHandler2.java:102) - his Election ROUND: 1
+INFO  | 2017-04-20 17:39:03 | [nioEventLoopGroup-3-3] netty.InHandler2 (InHandler2.java:43) - <<<Response:SNOTIFICATION:3,3,4,6,LEADING,1
+INFO  | 2017-04-20 17:39:03 | [nioEventLoopGroup-13-1] netty.InHandler2 (InHandler2.java:41) - >>>Channel Read:SNOTIFICATION:3,3,4,6,LEADING,1
+
+INFO  | 2017-04-20 17:39:03 | [nioEventLoopGroup-13-1] netty.InHandler2 (InHandler2.java:142) - Before:8
+INFO  | 2017-04-20 17:39:03 | [nioEventLoopGroup-9-1] netty.InHandler2 (InHandler2.java:152) - After:8
+INFO  | 2017-04-20 17:39:03 | [nioEventLoopGroup-9-1] netty.InHandler2 (InHandler2.java:159) - {2=vclv13-119.hpc.ncsu.edu/152.1.13.119:9002, 3=vclv13-119.hpc.ncsu.edu/152.1.13.119:9003}
+INFO  | 2017-04-20 17:39:03 | [nioEventLoopGroup-9-1] netty.InHandler2 (InHandler2.java:43) - <<<Response:ERROR
+INFO  | 2017-04-20 17:39:03 | [nioEventLoopGroup-10-1] netty.InHandler2 (InHandler2.java:152) - After:8
+INFO  | 2017-04-20 17:39:03 | [nioEventLoopGroup-10-1] netty.InHandler2 (InHandler2.java:159) - {2=vclv13-119.hpc.ncsu.edu/152.1.13.119:9002, 3=vclv13-119.hpc.ncsu.edu/152.1.13.119:9003}
+INFO  | 2017-04-20 17:39:03 | [nioEventLoopGroup-10-1] netty.InHandler2 (InHandler2.java:43) - <<<Response:ERROR
+INFO  | 2017-04-20 17:39:04 | [nioEventLoopGroup-3-3] netty.InHandler2 (InHandler2.java:99) - After:8
+INFO  | 2017-04-20 17:39:04 | [nioEventLoopGroup-3-3] netty.InHandler2 (InHandler2.java:100) - NODE is in STATE: ELECTION
+INFO  | 2017-04-20 17:39:04 | [nioEventLoopGroup-3-3] netty.InHandler2 (InHandler2.java:101) - My Election ROUND: 1
+INFO  | 2017-04-20 17:39:04 | [nioEventLoopGroup-3-3] netty.InHandler2 (InHandler2.java:102) - his Election ROUND: 1
+INFO  | 2017-04-20 17:39:04 | [nioEventLoopGroup-3-3] netty.InHandler2 (InHandler2.java:43) - <<<Response:SNOTIFICATION:1,3,4,6,ELECTION,1
+INFO  | 2017-04-20 17:39:04 | [nioEventLoopGroup-13-1] netty.InHandler2 (InHandler2.java:41) - >>>Channel Read:SNOTIFICATION:1,3,4,6,ELECTION,1
+
+INFO  | 2017-04-20 17:39:04 | [nioEventLoopGroup-13-1] netty.InHandler2 (InHandler2.java:159) - {2=vclv13-119.hpc.ncsu.edu/152.1.13.119:9002, 1=vclv13-119.hpc.ncsu.edu/152.1.13.119:9001}
+INFO  | 2017-04-20 17:39:04 | [nioEventLoopGroup-13-1] netty.InHandler2 (InHandler2.java:43) - <<<Response:ERROR
+INFO  | 2017-04-20 17:39:04 | [nioEventLoopGroup-3-4] netty.InHandler2 (InHandler2.java:99) - After:8
+INFO  | 2017-04-20 17:39:04 | [nioEventLoopGroup-3-4] netty.InHandler2 (InHandler2.java:100) - NODE is in STATE: ELECTION
+INFO  | 2017-04-20 17:39:04 | [nioEventLoopGroup-3-4] netty.InHandler2 (InHandler2.java:101) - My Election ROUND: 1
+INFO  | 2017-04-20 17:39:04 | [nioEventLoopGroup-3-4] netty.InHandler2 (InHandler2.java:102) - his Election ROUND: 1
+INFO  | 2017-04-20 17:39:04 | [nioEventLoopGroup-3-4] netty.InHandler2 (InHandler2.java:43) - <<<Response:SNOTIFICATION:1,3,4,6,ELECTION,1
+INFO  | 2017-04-20 17:39:04 | [nioEventLoopGroup-3-1] netty.InHandler2 (InHandler2.java:99) - After:9
+INFO  | 2017-04-20 17:39:04 | [nioEventLoopGroup-3-1] netty.InHandler2 (InHandler2.java:100) - NODE is in STATE: ELECTION
+INFO  | 2017-04-20 17:39:04 | [nioEventLoopGroup-3-1] netty.InHandler2 (InHandler2.java:101) - My Election ROUND: 1
+INFO  | 2017-04-20 17:39:04 | [nioEventLoopGroup-15-1] netty.InHandler2 (InHandler2.java:41) - >>>Channel Read:SNOTIFICATION:1,3,4,6,ELECTION,1
+
+INFO  | 2017-04-20 17:39:04 | [nioEventLoopGroup-3-1] netty.InHandler2 (InHandler2.java:102) - his Election ROUND: 1
+INFO  | 2017-04-20 17:39:04 | [nioEventLoopGroup-15-1] netty.InHandler2 (InHandler2.java:159) - {2=vclv13-119.hpc.ncsu.edu/152.1.13.119:9002, 1=vclv13-119.hpc.ncsu.edu/152.1.13.119:9001}
+INFO  | 2017-04-20 17:39:04 | [nioEventLoopGroup-3-1] netty.InHandler2 (InHandler2.java:43) - <<<Response:SNOTIFICATION:2,3,4,6,ELECTION,1
+INFO  | 2017-04-20 17:39:04 | [nioEventLoopGroup-15-1] netty.InHandler2 (InHandler2.java:43) - <<<Response:ERROR
+INFO  | 2017-04-20 17:39:04 | [nioEventLoopGroup-14-1] netty.InHandler2 (InHandler2.java:41) - >>>Channel Read:SNOTIFICATION:2,3,4,6,ELECTION,1
+
+INFO  | 2017-04-20 17:39:04 | [nioEventLoopGroup-3-4] netty.InHandler2 (InHandler2.java:99) - After:9
+INFO  | 2017-04-20 17:39:04 | [nioEventLoopGroup-3-4] netty.InHandler2 (InHandler2.java:100) - NODE is in STATE: ELECTION
+INFO  | 2017-04-20 17:39:04 | [nioEventLoopGroup-14-1] netty.InHandler2 (InHandler2.java:159) - {2=vclv13-119.hpc.ncsu.edu/152.1.13.119:9002, 1=vclv13-119.hpc.ncsu.edu/152.1.13.119:9001}
+INFO  | 2017-04-20 17:39:04 | [nioEventLoopGroup-3-4] netty.InHandler2 (InHandler2.java:101) - My Election ROUND: 1
+INFO  | 2017-04-20 17:39:04 | [nioEventLoopGroup-14-1] netty.InHandler2 (InHandler2.java:43) - <<<Response:ERROR
+INFO  | 2017-04-20 17:39:04 | [nioEventLoopGroup-3-4] netty.InHandler2 (InHandler2.java:102) - his Election ROUND: 1
+INFO  | 2017-04-20 17:39:04 | [nioEventLoopGroup-3-4] netty.InHandler2 (InHandler2.java:43) - <<<Response:SNOTIFICATION:2,3,4,6,ELECTION,1
+INFO  | 2017-04-20 17:39:04 | [nioEventLoopGroup-12-1] netty.InHandler2 (InHandler2.java:41) - >>>Channel Read:SNOTIFICATION:2,3,4,6,ELECTION,1
+
+INFO  | 2017-04-20 17:39:04 | [nioEventLoopGroup-12-1] netty.InHandler2 (InHandler2.java:159) - {2=vclv13-119.hpc.ncsu.edu/152.1.13.119:9002, 1=vclv13-119.hpc.ncsu.edu/152.1.13.119:9001}
+INFO  | 2017-04-20 17:39:04 | [nioEventLoopGroup-12-1] netty.InHandler2 (InHandler2.java:43) - <<<Response:ERROR
+INFO  | 2017-04-20 17:39:04 | [nioEventLoopGroup-10-1] netty.InHandler2 (InHandler2.java:152) - After:9
+INFO  | 2017-04-20 17:39:04 | [nioEventLoopGroup-10-1] netty.InHandler2 (InHandler2.java:159) - {1=vclv13-119.hpc.ncsu.edu/152.1.13.119:9001, 3=vclv13-119.hpc.ncsu.edu/152.1.13.119:9003}
+INFO  | 2017-04-20 17:39:04 | [nioEventLoopGroup-10-1] netty.InHandler2 (InHandler2.java:43) - <<<Response:ERROR
+INFO  | 2017-04-20 17:39:04 | [nioEventLoopGroup-11-1] netty.InHandler2 (InHandler2.java:152) - After:9
+INFO  | 2017-04-20 17:39:04 | [nioEventLoopGroup-11-1] netty.InHandler2 (InHandler2.java:159) - {1=vclv13-119.hpc.ncsu.edu/152.1.13.119:9001, 3=vclv13-119.hpc.ncsu.edu/152.1.13.119:9003}
+INFO  | 2017-04-20 17:39:04 | [nioEventLoopGroup-11-1] netty.InHandler2 (InHandler2.java:43) - <<<Response:ERROR
+INFO  | 2017-04-20 17:39:04 | [nioEventLoopGroup-12-1] netty.InHandler2 (InHandler2.java:152) - After:9
+INFO  | 2017-04-20 17:39:04 | [nioEventLoopGroup-12-1] netty.InHandler2 (InHandler2.java:159) - {1=vclv13-119.hpc.ncsu.edu/152.1.13.119:9001, 3=vclv13-119.hpc.ncsu.edu/152.1.13.119:9003}
+INFO  | 2017-04-20 17:39:04 | [nioEventLoopGroup-12-1] netty.InHandler2 (InHandler2.java:43) - <<<Response:ERROR
+INFO  | 2017-04-20 17:39:04 | [nioEventLoopGroup-13-1] netty.InHandler2 (InHandler2.java:152) - After:9
+INFO  | 2017-04-20 17:39:04 | [nioEventLoopGroup-13-1] netty.InHandler2 (InHandler2.java:159) - {1=vclv13-119.hpc.ncsu.edu/152.1.13.119:9001, 3=vclv13-119.hpc.ncsu.edu/152.1.13.119:9003}
+INFO  | 2017-04-20 17:39:04 | [nioEventLoopGroup-13-1] netty.InHandler2 (InHandler2.java:43) - <<<Response:ERROR
+INFO  | 2017-04-20 17:39:05 | [main] servers.NodeServer1 (NodeServer1.java:173) - Still have notifications in ElectionQueue
+INFO  | 2017-04-20 17:39:05 | [main] servers.NodeServer1 (NodeServer1.java:78) - Fetching from CurrentElectionQueue:
+
+INFO  | 2017-04-20 17:39:05 | [main] servers.NodeServer1 (NodeServer1.java:105) - Received notification is in Election
+INFO  | 2017-04-20 17:39:05 | [main] servers.NodeServer1 (NodeServer1.java:117) - -------------------------
+INFO  | 2017-04-20 17:39:05 | [main] servers.NodeServer1 (NodeServer1.java:118) - myvote:Vote [ Id =3,Epoch = 4,Counter = 6]
+INFO  | 2017-04-20 17:39:05 | [main] servers.NodeServer1 (NodeServer1.java:119) - othervote:Vote [ Id =2,Epoch = 4,Counter = 5]
+INFO  | 2017-04-20 17:39:05 | [main] servers.NodeServer1 (NodeServer1.java:120) - vote compare:-1
+INFO  | 2017-04-20 17:39:05 | [main] servers.NodeServer1 (NodeServer1.java:121) - -------------------------
+INFO  | 2017-04-20 17:39:05 | [main] servers.NodeServer1 (NodeServer1.java:675) - SendNotificationToAll()1,3,4,6,ELECTION,1
+INFO  | 2017-04-20 17:39:05 | [main] servers.NodeServer1 (NodeServer1.java:704) - *******MemberlistSize:2
+INFO  | 2017-04-20 17:39:05 | [main] servers.NodeServer1 (NodeServer1.java:708) - Sending CNOTIFICATION:1,3,4,6,ELECTION,1 to: vclv13-119.hpc.ncsu.edu:9002
+INFO  | 2017-04-20 17:39:05 | [nioEventLoopGroup-15-1] netty.InHandler2 (InHandler2.java:56) - Channel Registered: null:null
+INFO  | 2017-04-20 17:39:05 | [main] servers.NodeServer1 (NodeServer1.java:708) - Sending CNOTIFICATION:1,3,4,6,ELECTION,1 to: vclv13-119.hpc.ncsu.edu:9003
+INFO  | 2017-04-20 17:39:05 | [nioEventLoopGroup-3-2] netty.InHandler2 (InHandler2.java:56) - Channel Registered: /152.1.13.119:9002:/152.1.13.119:36324
+INFO  | 2017-04-20 17:39:05 | [nioEventLoopGroup-3-2] netty.InHandler2 (InHandler2.java:41) - >>>Channel Read:CNOTIFICATION:1,3,4,6,ELECTION,1
+
+INFO  | 2017-04-20 17:39:05 | [nioEventLoopGroup-3-2] netty.InHandler2 (InHandler2.java:88) - Before:9
+INFO  | 2017-04-20 17:39:05 | [nioEventLoopGroup-3-2] netty.InHandler2 (InHandler2.java:89) - adding notification to the queue1,3,4,6,ELECTION,1
+INFO  | 2017-04-20 17:39:05 | [nioEventLoopGroup-16-1] netty.InHandler2 (InHandler2.java:56) - Channel Registered: null:null
+INFO  | 2017-04-20 17:39:05 | [main] servers.NodeServer1 (NodeServer1.java:132) - *****Vote for NodeID:2:::Vote [ Id =2,Epoch = 4,Counter = 5]
+INFO  | 2017-04-20 17:39:05 | [nioEventLoopGroup-3-4] netty.InHandler2 (InHandler2.java:56) - Channel Registered: /152.1.13.119:9003:/152.1.13.119:58460
+INFO  | 2017-04-20 17:39:05 | [nioEventLoopGroup-3-4] netty.InHandler2 (InHandler2.java:41) - >>>Channel Read:CNOTIFICATION:1,3,4,6,ELECTION,1
+
+INFO  | 2017-04-20 17:39:05 | [nioEventLoopGroup-3-4] netty.InHandler2 (InHandler2.java:120) - myNotification:3,3,4,6,LEADING,1
+INFO  | 2017-04-20 17:39:05 | [nioEventLoopGroup-3-4] netty.InHandler2 (InHandler2.java:43) - <<<Response:SNOTIFICATION:3,3,4,6,LEADING,1
+INFO  | 2017-04-20 17:39:05 | [nioEventLoopGroup-16-1] netty.InHandler2 (InHandler2.java:41) - >>>Channel Read:SNOTIFICATION:3,3,4,6,LEADING,1
+
+INFO  | 2017-04-20 17:39:05 | [nioEventLoopGroup-16-1] netty.InHandler2 (InHandler2.java:142) - Before:8
+INFO  | 2017-04-20 17:39:05 | [main] servers.NodeServer1 (NodeServer1.java:138) - *****receivedVote.size:3
+INFO  | 2017-04-20 17:39:05 | [main] servers.NodeServer1 (NodeServer1.java:139) - *****memberList.size:2
+INFO  | 2017-04-20 17:39:05 | [main] servers.NodeServer1 (NodeServer1.java:143) - ***Received Votes from all the members
+INFO  | 2017-04-20 17:39:05 | [main] servers.NodeServer1 (NodeServer1.java:145) - 1::Vote [ Id =3,Epoch = 4,Counter = 6]
+INFO  | 2017-04-20 17:39:05 | [main] servers.NodeServer1 (NodeServer1.java:145) - 2::Vote [ Id =2,Epoch = 4,Counter = 5]
+INFO  | 2017-04-20 17:39:05 | [main] servers.NodeServer1 (NodeServer1.java:145) - 3::Vote [ Id =3,Epoch = 4,Counter = 6]
+INFO  | 2017-04-20 17:39:05 | [main] servers.NodeServer1 (NodeServer1.java:557) - End Leader Election---------
+INFO  | 2017-04-20 17:39:05 | [main] servers.NodeServer1 (NodeServer1.java:558) - Leader ID:3
+INFO  | 2017-04-20 17:39:05 | [main] servers.NodeServer1 (NodeServer1.java:559) - Begin Recovery---------
+INFO  | 2017-04-20 17:39:05 | [main] servers.NodeServer1 (NodeServer1.java:298) - Starting Recovery phase
+INFO  | 2017-04-20 17:39:05 | [main] servers.NodeServer1 (NodeServer1.java:419) - I am Follower
+INFO  | 2017-04-20 17:39:05 | [main] servers.NodeServer1 (NodeServer1.java:430) - Follower info msg is = FOLLOWERINFO:1:4
+INFO  | 2017-04-20 17:39:05 | [nioEventLoopGroup-17-1] netty.InHandler2 (InHandler2.java:56) - Channel Registered: null:null
+INFO  | 2017-04-20 17:39:05 | [nioEventLoopGroup-3-1] netty.InHandler2 (InHandler2.java:56) - Channel Registered: /152.1.13.119:9003:/152.1.13.119:58461
+INFO  | 2017-04-20 17:39:05 | [nioEventLoopGroup-3-1] netty.InHandler2 (InHandler2.java:41) - >>>Channel Read:FOLLOWERINFO:1:4
+
+INFO  | 2017-04-20 17:39:05 | [nioEventLoopGroup-3-1] netty.InHandler2 (InHandler2.java:179) - Request msg is = FOLLOWERINFO:1:4
+
+INFO  | 2017-04-20 17:39:05 | [main] servers.NodeServer1 (NodeServer1.java:322) - Member List size after while is = 2
+INFO  | 2017-04-20 17:39:05 | [main] servers.NodeServer1 (NodeServer1.java:323) - Accepted Epoch Map Size after while is = 1
+INFO  | 2017-04-20 17:39:05 | [main] servers.NodeServer1 (NodeServer1.java:326) - Accepted Epoch before max = 4
+INFO  | 2017-04-20 17:39:05 | [main] servers.NodeServer1 (NodeServer1.java:335) - New max = 4
+INFO  | 2017-04-20 17:39:05 | [nioEventLoopGroup-3-1] netty.InHandler2 (InHandler2.java:43) - <<<Response:NEWEPOCH:5:3
+INFO  | 2017-04-20 17:39:05 | [nioEventLoopGroup-17-1] netty.InHandler2 (InHandler2.java:41) - >>>Channel Read:NEWEPOCH:5:3
+
+INFO  | 2017-04-20 17:39:05 | [nioEventLoopGroup-17-1] netty.InHandler2 (InHandler2.java:219) - Member List is = {2=vclv13-119.hpc.ncsu.edu/152.1.13.119:9002, 3=vclv13-119.hpc.ncsu.edu/152.1.13.119:9003}
+INFO  | 2017-04-20 17:39:05 | [nioEventLoopGroup-17-1] netty.InHandler2 (InHandler2.java:226) - New Epoch received is = 5
+INFO  | 2017-04-20 17:39:05 | [nioEventLoopGroup-18-1] netty.InHandler2 (InHandler2.java:56) - Channel Registered: null:null
+INFO  | 2017-04-20 17:39:05 | [nioEventLoopGroup-17-1] netty.InHandler2 (InHandler2.java:43) - <<<Response:
+INFO  | 2017-04-20 17:39:05 | [nioEventLoopGroup-3-2] netty.InHandler2 (InHandler2.java:56) - Channel Registered: /152.1.13.119:9003:/152.1.13.119:58462
+INFO  | 2017-04-20 17:39:05 | [nioEventLoopGroup-3-2] netty.InHandler2 (InHandler2.java:41) - >>>Channel Read:ACKEPOCH:1:4:4
+
+INFO  | 2017-04-20 17:39:05 | [nioEventLoopGroup-3-2] netty.InHandler2 (InHandler2.java:257) - Ack new epoch message received = ACKEPOCH:1:4:4
+
+INFO  | 2017-04-20 17:39:05 | [nioEventLoopGroup-3-2] netty.InHandler2 (InHandler2.java:265) - follower last committed zxid = 4	4
+INFO  | 2017-04-20 17:39:05 | [nioEventLoopGroup-3-2] netty.InHandler2 (InHandler2.java:272) - Leader last log = 4,6,property4,Value6
+INFO  | 2017-04-20 17:39:05 | [nioEventLoopGroup-3-2] netty.InHandler2 (InHandler2.java:278) - leader last committed zxid = 4	6
+INFO  | 2017-04-20 17:39:05 | [nioEventLoopGroup-19-1] netty.InHandler2 (InHandler2.java:56) - Channel Registered: null:null
+INFO  | 2017-04-20 17:39:05 | [nioEventLoopGroup-3-2] netty.InHandler2 (InHandler2.java:43) - <<<Response:
+INFO  | 2017-04-20 17:39:05 | [nioEventLoopGroup-3-1] netty.InHandler2 (InHandler2.java:56) - Channel Registered: /152.1.13.119:9001:/152.1.13.119:44090
+INFO  | 2017-04-20 17:39:05 | [nioEventLoopGroup-3-1] netty.InHandler2 (InHandler2.java:41) - >>>Channel Read:DIFF
+
+INFO  | 2017-04-20 17:39:05 | [nioEventLoopGroup-3-1] netty.InHandler2 (InHandler2.java:320) - DIFF message received
+INFO  | 2017-04-20 17:39:05 | [nioEventLoopGroup-3-1] netty.InHandler2 (InHandler2.java:321) - Follower ready for Broadcast
+INFO  | 2017-04-20 17:39:05 | [nioEventLoopGroup-3-1] netty.InHandler2 (InHandler2.java:43) - <<<Response:ACKACTION:1
+INFO  | 2017-04-20 17:39:05 | [nioEventLoopGroup-19-1] netty.InHandler2 (InHandler2.java:41) - >>>Channel Read:ACKACTION:1
+
+INFO  | 2017-04-20 17:39:05 | [nioEventLoopGroup-19-1] netty.InHandler2 (InHandler2.java:43) - <<<Response:
+INFO  | 2017-04-20 17:39:05 | [main] servers.NodeServer1 (NodeServer1.java:407) - Leader ready for Broadcast
+INFO  | 2017-04-20 17:39:06 | [main] servers.NodeServer1 (NodeServer1.java:173) - Still have notifications in ElectionQueue
+INFO  | 2017-04-20 17:39:06 | [main] servers.NodeServer1 (NodeServer1.java:78) - Fetching from CurrentElectionQueue:
+
+INFO  | 2017-04-20 17:39:06 | [main] servers.NodeServer1 (NodeServer1.java:105) - Received notification is in Election
+INFO  | 2017-04-20 17:39:06 | [main] servers.NodeServer1 (NodeServer1.java:117) - -------------------------
+INFO  | 2017-04-20 17:39:06 | [main] servers.NodeServer1 (NodeServer1.java:118) - myvote:Vote [ Id =3,Epoch = 4,Counter = 6]
+INFO  | 2017-04-20 17:39:06 | [main] servers.NodeServer1 (NodeServer1.java:119) - othervote:Vote [ Id =3,Epoch = 4,Counter = 6]
+INFO  | 2017-04-20 17:39:06 | [main] servers.NodeServer1 (NodeServer1.java:120) - vote compare:0
+INFO  | 2017-04-20 17:39:06 | [main] servers.NodeServer1 (NodeServer1.java:121) - -------------------------
+INFO  | 2017-04-20 17:39:06 | [main] servers.NodeServer1 (NodeServer1.java:675) - SendNotificationToAll()2,3,4,6,ELECTION,1
+INFO  | 2017-04-20 17:39:06 | [main] servers.NodeServer1 (NodeServer1.java:704) - *******MemberlistSize:2
+INFO  | 2017-04-20 17:39:06 | [main] servers.NodeServer1 (NodeServer1.java:708) - Sending CNOTIFICATION:2,3,4,6,ELECTION,1 to: vclv13-119.hpc.ncsu.edu:9001
+INFO  | 2017-04-20 17:39:06 | [nioEventLoopGroup-17-1] netty.InHandler2 (InHandler2.java:56) - Channel Registered: null:null
+INFO  | 2017-04-20 17:39:06 | [main] servers.NodeServer1 (NodeServer1.java:708) - Sending CNOTIFICATION:2,3,4,6,ELECTION,1 to: vclv13-119.hpc.ncsu.edu:9003
+INFO  | 2017-04-20 17:39:06 | [nioEventLoopGroup-3-2] netty.InHandler2 (InHandler2.java:56) - Channel Registered: /152.1.13.119:9001:/152.1.13.119:44091
+INFO  | 2017-04-20 17:39:06 | [nioEventLoopGroup-3-2] netty.InHandler2 (InHandler2.java:41) - >>>Channel Read:CNOTIFICATION:2,3,4,6,ELECTION,1
+
+INFO  | 2017-04-20 17:39:06 | [nioEventLoopGroup-3-2] netty.InHandler2 (InHandler2.java:120) - myNotification:1,3,4,6,FOLLOWING,1
+INFO  | 2017-04-20 17:39:06 | [nioEventLoopGroup-3-2] netty.InHandler2 (InHandler2.java:43) - <<<Response:SNOTIFICATION:1,3,4,6,FOLLOWING,1
+INFO  | 2017-04-20 17:39:06 | [nioEventLoopGroup-17-1] netty.InHandler2 (InHandler2.java:41) - >>>Channel Read:SNOTIFICATION:1,3,4,6,FOLLOWING,1
+
+INFO  | 2017-04-20 17:39:06 | [nioEventLoopGroup-17-1] netty.InHandler2 (InHandler2.java:142) - Before:10
+INFO  | 2017-04-20 17:39:06 | [nioEventLoopGroup-18-1] netty.InHandler2 (InHandler2.java:56) - Channel Registered: null:null
+INFO  | 2017-04-20 17:39:06 | [nioEventLoopGroup-3-3] netty.InHandler2 (InHandler2.java:56) - Channel Registered: /152.1.13.119:9003:/152.1.13.119:58465
+INFO  | 2017-04-20 17:39:06 | [main] servers.NodeServer1 (NodeServer1.java:132) - *****Vote for NodeID:3:::Vote [ Id =3,Epoch = 4,Counter = 6]
+INFO  | 2017-04-20 17:39:06 | [main] servers.NodeServer1 (NodeServer1.java:138) - *****receivedVote.size:3
+INFO  | 2017-04-20 17:39:06 | [main] servers.NodeServer1 (NodeServer1.java:139) - *****memberList.size:2
+INFO  | 2017-04-20 17:39:06 | [main] servers.NodeServer1 (NodeServer1.java:143) - ***Received Votes from all the members
+INFO  | 2017-04-20 17:39:06 | [main] servers.NodeServer1 (NodeServer1.java:145) - 1::Vote [ Id =3,Epoch = 4,Counter = 6]
+INFO  | 2017-04-20 17:39:06 | [main] servers.NodeServer1 (NodeServer1.java:145) - 2::Vote [ Id =3,Epoch = 4,Counter = 6]
+INFO  | 2017-04-20 17:39:06 | [main] servers.NodeServer1 (NodeServer1.java:145) - 3::Vote [ Id =3,Epoch = 4,Counter = 6]
+INFO  | 2017-04-20 17:39:06 | [main] servers.NodeServer1 (NodeServer1.java:557) - End Leader Election---------
+INFO  | 2017-04-20 17:39:06 | [main] servers.NodeServer1 (NodeServer1.java:558) - Leader ID:3
+INFO  | 2017-04-20 17:39:06 | [main] servers.NodeServer1 (NodeServer1.java:559) - Begin Recovery---------
+INFO  | 2017-04-20 17:39:06 | [main] servers.NodeServer1 (NodeServer1.java:298) - Starting Recovery phase
+INFO  | 2017-04-20 17:39:06 | [main] servers.NodeServer1 (NodeServer1.java:419) - I am Follower
+INFO  | 2017-04-20 17:39:06 | [main] servers.NodeServer1 (NodeServer1.java:430) - Follower info msg is = FOLLOWERINFO:2:4
+INFO  | 2017-04-20 17:39:06 | [nioEventLoopGroup-3-3] netty.InHandler2 (InHandler2.java:41) - >>>Channel Read:CNOTIFICATION:2,3,4,6,ELECTION,1
+
+INFO  | 2017-04-20 17:39:06 | [nioEventLoopGroup-3-3] netty.InHandler2 (InHandler2.java:120) - myNotification:3,3,4,6,LEADING,1
+INFO  | 2017-04-20 17:39:06 | [nioEventLoopGroup-3-3] netty.InHandler2 (InHandler2.java:43) - <<<Response:SNOTIFICATION:3,3,4,6,LEADING,1
+INFO  | 2017-04-20 17:39:06 | [nioEventLoopGroup-18-1] netty.InHandler2 (InHandler2.java:41) - >>>Channel Read:SNOTIFICATION:3,3,4,6,LEADING,1
+
+INFO  | 2017-04-20 17:39:06 | [nioEventLoopGroup-18-1] netty.InHandler2 (InHandler2.java:159) - {1=vclv13-119.hpc.ncsu.edu/152.1.13.119:9001, 3=vclv13-119.hpc.ncsu.edu/152.1.13.119:9003}
+INFO  | 2017-04-20 17:39:06 | [nioEventLoopGroup-18-1] netty.InHandler2 (InHandler2.java:43) - <<<Response:ERROR
+INFO  | 2017-04-20 17:39:06 | [nioEventLoopGroup-19-1] netty.InHandler2 (InHandler2.java:56) - Channel Registered: null:null
+INFO  | 2017-04-20 17:39:06 | [nioEventLoopGroup-3-4] netty.InHandler2 (InHandler2.java:56) - Channel Registered: /152.1.13.119:9003:/152.1.13.119:58466
+INFO  | 2017-04-20 17:39:06 | [nioEventLoopGroup-3-4] netty.InHandler2 (InHandler2.java:41) - >>>Channel Read:FOLLOWERINFO:2:4
+
+INFO  | 2017-04-20 17:39:06 | [nioEventLoopGroup-3-4] netty.InHandler2 (InHandler2.java:179) - Request msg is = FOLLOWERINFO:2:4
+
+INFO  | 2017-04-20 17:39:06 | [nioEventLoopGroup-3-4] netty.InHandler2 (InHandler2.java:43) - <<<Response:NEWEPOCH:5:3
+INFO  | 2017-04-20 17:39:06 | [nioEventLoopGroup-19-1] netty.InHandler2 (InHandler2.java:41) - >>>Channel Read:NEWEPOCH:5:3
+
+INFO  | 2017-04-20 17:39:06 | [nioEventLoopGroup-19-1] netty.InHandler2 (InHandler2.java:219) - Member List is = {1=vclv13-119.hpc.ncsu.edu/152.1.13.119:9001, 3=vclv13-119.hpc.ncsu.edu/152.1.13.119:9003}
+INFO  | 2017-04-20 17:39:06 | [nioEventLoopGroup-19-1] netty.InHandler2 (InHandler2.java:226) - New Epoch received is = 5
+INFO  | 2017-04-20 17:39:06 | [nioEventLoopGroup-20-1] netty.InHandler2 (InHandler2.java:56) - Channel Registered: null:null
+INFO  | 2017-04-20 17:39:06 | [nioEventLoopGroup-3-1] netty.InHandler2 (InHandler2.java:56) - Channel Registered: /152.1.13.119:9003:/152.1.13.119:58467
+INFO  | 2017-04-20 17:39:06 | [nioEventLoopGroup-19-1] netty.InHandler2 (InHandler2.java:43) - <<<Response:
+INFO  | 2017-04-20 17:39:06 | [nioEventLoopGroup-3-1] netty.InHandler2 (InHandler2.java:41) - >>>Channel Read:ACKEPOCH:2:4:5
+
+INFO  | 2017-04-20 17:39:06 | [nioEventLoopGroup-3-1] netty.InHandler2 (InHandler2.java:257) - Ack new epoch message received = ACKEPOCH:2:4:5
+
+INFO  | 2017-04-20 17:39:06 | [nioEventLoopGroup-3-1] netty.InHandler2 (InHandler2.java:265) - follower last committed zxid = 4	5
+INFO  | 2017-04-20 17:39:06 | [nioEventLoopGroup-3-1] netty.InHandler2 (InHandler2.java:272) - Leader last log = 4,6,property4,Value6
+INFO  | 2017-04-20 17:39:06 | [nioEventLoopGroup-3-1] netty.InHandler2 (InHandler2.java:278) - leader last committed zxid = 4	6
+INFO  | 2017-04-20 17:39:06 | [nioEventLoopGroup-23-1] netty.InHandler2 (InHandler2.java:56) - Channel Registered: null:null
+INFO  | 2017-04-20 17:39:06 | [nioEventLoopGroup-3-1] netty.InHandler2 (InHandler2.java:43) - <<<Response:
+INFO  | 2017-04-20 17:39:06 | [nioEventLoopGroup-3-3] netty.InHandler2 (InHandler2.java:56) - Channel Registered: /152.1.13.119:9002:/152.1.13.119:36333
+INFO  | 2017-04-20 17:39:06 | [nioEventLoopGroup-3-3] netty.InHandler2 (InHandler2.java:41) - >>>Channel Read:DIFF
+
+INFO  | 2017-04-20 17:39:06 | [nioEventLoopGroup-3-3] netty.InHandler2 (InHandler2.java:320) - DIFF message received
+INFO  | 2017-04-20 17:39:06 | [nioEventLoopGroup-3-3] netty.InHandler2 (InHandler2.java:321) - Follower ready for Broadcast
+INFO  | 2017-04-20 17:39:06 | [nioEventLoopGroup-3-3] netty.InHandler2 (InHandler2.java:43) - <<<Response:ACKACTION:2
+INFO  | 2017-04-20 17:39:06 | [nioEventLoopGroup-23-1] netty.InHandler2 (InHandler2.java:41) - >>>Channel Read:ACKACTION:2
+
+INFO  | 2017-04-20 17:39:06 | [nioEventLoopGroup-23-1] netty.InHandler2 (InHandler2.java:43) - <<<Response:
+INFO  | 2017-04-20 17:39:06 | [nioEventLoopGroup-3-2] netty.InHandler2 (InHandler2.java:99) - After:11
+INFO  | 2017-04-20 17:39:06 | [nioEventLoopGroup-3-2] netty.InHandler2 (InHandler2.java:100) - NODE is in STATE: FOLLOWING
+INFO  | 2017-04-20 17:39:06 | [nioEventLoopGroup-3-2] netty.InHandler2 (InHandler2.java:101) - My Election ROUND: 1
+INFO  | 2017-04-20 17:39:06 | [nioEventLoopGroup-3-2] netty.InHandler2 (InHandler2.java:102) - his Election ROUND: 1
+INFO  | 2017-04-20 17:39:06 | [nioEventLoopGroup-3-2] netty.InHandler2 (InHandler2.java:43) - <<<Response:SNOTIFICATION:2,3,4,6,FOLLOWING,1
+INFO  | 2017-04-20 17:39:06 | [nioEventLoopGroup-15-1] netty.InHandler2 (InHandler2.java:41) - >>>Channel Read:SNOTIFICATION:2,3,4,6,FOLLOWING,1
+
+INFO  | 2017-04-20 17:39:06 | [nioEventLoopGroup-15-1] netty.InHandler2 (InHandler2.java:159) - {2=vclv13-119.hpc.ncsu.edu/152.1.13.119:9002, 3=vclv13-119.hpc.ncsu.edu/152.1.13.119:9003}
+INFO  | 2017-04-20 17:39:06 | [nioEventLoopGroup-15-1] netty.InHandler2 (InHandler2.java:43) - <<<Response:ERROR
+INFO  | 2017-04-20 17:39:06 | [nioEventLoopGroup-16-1] netty.InHandler2 (InHandler2.java:152) - After:9
+INFO  | 2017-04-20 17:39:06 | [nioEventLoopGroup-16-1] netty.InHandler2 (InHandler2.java:159) - {2=vclv13-119.hpc.ncsu.edu/152.1.13.119:9002, 3=vclv13-119.hpc.ncsu.edu/152.1.13.119:9003}
+INFO  | 2017-04-20 17:39:06 | [nioEventLoopGroup-16-1] netty.InHandler2 (InHandler2.java:43) - <<<Response:ERROR
+INFO  | 2017-04-20 17:39:07 | [nioEventLoopGroup-17-1] netty.InHandler2 (InHandler2.java:152) - After:11
+INFO  | 2017-04-20 17:39:07 | [nioEventLoopGroup-17-1] netty.InHandler2 (InHandler2.java:159) - {1=vclv13-119.hpc.ncsu.edu/152.1.13.119:9001, 3=vclv13-119.hpc.ncsu.edu/152.1.13.119:9003}
+INFO  | 2017-04-20 17:39:07 | [nioEventLoopGroup-17-1] netty.InHandler2 (InHandler2.java:43) - <<<Response:ERROR
+INFO  | 2017-04-20 17:42:00 | [main] Start (Start.java:65) - Port:4500
+INFO  | 2017-04-20 17:42:09 | [main] Start (Start.java:49) - Bootstrap Host: 152.1.13.119
+INFO  | 2017-04-20 17:42:09 | [main] Start (Start.java:50) - Bootstrap Port: 4500
+INFO  | 2017-04-20 17:42:09 | [main] Start (Start.java:51) - Node Port :9001
+INFO  | 2017-04-20 17:42:09 | [main] servers.NodeServer1 (NodeServer1.java:493) - Starting the Node server
+INFO  | 2017-04-20 17:42:09 | [main] servers.NodeServer1 (NodeServer1.java:619) - set 152.1.13.119:4500
+INFO  | 2017-04-20 17:42:09 | [main] servers.NodeServer1 (NodeServer1.java:620) - set 152.1.13.119:9001
+INFO  | 2017-04-20 17:42:09 | [nioEventLoopGroup-3-1] netty.BootStrapServerHandler (BootStrapServerHandler.java:63) - Server Recieved : set 152.1.13.119:9001
+
+INFO  | 2017-04-20 17:42:09 | [nioEventLoopGroup-3-1] netty.BootStrapServerHandler (BootStrapServerHandler.java:65) - Member List : 1:152.1.13.119:9001,
+INFO  | 2017-04-20 17:42:09 | [nioEventLoopGroup-3-1] netty.BootStrapServerHandler (BootStrapServerHandler.java:66) - counter : 1
+INFO  | 2017-04-20 17:42:10 | [main] servers.NodeServer1 (NodeServer1.java:627) - MemberID received:1
+INFO  | 2017-04-20 17:42:10 | [main] servers.NodeServer1 (NodeServer1.java:652) - ------------MembersList:----------
+1:152.1.13.119:9001,
+INFO  | 2017-04-20 17:42:10 | [main] servers.NodeServer1 (NodeServer1.java:670) - -----------MemberListSize:0
+INFO  | 2017-04-20 17:42:10 | [main] servers.NodeServer1 (NodeServer1.java:501) - 
+**ID for this node is :1
+INFO  | 2017-04-20 17:42:10 | [Thread-1] netty.NettyServer1 (NettyServer1.java:49) - Netty server started on port:9001
+INFO  | 2017-04-20 17:42:10 | [main] servers.NodeServer1 (NodeServer1.java:704) - *******MemberlistSize:0
+INFO  | 2017-04-20 17:42:10 | [main] servers.NodeServer1 (NodeServer1.java:555) - Begin Leader Election---------
+INFO  | 2017-04-20 17:42:10 | [main] servers.NodeServer1 (NodeServer1.java:72) - My Notification is:1,1,3,4,ELECTION,1
+INFO  | 2017-04-20 17:42:10 | [main] servers.NodeServer1 (NodeServer1.java:675) - SendNotificationToAll()1,1,3,4,ELECTION,1
+INFO  | 2017-04-20 17:42:10 | [main] servers.NodeServer1 (NodeServer1.java:704) - *******MemberlistSize:0
+INFO  | 2017-04-20 17:42:10 | [main] servers.NodeServer1 (NodeServer1.java:78) - Fetching from CurrentElectionQueue:
+
+INFO  | 2017-04-20 17:42:10 | [main] servers.NodeServer1 (NodeServer1.java:82) - Notification Queue is empty!!
+INFO  | 2017-04-20 17:42:10 | [main] Start (Start.java:49) - Bootstrap Host: 152.1.13.119
+INFO  | 2017-04-20 17:42:10 | [main] Start (Start.java:50) - Bootstrap Port: 4500
+INFO  | 2017-04-20 17:42:10 | [main] Start (Start.java:51) - Node Port :9002
+INFO  | 2017-04-20 17:42:10 | [main] servers.NodeServer1 (NodeServer1.java:493) - Starting the Node server
+INFO  | 2017-04-20 17:42:10 | [main] servers.NodeServer1 (NodeServer1.java:619) - set 152.1.13.119:4500
+INFO  | 2017-04-20 17:42:10 | [main] servers.NodeServer1 (NodeServer1.java:620) - set 152.1.13.119:9002
+INFO  | 2017-04-20 17:42:10 | [nioEventLoopGroup-3-2] netty.BootStrapServerHandler (BootStrapServerHandler.java:63) - Server Recieved : set 152.1.13.119:9002
+
+INFO  | 2017-04-20 17:42:10 | [nioEventLoopGroup-3-2] netty.BootStrapServerHandler (BootStrapServerHandler.java:65) - Member List : 1:152.1.13.119:9001,2:152.1.13.119:9002,
+INFO  | 2017-04-20 17:42:10 | [nioEventLoopGroup-3-2] netty.BootStrapServerHandler (BootStrapServerHandler.java:66) - counter : 2
+INFO  | 2017-04-20 17:42:10 | [main] servers.NodeServer1 (NodeServer1.java:627) - MemberID received:2
+INFO  | 2017-04-20 17:42:10 | [main] servers.NodeServer1 (NodeServer1.java:652) - ------------MembersList:----------
+1:152.1.13.119:9001,2:152.1.13.119:9002,
+INFO  | 2017-04-20 17:42:10 | [main] servers.NodeServer1 (NodeServer1.java:664) - Adding1:::/152.1.13.119:9001
+INFO  | 2017-04-20 17:42:10 | [main] servers.NodeServer1 (NodeServer1.java:670) - -----------MemberListSize:1
+INFO  | 2017-04-20 17:42:10 | [main] servers.NodeServer1 (NodeServer1.java:498) - 1:::vclv13-119.hpc.ncsu.edu:9001
+INFO  | 2017-04-20 17:42:10 | [main] servers.NodeServer1 (NodeServer1.java:501) - 
+**ID for this node is :2
+INFO  | 2017-04-20 17:42:11 | [Thread-1] netty.NettyServer1 (NettyServer1.java:49) - Netty server started on port:9002
+INFO  | 2017-04-20 17:42:11 | [main] Start (Start.java:49) - Bootstrap Host: 152.1.13.119
+INFO  | 2017-04-20 17:42:11 | [main] Start (Start.java:50) - Bootstrap Port: 4500
+INFO  | 2017-04-20 17:42:11 | [main] Start (Start.java:51) - Node Port :9003
+INFO  | 2017-04-20 17:42:11 | [main] servers.NodeServer1 (NodeServer1.java:704) - *******MemberlistSize:1
+INFO  | 2017-04-20 17:42:11 | [main] servers.NodeServer1 (NodeServer1.java:708) - Sending JOIN_GROUP:2:152.1.13.119:9002 to: vclv13-119.hpc.ncsu.edu:9001
+INFO  | 2017-04-20 17:42:11 | [nioEventLoopGroup-4-1] netty.InHandler2 (InHandler2.java:56) - Channel Registered: null:null
+INFO  | 2017-04-20 17:42:11 | [nioEventLoopGroup-3-1] netty.InHandler2 (InHandler2.java:56) - Channel Registered: /152.1.13.119:9001:/152.1.13.119:44101
+INFO  | 2017-04-20 17:42:11 | [main] servers.NodeServer1 (NodeServer1.java:555) - Begin Leader Election---------
+INFO  | 2017-04-20 17:42:11 | [main] servers.NodeServer1 (NodeServer1.java:72) - My Notification is:2,2,4,5,ELECTION,1
+INFO  | 2017-04-20 17:42:11 | [main] servers.NodeServer1 (NodeServer1.java:675) - SendNotificationToAll()2,2,4,5,ELECTION,1
+INFO  | 2017-04-20 17:42:11 | [main] servers.NodeServer1 (NodeServer1.java:704) - *******MemberlistSize:1
+INFO  | 2017-04-20 17:42:11 | [main] servers.NodeServer1 (NodeServer1.java:708) - Sending CNOTIFICATION:2,2,4,5,ELECTION,1 to: vclv13-119.hpc.ncsu.edu:9001
+INFO  | 2017-04-20 17:42:11 | [nioEventLoopGroup-5-1] netty.InHandler2 (InHandler2.java:56) - Channel Registered: null:null
+INFO  | 2017-04-20 17:42:11 | [main] servers.NodeServer1 (NodeServer1.java:78) - Fetching from CurrentElectionQueue:
+
+INFO  | 2017-04-20 17:42:11 | [main] servers.NodeServer1 (NodeServer1.java:82) - Notification Queue is empty!!
+INFO  | 2017-04-20 17:42:11 | [nioEventLoopGroup-3-2] netty.InHandler2 (InHandler2.java:56) - Channel Registered: /152.1.13.119:9001:/152.1.13.119:44102
+INFO  | 2017-04-20 17:42:11 | [nioEventLoopGroup-3-2] netty.InHandler2 (InHandler2.java:41) - >>>Channel Read:CNOTIFICATION:2,2,4,5,ELECTION,1
+
+INFO  | 2017-04-20 17:42:11 | [nioEventLoopGroup-3-1] netty.InHandler2 (InHandler2.java:41) - >>>Channel Read:JOIN_GROUP:2:152.1.13.119:9002
+
+INFO  | 2017-04-20 17:42:11 | [nioEventLoopGroup-3-2] netty.InHandler2 (InHandler2.java:88) - Before:0
+INFO  | 2017-04-20 17:42:11 | [nioEventLoopGroup-3-2] netty.InHandler2 (InHandler2.java:89) - adding notification to the queue2,2,4,5,ELECTION,1
+INFO  | 2017-04-20 17:42:11 | [nioEventLoopGroup-3-1] netty.InHandler2 (InHandler2.java:72) - {2=/152.1.13.119:9002}
+INFO  | 2017-04-20 17:42:11 | [nioEventLoopGroup-3-1] netty.InHandler2 (InHandler2.java:43) - <<<Response:OK
+INFO  | 2017-04-20 17:42:11 | [nioEventLoopGroup-4-1] netty.InHandler2 (InHandler2.java:41) - >>>Channel Read:OK
+
+INFO  | 2017-04-20 17:42:11 | [nioEventLoopGroup-4-1] netty.InHandler2 (InHandler2.java:172) - Client received OK!!
+INFO  | 2017-04-20 17:42:11 | [nioEventLoopGroup-4-1] netty.InHandler2 (InHandler2.java:173) - {1=vclv13-119.hpc.ncsu.edu/152.1.13.119:9001}
+INFO  | 2017-04-20 17:42:11 | [nioEventLoopGroup-4-1] netty.InHandler2 (InHandler2.java:43) - <<<Response:
+INFO  | 2017-04-20 17:42:11 | [main] servers.NodeServer1 (NodeServer1.java:493) - Starting the Node server
+INFO  | 2017-04-20 17:42:11 | [main] servers.NodeServer1 (NodeServer1.java:619) - set 152.1.13.119:4500
+INFO  | 2017-04-20 17:42:11 | [main] servers.NodeServer1 (NodeServer1.java:620) - set 152.1.13.119:9003
+INFO  | 2017-04-20 17:42:11 | [nioEventLoopGroup-3-3] netty.BootStrapServerHandler (BootStrapServerHandler.java:63) - Server Recieved : set 152.1.13.119:9003
+
+INFO  | 2017-04-20 17:42:11 | [nioEventLoopGroup-3-3] netty.BootStrapServerHandler (BootStrapServerHandler.java:65) - Member List : 1:152.1.13.119:9001,2:152.1.13.119:9002,3:152.1.13.119:9003,
+INFO  | 2017-04-20 17:42:11 | [nioEventLoopGroup-3-3] netty.BootStrapServerHandler (BootStrapServerHandler.java:66) - counter : 3
+INFO  | 2017-04-20 17:42:11 | [main] servers.NodeServer1 (NodeServer1.java:627) - MemberID received:3
+INFO  | 2017-04-20 17:42:11 | [main] servers.NodeServer1 (NodeServer1.java:652) - ------------MembersList:----------
+1:152.1.13.119:9001,2:152.1.13.119:9002,3:152.1.13.119:9003,
+INFO  | 2017-04-20 17:42:11 | [main] servers.NodeServer1 (NodeServer1.java:664) - Adding1:::/152.1.13.119:9001
+INFO  | 2017-04-20 17:42:11 | [main] servers.NodeServer1 (NodeServer1.java:664) - Adding2:::/152.1.13.119:9002
+INFO  | 2017-04-20 17:42:11 | [main] servers.NodeServer1 (NodeServer1.java:670) - -----------MemberListSize:2
+INFO  | 2017-04-20 17:42:11 | [main] servers.NodeServer1 (NodeServer1.java:498) - 2:::vclv13-119.hpc.ncsu.edu:9002
+INFO  | 2017-04-20 17:42:11 | [main] servers.NodeServer1 (NodeServer1.java:498) - 1:::vclv13-119.hpc.ncsu.edu:9001
+INFO  | 2017-04-20 17:42:11 | [main] servers.NodeServer1 (NodeServer1.java:501) - 
+**ID for this node is :3
+INFO  | 2017-04-20 17:42:11 | [Thread-1] netty.NettyServer1 (NettyServer1.java:49) - Netty server started on port:9003
+INFO  | 2017-04-20 17:42:11 | [main] servers.NodeServer1 (NodeServer1.java:704) - *******MemberlistSize:2
+INFO  | 2017-04-20 17:42:11 | [main] servers.NodeServer1 (NodeServer1.java:708) - Sending JOIN_GROUP:3:152.1.13.119:9003 to: vclv13-119.hpc.ncsu.edu:9002
+INFO  | 2017-04-20 17:42:11 | [nioEventLoopGroup-4-1] netty.InHandler2 (InHandler2.java:56) - Channel Registered: null:null
+INFO  | 2017-04-20 17:42:11 | [nioEventLoopGroup-3-1] netty.InHandler2 (InHandler2.java:56) - Channel Registered: /152.1.13.119:9002:/152.1.13.119:36342
+INFO  | 2017-04-20 17:42:12 | [main] servers.NodeServer1 (NodeServer1.java:708) - Sending JOIN_GROUP:3:152.1.13.119:9003 to: vclv13-119.hpc.ncsu.edu:9001
+INFO  | 2017-04-20 17:42:12 | [nioEventLoopGroup-5-1] netty.InHandler2 (InHandler2.java:56) - Channel Registered: null:null
+INFO  | 2017-04-20 17:42:12 | [nioEventLoopGroup-3-3] netty.InHandler2 (InHandler2.java:56) - Channel Registered: /152.1.13.119:9001:/152.1.13.119:44105
+INFO  | 2017-04-20 17:42:12 | [main] servers.NodeServer1 (NodeServer1.java:555) - Begin Leader Election---------
+INFO  | 2017-04-20 17:42:12 | [main] servers.NodeServer1 (NodeServer1.java:72) - My Notification is:3,3,4,6,ELECTION,1
+INFO  | 2017-04-20 17:42:12 | [main] servers.NodeServer1 (NodeServer1.java:675) - SendNotificationToAll()3,3,4,6,ELECTION,1
+INFO  | 2017-04-20 17:42:12 | [main] servers.NodeServer1 (NodeServer1.java:704) - *******MemberlistSize:2
+INFO  | 2017-04-20 17:42:12 | [nioEventLoopGroup-3-1] netty.InHandler2 (InHandler2.java:41) - >>>Channel Read:JOIN_GROUP:3:152.1.13.119:9003
+
+INFO  | 2017-04-20 17:42:12 | [nioEventLoopGroup-3-1] netty.InHandler2 (InHandler2.java:72) - {1=vclv13-119.hpc.ncsu.edu/152.1.13.119:9001, 3=/152.1.13.119:9003}
+INFO  | 2017-04-20 17:42:12 | [nioEventLoopGroup-3-1] netty.InHandler2 (InHandler2.java:43) - <<<Response:OK
+INFO  | 2017-04-20 17:42:12 | [main] servers.NodeServer1 (NodeServer1.java:708) - Sending CNOTIFICATION:3,3,4,6,ELECTION,1 to: vclv13-119.hpc.ncsu.edu:9002
+INFO  | 2017-04-20 17:42:12 | [nioEventLoopGroup-4-1] netty.InHandler2 (InHandler2.java:41) - >>>Channel Read:OK
+
+INFO  | 2017-04-20 17:42:12 | [nioEventLoopGroup-3-3] netty.InHandler2 (InHandler2.java:41) - >>>Channel Read:JOIN_GROUP:3:152.1.13.119:9003
+
+INFO  | 2017-04-20 17:42:12 | [nioEventLoopGroup-4-1] netty.InHandler2 (InHandler2.java:172) - Client received OK!!
+INFO  | 2017-04-20 17:42:12 | [nioEventLoopGroup-3-3] netty.InHandler2 (InHandler2.java:72) - {2=/152.1.13.119:9002, 3=/152.1.13.119:9003}
+INFO  | 2017-04-20 17:42:12 | [nioEventLoopGroup-3-3] netty.InHandler2 (InHandler2.java:43) - <<<Response:OK
+INFO  | 2017-04-20 17:42:12 | [nioEventLoopGroup-4-1] netty.InHandler2 (InHandler2.java:173) - {2=vclv13-119.hpc.ncsu.edu/152.1.13.119:9002, 1=vclv13-119.hpc.ncsu.edu/152.1.13.119:9001}
+INFO  | 2017-04-20 17:42:12 | [nioEventLoopGroup-4-1] netty.InHandler2 (InHandler2.java:43) - <<<Response:
+INFO  | 2017-04-20 17:42:12 | [nioEventLoopGroup-5-1] netty.InHandler2 (InHandler2.java:41) - >>>Channel Read:OK
+
+INFO  | 2017-04-20 17:42:12 | [nioEventLoopGroup-5-1] netty.InHandler2 (InHandler2.java:172) - Client received OK!!
+INFO  | 2017-04-20 17:42:12 | [nioEventLoopGroup-5-1] netty.InHandler2 (InHandler2.java:173) - {2=vclv13-119.hpc.ncsu.edu/152.1.13.119:9002, 1=vclv13-119.hpc.ncsu.edu/152.1.13.119:9001}
+INFO  | 2017-04-20 17:42:12 | [nioEventLoopGroup-5-1] netty.InHandler2 (InHandler2.java:43) - <<<Response:
+INFO  | 2017-04-20 17:42:12 | [nioEventLoopGroup-6-1] netty.InHandler2 (InHandler2.java:56) - Channel Registered: null:null
+INFO  | 2017-04-20 17:42:12 | [main] servers.NodeServer1 (NodeServer1.java:708) - Sending CNOTIFICATION:3,3,4,6,ELECTION,1 to: vclv13-119.hpc.ncsu.edu:9001
+INFO  | 2017-04-20 17:42:12 | [nioEventLoopGroup-3-2] netty.InHandler2 (InHandler2.java:56) - Channel Registered: /152.1.13.119:9002:/152.1.13.119:36344
+INFO  | 2017-04-20 17:42:12 | [nioEventLoopGroup-3-2] netty.InHandler2 (InHandler2.java:41) - >>>Channel Read:CNOTIFICATION:3,3,4,6,ELECTION,1
+
+INFO  | 2017-04-20 17:42:12 | [nioEventLoopGroup-3-2] netty.InHandler2 (InHandler2.java:88) - Before:0
+INFO  | 2017-04-20 17:42:12 | [nioEventLoopGroup-3-2] netty.InHandler2 (InHandler2.java:89) - adding notification to the queue3,3,4,6,ELECTION,1
+INFO  | 2017-04-20 17:42:12 | [nioEventLoopGroup-8-1] netty.InHandler2 (InHandler2.java:56) - Channel Registered: null:null
+INFO  | 2017-04-20 17:42:12 | [main] servers.NodeServer1 (NodeServer1.java:78) - Fetching from CurrentElectionQueue:
+
+INFO  | 2017-04-20 17:42:12 | [main] servers.NodeServer1 (NodeServer1.java:82) - Notification Queue is empty!!
+INFO  | 2017-04-20 17:42:12 | [nioEventLoopGroup-3-4] netty.InHandler2 (InHandler2.java:56) - Channel Registered: /152.1.13.119:9001:/152.1.13.119:44107
+INFO  | 2017-04-20 17:42:12 | [nioEventLoopGroup-3-4] netty.InHandler2 (InHandler2.java:41) - >>>Channel Read:CNOTIFICATION:3,3,4,6,ELECTION,1
+
+INFO  | 2017-04-20 17:42:12 | [nioEventLoopGroup-3-4] netty.InHandler2 (InHandler2.java:88) - Before:1
+INFO  | 2017-04-20 17:42:12 | [nioEventLoopGroup-3-4] netty.InHandler2 (InHandler2.java:89) - adding notification to the queue3,3,4,6,ELECTION,1
+INFO  | 2017-04-20 17:42:12 | [nioEventLoopGroup-3-2] netty.InHandler2 (InHandler2.java:99) - After:2
+INFO  | 2017-04-20 17:42:12 | [nioEventLoopGroup-3-2] netty.InHandler2 (InHandler2.java:100) - NODE is in STATE: ELECTION
+INFO  | 2017-04-20 17:42:12 | [nioEventLoopGroup-3-2] netty.InHandler2 (InHandler2.java:101) - My Election ROUND: 1
+INFO  | 2017-04-20 17:42:12 | [nioEventLoopGroup-3-2] netty.InHandler2 (InHandler2.java:102) - his Election ROUND: 1
+INFO  | 2017-04-20 17:42:12 | [nioEventLoopGroup-3-2] netty.InHandler2 (InHandler2.java:43) - <<<Response:SNOTIFICATION:1,1,3,4,ELECTION,1
+INFO  | 2017-04-20 17:42:12 | [nioEventLoopGroup-5-1] netty.InHandler2 (InHandler2.java:41) - >>>Channel Read:SNOTIFICATION:1,1,3,4,ELECTION,1
+
+INFO  | 2017-04-20 17:42:12 | [nioEventLoopGroup-5-1] netty.InHandler2 (InHandler2.java:142) - Before:1
+INFO  | 2017-04-20 17:42:12 | [main] servers.NodeServer1 (NodeServer1.java:78) - Fetching from CurrentElectionQueue:
+
+INFO  | 2017-04-20 17:42:12 | [main] servers.NodeServer1 (NodeServer1.java:105) - Received notification is in Election
+INFO  | 2017-04-20 17:42:12 | [main] servers.NodeServer1 (NodeServer1.java:117) - -------------------------
+INFO  | 2017-04-20 17:42:12 | [main] servers.NodeServer1 (NodeServer1.java:118) - myvote:Vote [ Id =1,Epoch = 3,Counter = 4]
+INFO  | 2017-04-20 17:42:12 | [main] servers.NodeServer1 (NodeServer1.java:119) - othervote:Vote [ Id =3,Epoch = 4,Counter = 6]
+INFO  | 2017-04-20 17:42:12 | [main] servers.NodeServer1 (NodeServer1.java:120) - vote compare:1
+INFO  | 2017-04-20 17:42:12 | [main] servers.NodeServer1 (NodeServer1.java:121) - -------------------------
+INFO  | 2017-04-20 17:42:12 | [main] servers.NodeServer1 (NodeServer1.java:123) - His vote bigger than mine
+INFO  | 2017-04-20 17:42:12 | [main] servers.NodeServer1 (NodeServer1.java:675) - SendNotificationToAll()1,3,4,6,ELECTION,1
+INFO  | 2017-04-20 17:42:12 | [main] servers.NodeServer1 (NodeServer1.java:704) - *******MemberlistSize:2
+INFO  | 2017-04-20 17:42:12 | [main] servers.NodeServer1 (NodeServer1.java:708) - Sending CNOTIFICATION:1,3,4,6,ELECTION,1 to: vclv13-119.hpc.ncsu.edu:9002
+INFO  | 2017-04-20 17:42:12 | [nioEventLoopGroup-9-1] netty.InHandler2 (InHandler2.java:56) - Channel Registered: null:null
+INFO  | 2017-04-20 17:42:12 | [nioEventLoopGroup-3-3] netty.InHandler2 (InHandler2.java:56) - Channel Registered: /152.1.13.119:9002:/152.1.13.119:36346
+INFO  | 2017-04-20 17:42:12 | [nioEventLoopGroup-3-3] netty.InHandler2 (InHandler2.java:41) - >>>Channel Read:CNOTIFICATION:1,3,4,6,ELECTION,1
+
+INFO  | 2017-04-20 17:42:12 | [nioEventLoopGroup-3-3] netty.InHandler2 (InHandler2.java:88) - Before:2
+INFO  | 2017-04-20 17:42:12 | [nioEventLoopGroup-3-3] netty.InHandler2 (InHandler2.java:89) - adding notification to the queue1,3,4,6,ELECTION,1
+INFO  | 2017-04-20 17:42:12 | [main] servers.NodeServer1 (NodeServer1.java:708) - Sending CNOTIFICATION:1,3,4,6,ELECTION,1 to: vclv13-119.hpc.ncsu.edu:9003
+INFO  | 2017-04-20 17:42:12 | [nioEventLoopGroup-10-1] netty.InHandler2 (InHandler2.java:56) - Channel Registered: null:null
+INFO  | 2017-04-20 17:42:12 | [main] servers.NodeServer1 (NodeServer1.java:132) - *****Vote for NodeID:3:::Vote [ Id =3,Epoch = 4,Counter = 6]
+INFO  | 2017-04-20 17:42:12 | [main] servers.NodeServer1 (NodeServer1.java:138) - *****receivedVote.size:2
+INFO  | 2017-04-20 17:42:12 | [main] servers.NodeServer1 (NodeServer1.java:139) - *****memberList.size:2
+INFO  | 2017-04-20 17:42:12 | [nioEventLoopGroup-3-1] netty.InHandler2 (InHandler2.java:56) - Channel Registered: /152.1.13.119:9003:/152.1.13.119:58482
+INFO  | 2017-04-20 17:42:12 | [main] servers.NodeServer1 (NodeServer1.java:151) - *Checking for Quorum in received votes
+INFO  | 2017-04-20 17:42:12 | [main] servers.NodeServer1 (NodeServer1.java:160) - **Found Quorum in received votes
+INFO  | 2017-04-20 17:42:12 | [nioEventLoopGroup-3-1] netty.InHandler2 (InHandler2.java:41) - >>>Channel Read:CNOTIFICATION:1,3,4,6,ELECTION,1
+
+INFO  | 2017-04-20 17:42:12 | [nioEventLoopGroup-3-1] netty.InHandler2 (InHandler2.java:88) - Before:0
+INFO  | 2017-04-20 17:42:12 | [nioEventLoopGroup-3-1] netty.InHandler2 (InHandler2.java:89) - adding notification to the queue1,3,4,6,ELECTION,1
+INFO  | 2017-04-20 17:42:13 | [nioEventLoopGroup-3-2] netty.InHandler2 (InHandler2.java:99) - After:3
+INFO  | 2017-04-20 17:42:13 | [nioEventLoopGroup-3-2] netty.InHandler2 (InHandler2.java:100) - NODE is in STATE: ELECTION
+INFO  | 2017-04-20 17:42:13 | [nioEventLoopGroup-3-2] netty.InHandler2 (InHandler2.java:101) - My Election ROUND: 1
+INFO  | 2017-04-20 17:42:13 | [nioEventLoopGroup-3-2] netty.InHandler2 (InHandler2.java:102) - his Election ROUND: 1
+INFO  | 2017-04-20 17:42:13 | [nioEventLoopGroup-3-2] netty.InHandler2 (InHandler2.java:43) - <<<Response:SNOTIFICATION:2,2,4,5,ELECTION,1
+INFO  | 2017-04-20 17:42:13 | [nioEventLoopGroup-6-1] netty.InHandler2 (InHandler2.java:41) - >>>Channel Read:SNOTIFICATION:2,2,4,5,ELECTION,1
+
+INFO  | 2017-04-20 17:42:13 | [nioEventLoopGroup-6-1] netty.InHandler2 (InHandler2.java:142) - Before:1
+INFO  | 2017-04-20 17:42:13 | [nioEventLoopGroup-3-4] netty.InHandler2 (InHandler2.java:99) - After:2
+INFO  | 2017-04-20 17:42:13 | [nioEventLoopGroup-3-4] netty.InHandler2 (InHandler2.java:100) - NODE is in STATE: ELECTION
+INFO  | 2017-04-20 17:42:13 | [nioEventLoopGroup-3-4] netty.InHandler2 (InHandler2.java:101) - My Election ROUND: 1
+INFO  | 2017-04-20 17:42:13 | [nioEventLoopGroup-3-4] netty.InHandler2 (InHandler2.java:102) - his Election ROUND: 1
+INFO  | 2017-04-20 17:42:13 | [nioEventLoopGroup-3-4] netty.InHandler2 (InHandler2.java:43) - <<<Response:SNOTIFICATION:1,3,4,6,ELECTION,1
+INFO  | 2017-04-20 17:42:13 | [nioEventLoopGroup-8-1] netty.InHandler2 (InHandler2.java:41) - >>>Channel Read:SNOTIFICATION:1,3,4,6,ELECTION,1
+
+INFO  | 2017-04-20 17:42:13 | [nioEventLoopGroup-8-1] netty.InHandler2 (InHandler2.java:142) - Before:2
+INFO  | 2017-04-20 17:42:13 | [main] servers.NodeServer1 (NodeServer1.java:78) - Fetching from CurrentElectionQueue:
+
+INFO  | 2017-04-20 17:42:13 | [main] servers.NodeServer1 (NodeServer1.java:105) - Received notification is in Election
+INFO  | 2017-04-20 17:42:13 | [main] servers.NodeServer1 (NodeServer1.java:117) - -------------------------
+INFO  | 2017-04-20 17:42:13 | [main] servers.NodeServer1 (NodeServer1.java:118) - myvote:Vote [ Id =2,Epoch = 4,Counter = 5]
+INFO  | 2017-04-20 17:42:13 | [main] servers.NodeServer1 (NodeServer1.java:119) - othervote:Vote [ Id =1,Epoch = 3,Counter = 4]
+INFO  | 2017-04-20 17:42:13 | [main] servers.NodeServer1 (NodeServer1.java:120) - vote compare:-1
+INFO  | 2017-04-20 17:42:13 | [main] servers.NodeServer1 (NodeServer1.java:121) - -------------------------
+INFO  | 2017-04-20 17:42:13 | [main] servers.NodeServer1 (NodeServer1.java:675) - SendNotificationToAll()2,2,4,5,ELECTION,1
+INFO  | 2017-04-20 17:42:13 | [main] servers.NodeServer1 (NodeServer1.java:704) - *******MemberlistSize:2
+INFO  | 2017-04-20 17:42:13 | [main] servers.NodeServer1 (NodeServer1.java:708) - Sending CNOTIFICATION:2,2,4,5,ELECTION,1 to: vclv13-119.hpc.ncsu.edu:9001
+INFO  | 2017-04-20 17:42:13 | [nioEventLoopGroup-10-1] netty.InHandler2 (InHandler2.java:56) - Channel Registered: null:null
+INFO  | 2017-04-20 17:42:13 | [nioEventLoopGroup-3-1] netty.InHandler2 (InHandler2.java:56) - Channel Registered: /152.1.13.119:9001:/152.1.13.119:44110
+INFO  | 2017-04-20 17:42:13 | [nioEventLoopGroup-3-1] netty.InHandler2 (InHandler2.java:41) - >>>Channel Read:CNOTIFICATION:2,2,4,5,ELECTION,1
+
+INFO  | 2017-04-20 17:42:13 | [nioEventLoopGroup-3-1] netty.InHandler2 (InHandler2.java:88) - Before:2
+INFO  | 2017-04-20 17:42:13 | [nioEventLoopGroup-3-1] netty.InHandler2 (InHandler2.java:89) - adding notification to the queue2,2,4,5,ELECTION,1
+INFO  | 2017-04-20 17:42:13 | [main] servers.NodeServer1 (NodeServer1.java:708) - Sending CNOTIFICATION:2,2,4,5,ELECTION,1 to: vclv13-119.hpc.ncsu.edu:9003
+INFO  | 2017-04-20 17:42:13 | [nioEventLoopGroup-11-1] netty.InHandler2 (InHandler2.java:56) - Channel Registered: null:null
+INFO  | 2017-04-20 17:42:13 | [main] servers.NodeServer1 (NodeServer1.java:132) - *****Vote for NodeID:1:::Vote [ Id =1,Epoch = 3,Counter = 4]
+INFO  | 2017-04-20 17:42:13 | [main] servers.NodeServer1 (NodeServer1.java:138) - *****receivedVote.size:2
+INFO  | 2017-04-20 17:42:13 | [main] servers.NodeServer1 (NodeServer1.java:139) - *****memberList.size:2
+INFO  | 2017-04-20 17:42:13 | [nioEventLoopGroup-3-2] netty.InHandler2 (InHandler2.java:56) - Channel Registered: /152.1.13.119:9003:/152.1.13.119:58484
+INFO  | 2017-04-20 17:42:13 | [main] servers.NodeServer1 (NodeServer1.java:151) - *Checking for Quorum in received votes
+INFO  | 2017-04-20 17:42:13 | [main] servers.NodeServer1 (NodeServer1.java:78) - Fetching from CurrentElectionQueue:
+
+INFO  | 2017-04-20 17:42:13 | [nioEventLoopGroup-3-2] netty.InHandler2 (InHandler2.java:41) - >>>Channel Read:CNOTIFICATION:2,2,4,5,ELECTION,1
+
+INFO  | 2017-04-20 17:42:13 | [main] servers.NodeServer1 (NodeServer1.java:105) - Received notification is in Election
+INFO  | 2017-04-20 17:42:13 | [nioEventLoopGroup-3-2] netty.InHandler2 (InHandler2.java:88) - Before:3
+INFO  | 2017-04-20 17:42:13 | [main] servers.NodeServer1 (NodeServer1.java:117) - -------------------------
+INFO  | 2017-04-20 17:42:13 | [nioEventLoopGroup-3-2] netty.InHandler2 (InHandler2.java:89) - adding notification to the queue2,2,4,5,ELECTION,1
+INFO  | 2017-04-20 17:42:13 | [main] servers.NodeServer1 (NodeServer1.java:118) - myvote:Vote [ Id =2,Epoch = 4,Counter = 5]
+INFO  | 2017-04-20 17:42:13 | [main] servers.NodeServer1 (NodeServer1.java:119) - othervote:Vote [ Id =3,Epoch = 4,Counter = 6]
+INFO  | 2017-04-20 17:42:13 | [main] servers.NodeServer1 (NodeServer1.java:120) - vote compare:1
+INFO  | 2017-04-20 17:42:13 | [main] servers.NodeServer1 (NodeServer1.java:121) - -------------------------
+INFO  | 2017-04-20 17:42:13 | [main] servers.NodeServer1 (NodeServer1.java:123) - His vote bigger than mine
+INFO  | 2017-04-20 17:42:13 | [main] servers.NodeServer1 (NodeServer1.java:675) - SendNotificationToAll()2,3,4,6,ELECTION,1
+INFO  | 2017-04-20 17:42:13 | [main] servers.NodeServer1 (NodeServer1.java:704) - *******MemberlistSize:2
+INFO  | 2017-04-20 17:42:13 | [main] servers.NodeServer1 (NodeServer1.java:708) - Sending CNOTIFICATION:2,3,4,6,ELECTION,1 to: vclv13-119.hpc.ncsu.edu:9001
+INFO  | 2017-04-20 17:42:13 | [nioEventLoopGroup-12-1] netty.InHandler2 (InHandler2.java:56) - Channel Registered: null:null
+INFO  | 2017-04-20 17:42:13 | [main] servers.NodeServer1 (NodeServer1.java:708) - Sending CNOTIFICATION:2,3,4,6,ELECTION,1 to: vclv13-119.hpc.ncsu.edu:9003
+INFO  | 2017-04-20 17:42:13 | [nioEventLoopGroup-3-2] netty.InHandler2 (InHandler2.java:56) - Channel Registered: /152.1.13.119:9001:/152.1.13.119:44112
+INFO  | 2017-04-20 17:42:13 | [nioEventLoopGroup-3-2] netty.InHandler2 (InHandler2.java:41) - >>>Channel Read:CNOTIFICATION:2,3,4,6,ELECTION,1
+
+INFO  | 2017-04-20 17:42:13 | [nioEventLoopGroup-3-2] netty.InHandler2 (InHandler2.java:88) - Before:3
+INFO  | 2017-04-20 17:42:13 | [nioEventLoopGroup-3-2] netty.InHandler2 (InHandler2.java:89) - adding notification to the queue2,3,4,6,ELECTION,1
+INFO  | 2017-04-20 17:42:13 | [nioEventLoopGroup-13-1] netty.InHandler2 (InHandler2.java:56) - Channel Registered: null:null
+INFO  | 2017-04-20 17:42:13 | [main] servers.NodeServer1 (NodeServer1.java:132) - *****Vote for NodeID:1:::Vote [ Id =3,Epoch = 4,Counter = 6]
+INFO  | 2017-04-20 17:42:13 | [main] servers.NodeServer1 (NodeServer1.java:138) - *****receivedVote.size:2
+INFO  | 2017-04-20 17:42:13 | [main] servers.NodeServer1 (NodeServer1.java:139) - *****memberList.size:2
+INFO  | 2017-04-20 17:42:13 | [nioEventLoopGroup-3-3] netty.InHandler2 (InHandler2.java:56) - Channel Registered: /152.1.13.119:9003:/152.1.13.119:58486
+INFO  | 2017-04-20 17:42:13 | [main] servers.NodeServer1 (NodeServer1.java:151) - *Checking for Quorum in received votes
+INFO  | 2017-04-20 17:42:13 | [main] servers.NodeServer1 (NodeServer1.java:160) - **Found Quorum in received votes
+INFO  | 2017-04-20 17:42:13 | [nioEventLoopGroup-3-3] netty.InHandler2 (InHandler2.java:41) - >>>Channel Read:CNOTIFICATION:2,3,4,6,ELECTION,1
+
+INFO  | 2017-04-20 17:42:13 | [nioEventLoopGroup-3-3] netty.InHandler2 (InHandler2.java:88) - Before:4
+INFO  | 2017-04-20 17:42:13 | [nioEventLoopGroup-3-3] netty.InHandler2 (InHandler2.java:89) - adding notification to the queue2,3,4,6,ELECTION,1
+INFO  | 2017-04-20 17:42:13 | [nioEventLoopGroup-5-1] netty.InHandler2 (InHandler2.java:152) - After:3
+INFO  | 2017-04-20 17:42:13 | [nioEventLoopGroup-5-1] netty.InHandler2 (InHandler2.java:159) - {1=vclv13-119.hpc.ncsu.edu/152.1.13.119:9001, 3=vclv13-119.hpc.ncsu.edu/152.1.13.119:9003}
+INFO  | 2017-04-20 17:42:13 | [nioEventLoopGroup-5-1] netty.InHandler2 (InHandler2.java:43) - <<<Response:ERROR
+INFO  | 2017-04-20 17:42:13 | [nioEventLoopGroup-3-3] netty.InHandler2 (InHandler2.java:99) - After:3
+INFO  | 2017-04-20 17:42:13 | [nioEventLoopGroup-3-3] netty.InHandler2 (InHandler2.java:100) - NODE is in STATE: ELECTION
+INFO  | 2017-04-20 17:42:13 | [nioEventLoopGroup-3-3] netty.InHandler2 (InHandler2.java:101) - My Election ROUND: 1
+INFO  | 2017-04-20 17:42:13 | [nioEventLoopGroup-3-3] netty.InHandler2 (InHandler2.java:102) - his Election ROUND: 1
+INFO  | 2017-04-20 17:42:13 | [nioEventLoopGroup-3-3] netty.InHandler2 (InHandler2.java:43) - <<<Response:SNOTIFICATION:2,3,4,6,ELECTION,1
+INFO  | 2017-04-20 17:42:13 | [nioEventLoopGroup-9-1] netty.InHandler2 (InHandler2.java:41) - >>>Channel Read:SNOTIFICATION:2,3,4,6,ELECTION,1
+
+INFO  | 2017-04-20 17:42:13 | [nioEventLoopGroup-9-1] netty.InHandler2 (InHandler2.java:142) - Before:4
+INFO  | 2017-04-20 17:42:13 | [nioEventLoopGroup-3-1] netty.InHandler2 (InHandler2.java:99) - After:5
+INFO  | 2017-04-20 17:42:13 | [nioEventLoopGroup-3-1] netty.InHandler2 (InHandler2.java:100) - NODE is in STATE: ELECTION
+INFO  | 2017-04-20 17:42:13 | [nioEventLoopGroup-3-1] netty.InHandler2 (InHandler2.java:101) - My Election ROUND: 1
+INFO  | 2017-04-20 17:42:13 | [nioEventLoopGroup-3-1] netty.InHandler2 (InHandler2.java:102) - his Election ROUND: 1
+INFO  | 2017-04-20 17:42:13 | [nioEventLoopGroup-3-1] netty.InHandler2 (InHandler2.java:43) - <<<Response:SNOTIFICATION:3,3,4,6,ELECTION,1
+INFO  | 2017-04-20 17:42:13 | [nioEventLoopGroup-10-1] netty.InHandler2 (InHandler2.java:41) - >>>Channel Read:SNOTIFICATION:3,3,4,6,ELECTION,1
+
+INFO  | 2017-04-20 17:42:13 | [nioEventLoopGroup-10-1] netty.InHandler2 (InHandler2.java:142) - Before:5
+INFO  | 2017-04-20 17:42:14 | [main] servers.NodeServer1 (NodeServer1.java:78) - Fetching from CurrentElectionQueue:
+
+INFO  | 2017-04-20 17:42:14 | [main] servers.NodeServer1 (NodeServer1.java:105) - Received notification is in Election
+INFO  | 2017-04-20 17:42:14 | [main] servers.NodeServer1 (NodeServer1.java:117) - -------------------------
+INFO  | 2017-04-20 17:42:14 | [main] servers.NodeServer1 (NodeServer1.java:118) - myvote:Vote [ Id =3,Epoch = 4,Counter = 6]
+INFO  | 2017-04-20 17:42:14 | [main] servers.NodeServer1 (NodeServer1.java:119) - othervote:Vote [ Id =2,Epoch = 4,Counter = 5]
+INFO  | 2017-04-20 17:42:14 | [main] servers.NodeServer1 (NodeServer1.java:120) - vote compare:-1
+INFO  | 2017-04-20 17:42:14 | [nioEventLoopGroup-6-1] netty.InHandler2 (InHandler2.java:152) - After:5
+INFO  | 2017-04-20 17:42:14 | [nioEventLoopGroup-6-1] netty.InHandler2 (InHandler2.java:159) - {2=vclv13-119.hpc.ncsu.edu/152.1.13.119:9002, 1=vclv13-119.hpc.ncsu.edu/152.1.13.119:9001}
+INFO  | 2017-04-20 17:42:14 | [main] servers.NodeServer1 (NodeServer1.java:121) - -------------------------
+INFO  | 2017-04-20 17:42:14 | [nioEventLoopGroup-6-1] netty.InHandler2 (InHandler2.java:43) - <<<Response:ERROR
+INFO  | 2017-04-20 17:42:14 | [main] servers.NodeServer1 (NodeServer1.java:675) - SendNotificationToAll()3,3,4,6,ELECTION,1
+INFO  | 2017-04-20 17:42:14 | [main] servers.NodeServer1 (NodeServer1.java:704) - *******MemberlistSize:2
+INFO  | 2017-04-20 17:42:14 | [main] servers.NodeServer1 (NodeServer1.java:708) - Sending CNOTIFICATION:3,3,4,6,ELECTION,1 to: vclv13-119.hpc.ncsu.edu:9002
+INFO  | 2017-04-20 17:42:14 | [nioEventLoopGroup-12-1] netty.InHandler2 (InHandler2.java:56) - Channel Registered: null:null
+INFO  | 2017-04-20 17:42:14 | [main] servers.NodeServer1 (NodeServer1.java:708) - Sending CNOTIFICATION:3,3,4,6,ELECTION,1 to: vclv13-119.hpc.ncsu.edu:9001
+INFO  | 2017-04-20 17:42:14 | [nioEventLoopGroup-3-4] netty.InHandler2 (InHandler2.java:56) - Channel Registered: /152.1.13.119:9002:/152.1.13.119:36352
+INFO  | 2017-04-20 17:42:14 | [nioEventLoopGroup-3-4] netty.InHandler2 (InHandler2.java:41) - >>>Channel Read:CNOTIFICATION:3,3,4,6,ELECTION,1
+
+INFO  | 2017-04-20 17:42:14 | [nioEventLoopGroup-13-1] netty.InHandler2 (InHandler2.java:56) - Channel Registered: null:null
+INFO  | 2017-04-20 17:42:14 | [nioEventLoopGroup-8-1] netty.InHandler2 (InHandler2.java:152) - After:5
+INFO  | 2017-04-20 17:42:14 | [nioEventLoopGroup-3-4] netty.InHandler2 (InHandler2.java:88) - Before:3
+INFO  | 2017-04-20 17:42:14 | [nioEventLoopGroup-3-4] netty.InHandler2 (InHandler2.java:89) - adding notification to the queue3,3,4,6,ELECTION,1
+INFO  | 2017-04-20 17:42:14 | [nioEventLoopGroup-8-1] netty.InHandler2 (InHandler2.java:159) - {2=vclv13-119.hpc.ncsu.edu/152.1.13.119:9002, 1=vclv13-119.hpc.ncsu.edu/152.1.13.119:9001}
+INFO  | 2017-04-20 17:42:14 | [nioEventLoopGroup-3-3] netty.InHandler2 (InHandler2.java:56) - Channel Registered: /152.1.13.119:9001:/152.1.13.119:44115
+INFO  | 2017-04-20 17:42:14 | [nioEventLoopGroup-8-1] netty.InHandler2 (InHandler2.java:43) - <<<Response:ERROR
+INFO  | 2017-04-20 17:42:14 | [main] servers.NodeServer1 (NodeServer1.java:132) - *****Vote for NodeID:2:::Vote [ Id =2,Epoch = 4,Counter = 5]
+INFO  | 2017-04-20 17:42:14 | [main] servers.NodeServer1 (NodeServer1.java:138) - *****receivedVote.size:2
+INFO  | 2017-04-20 17:42:14 | [main] servers.NodeServer1 (NodeServer1.java:139) - *****memberList.size:2
+INFO  | 2017-04-20 17:42:14 | [nioEventLoopGroup-3-3] netty.InHandler2 (InHandler2.java:41) - >>>Channel Read:CNOTIFICATION:3,3,4,6,ELECTION,1
+
+INFO  | 2017-04-20 17:42:14 | [nioEventLoopGroup-3-3] netty.InHandler2 (InHandler2.java:88) - Before:6
+INFO  | 2017-04-20 17:42:14 | [nioEventLoopGroup-3-3] netty.InHandler2 (InHandler2.java:89) - adding notification to the queue3,3,4,6,ELECTION,1
+INFO  | 2017-04-20 17:42:14 | [main] servers.NodeServer1 (NodeServer1.java:151) - *Checking for Quorum in received votes
+INFO  | 2017-04-20 17:42:14 | [main] servers.NodeServer1 (NodeServer1.java:78) - Fetching from CurrentElectionQueue:
+
+INFO  | 2017-04-20 17:42:14 | [main] servers.NodeServer1 (NodeServer1.java:105) - Received notification is in Election
+INFO  | 2017-04-20 17:42:14 | [main] servers.NodeServer1 (NodeServer1.java:117) - -------------------------
+INFO  | 2017-04-20 17:42:14 | [main] servers.NodeServer1 (NodeServer1.java:118) - myvote:Vote [ Id =3,Epoch = 4,Counter = 6]
+INFO  | 2017-04-20 17:42:14 | [main] servers.NodeServer1 (NodeServer1.java:119) - othervote:Vote [ Id =3,Epoch = 4,Counter = 6]
+INFO  | 2017-04-20 17:42:14 | [main] servers.NodeServer1 (NodeServer1.java:120) - vote compare:0
+INFO  | 2017-04-20 17:42:14 | [main] servers.NodeServer1 (NodeServer1.java:121) - -------------------------
+INFO  | 2017-04-20 17:42:14 | [main] servers.NodeServer1 (NodeServer1.java:675) - SendNotificationToAll()3,3,4,6,ELECTION,1
+INFO  | 2017-04-20 17:42:14 | [main] servers.NodeServer1 (NodeServer1.java:704) - *******MemberlistSize:2
+INFO  | 2017-04-20 17:42:14 | [main] servers.NodeServer1 (NodeServer1.java:708) - Sending CNOTIFICATION:3,3,4,6,ELECTION,1 to: vclv13-119.hpc.ncsu.edu:9002
+INFO  | 2017-04-20 17:42:14 | [nioEventLoopGroup-14-1] netty.InHandler2 (InHandler2.java:56) - Channel Registered: null:null
+INFO  | 2017-04-20 17:42:14 | [main] servers.NodeServer1 (NodeServer1.java:708) - Sending CNOTIFICATION:3,3,4,6,ELECTION,1 to: vclv13-119.hpc.ncsu.edu:9001
+INFO  | 2017-04-20 17:42:14 | [nioEventLoopGroup-3-1] netty.InHandler2 (InHandler2.java:56) - Channel Registered: /152.1.13.119:9002:/152.1.13.119:36354
+INFO  | 2017-04-20 17:42:14 | [nioEventLoopGroup-3-1] netty.InHandler2 (InHandler2.java:41) - >>>Channel Read:CNOTIFICATION:3,3,4,6,ELECTION,1
+
+INFO  | 2017-04-20 17:42:14 | [nioEventLoopGroup-3-1] netty.InHandler2 (InHandler2.java:88) - Before:4
+INFO  | 2017-04-20 17:42:14 | [nioEventLoopGroup-3-1] netty.InHandler2 (InHandler2.java:89) - adding notification to the queue3,3,4,6,ELECTION,1
+INFO  | 2017-04-20 17:42:14 | [nioEventLoopGroup-15-1] netty.InHandler2 (InHandler2.java:56) - Channel Registered: null:null
+INFO  | 2017-04-20 17:42:14 | [nioEventLoopGroup-3-4] netty.InHandler2 (InHandler2.java:56) - Channel Registered: /152.1.13.119:9001:/152.1.13.119:44117
+INFO  | 2017-04-20 17:42:14 | [main] servers.NodeServer1 (NodeServer1.java:132) - *****Vote for NodeID:1:::Vote [ Id =3,Epoch = 4,Counter = 6]
+INFO  | 2017-04-20 17:42:14 | [main] servers.NodeServer1 (NodeServer1.java:138) - *****receivedVote.size:3
+INFO  | 2017-04-20 17:42:14 | [main] servers.NodeServer1 (NodeServer1.java:139) - *****memberList.size:2
+INFO  | 2017-04-20 17:42:14 | [main] servers.NodeServer1 (NodeServer1.java:143) - ***Received Votes from all the members
+INFO  | 2017-04-20 17:42:14 | [main] servers.NodeServer1 (NodeServer1.java:145) - 1::Vote [ Id =3,Epoch = 4,Counter = 6]
+INFO  | 2017-04-20 17:42:14 | [main] servers.NodeServer1 (NodeServer1.java:145) - 2::Vote [ Id =2,Epoch = 4,Counter = 5]
+INFO  | 2017-04-20 17:42:14 | [main] servers.NodeServer1 (NodeServer1.java:145) - 3::Vote [ Id =3,Epoch = 4,Counter = 6]
+INFO  | 2017-04-20 17:42:14 | [main] servers.NodeServer1 (NodeServer1.java:557) - End Leader Election---------
+INFO  | 2017-04-20 17:42:14 | [nioEventLoopGroup-3-4] netty.InHandler2 (InHandler2.java:41) - >>>Channel Read:CNOTIFICATION:3,3,4,6,ELECTION,1
+
+INFO  | 2017-04-20 17:42:14 | [main] servers.NodeServer1 (NodeServer1.java:558) - Leader ID:3
+INFO  | 2017-04-20 17:42:14 | [nioEventLoopGroup-3-4] netty.InHandler2 (InHandler2.java:88) - Before:7
+INFO  | 2017-04-20 17:42:14 | [main] servers.NodeServer1 (NodeServer1.java:559) - Begin Recovery---------
+INFO  | 2017-04-20 17:42:14 | [nioEventLoopGroup-3-4] netty.InHandler2 (InHandler2.java:89) - adding notification to the queue3,3,4,6,ELECTION,1
+INFO  | 2017-04-20 17:42:14 | [main] servers.NodeServer1 (NodeServer1.java:298) - Starting Recovery phase
+INFO  | 2017-04-20 17:42:14 | [main] servers.NodeServer1 (NodeServer1.java:303) - I am Leader
+INFO  | 2017-04-20 17:42:14 | [main] servers.NodeServer1 (NodeServer1.java:310) - Member List size before while is = 2
+INFO  | 2017-04-20 17:42:14 | [main] servers.NodeServer1 (NodeServer1.java:311) - Accepted Epoch Map Size before while is = 0
+INFO  | 2017-04-20 17:42:14 | [nioEventLoopGroup-3-1] netty.InHandler2 (InHandler2.java:99) - After:8
+INFO  | 2017-04-20 17:42:14 | [nioEventLoopGroup-3-1] netty.InHandler2 (InHandler2.java:100) - NODE is in STATE: ELECTION
+INFO  | 2017-04-20 17:42:14 | [nioEventLoopGroup-3-1] netty.InHandler2 (InHandler2.java:101) - My Election ROUND: 1
+INFO  | 2017-04-20 17:42:14 | [nioEventLoopGroup-3-1] netty.InHandler2 (InHandler2.java:102) - his Election ROUND: 1
+INFO  | 2017-04-20 17:42:14 | [nioEventLoopGroup-3-1] netty.InHandler2 (InHandler2.java:43) - <<<Response:SNOTIFICATION:1,3,4,6,ELECTION,1
+INFO  | 2017-04-20 17:42:14 | [nioEventLoopGroup-10-1] netty.InHandler2 (InHandler2.java:41) - >>>Channel Read:SNOTIFICATION:1,3,4,6,ELECTION,1
+
+INFO  | 2017-04-20 17:42:14 | [nioEventLoopGroup-10-1] netty.InHandler2 (InHandler2.java:142) - Before:5
+INFO  | 2017-04-20 17:42:14 | [nioEventLoopGroup-3-2] netty.InHandler2 (InHandler2.java:99) - After:5
+INFO  | 2017-04-20 17:42:14 | [nioEventLoopGroup-3-2] netty.InHandler2 (InHandler2.java:100) - NODE is in STATE: LEADING
+INFO  | 2017-04-20 17:42:14 | [nioEventLoopGroup-3-2] netty.InHandler2 (InHandler2.java:101) - My Election ROUND: 1
+INFO  | 2017-04-20 17:42:14 | [nioEventLoopGroup-3-2] netty.InHandler2 (InHandler2.java:102) - his Election ROUND: 1
+INFO  | 2017-04-20 17:42:14 | [nioEventLoopGroup-3-2] netty.InHandler2 (InHandler2.java:43) - <<<Response:SNOTIFICATION:3,3,4,6,LEADING,1
+INFO  | 2017-04-20 17:42:14 | [nioEventLoopGroup-11-1] netty.InHandler2 (InHandler2.java:41) - >>>Channel Read:SNOTIFICATION:3,3,4,6,LEADING,1
+
+INFO  | 2017-04-20 17:42:14 | [nioEventLoopGroup-11-1] netty.InHandler2 (InHandler2.java:142) - Before:6
+INFO  | 2017-04-20 17:42:14 | [nioEventLoopGroup-3-2] netty.InHandler2 (InHandler2.java:99) - After:8
+INFO  | 2017-04-20 17:42:14 | [nioEventLoopGroup-3-2] netty.InHandler2 (InHandler2.java:100) - NODE is in STATE: ELECTION
+INFO  | 2017-04-20 17:42:14 | [nioEventLoopGroup-3-2] netty.InHandler2 (InHandler2.java:101) - My Election ROUND: 1
+INFO  | 2017-04-20 17:42:14 | [nioEventLoopGroup-3-2] netty.InHandler2 (InHandler2.java:102) - his Election ROUND: 1
+INFO  | 2017-04-20 17:42:14 | [nioEventLoopGroup-3-2] netty.InHandler2 (InHandler2.java:43) - <<<Response:SNOTIFICATION:1,3,4,6,ELECTION,1
+INFO  | 2017-04-20 17:42:14 | [nioEventLoopGroup-12-1] netty.InHandler2 (InHandler2.java:41) - >>>Channel Read:SNOTIFICATION:1,3,4,6,ELECTION,1
+
+INFO  | 2017-04-20 17:42:14 | [nioEventLoopGroup-12-1] netty.InHandler2 (InHandler2.java:142) - Before:7
+INFO  | 2017-04-20 17:42:14 | [nioEventLoopGroup-3-3] netty.InHandler2 (InHandler2.java:99) - After:5
+INFO  | 2017-04-20 17:42:14 | [nioEventLoopGroup-3-3] netty.InHandler2 (InHandler2.java:100) - NODE is in STATE: LEADING
+INFO  | 2017-04-20 17:42:14 | [nioEventLoopGroup-3-3] netty.InHandler2 (InHandler2.java:101) - My Election ROUND: 1
+INFO  | 2017-04-20 17:42:14 | [nioEventLoopGroup-3-3] netty.InHandler2 (InHandler2.java:102) - his Election ROUND: 1
+INFO  | 2017-04-20 17:42:14 | [nioEventLoopGroup-3-3] netty.InHandler2 (InHandler2.java:43) - <<<Response:SNOTIFICATION:3,3,4,6,LEADING,1
+INFO  | 2017-04-20 17:42:14 | [nioEventLoopGroup-13-1] netty.InHandler2 (InHandler2.java:41) - >>>Channel Read:SNOTIFICATION:3,3,4,6,LEADING,1
+
+INFO  | 2017-04-20 17:42:14 | [nioEventLoopGroup-13-1] netty.InHandler2 (InHandler2.java:142) - Before:8
+INFO  | 2017-04-20 17:42:14 | [nioEventLoopGroup-9-1] netty.InHandler2 (InHandler2.java:152) - After:8
+INFO  | 2017-04-20 17:42:14 | [nioEventLoopGroup-9-1] netty.InHandler2 (InHandler2.java:159) - {2=vclv13-119.hpc.ncsu.edu/152.1.13.119:9002, 3=vclv13-119.hpc.ncsu.edu/152.1.13.119:9003}
+INFO  | 2017-04-20 17:42:14 | [nioEventLoopGroup-9-1] netty.InHandler2 (InHandler2.java:43) - <<<Response:ERROR
+INFO  | 2017-04-20 17:42:14 | [nioEventLoopGroup-10-1] netty.InHandler2 (InHandler2.java:152) - After:8
+INFO  | 2017-04-20 17:42:14 | [nioEventLoopGroup-10-1] netty.InHandler2 (InHandler2.java:159) - {2=vclv13-119.hpc.ncsu.edu/152.1.13.119:9002, 3=vclv13-119.hpc.ncsu.edu/152.1.13.119:9003}
+INFO  | 2017-04-20 17:42:14 | [nioEventLoopGroup-10-1] netty.InHandler2 (InHandler2.java:43) - <<<Response:ERROR
+INFO  | 2017-04-20 17:42:15 | [nioEventLoopGroup-3-4] netty.InHandler2 (InHandler2.java:99) - After:9
+INFO  | 2017-04-20 17:42:15 | [nioEventLoopGroup-3-4] netty.InHandler2 (InHandler2.java:100) - NODE is in STATE: ELECTION
+INFO  | 2017-04-20 17:42:15 | [nioEventLoopGroup-3-4] netty.InHandler2 (InHandler2.java:101) - My Election ROUND: 1
+INFO  | 2017-04-20 17:42:15 | [nioEventLoopGroup-3-4] netty.InHandler2 (InHandler2.java:102) - his Election ROUND: 1
+INFO  | 2017-04-20 17:42:15 | [nioEventLoopGroup-3-4] netty.InHandler2 (InHandler2.java:43) - <<<Response:SNOTIFICATION:2,3,4,6,ELECTION,1
+INFO  | 2017-04-20 17:42:15 | [nioEventLoopGroup-12-1] netty.InHandler2 (InHandler2.java:41) - >>>Channel Read:SNOTIFICATION:2,3,4,6,ELECTION,1
+
+INFO  | 2017-04-20 17:42:15 | [nioEventLoopGroup-12-1] netty.InHandler2 (InHandler2.java:159) - {2=vclv13-119.hpc.ncsu.edu/152.1.13.119:9002, 1=vclv13-119.hpc.ncsu.edu/152.1.13.119:9001}
+INFO  | 2017-04-20 17:42:15 | [nioEventLoopGroup-12-1] netty.InHandler2 (InHandler2.java:43) - <<<Response:ERROR
+INFO  | 2017-04-20 17:42:15 | [nioEventLoopGroup-3-3] netty.InHandler2 (InHandler2.java:99) - After:8
+INFO  | 2017-04-20 17:42:15 | [nioEventLoopGroup-3-3] netty.InHandler2 (InHandler2.java:100) - NODE is in STATE: ELECTION
+INFO  | 2017-04-20 17:42:15 | [nioEventLoopGroup-3-3] netty.InHandler2 (InHandler2.java:101) - My Election ROUND: 1
+INFO  | 2017-04-20 17:42:15 | [nioEventLoopGroup-3-3] netty.InHandler2 (InHandler2.java:102) - his Election ROUND: 1
+INFO  | 2017-04-20 17:42:15 | [nioEventLoopGroup-3-3] netty.InHandler2 (InHandler2.java:43) - <<<Response:SNOTIFICATION:1,3,4,6,ELECTION,1
+INFO  | 2017-04-20 17:42:15 | [nioEventLoopGroup-13-1] netty.InHandler2 (InHandler2.java:41) - >>>Channel Read:SNOTIFICATION:1,3,4,6,ELECTION,1
+
+INFO  | 2017-04-20 17:42:15 | [nioEventLoopGroup-13-1] netty.InHandler2 (InHandler2.java:159) - {2=vclv13-119.hpc.ncsu.edu/152.1.13.119:9002, 1=vclv13-119.hpc.ncsu.edu/152.1.13.119:9001}
+INFO  | 2017-04-20 17:42:15 | [nioEventLoopGroup-13-1] netty.InHandler2 (InHandler2.java:43) - <<<Response:ERROR
+INFO  | 2017-04-20 17:42:15 | [nioEventLoopGroup-3-1] netty.InHandler2 (InHandler2.java:99) - After:9
+INFO  | 2017-04-20 17:42:15 | [nioEventLoopGroup-3-1] netty.InHandler2 (InHandler2.java:100) - NODE is in STATE: ELECTION
+INFO  | 2017-04-20 17:42:15 | [nioEventLoopGroup-3-1] netty.InHandler2 (InHandler2.java:101) - My Election ROUND: 1
+INFO  | 2017-04-20 17:42:15 | [nioEventLoopGroup-3-1] netty.InHandler2 (InHandler2.java:102) - his Election ROUND: 1
+INFO  | 2017-04-20 17:42:15 | [nioEventLoopGroup-3-1] netty.InHandler2 (InHandler2.java:43) - <<<Response:SNOTIFICATION:2,3,4,6,ELECTION,1
+INFO  | 2017-04-20 17:42:15 | [nioEventLoopGroup-14-1] netty.InHandler2 (InHandler2.java:41) - >>>Channel Read:SNOTIFICATION:2,3,4,6,ELECTION,1
+
+INFO  | 2017-04-20 17:42:15 | [nioEventLoopGroup-14-1] netty.InHandler2 (InHandler2.java:159) - {2=vclv13-119.hpc.ncsu.edu/152.1.13.119:9002, 1=vclv13-119.hpc.ncsu.edu/152.1.13.119:9001}
+INFO  | 2017-04-20 17:42:15 | [nioEventLoopGroup-14-1] netty.InHandler2 (InHandler2.java:43) - <<<Response:ERROR
+INFO  | 2017-04-20 17:42:15 | [nioEventLoopGroup-3-4] netty.InHandler2 (InHandler2.java:99) - After:8
+INFO  | 2017-04-20 17:42:15 | [nioEventLoopGroup-3-4] netty.InHandler2 (InHandler2.java:100) - NODE is in STATE: ELECTION
+INFO  | 2017-04-20 17:42:15 | [nioEventLoopGroup-3-4] netty.InHandler2 (InHandler2.java:101) - My Election ROUND: 1
+INFO  | 2017-04-20 17:42:15 | [nioEventLoopGroup-3-4] netty.InHandler2 (InHandler2.java:102) - his Election ROUND: 1
+INFO  | 2017-04-20 17:42:15 | [nioEventLoopGroup-3-4] netty.InHandler2 (InHandler2.java:43) - <<<Response:SNOTIFICATION:1,3,4,6,ELECTION,1
+INFO  | 2017-04-20 17:42:15 | [nioEventLoopGroup-15-1] netty.InHandler2 (InHandler2.java:41) - >>>Channel Read:SNOTIFICATION:1,3,4,6,ELECTION,1
+
+INFO  | 2017-04-20 17:42:15 | [nioEventLoopGroup-15-1] netty.InHandler2 (InHandler2.java:159) - {2=vclv13-119.hpc.ncsu.edu/152.1.13.119:9002, 1=vclv13-119.hpc.ncsu.edu/152.1.13.119:9001}
+INFO  | 2017-04-20 17:42:15 | [nioEventLoopGroup-15-1] netty.InHandler2 (InHandler2.java:43) - <<<Response:ERROR
+INFO  | 2017-04-20 17:42:15 | [nioEventLoopGroup-10-1] netty.InHandler2 (InHandler2.java:152) - After:9
+INFO  | 2017-04-20 17:42:15 | [nioEventLoopGroup-10-1] netty.InHandler2 (InHandler2.java:159) - {1=vclv13-119.hpc.ncsu.edu/152.1.13.119:9001, 3=vclv13-119.hpc.ncsu.edu/152.1.13.119:9003}
+INFO  | 2017-04-20 17:42:15 | [nioEventLoopGroup-10-1] netty.InHandler2 (InHandler2.java:43) - <<<Response:ERROR
+INFO  | 2017-04-20 17:42:15 | [nioEventLoopGroup-11-1] netty.InHandler2 (InHandler2.java:152) - After:9
+INFO  | 2017-04-20 17:42:15 | [nioEventLoopGroup-11-1] netty.InHandler2 (InHandler2.java:159) - {1=vclv13-119.hpc.ncsu.edu/152.1.13.119:9001, 3=vclv13-119.hpc.ncsu.edu/152.1.13.119:9003}
+INFO  | 2017-04-20 17:42:15 | [nioEventLoopGroup-11-1] netty.InHandler2 (InHandler2.java:43) - <<<Response:ERROR
+INFO  | 2017-04-20 17:42:15 | [nioEventLoopGroup-12-1] netty.InHandler2 (InHandler2.java:152) - After:9
+INFO  | 2017-04-20 17:42:15 | [nioEventLoopGroup-12-1] netty.InHandler2 (InHandler2.java:159) - {1=vclv13-119.hpc.ncsu.edu/152.1.13.119:9001, 3=vclv13-119.hpc.ncsu.edu/152.1.13.119:9003}
+INFO  | 2017-04-20 17:42:15 | [nioEventLoopGroup-12-1] netty.InHandler2 (InHandler2.java:43) - <<<Response:ERROR
+INFO  | 2017-04-20 17:42:15 | [nioEventLoopGroup-13-1] netty.InHandler2 (InHandler2.java:152) - After:9
+INFO  | 2017-04-20 17:42:15 | [nioEventLoopGroup-13-1] netty.InHandler2 (InHandler2.java:159) - {1=vclv13-119.hpc.ncsu.edu/152.1.13.119:9001, 3=vclv13-119.hpc.ncsu.edu/152.1.13.119:9003}
+INFO  | 2017-04-20 17:42:15 | [nioEventLoopGroup-13-1] netty.InHandler2 (InHandler2.java:43) - <<<Response:ERROR
+INFO  | 2017-04-20 17:42:16 | [main] servers.NodeServer1 (NodeServer1.java:173) - Still have notifications in ElectionQueue
+INFO  | 2017-04-20 17:42:16 | [main] servers.NodeServer1 (NodeServer1.java:78) - Fetching from CurrentElectionQueue:
+
+INFO  | 2017-04-20 17:42:16 | [main] servers.NodeServer1 (NodeServer1.java:105) - Received notification is in Election
+INFO  | 2017-04-20 17:42:16 | [main] servers.NodeServer1 (NodeServer1.java:117) - -------------------------
+INFO  | 2017-04-20 17:42:16 | [main] servers.NodeServer1 (NodeServer1.java:118) - myvote:Vote [ Id =3,Epoch = 4,Counter = 6]
+INFO  | 2017-04-20 17:42:16 | [main] servers.NodeServer1 (NodeServer1.java:119) - othervote:Vote [ Id =2,Epoch = 4,Counter = 5]
+INFO  | 2017-04-20 17:42:16 | [main] servers.NodeServer1 (NodeServer1.java:120) - vote compare:-1
+INFO  | 2017-04-20 17:42:16 | [main] servers.NodeServer1 (NodeServer1.java:121) - -------------------------
+INFO  | 2017-04-20 17:42:16 | [main] servers.NodeServer1 (NodeServer1.java:675) - SendNotificationToAll()1,3,4,6,ELECTION,1
+INFO  | 2017-04-20 17:42:16 | [main] servers.NodeServer1 (NodeServer1.java:704) - *******MemberlistSize:2
+INFO  | 2017-04-20 17:42:16 | [main] servers.NodeServer1 (NodeServer1.java:708) - Sending CNOTIFICATION:1,3,4,6,ELECTION,1 to: vclv13-119.hpc.ncsu.edu:9002
+INFO  | 2017-04-20 17:42:16 | [nioEventLoopGroup-15-1] netty.InHandler2 (InHandler2.java:56) - Channel Registered: null:null
+INFO  | 2017-04-20 17:42:16 | [nioEventLoopGroup-3-2] netty.InHandler2 (InHandler2.java:56) - Channel Registered: /152.1.13.119:9002:/152.1.13.119:36356
+INFO  | 2017-04-20 17:42:16 | [nioEventLoopGroup-3-2] netty.InHandler2 (InHandler2.java:41) - >>>Channel Read:CNOTIFICATION:1,3,4,6,ELECTION,1
+
+INFO  | 2017-04-20 17:42:16 | [nioEventLoopGroup-3-2] netty.InHandler2 (InHandler2.java:88) - Before:9
+INFO  | 2017-04-20 17:42:16 | [nioEventLoopGroup-3-2] netty.InHandler2 (InHandler2.java:89) - adding notification to the queue1,3,4,6,ELECTION,1
+INFO  | 2017-04-20 17:42:16 | [main] servers.NodeServer1 (NodeServer1.java:708) - Sending CNOTIFICATION:1,3,4,6,ELECTION,1 to: vclv13-119.hpc.ncsu.edu:9003
+INFO  | 2017-04-20 17:42:16 | [nioEventLoopGroup-16-1] netty.InHandler2 (InHandler2.java:56) - Channel Registered: null:null
+INFO  | 2017-04-20 17:42:16 | [main] servers.NodeServer1 (NodeServer1.java:132) - *****Vote for NodeID:2:::Vote [ Id =2,Epoch = 4,Counter = 5]
+INFO  | 2017-04-20 17:42:16 | [main] servers.NodeServer1 (NodeServer1.java:138) - *****receivedVote.size:3
+INFO  | 2017-04-20 17:42:16 | [main] servers.NodeServer1 (NodeServer1.java:139) - *****memberList.size:2
+INFO  | 2017-04-20 17:42:16 | [main] servers.NodeServer1 (NodeServer1.java:143) - ***Received Votes from all the members
+INFO  | 2017-04-20 17:42:16 | [main] servers.NodeServer1 (NodeServer1.java:145) - 1::Vote [ Id =3,Epoch = 4,Counter = 6]
+INFO  | 2017-04-20 17:42:16 | [main] servers.NodeServer1 (NodeServer1.java:145) - 2::Vote [ Id =2,Epoch = 4,Counter = 5]
+INFO  | 2017-04-20 17:42:16 | [nioEventLoopGroup-3-4] netty.InHandler2 (InHandler2.java:56) - Channel Registered: /152.1.13.119:9003:/152.1.13.119:58492
+INFO  | 2017-04-20 17:42:16 | [main] servers.NodeServer1 (NodeServer1.java:145) - 3::Vote [ Id =3,Epoch = 4,Counter = 6]
+INFO  | 2017-04-20 17:42:16 | [main] servers.NodeServer1 (NodeServer1.java:557) - End Leader Election---------
+INFO  | 2017-04-20 17:42:16 | [nioEventLoopGroup-3-4] netty.InHandler2 (InHandler2.java:41) - >>>Channel Read:CNOTIFICATION:1,3,4,6,ELECTION,1
+
+INFO  | 2017-04-20 17:42:16 | [main] servers.NodeServer1 (NodeServer1.java:558) - Leader ID:3
+INFO  | 2017-04-20 17:42:16 | [main] servers.NodeServer1 (NodeServer1.java:559) - Begin Recovery---------
+INFO  | 2017-04-20 17:42:16 | [nioEventLoopGroup-3-4] netty.InHandler2 (InHandler2.java:120) - myNotification:3,3,4,6,LEADING,1
+INFO  | 2017-04-20 17:42:16 | [main] servers.NodeServer1 (NodeServer1.java:298) - Starting Recovery phase
+INFO  | 2017-04-20 17:42:16 | [nioEventLoopGroup-3-4] netty.InHandler2 (InHandler2.java:43) - <<<Response:SNOTIFICATION:3,3,4,6,LEADING,1
+INFO  | 2017-04-20 17:42:16 | [main] servers.NodeServer1 (NodeServer1.java:419) - I am Follower
+INFO  | 2017-04-20 17:42:16 | [main] servers.NodeServer1 (NodeServer1.java:430) - Follower info msg is = FOLLOWERINFO:1:3
+INFO  | 2017-04-20 17:42:16 | [nioEventLoopGroup-16-1] netty.InHandler2 (InHandler2.java:41) - >>>Channel Read:SNOTIFICATION:3,3,4,6,LEADING,1
+
+INFO  | 2017-04-20 17:42:16 | [nioEventLoopGroup-16-1] netty.InHandler2 (InHandler2.java:159) - {2=vclv13-119.hpc.ncsu.edu/152.1.13.119:9002, 3=vclv13-119.hpc.ncsu.edu/152.1.13.119:9003}
+INFO  | 2017-04-20 17:42:16 | [nioEventLoopGroup-16-1] netty.InHandler2 (InHandler2.java:43) - <<<Response:ERROR
+INFO  | 2017-04-20 17:42:16 | [nioEventLoopGroup-17-1] netty.InHandler2 (InHandler2.java:56) - Channel Registered: null:null
+INFO  | 2017-04-20 17:42:16 | [nioEventLoopGroup-3-1] netty.InHandler2 (InHandler2.java:56) - Channel Registered: /152.1.13.119:9003:/152.1.13.119:58493
+INFO  | 2017-04-20 17:42:16 | [nioEventLoopGroup-3-1] netty.InHandler2 (InHandler2.java:41) - >>>Channel Read:FOLLOWERINFO:1:3
+
+INFO  | 2017-04-20 17:42:16 | [nioEventLoopGroup-3-1] netty.InHandler2 (InHandler2.java:179) - Request msg is = FOLLOWERINFO:1:3
+
+INFO  | 2017-04-20 17:42:16 | [main] servers.NodeServer1 (NodeServer1.java:322) - Member List size after while is = 2
+INFO  | 2017-04-20 17:42:16 | [main] servers.NodeServer1 (NodeServer1.java:323) - Accepted Epoch Map Size after while is = 1
+INFO  | 2017-04-20 17:42:16 | [main] servers.NodeServer1 (NodeServer1.java:326) - Accepted Epoch before max = 4
+INFO  | 2017-04-20 17:42:16 | [main] servers.NodeServer1 (NodeServer1.java:335) - New max = 4
+INFO  | 2017-04-20 17:42:16 | [nioEventLoopGroup-3-1] netty.InHandler2 (InHandler2.java:43) - <<<Response:NEWEPOCH:5:3
+INFO  | 2017-04-20 17:42:16 | [nioEventLoopGroup-17-1] netty.InHandler2 (InHandler2.java:41) - >>>Channel Read:NEWEPOCH:5:3
+
+INFO  | 2017-04-20 17:42:16 | [nioEventLoopGroup-17-1] netty.InHandler2 (InHandler2.java:219) - Member List is = {2=vclv13-119.hpc.ncsu.edu/152.1.13.119:9002, 3=vclv13-119.hpc.ncsu.edu/152.1.13.119:9003}
+INFO  | 2017-04-20 17:42:16 | [nioEventLoopGroup-17-1] netty.InHandler2 (InHandler2.java:226) - New Epoch received is = 5
+INFO  | 2017-04-20 17:42:16 | [nioEventLoopGroup-18-1] netty.InHandler2 (InHandler2.java:56) - Channel Registered: null:null
+INFO  | 2017-04-20 17:42:16 | [nioEventLoopGroup-17-1] netty.InHandler2 (InHandler2.java:43) - <<<Response:
+INFO  | 2017-04-20 17:42:16 | [nioEventLoopGroup-3-2] netty.InHandler2 (InHandler2.java:56) - Channel Registered: /152.1.13.119:9003:/152.1.13.119:58494
+INFO  | 2017-04-20 17:42:16 | [nioEventLoopGroup-3-2] netty.InHandler2 (InHandler2.java:41) - >>>Channel Read:ACKEPOCH:1:3:4
+
+INFO  | 2017-04-20 17:42:16 | [nioEventLoopGroup-3-2] netty.InHandler2 (InHandler2.java:257) - Ack new epoch message received = ACKEPOCH:1:3:4
+
+INFO  | 2017-04-20 17:42:16 | [nioEventLoopGroup-3-2] netty.InHandler2 (InHandler2.java:265) - follower last committed zxid = 3	4
+INFO  | 2017-04-20 17:42:16 | [nioEventLoopGroup-3-2] netty.InHandler2 (InHandler2.java:272) - Leader last log = 4,6,property4,Value6
+INFO  | 2017-04-20 17:42:16 | [nioEventLoopGroup-3-2] netty.InHandler2 (InHandler2.java:278) - leader last committed zxid = 4	6
+INFO  | 2017-04-20 17:42:16 | [nioEventLoopGroup-19-1] netty.InHandler2 (InHandler2.java:56) - Channel Registered: null:null
+INFO  | 2017-04-20 17:42:16 | [nioEventLoopGroup-3-2] netty.InHandler2 (InHandler2.java:43) - <<<Response:
+INFO  | 2017-04-20 17:42:16 | [nioEventLoopGroup-3-1] netty.InHandler2 (InHandler2.java:56) - Channel Registered: /152.1.13.119:9001:/152.1.13.119:44122
+INFO  | 2017-04-20 17:42:16 | [nioEventLoopGroup-3-1] netty.InHandler2 (InHandler2.java:41) - >>>Channel Read:SNAP
+
+INFO  | 2017-04-20 17:42:16 | [nioEventLoopGroup-3-1] netty.InHandler2 (InHandler2.java:326) - SNAP message received
+INFO  | 2017-04-20 17:42:16 | [nioEventLoopGroup-3-1] netty.InHandler2 (InHandler2.java:327) - Follower ready for Broadcast
+INFO  | 2017-04-20 17:42:16 | [nioEventLoopGroup-3-1] netty.InHandler2 (InHandler2.java:43) - <<<Response:ACKACTION:1
+INFO  | 2017-04-20 17:42:16 | [nioEventLoopGroup-19-1] netty.InHandler2 (InHandler2.java:41) - >>>Channel Read:ACKACTION:1
+
+INFO  | 2017-04-20 17:42:16 | [nioEventLoopGroup-19-1] netty.InHandler2 (InHandler2.java:43) - <<<Response:
+INFO  | 2017-04-20 17:42:16 | [main] servers.NodeServer1 (NodeServer1.java:407) - Leader ready for Broadcast
+INFO  | 2017-04-20 17:42:17 | [main] servers.NodeServer1 (NodeServer1.java:173) - Still have notifications in ElectionQueue
+INFO  | 2017-04-20 17:42:17 | [main] servers.NodeServer1 (NodeServer1.java:78) - Fetching from CurrentElectionQueue:
+
+INFO  | 2017-04-20 17:42:17 | [main] servers.NodeServer1 (NodeServer1.java:105) - Received notification is in Election
+INFO  | 2017-04-20 17:42:17 | [main] servers.NodeServer1 (NodeServer1.java:117) - -------------------------
+INFO  | 2017-04-20 17:42:17 | [main] servers.NodeServer1 (NodeServer1.java:118) - myvote:Vote [ Id =3,Epoch = 4,Counter = 6]
+INFO  | 2017-04-20 17:42:17 | [main] servers.NodeServer1 (NodeServer1.java:119) - othervote:Vote [ Id =3,Epoch = 4,Counter = 6]
+INFO  | 2017-04-20 17:42:17 | [main] servers.NodeServer1 (NodeServer1.java:120) - vote compare:0
+INFO  | 2017-04-20 17:42:17 | [main] servers.NodeServer1 (NodeServer1.java:121) - -------------------------
+INFO  | 2017-04-20 17:42:17 | [main] servers.NodeServer1 (NodeServer1.java:675) - SendNotificationToAll()2,3,4,6,ELECTION,1
+INFO  | 2017-04-20 17:42:17 | [main] servers.NodeServer1 (NodeServer1.java:704) - *******MemberlistSize:2
+INFO  | 2017-04-20 17:42:17 | [main] servers.NodeServer1 (NodeServer1.java:708) - Sending CNOTIFICATION:2,3,4,6,ELECTION,1 to: vclv13-119.hpc.ncsu.edu:9001
+INFO  | 2017-04-20 17:42:17 | [nioEventLoopGroup-17-1] netty.InHandler2 (InHandler2.java:56) - Channel Registered: null:null
+INFO  | 2017-04-20 17:42:17 | [main] servers.NodeServer1 (NodeServer1.java:708) - Sending CNOTIFICATION:2,3,4,6,ELECTION,1 to: vclv13-119.hpc.ncsu.edu:9003
+INFO  | 2017-04-20 17:42:17 | [nioEventLoopGroup-3-2] netty.InHandler2 (InHandler2.java:56) - Channel Registered: /152.1.13.119:9001:/152.1.13.119:44123
+INFO  | 2017-04-20 17:42:17 | [nioEventLoopGroup-3-2] netty.InHandler2 (InHandler2.java:41) - >>>Channel Read:CNOTIFICATION:2,3,4,6,ELECTION,1
+
+INFO  | 2017-04-20 17:42:17 | [nioEventLoopGroup-3-2] netty.InHandler2 (InHandler2.java:120) - myNotification:1,3,4,6,FOLLOWING,1
+INFO  | 2017-04-20 17:42:17 | [nioEventLoopGroup-3-2] netty.InHandler2 (InHandler2.java:43) - <<<Response:SNOTIFICATION:1,3,4,6,FOLLOWING,1
+INFO  | 2017-04-20 17:42:17 | [nioEventLoopGroup-17-1] netty.InHandler2 (InHandler2.java:41) - >>>Channel Read:SNOTIFICATION:1,3,4,6,FOLLOWING,1
+
+INFO  | 2017-04-20 17:42:17 | [nioEventLoopGroup-17-1] netty.InHandler2 (InHandler2.java:142) - Before:10
+INFO  | 2017-04-20 17:42:17 | [nioEventLoopGroup-18-1] netty.InHandler2 (InHandler2.java:56) - Channel Registered: null:null
+INFO  | 2017-04-20 17:42:17 | [nioEventLoopGroup-3-3] netty.InHandler2 (InHandler2.java:56) - Channel Registered: /152.1.13.119:9003:/152.1.13.119:58497
+INFO  | 2017-04-20 17:42:17 | [main] servers.NodeServer1 (NodeServer1.java:132) - *****Vote for NodeID:3:::Vote [ Id =3,Epoch = 4,Counter = 6]
+INFO  | 2017-04-20 17:42:17 | [nioEventLoopGroup-3-3] netty.InHandler2 (InHandler2.java:41) - >>>Channel Read:CNOTIFICATION:2,3,4,6,ELECTION,1
+
+INFO  | 2017-04-20 17:42:17 | [nioEventLoopGroup-3-3] netty.InHandler2 (InHandler2.java:120) - myNotification:3,3,4,6,LEADING,1
+INFO  | 2017-04-20 17:42:17 | [nioEventLoopGroup-3-3] netty.InHandler2 (InHandler2.java:43) - <<<Response:SNOTIFICATION:3,3,4,6,LEADING,1
+INFO  | 2017-04-20 17:42:17 | [main] servers.NodeServer1 (NodeServer1.java:138) - *****receivedVote.size:3
+INFO  | 2017-04-20 17:42:17 | [nioEventLoopGroup-18-1] netty.InHandler2 (InHandler2.java:41) - >>>Channel Read:SNOTIFICATION:3,3,4,6,LEADING,1
+
+INFO  | 2017-04-20 17:42:17 | [main] servers.NodeServer1 (NodeServer1.java:139) - *****memberList.size:2
+INFO  | 2017-04-20 17:42:17 | [nioEventLoopGroup-18-1] netty.InHandler2 (InHandler2.java:142) - Before:11
+INFO  | 2017-04-20 17:42:17 | [main] servers.NodeServer1 (NodeServer1.java:143) - ***Received Votes from all the members
+INFO  | 2017-04-20 17:42:17 | [main] servers.NodeServer1 (NodeServer1.java:145) - 1::Vote [ Id =3,Epoch = 4,Counter = 6]
+INFO  | 2017-04-20 17:42:17 | [main] servers.NodeServer1 (NodeServer1.java:145) - 2::Vote [ Id =3,Epoch = 4,Counter = 6]
+INFO  | 2017-04-20 17:42:17 | [main] servers.NodeServer1 (NodeServer1.java:145) - 3::Vote [ Id =3,Epoch = 4,Counter = 6]
+INFO  | 2017-04-20 17:42:17 | [main] servers.NodeServer1 (NodeServer1.java:557) - End Leader Election---------
+INFO  | 2017-04-20 17:42:17 | [main] servers.NodeServer1 (NodeServer1.java:558) - Leader ID:3
+INFO  | 2017-04-20 17:42:17 | [main] servers.NodeServer1 (NodeServer1.java:559) - Begin Recovery---------
+INFO  | 2017-04-20 17:42:17 | [main] servers.NodeServer1 (NodeServer1.java:298) - Starting Recovery phase
+INFO  | 2017-04-20 17:42:17 | [main] servers.NodeServer1 (NodeServer1.java:419) - I am Follower
+INFO  | 2017-04-20 17:42:17 | [main] servers.NodeServer1 (NodeServer1.java:430) - Follower info msg is = FOLLOWERINFO:2:4
+INFO  | 2017-04-20 17:42:17 | [nioEventLoopGroup-19-1] netty.InHandler2 (InHandler2.java:56) - Channel Registered: null:null
+INFO  | 2017-04-20 17:42:17 | [nioEventLoopGroup-3-4] netty.InHandler2 (InHandler2.java:56) - Channel Registered: /152.1.13.119:9003:/152.1.13.119:58498
+INFO  | 2017-04-20 17:42:17 | [nioEventLoopGroup-3-4] netty.InHandler2 (InHandler2.java:41) - >>>Channel Read:FOLLOWERINFO:2:4
+
+INFO  | 2017-04-20 17:42:17 | [nioEventLoopGroup-3-4] netty.InHandler2 (InHandler2.java:179) - Request msg is = FOLLOWERINFO:2:4
+
+INFO  | 2017-04-20 17:42:17 | [nioEventLoopGroup-3-4] netty.InHandler2 (InHandler2.java:43) - <<<Response:NEWEPOCH:5:3
+INFO  | 2017-04-20 17:42:17 | [nioEventLoopGroup-19-1] netty.InHandler2 (InHandler2.java:41) - >>>Channel Read:NEWEPOCH:5:3
+
+INFO  | 2017-04-20 17:42:17 | [nioEventLoopGroup-19-1] netty.InHandler2 (InHandler2.java:219) - Member List is = {1=vclv13-119.hpc.ncsu.edu/152.1.13.119:9001, 3=vclv13-119.hpc.ncsu.edu/152.1.13.119:9003}
+INFO  | 2017-04-20 17:42:17 | [nioEventLoopGroup-19-1] netty.InHandler2 (InHandler2.java:226) - New Epoch received is = 5
+INFO  | 2017-04-20 17:42:17 | [nioEventLoopGroup-20-1] netty.InHandler2 (InHandler2.java:56) - Channel Registered: null:null
+INFO  | 2017-04-20 17:42:17 | [nioEventLoopGroup-19-1] netty.InHandler2 (InHandler2.java:43) - <<<Response:
+INFO  | 2017-04-20 17:42:17 | [nioEventLoopGroup-3-1] netty.InHandler2 (InHandler2.java:56) - Channel Registered: /152.1.13.119:9003:/152.1.13.119:58499
+INFO  | 2017-04-20 17:42:17 | [nioEventLoopGroup-3-1] netty.InHandler2 (InHandler2.java:41) - >>>Channel Read:ACKEPOCH:2:4:5
+
+INFO  | 2017-04-20 17:42:17 | [nioEventLoopGroup-3-1] netty.InHandler2 (InHandler2.java:257) - Ack new epoch message received = ACKEPOCH:2:4:5
+
+INFO  | 2017-04-20 17:42:17 | [nioEventLoopGroup-3-1] netty.InHandler2 (InHandler2.java:265) - follower last committed zxid = 4	5
+INFO  | 2017-04-20 17:42:17 | [nioEventLoopGroup-3-1] netty.InHandler2 (InHandler2.java:272) - Leader last log = 4,6,property4,Value6
+INFO  | 2017-04-20 17:42:17 | [nioEventLoopGroup-3-1] netty.InHandler2 (InHandler2.java:278) - leader last committed zxid = 4	6
+INFO  | 2017-04-20 17:42:17 | [nioEventLoopGroup-23-1] netty.InHandler2 (InHandler2.java:56) - Channel Registered: null:null
+INFO  | 2017-04-20 17:42:17 | [nioEventLoopGroup-3-1] netty.InHandler2 (InHandler2.java:43) - <<<Response:
+INFO  | 2017-04-20 17:42:17 | [nioEventLoopGroup-3-3] netty.InHandler2 (InHandler2.java:56) - Channel Registered: /152.1.13.119:9002:/152.1.13.119:36365
+INFO  | 2017-04-20 17:42:17 | [nioEventLoopGroup-3-3] netty.InHandler2 (InHandler2.java:41) - >>>Channel Read:DIFF
+
+INFO  | 2017-04-20 17:42:17 | [nioEventLoopGroup-3-3] netty.InHandler2 (InHandler2.java:320) - DIFF message received
+INFO  | 2017-04-20 17:42:17 | [nioEventLoopGroup-3-3] netty.InHandler2 (InHandler2.java:321) - Follower ready for Broadcast
+INFO  | 2017-04-20 17:42:17 | [nioEventLoopGroup-3-3] netty.InHandler2 (InHandler2.java:43) - <<<Response:ACKACTION:2
+INFO  | 2017-04-20 17:42:17 | [nioEventLoopGroup-23-1] netty.InHandler2 (InHandler2.java:41) - >>>Channel Read:ACKACTION:2
+
+INFO  | 2017-04-20 17:42:17 | [nioEventLoopGroup-23-1] netty.InHandler2 (InHandler2.java:43) - <<<Response:
+INFO  | 2017-04-20 17:42:17 | [nioEventLoopGroup-3-2] netty.InHandler2 (InHandler2.java:99) - After:12
+INFO  | 2017-04-20 17:42:17 | [nioEventLoopGroup-3-2] netty.InHandler2 (InHandler2.java:100) - NODE is in STATE: FOLLOWING
+INFO  | 2017-04-20 17:42:17 | [nioEventLoopGroup-3-2] netty.InHandler2 (InHandler2.java:101) - My Election ROUND: 1
+INFO  | 2017-04-20 17:42:17 | [nioEventLoopGroup-3-2] netty.InHandler2 (InHandler2.java:102) - his Election ROUND: 1
+INFO  | 2017-04-20 17:42:17 | [nioEventLoopGroup-3-2] netty.InHandler2 (InHandler2.java:43) - <<<Response:SNOTIFICATION:2,3,4,6,FOLLOWING,1
+INFO  | 2017-04-20 17:42:17 | [nioEventLoopGroup-15-1] netty.InHandler2 (InHandler2.java:41) - >>>Channel Read:SNOTIFICATION:2,3,4,6,FOLLOWING,1
+
+INFO  | 2017-04-20 17:42:17 | [nioEventLoopGroup-15-1] netty.InHandler2 (InHandler2.java:159) - {2=vclv13-119.hpc.ncsu.edu/152.1.13.119:9002, 3=vclv13-119.hpc.ncsu.edu/152.1.13.119:9003}
+INFO  | 2017-04-20 17:42:17 | [nioEventLoopGroup-15-1] netty.InHandler2 (InHandler2.java:43) - <<<Response:ERROR
+INFO  | 2017-04-20 17:42:18 | [nioEventLoopGroup-17-1] netty.InHandler2 (InHandler2.java:152) - After:12
+INFO  | 2017-04-20 17:42:18 | [nioEventLoopGroup-17-1] netty.InHandler2 (InHandler2.java:159) - {1=vclv13-119.hpc.ncsu.edu/152.1.13.119:9001, 3=vclv13-119.hpc.ncsu.edu/152.1.13.119:9003}
+INFO  | 2017-04-20 17:42:18 | [nioEventLoopGroup-17-1] netty.InHandler2 (InHandler2.java:43) - <<<Response:ERROR
+INFO  | 2017-04-20 17:42:18 | [nioEventLoopGroup-18-1] netty.InHandler2 (InHandler2.java:152) - After:12
+INFO  | 2017-04-20 17:42:18 | [nioEventLoopGroup-18-1] netty.InHandler2 (InHandler2.java:159) - {1=vclv13-119.hpc.ncsu.edu/152.1.13.119:9001, 3=vclv13-119.hpc.ncsu.edu/152.1.13.119:9003}
+INFO  | 2017-04-20 17:42:18 | [nioEventLoopGroup-18-1] netty.InHandler2 (InHandler2.java:43) - <<<Response:ERROR
