@@ -290,6 +290,10 @@ public class NodeServer1 {
 		this.properties.getSynData().setQuorumCount(quorumCount);
 		this.properties.getSynData().setNewEpochFlag(false);
 
+		this.properties.getElectionQueue().clear();
+
+
+
 		return this.properties.getMyVote();
 //		
 	}
@@ -556,6 +560,17 @@ public class NodeServer1 {
 			Vote leaderVote = startLeaderElection();
 			LOG.info("End Leader Election---------");
 			LOG.info("Leader ID:"+leaderVote.getId() );
+
+			if (leaderVote.getId() != properties.getNodeId()){
+				LOG.info("Sleeping for 3 seconds");
+				try {
+					Thread.sleep(3000);
+				} catch (InterruptedException e){
+					e.printStackTrace();
+				}
+				LOG.info("Good Morning");
+			}
+
 			LOG.info("Begin Recovery---------");
 			Recovery();
 			LOG.info("END Recovery---------");
