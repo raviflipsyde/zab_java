@@ -15,7 +15,7 @@ import servers.ZxId;
 public class SyncDataStructs {
 
 	private static SyncDataStructs instance = null;
-	private MpscArrayQueue<Notification> electionQueue = null;
+	private volatile MpscArrayQueue<Notification> electionQueue = null;
 	private List<InetSocketAddress> memberList = null;
 	private ConcurrentHashMap<Long, Long> acceptedEpochMap = null;
 	private ConcurrentHashMap<Long, ZxId> currentEpochMap = null;

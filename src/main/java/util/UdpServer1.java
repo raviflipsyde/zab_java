@@ -31,25 +31,41 @@ public class UdpServer1 implements Runnable{
 		this.properties = nodeProperties;
 		heartBeatMap = new HashMap<String, Long>();
 		
-//		Timer t = new Timer();
-//		t.schedule(new TimerTask() {
-//		    @Override
-//		    public void run() {
-//		    	long currentTime = System.currentTimeMillis();
-//		    	for(Entry<String, Long> entry:heartBeatMap.entrySet()){
-//		    		String key = entry.getKey();
-//					long lastTimeEntry = entry.getValue();
-//					if(currentTime - lastTimeEntry > 10000){
+		Timer t = new Timer();
+		t.schedule(new TimerTask() {
+		    @Override
+		    public void run() {
+		    	HashMap<String, Long> removeMap = new HashMap<String, Long>();
+		    	
+		    	long currentTime = System.currentTimeMillis();
+		    	for(Entry<String, Long> entry:heartBeatMap.entrySet()){
+		    		String key = entry.getKey();
+					long lastTimeEntry = entry.getValue();
+					if(currentTime - lastTimeEntry > 10000){
+						removeMap.put(key, lastTimeEntry);
 //						String addr[] = key.split(":");
 //						String dedadhost = addr[0].trim();
 //						int deadPort = Integer.parseInt(addr[1]); 
 //						InetSocketAddress socketAddr = new InetSocketAddress(dedadhost, deadPort);
 //						LOG.info("Removing "+socketAddr.toString()+" from memberlist");
 //						properties.getMemberList().remove(socketAddr);
-//					}
-//				}
-//		    }
-//		}, 0, 20000);
+					}
+				}
+		    	
+		    	for(Entry<String, Long> entry:removeMap.entrySet()){
+		    		heartBeatMap.remove(entry.getKey());
+		    	}
+		    	
+		    	if(heartBeatMap.size() < properties.getMemberList().size()/2){
+		    		LOG.info("Throwing runtime exception");
+//		    		properties.removeMemberFromList(properties.getLeaderId());
+		    		LOG.info("Removing leader from memberlist");
+		    		properties.setLeaderId(0);
+		    		properties.setNodestate(NodeServerProperties1.State.ELECTION);
+		    		throw new RuntimeException();
+		    	}
+		    }
+		}, 20000, 20000);
 		
 	} 
 	
@@ -62,8 +78,14 @@ public class UdpServer1 implements Runnable{
 		DatagramSocket serverSocket = null;
 		try {
 			
+			
 			serverSocket = new DatagramSocket(properties.getNodePort()+123);
-		
+			serverSocket.close();
+			serverSocket = new DatagramSocket(properties.getNodePort()+123);
+			
+			LOG.info("ServerSocketState:"+ serverSocket.isBound());
+			LOG.info("ServerSocketState:"+ serverSocket.isClosed());
+			LOG.info("ServerSocketState:"+ serverSocket.isConnected());
 			byte[] receiveData = new byte[100];
 			byte[] sendData = new byte[100];
 
@@ -75,7 +97,7 @@ public class UdpServer1 implements Runnable{
 				
 				InetAddress IPAddress = receivePacket.getAddress();
 				int port = receivePacket.getPort();
-//				InetSocketAddress recvAddress = new InetSocketAddress(IPAddress, port);
+				InetSocketAddress recvAddress = new InetSocketAddress(IPAddress, port);
 				
 				long currentTime = System.currentTimeMillis();
 //				LOG.info("RECEIVED: " + sentence
@@ -110,5 +132,9 @@ public class UdpServer1 implements Runnable{
 
 	}
 
-
+	public static void main(String args[]){
+		
+		int port = Integer.parseInt(args[0]);
+		new UdpServer1(port).run();
+	}
 }
