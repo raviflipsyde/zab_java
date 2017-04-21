@@ -3,6 +3,7 @@ package netty;
 import java.net.InetSocketAddress;
 import java.net.SocketAddress;
 import java.nio.charset.StandardCharsets;
+import java.util.Map.Entry;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -25,9 +26,10 @@ public class NettyClient1 {
 	private static final Logger LOG = LogManager.getLogger(NettyClient1.class);
 	// private SyncDataStructs sds = SyncDataStructs.getInstance();
 	private static Bootstrap b = null;
-
-	public NettyClient1(final NodeServerProperties1 properties) {
-
+	private NodeServerProperties1 properties;
+	public NettyClient1( NodeServerProperties1 properties1) {
+		this.properties = properties1;
+		
 		EventLoopGroup workerGroup = new NioEventLoopGroup();
 		try {
 			b = new Bootstrap(); // (1)
@@ -86,6 +88,21 @@ public class NettyClient1 {
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
+			LOG.info("failed to send msg to "+ip+":"+port+ "\n"+ msg);
+			LOG.info("Remove this ip from the memberlist");
+			long removeId = -1;
+			for( Entry<Long, InetSocketAddress> entry : properties.getMemberList().entrySet()){
+				String memberip = entry.getValue().getHostName();
+				String memberString = entry.getValue().getHostString();
+				int memberport = entry.getValue().getPort();
+				if(port == memberport && memberip.equals(ip)){
+					removeId = entry.getKey();
+					break;
+				}
+			}
+			LOG.info("------------------**Remove "+removeId+" from memberlist");
+			properties.removeMemberFromList(removeId);
+			
 		}
 
 	}

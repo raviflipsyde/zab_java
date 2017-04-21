@@ -85,6 +85,7 @@ public class NodeServer1 {
 						LOG.info("Notification Queue is empty again!!");
 						timeout = 2*timeout;
 						LOG.info("increasing timeout");
+						
 						//TODO: verify
 						sendNotificationToAll(myNotification.toString()); 
 						
@@ -156,9 +157,8 @@ public class NodeServer1 {
 						if(myVoteCounter> (memberList.size()+1)/2 ){
 							LOG.info("**Found Quorum in received votes");
 							try {
-								
 									
-									Thread.sleep(2*timeout);
+									Thread.sleep(timeout);
 				                
 								
 //								Thread.sleep(timeout);
@@ -442,7 +442,7 @@ public class NodeServer1 {
 	    public void uncaughtException(Thread th, Throwable ex) {
 	    	LOG.info(th.getName());
 	    	LOG.info(th.getId());
-	    	LOG.info(ex);
+	    	LOG.info(ex.getMessage());
 	    	changePhase();
 	    	System.out.println("Uncaught exception: " + ex);
 	        

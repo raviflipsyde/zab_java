@@ -76,8 +76,7 @@ public class UdpClient1 implements Runnable{
 
 		}
 		LOG.info("Throwing runtime exception");
-
-		properties.removeMemberFromList(properties.getLeaderId());
+//		properties.removeMemberFromList(properties.getLeaderId());
 		LOG.info("Removing leader from memberlist");
 		properties.setLeaderId(0);
 		properties.setNodestate(NodeServerProperties1.State.ELECTION);

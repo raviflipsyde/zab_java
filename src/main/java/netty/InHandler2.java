@@ -93,6 +93,7 @@ public class InHandler2 extends ChannelInboundHandlerAdapter { // (1)
 				currentElectionQueue.offer(responseNotification);
 				
 					try {
+						
 						Thread.sleep(1000);
 					} catch (InterruptedException e) {
 						// TODO Auto-generated catch block
@@ -142,11 +143,14 @@ public class InHandler2 extends ChannelInboundHandlerAdapter { // (1)
 			
 			if(properties.getNodestate() == NodeServerProperties1.State.ELECTION){
 				MpscArrayQueue<Notification> currentElectionQueue = properties.getSynData().getElectionQueue();
+				
 				LOG.info("Before:"+currentElectionQueue.currentProducerIndex());
 				currentElectionQueue.offer(responseNotification);
 				
 					try {
+						
 						Thread.sleep(1000);
+						
 					} catch (InterruptedException e) {
 						// TODO Auto-generated catch block
 						e.printStackTrace();
