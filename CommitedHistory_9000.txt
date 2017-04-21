@@ -1,7 +1,0 @@
-//epochID,counter,key,value 
-2,3,prop1,value1
-3,3,prop2,value2
-4,3,prop1,value3
-5,3,prop2,value4
-6,3,prop1,null
-7,3,60
