@@ -30,7 +30,7 @@ public class ZxId implements Comparable<ZxId>{
 	@Override
 	public String toString() {
 		// TODO Auto-generated method stub
-		return "ZxID [ Epoch = " + this.epoch + ",Counter = " + this.counter + "]";
+		return this.epoch + ":" + this.counter;
 	}
 	public int compareTo(ZxId o) {
 		if(this.getEpoch() < o.getEpoch())

@@ -7,6 +7,7 @@ import java.util.SortedSet;
 import java.util.TreeSet;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.CopyOnWriteArrayList;
+import java.util.concurrent.atomic.AtomicInteger;
 
 import io.netty.util.internal.shaded.org.jctools.queues.MpscArrayQueue;
 import servers.Notification;
@@ -26,7 +27,7 @@ public class SyncDataStructs {
  	//private MpscArrayQueue<Proposal> commitQueue = null;
 	
 	//used during broadcast
-	private ConcurrentHashMap<Proposal, Long> proposedTransactions = null; //<counter,num_ack> Map that the leader maintains to store acknowledgements of proposedtransactions
+	private ConcurrentHashMap<Proposal, AtomicInteger> proposedTransactions = null; //<counter,num_ack> Map that the leader maintains to store acknowledgements of proposedtransactions
 	private SortedSet<Proposal> committedTransactions = null;
 	
 	private Vote myVote;
@@ -48,7 +49,7 @@ public class SyncDataStructs {
 		memberList  = new CopyOnWriteArrayList<InetSocketAddress>();
 		acceptedEpochMap = new ConcurrentHashMap<Long, Long>();
 		currentEpochMap = new ConcurrentHashMap<Long, ZxId>();
-		proposedTransactions = new ConcurrentHashMap<Proposal, Long>();
+		proposedTransactions = new ConcurrentHashMap<Proposal, AtomicInteger>();
 		committedTransactions = new TreeSet<Proposal>(comparator);
 	 	
 		//proposeQueue = new MpscArrayQueue<Proposal>(1000);
@@ -106,19 +107,14 @@ public class SyncDataStructs {
 //		return this.quorum;
 //	}
 	
-	public synchronized ConcurrentHashMap<Proposal, Long> getProposedTransactions() {
+	public synchronized ConcurrentHashMap<Proposal, AtomicInteger> getProposedTransactions() {
 		return proposedTransactions;
 	}
 	
-	public synchronized void setProposedTransactions(ConcurrentHashMap<Proposal, Long> proposedTransactions) {
+	public synchronized void setProposedTransactions(ConcurrentHashMap<Proposal, AtomicInteger> proposedTransactions) {
 		this.proposedTransactions = proposedTransactions;
 	}
 	
-	public synchronized void incrementAckCount(Proposal p){
-		long count = this.proposedTransactions.get(p);
-		count++;
-		this.proposedTransactions.put(p,count);
-	}
 //	public MpscArrayQueue<Proposal> getProposeQueue() {
 //		return proposeQueue;
 //	}

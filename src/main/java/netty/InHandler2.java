@@ -92,7 +92,7 @@ public class InHandler2 extends ChannelInboundHandlerAdapter { // (1)
 				String proposal = "PROPOSE:" + p.toString();
 				
 				//enqueue this proposal to proposed transactions to keep the count of Acknowledgements
-				properties.getSynData().getProposedTransactions().put(p,1L);
+				properties.getSynData().getProposedTransactions().put(p,new AtomicInteger(1));
 				
 				//send proposal to quorum
 				LOG.info("Leader:" + "Sending proposal to everyone:" + proposal);
@@ -125,7 +125,7 @@ public class InHandler2 extends ChannelInboundHandlerAdapter { // (1)
 				String value = arr[4].trim();
 				Proposal proposal = new Proposal(z,key,value);
 				
-				properties.getSynData().getProposedTransactions().put(proposal, 0L);
+				properties.getSynData().getProposedTransactions().put(proposal, new AtomicInteger(0));
 				LOG.info("Enqueing proposal in Proposal Queue:" + proposal);
 				
 				LOG.info("Sending Acknowledgement to the leader");
@@ -156,7 +156,9 @@ public class InHandler2 extends ChannelInboundHandlerAdapter { // (1)
 				
 				//checking the ack count for the proposal (counter value)
 				//TODO: use atomic integer
-				properties.getSynData().incrementAckCount(p);	
+				
+				int count = properties.getSynData().getProposedTransactions().get(p).incrementAndGet();
+				properties.getSynData().getProposedTransactions().put(p,new AtomicInteger(count));
 				
 				return "OK";
 			}

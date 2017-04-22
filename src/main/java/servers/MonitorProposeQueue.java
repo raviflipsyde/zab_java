@@ -3,6 +3,7 @@ package servers;
 import java.util.Map.Entry;
 import java.util.SortedSet;
 import java.util.concurrent.ConcurrentHashMap;
+import java.util.concurrent.atomic.AtomicInteger;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -24,12 +25,12 @@ public class MonitorProposeQueue implements Runnable {
 		LOG.info("Run method for MonitorProposeQueue");
 		
 		
-		ConcurrentHashMap<Proposal, Long> proposedtransactions = this.nodeserverproperties.getSynData().getProposedTransactions();
+		ConcurrentHashMap<Proposal, AtomicInteger> proposedtransactions = this.nodeserverproperties.getSynData().getProposedTransactions();
 
 		while(nodeserverproperties.getNodestate() == NodeServerProperties1.State.LEADING){
-			ConcurrentHashMap<Proposal, Long> removeMap = new ConcurrentHashMap<Proposal, Long>();
-			for( Entry<Proposal,Long> entry: proposedtransactions.entrySet()){
-				if(entry.getValue() >= this.nodeserverproperties.getMemberList().size()/2){
+			ConcurrentHashMap<Proposal, AtomicInteger> removeMap = new ConcurrentHashMap<Proposal, AtomicInteger>();
+			for( Entry<Proposal,AtomicInteger> entry: proposedtransactions.entrySet()){
+				if(entry.getValue().get() >= this.nodeserverproperties.getMemberList().size()/2){
 					LOG.info("Quorum achieved for Proposal:" + entry.getKey());
 					LOG.info("Sending a COMMIT message now to all followers..!!");
 					String commitMessage = "COMMIT:"+ entry.getKey();
@@ -47,7 +48,7 @@ public class MonitorProposeQueue implements Runnable {
 		
 			//LOG.info( removeMap.size() + "transactions to be removed");
 			
-			for (Entry<Proposal, Long> entry : removeMap.entrySet()) {
+			for (Entry<Proposal, AtomicInteger> entry : removeMap.entrySet()) {
 				LOG.info("Removing from Proposed transactions Map"+ entry.getKey()+":"+ entry.getValue());
 				proposedtransactions.remove(entry.getKey());
 			}
