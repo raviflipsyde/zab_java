@@ -2,6 +2,7 @@ package netty;
 
 import java.net.InetSocketAddress;
 import java.nio.charset.StandardCharsets;
+import java.util.Map.Entry;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.atomic.AtomicInteger;
 
@@ -96,14 +97,13 @@ public class InHandler2 extends ChannelInboundHandlerAdapter { // (1)
 				//send proposal to quorum
 				LOG.info("Leader:" + "Sending proposal to everyone:" + proposal);
 				
-				LOG.info("Number of members:" + properties.getSynData().getMemberList().size());
+				LOG.info("Number of members:" + properties.getMemberList().size());
 				
-				for (InetSocketAddress member : properties.getSynData().getMemberList()) {
-					
-					LOG.info("Sending "+ proposal +" to: "+ member.getHostName() + ":"+ member.getPort());
-					this.nettyClient.sendMessage(member.getHostName(), member.getPort(), proposal);
-			
+				for (Entry<Long, InetSocketAddress> member : properties.getMemberList().entrySet()) {
+						LOG.info("Sending "+proposal+" to: "+ member.getValue().getHostName() + ":"+ member.getValue().getPort());
+						this.nettyClient.sendMessage(member.getValue().getHostName(), member.getValue().getPort(), proposal);
 				}
+
 			}
 		
 			return "OK";
