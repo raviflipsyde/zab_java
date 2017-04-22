@@ -417,9 +417,12 @@ public class NodeServer1 {
 		}
 		
 		LOG.info("Starting Write to disk thread irrespective of leader or follower...");
-		Thread threadWriteToDisk = new Thread(new WriteToDisk(properties));
-		threadWriteToDisk.setPriority(Thread.MIN_PRIORITY);
-		threadWriteToDisk.start();
+		if(properties.getNodestate() != NodeServerProperties1.State.ELECTION){
+			Thread threadWriteToDisk = new Thread(new WriteToDisk(properties));
+			threadWriteToDisk.setPriority(Thread.MIN_PRIORITY);
+			threadWriteToDisk.start();
+		}
+		
 	
 	}
 	

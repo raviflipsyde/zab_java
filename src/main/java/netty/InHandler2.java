@@ -195,7 +195,8 @@ public class InHandler2 extends ChannelInboundHandlerAdapter { // (1)
 				Proposal p = new Proposal(z,key,value);
 				ConcurrentHashMap<Proposal, AtomicInteger> proposalMap = properties.getSynData().getProposedTransactions();
 				LOG.info("Map Size when Commit received: "+proposalMap.size());
-				LOG.info("Map when Commit received: "+proposalMap);
+				LOG.info("Map when Commit received: "+ proposalMap);
+				
 				if(proposalMap.containsKey(p)){
 					LOG.info("Commit Queue contains the transaction to be removed:" + p);
 					//String fileName = "CommitedHistory_" + properties.getNodePort() + ".log";
