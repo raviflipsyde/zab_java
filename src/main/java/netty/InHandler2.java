@@ -94,16 +94,24 @@ public class InHandler2 extends ChannelInboundHandlerAdapter { // (1)
 				//enqueue this proposal to proposed transactions to keep the count of Acknowledgements
 				properties.getSynData().getProposedTransactions().put(p,new AtomicInteger(1));
 				
-				//send proposal to quorum
-				LOG.info("Leader:" + "Sending proposal to everyone:" + proposal);
+				ConcurrentHashMap<Proposal, AtomicInteger> proposedtransactions = properties.getSynData().getProposedTransactions();
+				proposedtransactions.put(p, new AtomicInteger(1));
 				
-				LOG.info("Number of members:" + properties.getMemberList().size());
+				LOG.info("##################ACK count for proposal before incrementing####################3" + proposedtransactions.get(p));
+				int increased_count = proposedtransactions.get(p).incrementAndGet();
+				LOG.info("###################ACK count for proposal after incrementing####################" + increased_count);
 				
-				for (Entry<Long, InetSocketAddress> member : properties.getMemberList().entrySet()) {
-						LOG.info("Sending "+proposal+" to: "+ member.getValue().getHostName() + ":"+ member.getValue().getPort());
-						this.nettyClient.sendMessage(member.getValue().getHostName(), member.getValue().getPort(), proposal);
-				}
-
+				
+//				//send proposal to quorum
+//				LOG.info("Leader:" + "Sending proposal to everyone:" + proposal);
+//				
+//				LOG.info("Number of members:" + properties.getMemberList().size());
+//				
+//				for (Entry<Long, InetSocketAddress> member : properties.getMemberList().entrySet()) {
+//						LOG.info("Sending "+proposal+" to: "+ member.getValue().getHostName() + ":"+ member.getValue().getPort());
+//						this.nettyClient.sendMessage(member.getValue().getHostName(), member.getValue().getPort(), proposal);
+//				}
+//
 			}
 		
 			return "OK";
