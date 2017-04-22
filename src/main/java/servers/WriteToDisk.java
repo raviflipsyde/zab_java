@@ -25,7 +25,7 @@ public class WriteToDisk implements Runnable {
 	}
 	public void run() {
 		LOG.info("Run method for WriteToDisk thread");
-		LOG.info("Node is in " + NodeServerProperties1.State.ELECTION.toString() + " state");
+		LOG.info("Node is in " + properties.getNodestate().toString() + " state");
 		while( properties.getNodestate() != NodeServerProperties1.State.ELECTION){
 			
 			//flush the committed transactions set
