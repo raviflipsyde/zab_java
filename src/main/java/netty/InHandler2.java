@@ -97,9 +97,10 @@ public class InHandler2 extends ChannelInboundHandlerAdapter { // (1)
 				ConcurrentHashMap<Proposal, AtomicInteger> proposedtransactions = properties.getSynData().getProposedTransactions();
 				proposedtransactions.put(p, new AtomicInteger(1));
 				
-				LOG.info("##################ACK count for proposal before incrementing####################3" + proposedtransactions.get(p));
-				int increased_count = proposedtransactions.get(p).incrementAndGet();
-				LOG.info("###################ACK count for proposal after incrementing####################" + increased_count);
+				LOG.info("##################ACK count for proposal before incrementing####################" + proposedtransactions.get(p));
+				int count = proposedtransactions.get(p).incrementAndGet();
+				proposedtransactions.put(p, new AtomicInteger(count));
+				LOG.info("###################ACK count for proposal after incrementing####################" + proposedtransactions.get(p));
 				
 				
 //				//send proposal to quorum
