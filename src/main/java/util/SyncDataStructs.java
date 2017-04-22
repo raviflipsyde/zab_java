@@ -1,12 +1,16 @@
 package util;
 
 import java.net.InetSocketAddress;
+import java.util.Comparator;
 import java.util.List;
+import java.util.SortedSet;
+import java.util.TreeSet;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.CopyOnWriteArrayList;
 
 import io.netty.util.internal.shaded.org.jctools.queues.MpscArrayQueue;
 import servers.Notification;
+import servers.Proposal;
 import servers.Vote;
 import servers.ZxId;
 
@@ -17,14 +21,39 @@ public class SyncDataStructs {
 	private List<InetSocketAddress> memberList = null;
 	private ConcurrentHashMap<Long, Long> acceptedEpochMap = null;
 	private ConcurrentHashMap<Long, ZxId> currentEpochMap = null;
+	//ConcurrentHashMap<Long, InetSocketAddress> quorum = null;
+	//private MpscArrayQueue<Proposal> proposeQueue = null; //Request Queue with each node
+ 	//private MpscArrayQueue<Proposal> commitQueue = null;
+	
+	//used during broadcast
+	private ConcurrentHashMap<Proposal, Long> proposedTransactions = null; //<counter,num_ack> Map that the leader maintains to store acknowledgements of proposedtransactions
+	private SortedSet<Proposal> committedTransactions = null;
+	
 	private Vote myVote;
 	private long newEpoch;
 	
+	public Comparator<Proposal> comparator = new Comparator<Proposal>() {
+		  public int compare(Proposal p1, Proposal p2) {
+			  if (p1.getZ().compareTo(p2.getZ()) == 1)
+				  return 1;
+			  else if (p1.getZ().compareTo(p2.getZ()) == -1)
+				  return -1;
+			  else
+				  return 0;
+		  }
+		};
+		
 	private SyncDataStructs(){
 		electionQueue = new MpscArrayQueue<Notification>(100);
 		memberList  = new CopyOnWriteArrayList<InetSocketAddress>();
 		acceptedEpochMap = new ConcurrentHashMap<Long, Long>();
 		currentEpochMap = new ConcurrentHashMap<Long, ZxId>();
+		proposedTransactions = new ConcurrentHashMap<Proposal, Long>();
+		committedTransactions = new TreeSet<Proposal>(comparator);
+	 	
+		//proposeQueue = new MpscArrayQueue<Proposal>(1000);
+		//commitQueue = new MpscArrayQueue<Proposal>(1000);
+		
 
 	}
 	public static SyncDataStructs getInstance(){
@@ -71,6 +100,42 @@ public class SyncDataStructs {
 	}
 	public synchronized void setMyVote(Vote myVote) {
 		this.myVote = myVote;
+	}
+//	
+//	public ConcurrentHashMap<Long, InetSocketAddress> getQuorum() {
+//		return this.quorum;
+//	}
+	
+	public synchronized ConcurrentHashMap<Proposal, Long> getProposedTransactions() {
+		return proposedTransactions;
+	}
+	
+	public synchronized void setProposedTransactions(ConcurrentHashMap<Proposal, Long> proposedTransactions) {
+		this.proposedTransactions = proposedTransactions;
+	}
+	
+	public synchronized void incrementAckCount(Proposal p){
+		long count = this.proposedTransactions.get(p);
+		count++;
+		this.proposedTransactions.put(p,count);
+	}
+//	public MpscArrayQueue<Proposal> getProposeQueue() {
+//		return proposeQueue;
+//	}
+//	public void setProposeQueue(MpscArrayQueue<Proposal> proposeQueue) {
+//		this.proposeQueue = proposeQueue;
+//	}
+//	public MpscArrayQueue<Proposal> getCommitQueue() {
+//		return commitQueue;
+//	}
+//	public void setCommitQueue(MpscArrayQueue<Proposal> commitQueue) {
+//		this.commitQueue = commitQueue;
+//	}
+	public SortedSet<Proposal> getCommittedTransactions() {
+		return committedTransactions;
+	}
+	public void setCommittedTransactions(SortedSet<Proposal> committedTransactions) {
+		this.committedTransactions = committedTransactions;
 	}
 	
 	

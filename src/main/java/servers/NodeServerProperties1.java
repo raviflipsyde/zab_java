@@ -46,8 +46,10 @@ public class NodeServerProperties1 {
 	private InetSocketAddress leaderAddress;
 	private InetSocketAddress myAddress;
 
+	//TODO: remove requestQueue and CommitQueue
 	private Queue<Message> requestQueue;
 	private Queue<Message> commitQueue;
+	
 	private SyncDataStructs synData;
 	private MpscArrayQueue<Notification> electionQueue;
 	private Vote myVote;
@@ -67,8 +69,8 @@ public class NodeServerProperties1 {
 		nodestate = State.ELECTION;
 		leaderId = 0;
 		leaderAddress = null;
-		requestQueue = new ConcurrentLinkedQueue<Message>();
-		commitQueue = new ConcurrentLinkedQueue<Message>();
+//		requestQueue = new ConcurrentLinkedQueue<Message>();
+//		commitQueue = new ConcurrentLinkedQueue<Message>();
 		electionQueue = new MpscArrayQueue<Notification>(100);
 		nodeHost = getMyIP();
 		myAddress = new InetSocketAddress(nodeHost, nodePort);

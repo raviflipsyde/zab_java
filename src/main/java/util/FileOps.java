@@ -1,13 +1,15 @@
 package util;
 
+import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
+import java.io.FileWriter;
 import java.io.IOException;
 import java.nio.charset.Charset;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Map;
+//import java.util.Map;
 import java.util.Properties;
 
 import org.apache.commons.io.input.ReversedLinesFileReader;
@@ -17,7 +19,27 @@ import servers.ZxId;
 
 public class FileOps {
 
-	
+	//write a function to write the line into the CommitedHistory file
+	public static String appendTransaction(String fileName, String transaction){
+
+		try {
+			FileWriter fileWriter = new FileWriter(fileName,true);
+			BufferedWriter bufferedWriter = new BufferedWriter(fileWriter);
+
+			bufferedWriter.write(transaction);
+			bufferedWriter.newLine();
+			bufferedWriter.flush();
+			bufferedWriter.close();
+
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			return "appendTransaction:Error";
+		}
+
+		return "appendTransaction:Success";
+	}
+
 	
 	public static Properties readDataMap(NodeServerProperties1 properties) {
 		

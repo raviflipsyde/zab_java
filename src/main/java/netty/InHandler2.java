@@ -3,6 +3,7 @@ package netty;
 import java.net.InetSocketAddress;
 import java.nio.charset.StandardCharsets;
 import java.util.concurrent.ConcurrentHashMap;
+import java.util.concurrent.atomic.AtomicInteger;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -15,8 +16,10 @@ import io.netty.util.internal.shaded.org.jctools.queues.MpscArrayQueue;
 
 import servers.NodeServerProperties1;
 import servers.Notification;
+import servers.Proposal;
 import servers.Vote;
 import servers.ZxId;
+import util.FileOps;
 
 /**
  * Handles a server-side channel.
@@ -25,16 +28,15 @@ public class InHandler2 extends ChannelInboundHandlerAdapter { // (1)
 	private static final Logger LOG = LogManager.getLogger(InHandler2.class);
 	
 	private NodeServerProperties1 properties;
-
+	private NettyClient1 nettyClient;
 	public InHandler2(NodeServerProperties1 nsProperties) {
 		this.properties = nsProperties;
+		nettyClient = new NettyClient1(nsProperties);
 	}
 
 
 	@Override
 	public void channelRead(ChannelHandlerContext ctx, Object msg) {
-
-
 
 		ByteBuf in = (ByteBuf) msg;
 		String requestMsg  = in.toString(StandardCharsets.UTF_8 );
@@ -56,13 +58,135 @@ public class InHandler2 extends ChannelInboundHandlerAdapter { // (1)
 	public void channelRegistered(ChannelHandlerContext ctx) throws Exception {
 
 		super.channelRegistered(ctx);
-		LOG.info("Channel Registered: "+ctx.channel().localAddress() + ":" + ctx.channel().remoteAddress());
+		LOG.info("Channel Registered: "+ ctx.channel().localAddress() + ":" + ctx.channel().remoteAddress());
 	}
 
 
 	private String handleClientRequest(String requestMsg) {
 		//		LOG.info("handleClientRequest:"+requestMsg);
 
+		if(requestMsg.contains("WRITE:")){
+			if(!properties.isLeader()){ //follower
+				//Forward write request to the leader
+				LOG.info("Follower received WRITE request from client, forwarding to the leader..!!");
+				this.nettyClient.sendMessage(properties.getLeaderAddress().getHostName(), properties.getLeaderAddress().getPort(), requestMsg);
+				
+			}
+			else{ //leader
+
+				//"WRITE:KEY:VALUE"
+				String[] arr = requestMsg.split(":");
+				
+				//Key-value pair to be proposed
+				String key = arr[1].trim();
+				String value = arr[2].trim();
+				long epoch = 3;//this.properties.getAcceptedEpoch()
+				long counter = 4;//this.getCounter()++;
+			
+				
+				//Form a proposal
+				ZxId z = new ZxId(epoch, counter);
+				Proposal p = new Proposal(z, key, value);
+				String proposal = "PROPOSE:" + p.toString();
+				
+				//enqueue this proposal to proposed transactions to keep the count of Acknowledgements
+				properties.getSynData().getProposedTransactions().put(p,1L);
+				
+				//send proposal to quorum
+				LOG.info("Leader:" + "Sending proposal to everyone:" + proposal);
+				for (InetSocketAddress member : properties.getSynData().getMemberList()) {
+					
+					LOG.info("Sending "+ proposal +" to: "+ member.getHostName() + ":"+ member.getPort());
+					this.nettyClient.sendMessage(member.getHostName(), member.getPort(), proposal);
+			
+				}
+			}
+		
+		}
+		
+		if(requestMsg.contains("PROPOSE")){
+			if(properties.isLeader()){ // Leader will not accept this message
+				LOG.info("I am the Leader, I do not accept proposals");
+				return "ERROR: I am the eader, I send proposals, not accept!";
+				
+			}
+			else{ ///Follower
+				//enqueue this message to proposal queue 
+				String[] arr = requestMsg.split(":");
+				Long epoch = Long.parseLong(arr[1].trim());
+				Long counter = Long.parseLong(arr[2].trim());
+				ZxId z = new ZxId(epoch, counter);
+				String key = arr[3].trim();
+				String value = arr[4].trim();
+				Proposal proposal = new Proposal(z,key,value);
+				
+				properties.getSynData().getProposedTransactions().put(proposal, 0L);
+				LOG.info("Enqueing proposal in Proposal Queue:" + proposal);
+				
+				LOG.info("Sending Acknowledgement to the leader");
+				return "ACK_PROPOSAL:" + proposal.toString();
+		
+			}
+		}
+		
+		if(requestMsg.contains("ACK_PROPOSAL")){
+			if(!properties.isLeader()){//follower
+				//follower should disregard this message
+				LOG.info("Follower got ACK_PROPOSAL, shouldn't happen!");
+				return "ERROR:Follower got ACK_PROPOSAL";
+			}
+			else{//Leader
+				String[] arr = requestMsg.split(":");
+				
+				//Parsing proposal for which acknowledgement was received				
+				Long epoch = Long.parseLong(arr[1].trim());
+				Long counter = Long.parseLong(arr[2].trim());
+				ZxId z = new ZxId(epoch, counter);
+				String key = arr[3].trim();
+				String value = arr[4].trim();
+				Proposal p = new Proposal(z,key,value);
+				
+				//we have to increment the ack count for this zxid
+				LOG.info("Leader: Got ACK_PROPOSAL, incrementing count for zxid" + z);
+				
+				//checking the ack count for the proposal (counter value)
+				//TODO: use atomic integer
+				properties.getSynData().incrementAckCount(p);			
+			}
+		}
+		
+		if(requestMsg.contains("COMMIT:")){
+			if(properties.isLeader()){ // leader will not accept this message
+				LOG.info("I am the Leader, I do not accept commit messages");
+				return "ERROR: I am the eader, I send proposals, not accept!";
+			}
+			else{//follower
+				String[] arr = requestMsg.split(":");
+				
+				//Parsing proposal for which acknowledgement was received				
+				Long epoch = Long.parseLong(arr[1].trim());
+				Long counter = Long.parseLong(arr[2].trim());
+				ZxId z = new ZxId(epoch, counter);
+				String key = arr[3].trim();
+				String value = arr[4].trim();
+				Proposal p = new Proposal(z,key,value);
+				
+				if(properties.getSynData().getProposedTransactions().contains(p)){
+					
+					//String fileName = "CommitedHistory_" + properties.getNodePort() + ".log";
+					//FileOps.appendTransaction(fileName, p.toString());
+					synchronized (properties.getSynData().getProposedTransactions()) {
+						//remove from proposedtransactions map
+						properties.getSynData().getProposedTransactions().remove(p);
+						
+						//enqueue in commitQueue
+						properties.getSynData().getCommittedTransactions().add(p);
+					}				
+				}				
+			}
+		}
+		
+		
 		if(requestMsg.contains("JOIN_GROUP:")){
 			//add the ip:port to the group member list;
 
@@ -78,7 +202,7 @@ public class InHandler2 extends ChannelInboundHandlerAdapter { // (1)
 		}
 
 		if(requestMsg.contains("CNOTIFICATION:")){
-			//add the ip:port to the group member list;
+			//add the ip:port to thefore group member list;
 			
 
 			String[] arr = requestMsg.split(":");
@@ -204,7 +328,7 @@ public class InHandler2 extends ChannelInboundHandlerAdapter { // (1)
 		}
 
 		return "";
-
+	
 	}
 
 
