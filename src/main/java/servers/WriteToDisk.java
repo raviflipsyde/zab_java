@@ -30,6 +30,7 @@ public class WriteToDisk implements Runnable {
 			//flush the committed transactions set
 			SortedSet<Proposal> committedtransactions = properties.getSynData().getCommittedTransactions();
 			for(Object entry: committedtransactions){
+				LOG.info("WriteToDisk: Writing transactions to Transaction log");
 				String s = entry.toString();
 				String fileName = "TestReplication_" + properties.getNodePort() + ".log";
 				FileOps.appendTransaction(fileName,s);

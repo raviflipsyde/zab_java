@@ -174,11 +174,12 @@ public class InHandler2 extends ChannelInboundHandlerAdapter { // (1)
 				Proposal p = new Proposal(z,key,value);
 				
 				if(properties.getSynData().getProposedTransactions().contains(p)){
-					
+					LOG.info("Commit Queue contains the transaction to be removed:" + p);
 					//String fileName = "CommitedHistory_" + properties.getNodePort() + ".log";
 					//FileOps.appendTransaction(fileName, p.toString());
 					synchronized (properties.getSynData().getProposedTransactions()) {
 						//remove from proposedtransactions map
+						LOG.info("Inside synchronized block....!!!");
 						properties.getSynData().getProposedTransactions().remove(p);
 						
 						//enqueue in commitQueue
