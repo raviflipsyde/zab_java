@@ -95,6 +95,7 @@ public class InHandler2 extends ChannelInboundHandlerAdapter { // (1)
 				
 				//send proposal to quorum
 				LOG.info("Leader:" + "Sending proposal to everyone:" + proposal);
+				
 				for (InetSocketAddress member : properties.getSynData().getMemberList()) {
 					
 					LOG.info("Sending "+ proposal +" to: "+ member.getHostName() + ":"+ member.getPort());

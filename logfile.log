@@ -10937,3 +10937,303 @@ INFO  | 2017-04-21 20:24:45 | [Thread-2] servers.MonitorProposeQueue (MonitorPro
 INFO  | 2017-04-21 20:24:45 | [Thread-2] servers.MonitorProposeQueue (MonitorProposeQueue.java:49) - Removing from Proposed transactions Map3:4:3:2:1
 INFO  | 2017-04-21 20:24:46 | [Thread-2] servers.MonitorProposeQueue (MonitorProposeQueue.java:49) - Removing from Proposed transactions Map3:4:3:2:1
 INFO  | 2017-04-21 20:24:46 | [Thread-2] servers.MonitorProposeQueue (MonitorProposeQueue.java:49) - Removing from Proposed transactions Map3:4:3:2:1
+INFO  | 2017-04-22 00:41:45 | [main] Start (Start.java:49) - Bootstrap Host: 127.0.0.1
+INFO  | 2017-04-22 00:41:45 | [main] Start (Start.java:50) - Bootstrap Port: 4500
+INFO  | 2017-04-22 00:41:45 | [main] Start (Start.java:51) - Node Port :8080
+INFO  | 2017-04-22 00:41:45 | [main] servers.NodeServer1 (NodeServer1.java:425) - Starting the Node server
+INFO  | 2017-04-22 00:41:46 | [main] servers.NodeServer1 (NodeServer1.java:433) - 
+**ID for this node is :0
+INFO  | 2017-04-22 00:41:59 | [main] Start (Start.java:65) - Port:45000
+INFO  | 2017-04-22 00:44:33 | [main] Start (Start.java:49) - Bootstrap Host: localhost
+INFO  | 2017-04-22 00:44:33 | [main] Start (Start.java:50) - Bootstrap Port: 4500
+INFO  | 2017-04-22 00:44:33 | [main] Start (Start.java:51) - Node Port :9001
+INFO  | 2017-04-22 00:44:33 | [main] servers.NodeServer1 (NodeServer1.java:425) - Starting the Node server
+INFO  | 2017-04-22 00:44:34 | [main] servers.NodeServer1 (NodeServer1.java:433) - 
+**ID for this node is :0
+INFO  | 2017-04-22 00:44:35 | [main] servers.NodeServer1 (NodeServer1.java:635) - Inside Broadcast::Message:JOIN_GROUP:0:71.69.171.88:9001
+INFO  | 2017-04-22 00:44:35 | [main] servers.NodeServer1 (NodeServer1.java:544) - Mocking the data for testing broadcast...!!
+INFO  | 2017-04-22 00:44:35 | [main] servers.NodeServer1 (NodeServer1.java:407) - Starting the broadcast phase..!!
+INFO  | 2017-04-22 00:44:35 | [main] servers.NodeServer1 (NodeServer1.java:413) - Starting Monitor Propose Queue thread for leader...
+INFO  | 2017-04-22 00:44:35 | [main] servers.NodeServer1 (NodeServer1.java:418) - Starting Write to disk thread irrespective of leader or follower...
+INFO  | 2017-04-22 00:44:35 | [Thread-2] servers.MonitorProposeQueue (MonitorProposeQueue.java:24) - Run method for MonitorProposeQueue
+INFO  | 2017-04-22 00:44:36 | [Thread-1] netty.NettyServer1 (NettyServer1.java:49) - Netty server started on port:9001
+INFO  | 2017-04-22 00:45:11 | [main] Start (Start.java:65) - Port:4500
+INFO  | 2017-04-22 00:45:17 | [main] Start (Start.java:49) - Bootstrap Host: localhost
+INFO  | 2017-04-22 00:45:17 | [main] Start (Start.java:50) - Bootstrap Port: 4500
+INFO  | 2017-04-22 00:45:17 | [main] Start (Start.java:51) - Node Port :9001
+INFO  | 2017-04-22 00:45:17 | [main] servers.NodeServer1 (NodeServer1.java:425) - Starting the Node server
+INFO  | 2017-04-22 00:45:17 | [nioEventLoopGroup-3-1] netty.BootStrapServerHandler (BootStrapServerHandler.java:63) - Server Recieved : set 71.69.171.88:9001
+
+INFO  | 2017-04-22 00:45:17 | [nioEventLoopGroup-3-1] netty.BootStrapServerHandler (BootStrapServerHandler.java:65) - Member List : 1:71.69.171.88:9001,
+INFO  | 2017-04-22 00:45:17 | [nioEventLoopGroup-3-1] netty.BootStrapServerHandler (BootStrapServerHandler.java:66) - counter : 1
+INFO  | 2017-04-22 00:45:17 | [main] servers.NodeServer1 (NodeServer1.java:576) - MemberID received:1
+INFO  | 2017-04-22 00:45:17 | [main] servers.NodeServer1 (NodeServer1.java:601) - ------------MembersList:----------
+1:71.69.171.88:9001,
+INFO  | 2017-04-22 00:45:17 | [main] servers.NodeServer1 (NodeServer1.java:618) - -----------MemberListSize:0
+INFO  | 2017-04-22 00:45:17 | [main] servers.NodeServer1 (NodeServer1.java:433) - 
+**ID for this node is :1
+INFO  | 2017-04-22 00:45:18 | [main] servers.NodeServer1 (NodeServer1.java:635) - Inside Broadcast::Message:JOIN_GROUP:1:71.69.171.88:9001
+INFO  | 2017-04-22 00:45:18 | [main] servers.NodeServer1 (NodeServer1.java:544) - Mocking the data for testing broadcast...!!
+INFO  | 2017-04-22 00:45:18 | [main] servers.NodeServer1 (NodeServer1.java:407) - Starting the broadcast phase..!!
+INFO  | 2017-04-22 00:45:18 | [main] servers.NodeServer1 (NodeServer1.java:413) - Starting Monitor Propose Queue thread for leader...
+INFO  | 2017-04-22 00:45:18 | [main] servers.NodeServer1 (NodeServer1.java:418) - Starting Write to disk thread irrespective of leader or follower...
+INFO  | 2017-04-22 00:45:18 | [Thread-2] servers.MonitorProposeQueue (MonitorProposeQueue.java:24) - Run method for MonitorProposeQueue
+INFO  | 2017-04-22 00:45:19 | [Thread-1] netty.NettyServer1 (NettyServer1.java:49) - Netty server started on port:9001
+INFO  | 2017-04-22 00:46:22 | [main] Start (Start.java:49) - Bootstrap Host: localhost
+INFO  | 2017-04-22 00:46:22 | [main] Start (Start.java:50) - Bootstrap Port: 4500
+INFO  | 2017-04-22 00:46:22 | [main] Start (Start.java:51) - Node Port :9002
+INFO  | 2017-04-22 00:46:22 | [main] servers.NodeServer1 (NodeServer1.java:427) - Starting the Node server
+INFO  | 2017-04-22 00:46:22 | [nioEventLoopGroup-3-2] netty.BootStrapServerHandler (BootStrapServerHandler.java:63) - Server Recieved : set 71.69.171.88:9002
+
+INFO  | 2017-04-22 00:46:22 | [nioEventLoopGroup-3-2] netty.BootStrapServerHandler (BootStrapServerHandler.java:65) - Member List : 1:71.69.171.88:9001,2:71.69.171.88:9002,
+INFO  | 2017-04-22 00:46:22 | [nioEventLoopGroup-3-2] netty.BootStrapServerHandler (BootStrapServerHandler.java:66) - counter : 2
+INFO  | 2017-04-22 00:46:22 | [main] servers.NodeServer1 (NodeServer1.java:578) - MemberID received:2
+INFO  | 2017-04-22 00:46:22 | [main] servers.NodeServer1 (NodeServer1.java:603) - ------------MembersList:----------
+1:71.69.171.88:9001,2:71.69.171.88:9002,
+INFO  | 2017-04-22 00:46:22 | [main] servers.NodeServer1 (NodeServer1.java:614) - Adding1:::/71.69.171.88:9001
+INFO  | 2017-04-22 00:46:22 | [main] servers.NodeServer1 (NodeServer1.java:620) - -----------MemberListSize:1
+INFO  | 2017-04-22 00:46:27 | [main] servers.NodeServer1 (NodeServer1.java:432) - 1:::71.69.171.88:9001
+INFO  | 2017-04-22 00:46:27 | [main] servers.NodeServer1 (NodeServer1.java:435) - 
+**ID for this node is :2
+INFO  | 2017-04-22 00:46:28 | [main] servers.NodeServer1 (NodeServer1.java:637) - Inside Broadcast::Message:JOIN_GROUP:2:71.69.171.88:9002
+INFO  | 2017-04-22 00:46:28 | [main] servers.NodeServer1 (NodeServer1.java:641) - Sending JOIN_GROUP:2:71.69.171.88:9002 to: 71.69.171.88:9001
+INFO  | 2017-04-22 00:47:13 | [nioEventLoopGroup-3-1] netty.InHandler2 (InHandler2.java:61) - Channel Registered: null:null
+INFO  | 2017-04-22 00:47:31 | [Thread-1] netty.NettyServer1 (NettyServer1.java:49) - Netty server started on port:9002
+INFO  | 2017-04-22 00:47:34 | [main] servers.NodeServer1 (NodeServer1.java:546) - Mocking the data for testing broadcast...!!
+INFO  | 2017-04-22 00:47:34 | [main] servers.NodeServer1 (NodeServer1.java:407) - Starting the broadcast phase..!!
+INFO  | 2017-04-22 00:47:34 | [main] servers.NodeServer1 (NodeServer1.java:419) - Starting Write to disk thread irrespective of leader or follower...
+INFO  | 2017-04-22 00:48:23 | [nioEventLoopGroup-4-1] netty.InHandler2 (InHandler2.java:61) - Channel Registered: /0:0:0:0:0:0:0:1:9002:/0:0:0:0:0:0:0:1:61054
+INFO  | 2017-04-22 00:51:05 | [nioEventLoopGroup-4-1] netty.InHandler2 (InHandler2.java:43) - >>>Channel Read:WRITE:3:2
+
+INFO  | 2017-04-22 00:51:12 | [nioEventLoopGroup-4-1] netty.InHandler2 (InHandler2.java:71) - Follower received WRITE request from client, forwarding to the leader..!!
+INFO  | 2017-04-22 00:52:01 | [nioEventLoopGroup-6-1] netty.InHandler2 (InHandler2.java:61) - Channel Registered: null:null
+INFO  | 2017-04-22 00:52:37 | [nioEventLoopGroup-4-1] netty.InHandler2 (InHandler2.java:61) - Channel Registered: /127.0.0.1:9001:/127.0.0.1:61101
+INFO  | 2017-04-22 00:52:37 | [nioEventLoopGroup-4-1] netty.InHandler2 (InHandler2.java:43) - >>>Channel Read:WRITE:3:2
+
+
+INFO  | 2017-04-22 00:52:37 | [nioEventLoopGroup-4-1] netty.InHandler2 (InHandler2.java:96) - Leader:Sending proposal to everyone:PROPOSE:3:4:3:2
+INFO  | 2017-04-22 00:52:37 | [nioEventLoopGroup-4-1] netty.InHandler2 (InHandler2.java:45) - <<<Response:
+INFO  | 2017-04-22 00:52:37 | [Thread-2] servers.MonitorProposeQueue (MonitorProposeQueue.java:33) - Quorum achieved for Proposal:3:4:3:2
+INFO  | 2017-04-22 00:52:37 | [Thread-2] servers.MonitorProposeQueue (MonitorProposeQueue.java:34) - Sending a COMMIT message now to all followers..!!
+INFO  | 2017-04-22 00:52:37 | [Thread-2] servers.NodeServer1 (NodeServer1.java:635) - Inside Broadcast::Message:COMMIT:3:4:3:2
+INFO  | 2017-04-22 00:52:37 | [Thread-2] servers.MonitorProposeQueue (MonitorProposeQueue.java:50) - Removing from Proposed transactions Map3:4:3:2:1
+INFO  | 2017-04-22 00:52:38 | [Thread-2] servers.MonitorProposeQueue (MonitorProposeQueue.java:50) - Removing from Proposed transactions Map3:4:3:2:1
+INFO  | 2017-04-22 00:52:39 | [Thread-2] servers.MonitorProposeQueue (MonitorProposeQueue.java:50) - Removing from Proposed transactions Map3:4:3:2:1
+INFO  | 2017-04-22 00:52:40 | [Thread-2] servers.MonitorProposeQueue (MonitorProposeQueue.java:50) - Removing from Proposed transactions Map3:4:3:2:1
+INFO  | 2017-04-22 00:52:41 | [Thread-2] servers.MonitorProposeQueue (MonitorProposeQueue.java:50) - Removing from Proposed transactions Map3:4:3:2:1
+INFO  | 2017-04-22 00:52:42 | [Thread-2] servers.MonitorProposeQueue (MonitorProposeQueue.java:50) - Removing from Proposed transactions Map3:4:3:2:1
+INFO  | 2017-04-22 00:52:43 | [Thread-2] servers.MonitorProposeQueue (MonitorProposeQueue.java:50) - Removing from Proposed transactions Map3:4:3:2:1
+INFO  | 2017-04-22 00:52:44 | [Thread-2] servers.MonitorProposeQueue (MonitorProposeQueue.java:50) - Removing from Proposed transactions Map3:4:3:2:1
+INFO  | 2017-04-22 00:52:45 | [Thread-2] servers.MonitorProposeQueue (MonitorProposeQueue.java:50) - Removing from Proposed transactions Map3:4:3:2:1
+INFO  | 2017-04-22 00:52:46 | [Thread-2] servers.MonitorProposeQueue (MonitorProposeQueue.java:50) - Removing from Proposed transactions Map3:4:3:2:1
+INFO  | 2017-04-22 00:52:47 | [Thread-2] servers.MonitorProposeQueue (MonitorProposeQueue.java:50) - Removing from Proposed transactions Map3:4:3:2:1
+INFO  | 2017-04-22 00:52:48 | [Thread-2] servers.MonitorProposeQueue (MonitorProposeQueue.java:50) - Removing from Proposed transactions Map3:4:3:2:1
+INFO  | 2017-04-22 00:52:49 | [Thread-2] servers.MonitorProposeQueue (MonitorProposeQueue.java:50) - Removing from Proposed transactions Map3:4:3:2:1
+INFO  | 2017-04-22 00:52:50 | [Thread-2] servers.MonitorProposeQueue (MonitorProposeQueue.java:50) - Removing from Proposed transactions Map3:4:3:2:1
+INFO  | 2017-04-22 00:52:51 | [Thread-2] servers.MonitorProposeQueue (MonitorProposeQueue.java:50) - Removing from Proposed transactions Map3:4:3:2:1
+INFO  | 2017-04-22 00:52:52 | [Thread-2] servers.MonitorProposeQueue (MonitorProposeQueue.java:50) - Removing from Proposed transactions Map3:4:3:2:1
+INFO  | 2017-04-22 00:52:53 | [Thread-2] servers.MonitorProposeQueue (MonitorProposeQueue.java:50) - Removing from Proposed transactions Map3:4:3:2:1
+INFO  | 2017-04-22 00:52:54 | [Thread-2] servers.MonitorProposeQueue (MonitorProposeQueue.java:50) - Removing from Proposed transactions Map3:4:3:2:1
+INFO  | 2017-04-22 00:52:55 | [Thread-2] servers.MonitorProposeQueue (MonitorProposeQueue.java:50) - Removing from Proposed transactions Map3:4:3:2:1
+INFO  | 2017-04-22 00:52:56 | [Thread-2] servers.MonitorProposeQueue (MonitorProposeQueue.java:50) - Removing from Proposed transactions Map3:4:3:2:1
+INFO  | 2017-04-22 00:52:57 | [Thread-2] servers.MonitorProposeQueue (MonitorProposeQueue.java:50) - Removing from Proposed transactions Map3:4:3:2:1
+INFO  | 2017-04-22 00:52:58 | [Thread-2] servers.MonitorProposeQueue (MonitorProposeQueue.java:50) - Removing from Proposed transactions Map3:4:3:2:1
+INFO  | 2017-04-22 00:52:59 | [Thread-2] servers.MonitorProposeQueue (MonitorProposeQueue.java:50) - Removing from Proposed transactions Map3:4:3:2:1
+INFO  | 2017-04-22 00:53:00 | [Thread-2] servers.MonitorProposeQueue (MonitorProposeQueue.java:50) - Removing from Proposed transactions Map3:4:3:2:1
+INFO  | 2017-04-22 00:53:01 | [Thread-2] servers.MonitorProposeQueue (MonitorProposeQueue.java:50) - Removing from Proposed transactions Map3:4:3:2:1
+INFO  | 2017-04-22 00:53:02 | [Thread-2] servers.MonitorProposeQueue (MonitorProposeQueue.java:50) - Removing from Proposed transactions Map3:4:3:2:1
+INFO  | 2017-04-22 00:53:03 | [Thread-2] servers.MonitorProposeQueue (MonitorProposeQueue.java:50) - Removing from Proposed transactions Map3:4:3:2:1
+INFO  | 2017-04-22 00:53:04 | [Thread-2] servers.MonitorProposeQueue (MonitorProposeQueue.java:50) - Removing from Proposed transactions Map3:4:3:2:1
+INFO  | 2017-04-22 00:53:05 | [Thread-2] servers.MonitorProposeQueue (MonitorProposeQueue.java:50) - Removing from Proposed transactions Map3:4:3:2:1
+INFO  | 2017-04-22 00:53:06 | [Thread-2] servers.MonitorProposeQueue (MonitorProposeQueue.java:50) - Removing from Proposed transactions Map3:4:3:2:1
+INFO  | 2017-04-22 00:53:07 | [Thread-2] servers.MonitorProposeQueue (MonitorProposeQueue.java:50) - Removing from Proposed transactions Map3:4:3:2:1
+INFO  | 2017-04-22 00:53:08 | [Thread-2] servers.MonitorProposeQueue (MonitorProposeQueue.java:50) - Removing from Proposed transactions Map3:4:3:2:1
+INFO  | 2017-04-22 00:53:09 | [Thread-2] servers.MonitorProposeQueue (MonitorProposeQueue.java:50) - Removing from Proposed transactions Map3:4:3:2:1
+INFO  | 2017-04-22 00:53:10 | [Thread-2] servers.MonitorProposeQueue (MonitorProposeQueue.java:50) - Removing from Proposed transactions Map3:4:3:2:1
+INFO  | 2017-04-22 00:53:11 | [Thread-2] servers.MonitorProposeQueue (MonitorProposeQueue.java:50) - Removing from Proposed transactions Map3:4:3:2:1
+INFO  | 2017-04-22 00:53:12 | [Thread-2] servers.MonitorProposeQueue (MonitorProposeQueue.java:50) - Removing from Proposed transactions Map3:4:3:2:1
+INFO  | 2017-04-22 00:53:13 | [Thread-2] servers.MonitorProposeQueue (MonitorProposeQueue.java:50) - Removing from Proposed transactions Map3:4:3:2:1
+INFO  | 2017-04-22 00:53:14 | [Thread-2] servers.MonitorProposeQueue (MonitorProposeQueue.java:50) - Removing from Proposed transactions Map3:4:3:2:1
+INFO  | 2017-04-22 00:53:15 | [Thread-2] servers.MonitorProposeQueue (MonitorProposeQueue.java:50) - Removing from Proposed transactions Map3:4:3:2:1
+INFO  | 2017-04-22 00:53:16 | [Thread-2] servers.MonitorProposeQueue (MonitorProposeQueue.java:50) - Removing from Proposed transactions Map3:4:3:2:1
+INFO  | 2017-04-22 00:53:17 | [Thread-2] servers.MonitorProposeQueue (MonitorProposeQueue.java:50) - Removing from Proposed transactions Map3:4:3:2:1
+INFO  | 2017-04-22 00:53:18 | [Thread-2] servers.MonitorProposeQueue (MonitorProposeQueue.java:50) - Removing from Proposed transactions Map3:4:3:2:1
+INFO  | 2017-04-22 00:53:19 | [Thread-2] servers.MonitorProposeQueue (MonitorProposeQueue.java:50) - Removing from Proposed transactions Map3:4:3:2:1
+INFO  | 2017-04-22 00:53:20 | [Thread-2] servers.MonitorProposeQueue (MonitorProposeQueue.java:50) - Removing from Proposed transactions Map3:4:3:2:1
+INFO  | 2017-04-22 00:53:21 | [Thread-2] servers.MonitorProposeQueue (MonitorProposeQueue.java:50) - Removing from Proposed transactions Map3:4:3:2:1
+INFO  | 2017-04-22 00:53:22 | [Thread-2] servers.MonitorProposeQueue (MonitorProposeQueue.java:50) - Removing from Proposed transactions Map3:4:3:2:1
+INFO  | 2017-04-22 00:53:23 | [Thread-2] servers.MonitorProposeQueue (MonitorProposeQueue.java:50) - Removing from Proposed transactions Map3:4:3:2:1
+INFO  | 2017-04-22 00:53:24 | [Thread-2] servers.MonitorProposeQueue (MonitorProposeQueue.java:50) - Removing from Proposed transactions Map3:4:3:2:1
+INFO  | 2017-04-22 00:53:25 | [Thread-2] servers.MonitorProposeQueue (MonitorProposeQueue.java:50) - Removing from Proposed transactions Map3:4:3:2:1
+INFO  | 2017-04-22 00:53:26 | [Thread-2] servers.MonitorProposeQueue (MonitorProposeQueue.java:50) - Removing from Proposed transactions Map3:4:3:2:1
+INFO  | 2017-04-22 00:53:27 | [Thread-2] servers.MonitorProposeQueue (MonitorProposeQueue.java:50) - Removing from Proposed transactions Map3:4:3:2:1
+INFO  | 2017-04-22 00:53:28 | [Thread-2] servers.MonitorProposeQueue (MonitorProposeQueue.java:50) - Removing from Proposed transactions Map3:4:3:2:1
+INFO  | 2017-04-22 00:53:29 | [Thread-2] servers.MonitorProposeQueue (MonitorProposeQueue.java:50) - Removing from Proposed transactions Map3:4:3:2:1
+INFO  | 2017-04-22 00:53:30 | [Thread-2] servers.MonitorProposeQueue (MonitorProposeQueue.java:50) - Removing from Proposed transactions Map3:4:3:2:1
+INFO  | 2017-04-22 00:53:31 | [Thread-2] servers.MonitorProposeQueue (MonitorProposeQueue.java:50) - Removing from Proposed transactions Map3:4:3:2:1
+INFO  | 2017-04-22 00:53:32 | [Thread-2] servers.MonitorProposeQueue (MonitorProposeQueue.java:50) - Removing from Proposed transactions Map3:4:3:2:1
+INFO  | 2017-04-22 00:53:33 | [Thread-2] servers.MonitorProposeQueue (MonitorProposeQueue.java:50) - Removing from Proposed transactions Map3:4:3:2:1
+INFO  | 2017-04-22 00:53:34 | [Thread-2] servers.MonitorProposeQueue (MonitorProposeQueue.java:50) - Removing from Proposed transactions Map3:4:3:2:1
+INFO  | 2017-04-22 00:53:35 | [nioEventLoopGroup-4-1] netty.InHandler2 (InHandler2.java:45) - <<<Response:FOLLOWER WRITE:OK
+INFO  | 2017-04-22 00:53:35 | [Thread-2] servers.MonitorProposeQueue (MonitorProposeQueue.java:50) - Removing from Proposed transactions Map3:4:3:2:1
+INFO  | 2017-04-22 00:53:36 | [Thread-2] servers.MonitorProposeQueue (MonitorProposeQueue.java:50) - Removing from Proposed transactions Map3:4:3:2:1
+INFO  | 2017-04-22 00:53:37 | [Thread-2] servers.MonitorProposeQueue (MonitorProposeQueue.java:50) - Removing from Proposed transactions Map3:4:3:2:1
+INFO  | 2017-04-22 00:53:38 | [Thread-2] servers.MonitorProposeQueue (MonitorProposeQueue.java:50) - Removing from Proposed transactions Map3:4:3:2:1
+INFO  | 2017-04-22 00:53:39 | [Thread-2] servers.MonitorProposeQueue (MonitorProposeQueue.java:50) - Removing from Proposed transactions Map3:4:3:2:1
+INFO  | 2017-04-22 00:53:40 | [Thread-2] servers.MonitorProposeQueue (MonitorProposeQueue.java:50) - Removing from Proposed transactions Map3:4:3:2:1
+INFO  | 2017-04-22 00:53:41 | [Thread-2] servers.MonitorProposeQueue (MonitorProposeQueue.java:50) - Removing from Proposed transactions Map3:4:3:2:1
+INFO  | 2017-04-22 00:53:42 | [Thread-2] servers.MonitorProposeQueue (MonitorProposeQueue.java:50) - Removing from Proposed transactions Map3:4:3:2:1
+INFO  | 2017-04-22 00:53:43 | [Thread-2] servers.MonitorProposeQueue (MonitorProposeQueue.java:50) - Removing from Proposed transactions Map3:4:3:2:1
+INFO  | 2017-04-22 00:53:44 | [Thread-2] servers.MonitorProposeQueue (MonitorProposeQueue.java:50) - Removing from Proposed transactions Map3:4:3:2:1
+INFO  | 2017-04-22 00:53:45 | [Thread-2] servers.MonitorProposeQueue (MonitorProposeQueue.java:50) - Removing from Proposed transactions Map3:4:3:2:1
+INFO  | 2017-04-22 00:53:46 | [Thread-2] servers.MonitorProposeQueue (MonitorProposeQueue.java:50) - Removing from Proposed transactions Map3:4:3:2:1
+INFO  | 2017-04-22 00:53:47 | [Thread-2] servers.MonitorProposeQueue (MonitorProposeQueue.java:50) - Removing from Proposed transactions Map3:4:3:2:1
+INFO  | 2017-04-22 00:53:48 | [Thread-2] servers.MonitorProposeQueue (MonitorProposeQueue.java:50) - Removing from Proposed transactions Map3:4:3:2:1
+INFO  | 2017-04-22 00:53:49 | [Thread-2] servers.MonitorProposeQueue (MonitorProposeQueue.java:50) - Removing from Proposed transactions Map3:4:3:2:1
+INFO  | 2017-04-22 00:53:50 | [Thread-2] servers.MonitorProposeQueue (MonitorProposeQueue.java:50) - Removing from Proposed transactions Map3:4:3:2:1
+INFO  | 2017-04-22 00:53:51 | [Thread-2] servers.MonitorProposeQueue (MonitorProposeQueue.java:50) - Removing from Proposed transactions Map3:4:3:2:1
+INFO  | 2017-04-22 00:53:53 | [Thread-2] servers.MonitorProposeQueue (MonitorProposeQueue.java:50) - Removing from Proposed transactions Map3:4:3:2:1
+INFO  | 2017-04-22 00:53:54 | [Thread-2] servers.MonitorProposeQueue (MonitorProposeQueue.java:50) - Removing from Proposed transactions Map3:4:3:2:1
+INFO  | 2017-04-22 00:53:55 | [Thread-2] servers.MonitorProposeQueue (MonitorProposeQueue.java:50) - Removing from Proposed transactions Map3:4:3:2:1
+INFO  | 2017-04-22 00:53:56 | [Thread-2] servers.MonitorProposeQueue (MonitorProposeQueue.java:50) - Removing from Proposed transactions Map3:4:3:2:1
+INFO  | 2017-04-22 00:53:57 | [Thread-2] servers.MonitorProposeQueue (MonitorProposeQueue.java:50) - Removing from Proposed transactions Map3:4:3:2:1
+INFO  | 2017-04-22 00:53:58 | [Thread-2] servers.MonitorProposeQueue (MonitorProposeQueue.java:50) - Removing from Proposed transactions Map3:4:3:2:1
+INFO  | 2017-04-22 00:53:59 | [Thread-2] servers.MonitorProposeQueue (MonitorProposeQueue.java:50) - Removing from Proposed transactions Map3:4:3:2:1
+INFO  | 2017-04-22 00:54:00 | [Thread-2] servers.MonitorProposeQueue (MonitorProposeQueue.java:50) - Removing from Proposed transactions Map3:4:3:2:1
+INFO  | 2017-04-22 00:54:01 | [Thread-2] servers.MonitorProposeQueue (MonitorProposeQueue.java:50) - Removing from Proposed transactions Map3:4:3:2:1
+INFO  | 2017-04-22 00:54:02 | [Thread-2] servers.MonitorProposeQueue (MonitorProposeQueue.java:50) - Removing from Proposed transactions Map3:4:3:2:1
+INFO  | 2017-04-22 00:54:03 | [Thread-2] servers.MonitorProposeQueue (MonitorProposeQueue.java:50) - Removing from Proposed transactions Map3:4:3:2:1
+INFO  | 2017-04-22 00:54:04 | [Thread-2] servers.MonitorProposeQueue (MonitorProposeQueue.java:50) - Removing from Proposed transactions Map3:4:3:2:1
+INFO  | 2017-04-22 00:54:05 | [Thread-2] servers.MonitorProposeQueue (MonitorProposeQueue.java:50) - Removing from Proposed transactions Map3:4:3:2:1
+INFO  | 2017-04-22 00:54:06 | [Thread-2] servers.MonitorProposeQueue (MonitorProposeQueue.java:50) - Removing from Proposed transactions Map3:4:3:2:1
+INFO  | 2017-04-22 00:54:07 | [Thread-2] servers.MonitorProposeQueue (MonitorProposeQueue.java:50) - Removing from Proposed transactions Map3:4:3:2:1
+INFO  | 2017-04-22 00:54:08 | [Thread-2] servers.MonitorProposeQueue (MonitorProposeQueue.java:50) - Removing from Proposed transactions Map3:4:3:2:1
+INFO  | 2017-04-22 00:54:09 | [Thread-2] servers.MonitorProposeQueue (MonitorProposeQueue.java:50) - Removing from Proposed transactions Map3:4:3:2:1
+INFO  | 2017-04-22 00:54:10 | [Thread-2] servers.MonitorProposeQueue (MonitorProposeQueue.java:50) - Removing from Proposed transactions Map3:4:3:2:1
+INFO  | 2017-04-22 00:54:11 | [Thread-2] servers.MonitorProposeQueue (MonitorProposeQueue.java:50) - Removing from Proposed transactions Map3:4:3:2:1
+INFO  | 2017-04-22 00:54:12 | [Thread-2] servers.MonitorProposeQueue (MonitorProposeQueue.java:50) - Removing from Proposed transactions Map3:4:3:2:1
+INFO  | 2017-04-22 00:54:13 | [Thread-2] servers.MonitorProposeQueue (MonitorProposeQueue.java:50) - Removing from Proposed transactions Map3:4:3:2:1
+INFO  | 2017-04-22 00:54:14 | [Thread-2] servers.MonitorProposeQueue (MonitorProposeQueue.java:50) - Removing from Proposed transactions Map3:4:3:2:1
+INFO  | 2017-04-22 00:54:15 | [Thread-2] servers.MonitorProposeQueue (MonitorProposeQueue.java:50) - Removing from Proposed transactions Map3:4:3:2:1
+INFO  | 2017-04-22 00:54:16 | [Thread-2] servers.MonitorProposeQueue (MonitorProposeQueue.java:50) - Removing from Proposed transactions Map3:4:3:2:1
+INFO  | 2017-04-22 00:54:17 | [Thread-2] servers.MonitorProposeQueue (MonitorProposeQueue.java:50) - Removing from Proposed transactions Map3:4:3:2:1
+INFO  | 2017-04-22 00:54:18 | [Thread-2] servers.MonitorProposeQueue (MonitorProposeQueue.java:50) - Removing from Proposed transactions Map3:4:3:2:1
+INFO  | 2017-04-22 00:54:19 | [Thread-2] servers.MonitorProposeQueue (MonitorProposeQueue.java:50) - Removing from Proposed transactions Map3:4:3:2:1
+INFO  | 2017-04-22 00:54:20 | [Thread-2] servers.MonitorProposeQueue (MonitorProposeQueue.java:50) - Removing from Proposed transactions Map3:4:3:2:1
+INFO  | 2017-04-22 00:54:21 | [Thread-2] servers.MonitorProposeQueue (MonitorProposeQueue.java:50) - Removing from Proposed transactions Map3:4:3:2:1
+INFO  | 2017-04-22 00:54:22 | [Thread-2] servers.MonitorProposeQueue (MonitorProposeQueue.java:50) - Removing from Proposed transactions Map3:4:3:2:1
+INFO  | 2017-04-22 00:54:23 | [Thread-2] servers.MonitorProposeQueue (MonitorProposeQueue.java:50) - Removing from Proposed transactions Map3:4:3:2:1
+INFO  | 2017-04-22 00:54:24 | [Thread-2] servers.MonitorProposeQueue (MonitorProposeQueue.java:50) - Removing from Proposed transactions Map3:4:3:2:1
+INFO  | 2017-04-22 00:54:25 | [Thread-2] servers.MonitorProposeQueue (MonitorProposeQueue.java:50) - Removing from Proposed transactions Map3:4:3:2:1
+INFO  | 2017-04-22 00:54:26 | [Thread-2] servers.MonitorProposeQueue (MonitorProposeQueue.java:50) - Removing from Proposed transactions Map3:4:3:2:1
+INFO  | 2017-04-22 00:54:27 | [Thread-2] servers.MonitorProposeQueue (MonitorProposeQueue.java:50) - Removing from Proposed transactions Map3:4:3:2:1
+INFO  | 2017-04-22 00:54:28 | [Thread-2] servers.MonitorProposeQueue (MonitorProposeQueue.java:50) - Removing from Proposed transactions Map3:4:3:2:1
+INFO  | 2017-04-22 00:54:29 | [Thread-2] servers.MonitorProposeQueue (MonitorProposeQueue.java:50) - Removing from Proposed transactions Map3:4:3:2:1
+INFO  | 2017-04-22 00:54:30 | [Thread-2] servers.MonitorProposeQueue (MonitorProposeQueue.java:50) - Removing from Proposed transactions Map3:4:3:2:1
+INFO  | 2017-04-22 00:54:31 | [Thread-2] servers.MonitorProposeQueue (MonitorProposeQueue.java:50) - Removing from Proposed transactions Map3:4:3:2:1
+INFO  | 2017-04-22 00:54:32 | [Thread-2] servers.MonitorProposeQueue (MonitorProposeQueue.java:50) - Removing from Proposed transactions Map3:4:3:2:1
+INFO  | 2017-04-22 00:54:33 | [Thread-2] servers.MonitorProposeQueue (MonitorProposeQueue.java:50) - Removing from Proposed transactions Map3:4:3:2:1
+INFO  | 2017-04-22 00:54:34 | [Thread-2] servers.MonitorProposeQueue (MonitorProposeQueue.java:50) - Removing from Proposed transactions Map3:4:3:2:1
+INFO  | 2017-04-22 00:54:35 | [Thread-2] servers.MonitorProposeQueue (MonitorProposeQueue.java:50) - Removing from Proposed transactions Map3:4:3:2:1
+INFO  | 2017-04-22 00:54:36 | [Thread-2] servers.MonitorProposeQueue (MonitorProposeQueue.java:50) - Removing from Proposed transactions Map3:4:3:2:1
+INFO  | 2017-04-22 00:54:37 | [Thread-2] servers.MonitorProposeQueue (MonitorProposeQueue.java:50) - Removing from Proposed transactions Map3:4:3:2:1
+INFO  | 2017-04-22 00:54:38 | [Thread-2] servers.MonitorProposeQueue (MonitorProposeQueue.java:50) - Removing from Proposed transactions Map3:4:3:2:1
+INFO  | 2017-04-22 00:54:39 | [Thread-2] servers.MonitorProposeQueue (MonitorProposeQueue.java:50) - Removing from Proposed transactions Map3:4:3:2:1
+INFO  | 2017-04-22 00:54:40 | [Thread-2] servers.MonitorProposeQueue (MonitorProposeQueue.java:50) - Removing from Proposed transactions Map3:4:3:2:1
+INFO  | 2017-04-22 00:54:41 | [Thread-2] servers.MonitorProposeQueue (MonitorProposeQueue.java:50) - Removing from Proposed transactions Map3:4:3:2:1
+INFO  | 2017-04-22 00:54:42 | [Thread-2] servers.MonitorProposeQueue (MonitorProposeQueue.java:50) - Removing from Proposed transactions Map3:4:3:2:1
+INFO  | 2017-04-22 00:54:43 | [Thread-2] servers.MonitorProposeQueue (MonitorProposeQueue.java:50) - Removing from Proposed transactions Map3:4:3:2:1
+INFO  | 2017-04-22 00:54:44 | [Thread-2] servers.MonitorProposeQueue (MonitorProposeQueue.java:50) - Removing from Proposed transactions Map3:4:3:2:1
+INFO  | 2017-04-22 00:54:45 | [Thread-2] servers.MonitorProposeQueue (MonitorProposeQueue.java:50) - Removing from Proposed transactions Map3:4:3:2:1
+INFO  | 2017-04-22 00:54:46 | [Thread-2] servers.MonitorProposeQueue (MonitorProposeQueue.java:50) - Removing from Proposed transactions Map3:4:3:2:1
+INFO  | 2017-04-22 00:54:47 | [Thread-2] servers.MonitorProposeQueue (MonitorProposeQueue.java:50) - Removing from Proposed transactions Map3:4:3:2:1
+INFO  | 2017-04-22 00:54:48 | [Thread-2] servers.MonitorProposeQueue (MonitorProposeQueue.java:50) - Removing from Proposed transactions Map3:4:3:2:1
+INFO  | 2017-04-22 00:54:49 | [Thread-2] servers.MonitorProposeQueue (MonitorProposeQueue.java:50) - Removing from Proposed transactions Map3:4:3:2:1
+INFO  | 2017-04-22 00:54:50 | [Thread-2] servers.MonitorProposeQueue (MonitorProposeQueue.java:50) - Removing from Proposed transactions Map3:4:3:2:1
+INFO  | 2017-04-22 00:54:51 | [Thread-2] servers.MonitorProposeQueue (MonitorProposeQueue.java:50) - Removing from Proposed transactions Map3:4:3:2:1
+INFO  | 2017-04-22 00:54:52 | [Thread-2] servers.MonitorProposeQueue (MonitorProposeQueue.java:50) - Removing from Proposed transactions Map3:4:3:2:1
+INFO  | 2017-04-22 00:54:53 | [Thread-2] servers.MonitorProposeQueue (MonitorProposeQueue.java:50) - Removing from Proposed transactions Map3:4:3:2:1
+INFO  | 2017-04-22 00:54:54 | [Thread-2] servers.MonitorProposeQueue (MonitorProposeQueue.java:50) - Removing from Proposed transactions Map3:4:3:2:1
+INFO  | 2017-04-22 00:54:55 | [Thread-2] servers.MonitorProposeQueue (MonitorProposeQueue.java:50) - Removing from Proposed transactions Map3:4:3:2:1
+INFO  | 2017-04-22 00:54:56 | [Thread-2] servers.MonitorProposeQueue (MonitorProposeQueue.java:50) - Removing from Proposed transactions Map3:4:3:2:1
+INFO  | 2017-04-22 00:54:57 | [Thread-2] servers.MonitorProposeQueue (MonitorProposeQueue.java:50) - Removing from Proposed transactions Map3:4:3:2:1
+INFO  | 2017-04-22 00:54:58 | [Thread-2] servers.MonitorProposeQueue (MonitorProposeQueue.java:50) - Removing from Proposed transactions Map3:4:3:2:1
+INFO  | 2017-04-22 00:54:59 | [Thread-2] servers.MonitorProposeQueue (MonitorProposeQueue.java:50) - Removing from Proposed transactions Map3:4:3:2:1
+INFO  | 2017-04-22 00:55:00 | [Thread-2] servers.MonitorProposeQueue (MonitorProposeQueue.java:50) - Removing from Proposed transactions Map3:4:3:2:1
+INFO  | 2017-04-22 00:55:01 | [Thread-2] servers.MonitorProposeQueue (MonitorProposeQueue.java:50) - Removing from Proposed transactions Map3:4:3:2:1
+INFO  | 2017-04-22 00:55:02 | [Thread-2] servers.MonitorProposeQueue (MonitorProposeQueue.java:50) - Removing from Proposed transactions Map3:4:3:2:1
+INFO  | 2017-04-22 00:55:03 | [Thread-2] servers.MonitorProposeQueue (MonitorProposeQueue.java:50) - Removing from Proposed transactions Map3:4:3:2:1
+INFO  | 2017-04-22 00:55:04 | [Thread-2] servers.MonitorProposeQueue (MonitorProposeQueue.java:50) - Removing from Proposed transactions Map3:4:3:2:1
+INFO  | 2017-04-22 00:55:05 | [Thread-2] servers.MonitorProposeQueue (MonitorProposeQueue.java:50) - Removing from Proposed transactions Map3:4:3:2:1
+INFO  | 2017-04-22 00:55:06 | [Thread-2] servers.MonitorProposeQueue (MonitorProposeQueue.java:50) - Removing from Proposed transactions Map3:4:3:2:1
+INFO  | 2017-04-22 00:55:07 | [Thread-2] servers.MonitorProposeQueue (MonitorProposeQueue.java:50) - Removing from Proposed transactions Map3:4:3:2:1
+INFO  | 2017-04-22 00:55:08 | [Thread-2] servers.MonitorProposeQueue (MonitorProposeQueue.java:50) - Removing from Proposed transactions Map3:4:3:2:1
+INFO  | 2017-04-22 00:55:09 | [Thread-2] servers.MonitorProposeQueue (MonitorProposeQueue.java:50) - Removing from Proposed transactions Map3:4:3:2:1
+INFO  | 2017-04-22 00:55:10 | [Thread-2] servers.MonitorProposeQueue (MonitorProposeQueue.java:50) - Removing from Proposed transactions Map3:4:3:2:1
+INFO  | 2017-04-22 00:55:11 | [Thread-2] servers.MonitorProposeQueue (MonitorProposeQueue.java:50) - Removing from Proposed transactions Map3:4:3:2:1
+INFO  | 2017-04-22 00:55:12 | [Thread-2] servers.MonitorProposeQueue (MonitorProposeQueue.java:50) - Removing from Proposed transactions Map3:4:3:2:1
+INFO  | 2017-04-22 00:55:13 | [Thread-2] servers.MonitorProposeQueue (MonitorProposeQueue.java:50) - Removing from Proposed transactions Map3:4:3:2:1
+INFO  | 2017-04-22 00:55:14 | [Thread-2] servers.MonitorProposeQueue (MonitorProposeQueue.java:50) - Removing from Proposed transactions Map3:4:3:2:1
+INFO  | 2017-04-22 00:55:15 | [Thread-2] servers.MonitorProposeQueue (MonitorProposeQueue.java:50) - Removing from Proposed transactions Map3:4:3:2:1
+INFO  | 2017-04-22 00:55:16 | [Thread-2] servers.MonitorProposeQueue (MonitorProposeQueue.java:50) - Removing from Proposed transactions Map3:4:3:2:1
+INFO  | 2017-04-22 00:55:17 | [Thread-2] servers.MonitorProposeQueue (MonitorProposeQueue.java:50) - Removing from Proposed transactions Map3:4:3:2:1
+INFO  | 2017-04-22 00:55:18 | [Thread-2] servers.MonitorProposeQueue (MonitorProposeQueue.java:50) - Removing from Proposed transactions Map3:4:3:2:1
+INFO  | 2017-04-22 00:55:19 | [Thread-2] servers.MonitorProposeQueue (MonitorProposeQueue.java:50) - Removing from Proposed transactions Map3:4:3:2:1
+INFO  | 2017-04-22 00:55:20 | [Thread-2] servers.MonitorProposeQueue (MonitorProposeQueue.java:50) - Removing from Proposed transactions Map3:4:3:2:1
+INFO  | 2017-04-22 00:55:21 | [Thread-2] servers.MonitorProposeQueue (MonitorProposeQueue.java:50) - Removing from Proposed transactions Map3:4:3:2:1
+INFO  | 2017-04-22 00:55:22 | [Thread-2] servers.MonitorProposeQueue (MonitorProposeQueue.java:50) - Removing from Proposed transactions Map3:4:3:2:1
+INFO  | 2017-04-22 00:55:23 | [Thread-2] servers.MonitorProposeQueue (MonitorProposeQueue.java:50) - Removing from Proposed transactions Map3:4:3:2:1
+INFO  | 2017-04-22 00:55:24 | [Thread-2] servers.MonitorProposeQueue (MonitorProposeQueue.java:50) - Removing from Proposed transactions Map3:4:3:2:1
+INFO  | 2017-04-22 00:55:25 | [Thread-2] servers.MonitorProposeQueue (MonitorProposeQueue.java:50) - Removing from Proposed transactions Map3:4:3:2:1
+INFO  | 2017-04-22 00:55:26 | [Thread-2] servers.MonitorProposeQueue (MonitorProposeQueue.java:50) - Removing from Proposed transactions Map3:4:3:2:1
+INFO  | 2017-04-22 00:55:27 | [Thread-2] servers.MonitorProposeQueue (MonitorProposeQueue.java:50) - Removing from Proposed transactions Map3:4:3:2:1
+INFO  | 2017-04-22 00:55:28 | [Thread-2] servers.MonitorProposeQueue (MonitorProposeQueue.java:50) - Removing from Proposed transactions Map3:4:3:2:1
+INFO  | 2017-04-22 00:55:29 | [Thread-2] servers.MonitorProposeQueue (MonitorProposeQueue.java:50) - Removing from Proposed transactions Map3:4:3:2:1
+INFO  | 2017-04-22 00:55:30 | [Thread-2] servers.MonitorProposeQueue (MonitorProposeQueue.java:50) - Removing from Proposed transactions Map3:4:3:2:1
+INFO  | 2017-04-22 00:55:31 | [Thread-2] servers.MonitorProposeQueue (MonitorProposeQueue.java:50) - Removing from Proposed transactions Map3:4:3:2:1
+INFO  | 2017-04-22 00:55:32 | [Thread-2] servers.MonitorProposeQueue (MonitorProposeQueue.java:50) - Removing from Proposed transactions Map3:4:3:2:1
+INFO  | 2017-04-22 00:55:33 | [Thread-2] servers.MonitorProposeQueue (MonitorProposeQueue.java:50) - Removing from Proposed transactions Map3:4:3:2:1
+INFO  | 2017-04-22 00:55:34 | [Thread-2] servers.MonitorProposeQueue (MonitorProposeQueue.java:50) - Removing from Proposed transactions Map3:4:3:2:1
+INFO  | 2017-04-22 00:55:35 | [Thread-2] servers.MonitorProposeQueue (MonitorProposeQueue.java:50) - Removing from Proposed transactions Map3:4:3:2:1
+INFO  | 2017-04-22 00:55:36 | [Thread-2] servers.MonitorProposeQueue (MonitorProposeQueue.java:50) - Removing from Proposed transactions Map3:4:3:2:1
+INFO  | 2017-04-22 00:55:37 | [Thread-2] servers.MonitorProposeQueue (MonitorProposeQueue.java:50) - Removing from Proposed transactions Map3:4:3:2:1
+INFO  | 2017-04-22 00:55:38 | [Thread-2] servers.MonitorProposeQueue (MonitorProposeQueue.java:50) - Removing from Proposed transactions Map3:4:3:2:1
+INFO  | 2017-04-22 00:55:39 | [Thread-2] servers.MonitorProposeQueue (MonitorProposeQueue.java:50) - Removing from Proposed transactions Map3:4:3:2:1
+INFO  | 2017-04-22 00:55:40 | [Thread-2] servers.MonitorProposeQueue (MonitorProposeQueue.java:50) - Removing from Proposed transactions Map3:4:3:2:1
+INFO  | 2017-04-22 00:55:41 | [Thread-2] servers.MonitorProposeQueue (MonitorProposeQueue.java:50) - Removing from Proposed transactions Map3:4:3:2:1
+INFO  | 2017-04-22 00:55:42 | [Thread-2] servers.MonitorProposeQueue (MonitorProposeQueue.java:50) - Removing from Proposed transactions Map3:4:3:2:1
+INFO  | 2017-04-22 00:55:43 | [Thread-2] servers.MonitorProposeQueue (MonitorProposeQueue.java:50) - Removing from Proposed transactions Map3:4:3:2:1
+INFO  | 2017-04-22 00:55:44 | [Thread-2] servers.MonitorProposeQueue (MonitorProposeQueue.java:50) - Removing from Proposed transactions Map3:4:3:2:1
+INFO  | 2017-04-22 00:55:45 | [Thread-2] servers.MonitorProposeQueue (MonitorProposeQueue.java:50) - Removing from Proposed transactions Map3:4:3:2:1
+INFO  | 2017-04-22 00:55:46 | [Thread-2] servers.MonitorProposeQueue (MonitorProposeQueue.java:50) - Removing from Proposed transactions Map3:4:3:2:1
+INFO  | 2017-04-22 00:55:47 | [Thread-2] servers.MonitorProposeQueue (MonitorProposeQueue.java:50) - Removing from Proposed transactions Map3:4:3:2:1
+INFO  | 2017-04-22 00:55:48 | [Thread-2] servers.MonitorProposeQueue (MonitorProposeQueue.java:50) - Removing from Proposed transactions Map3:4:3:2:1
+INFO  | 2017-04-22 00:55:49 | [Thread-2] servers.MonitorProposeQueue (MonitorProposeQueue.java:50) - Removing from Proposed transactions Map3:4:3:2:1
+INFO  | 2017-04-22 00:55:50 | [Thread-2] servers.MonitorProposeQueue (MonitorProposeQueue.java:50) - Removing from Proposed transactions Map3:4:3:2:1
+INFO  | 2017-04-22 00:55:51 | [Thread-2] servers.MonitorProposeQueue (MonitorProposeQueue.java:50) - Removing from Proposed transactions Map3:4:3:2:1
+INFO  | 2017-04-22 00:55:52 | [Thread-2] servers.MonitorProposeQueue (MonitorProposeQueue.java:50) - Removing from Proposed transactions Map3:4:3:2:1
+INFO  | 2017-04-22 00:55:53 | [Thread-2] servers.MonitorProposeQueue (MonitorProposeQueue.java:50) - Removing from Proposed transactions Map3:4:3:2:1
+INFO  | 2017-04-22 00:55:54 | [Thread-2] servers.MonitorProposeQueue (MonitorProposeQueue.java:50) - Removing from Proposed transactions Map3:4:3:2:1
+INFO  | 2017-04-22 00:55:55 | [Thread-2] servers.MonitorProposeQueue (MonitorProposeQueue.java:50) - Removing from Proposed transactions Map3:4:3:2:1
+INFO  | 2017-04-22 00:55:56 | [Thread-2] servers.MonitorProposeQueue (MonitorProposeQueue.java:50) - Removing from Proposed transactions Map3:4:3:2:1
+INFO  | 2017-04-22 00:55:57 | [Thread-2] servers.MonitorProposeQueue (MonitorProposeQueue.java:50) - Removing from Proposed transactions Map3:4:3:2:1
+INFO  | 2017-04-22 00:55:58 | [Thread-2] servers.MonitorProposeQueue (MonitorProposeQueue.java:50) - Removing from Proposed transactions Map3:4:3:2:1
+INFO  | 2017-04-22 00:55:59 | [Thread-2] servers.MonitorProposeQueue (MonitorProposeQueue.java:50) - Removing from Proposed transactions Map3:4:3:2:1
+INFO  | 2017-04-22 00:56:00 | [Thread-2] servers.MonitorProposeQueue (MonitorProposeQueue.java:50) - Removing from Proposed transactions Map3:4:3:2:1
+INFO  | 2017-04-22 00:56:01 | [Thread-2] servers.MonitorProposeQueue (MonitorProposeQueue.java:50) - Removing from Proposed transactions Map3:4:3:2:1
+INFO  | 2017-04-22 00:56:02 | [Thread-2] servers.MonitorProposeQueue (MonitorProposeQueue.java:50) - Removing from Proposed transactions Map3:4:3:2:1
+INFO  | 2017-04-22 00:56:03 | [Thread-2] servers.MonitorProposeQueue (MonitorProposeQueue.java:50) - Removing from Proposed transactions Map3:4:3:2:1
+INFO  | 2017-04-22 00:56:04 | [Thread-2] servers.MonitorProposeQueue (MonitorProposeQueue.java:50) - Removing from Proposed transactions Map3:4:3:2:1
+INFO  | 2017-04-22 00:56:05 | [Thread-2] servers.MonitorProposeQueue (MonitorProposeQueue.java:50) - Removing from Proposed transactions Map3:4:3:2:1
+INFO  | 2017-04-22 00:56:06 | [Thread-2] servers.MonitorProposeQueue (MonitorProposeQueue.java:50) - Removing from Proposed transactions Map3:4:3:2:1
+INFO  | 2017-04-22 00:56:07 | [Thread-2] servers.MonitorProposeQueue (MonitorProposeQueue.java:50) - Removing from Proposed transactions Map3:4:3:2:1
+INFO  | 2017-04-22 00:56:08 | [Thread-2] servers.MonitorProposeQueue (MonitorProposeQueue.java:50) - Removing from Proposed transactions Map3:4:3:2:1
+INFO  | 2017-04-22 00:56:09 | [Thread-2] servers.MonitorProposeQueue (MonitorProposeQueue.java:50) - Removing from Proposed transactions Map3:4:3:2:1
+INFO  | 2017-04-22 00:56:10 | [Thread-2] servers.MonitorProposeQueue (MonitorProposeQueue.java:50) - Removing from Proposed transactions Map3:4:3:2:1
+INFO  | 2017-04-22 00:56:11 | [Thread-2] servers.MonitorProposeQueue (MonitorProposeQueue.java:50) - Removing from Proposed transactions Map3:4:3:2:1
+INFO  | 2017-04-22 00:56:12 | [Thread-2] servers.MonitorProposeQueue (MonitorProposeQueue.java:50) - Removing from Proposed transactions Map3:4:3:2:1
+INFO  | 2017-04-22 00:56:13 | [Thread-2] servers.MonitorProposeQueue (MonitorProposeQueue.java:50) - Removing from Proposed transactions Map3:4:3:2:1
+INFO  | 2017-04-22 00:56:14 | [Thread-2] servers.MonitorProposeQueue (MonitorProposeQueue.java:50) - Removing from Proposed transactions Map3:4:3:2:1
+INFO  | 2017-04-22 00:56:15 | [Thread-2] servers.MonitorProposeQueue (MonitorProposeQueue.java:50) - Removing from Proposed transactions Map3:4:3:2:1
+INFO  | 2017-04-22 00:56:16 | [Thread-2] servers.MonitorProposeQueue (MonitorProposeQueue.java:50) - Removing from Proposed transactions Map3:4:3:2:1
+INFO  | 2017-04-22 00:56:17 | [Thread-2] servers.MonitorProposeQueue (MonitorProposeQueue.java:50) - Removing from Proposed transactions Map3:4:3:2:1

@@ -29,7 +29,7 @@ public class MonitorProposeQueue implements Runnable {
 		while(nodeserverproperties.getNodestate() == NodeServerProperties1.State.LEADING){
 			ConcurrentHashMap<Proposal, Long> removeMap = new ConcurrentHashMap<Proposal, Long>();
 			for( Entry<Proposal,Long> entry: proposedtransactions.entrySet()){
-				//if(entry.getValue() >= this.nodeserverproperties.getMemberList().size()/2){
+				if(entry.getValue() >= this.nodeserverproperties.getMemberList().size()/2){
 					LOG.info("Quorum achieved for Proposal:" + entry.getKey());
 					LOG.info("Sending a COMMIT message now to all followers..!!");
 					String commitMessage = "COMMIT:"+ entry.getKey();
@@ -42,7 +42,7 @@ public class MonitorProposeQueue implements Runnable {
 					
 					//Adding the entry to remove Queue
 					removeMap.put(entry.getKey(), entry.getValue());
-				//}
+				}
 			}	
 		
 			//LOG.info( removeMap.size() + "transactions to be removed");
