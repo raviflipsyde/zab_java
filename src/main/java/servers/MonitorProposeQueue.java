@@ -1,5 +1,6 @@
 package servers;
 
+import java.util.ConcurrentModificationException;
 import java.util.Map.Entry;
 import java.util.SortedSet;
 import java.util.concurrent.ConcurrentHashMap;
@@ -30,7 +31,8 @@ public class MonitorProposeQueue implements Runnable {
 		while(nodeserverproperties.getNodestate() == NodeServerProperties1.State.LEADING){
 			ConcurrentHashMap<Proposal, AtomicInteger> removeMap = new ConcurrentHashMap<Proposal, AtomicInteger>();
 			for( Entry<Proposal,AtomicInteger> entry: proposedtransactions.entrySet()){
-				if(entry.getValue().get() >= this.nodeserverproperties.getMemberList().size()/2){
+				
+				if(entry.getValue().get() > this.nodeserverproperties.getMemberList().size()/2){
 					LOG.info("Quorum achieved for Proposal:" + entry.getKey());
 					LOG.info("Sending a COMMIT message now to all followers..!!");
 					String commitMessage = "COMMIT:"+ entry.getKey();
@@ -40,9 +42,26 @@ public class MonitorProposeQueue implements Runnable {
 					SortedSet<Proposal> committedtransactions = nodeserverproperties.getSynData().getCommittedTransactions();
 					committedtransactions.add(entry.getKey());
 					
+					int count = 0;
+					int maxTries = 3;
+					while(true) {
+					    try {
+					    	//Adding the entry to remove Queue
+							removeMap.put(entry.getKey(), entry.getValue());
+							
+							// break out of loop, or return, on success
+							break;  
+					    } catch (ConcurrentModificationException e) {
+					        try {
+								Thread.sleep(100);
+							} catch (InterruptedException e1) {
+								
+								e1.printStackTrace();
+							}
+					        if (++count == maxTries) throw e;
+					    }
+					}
 					
-					//Adding the entry to remove Queue
-					removeMap.put(entry.getKey(), entry.getValue());
 				}
 			}	
 		

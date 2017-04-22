@@ -97,22 +97,19 @@ public class InHandler2 extends ChannelInboundHandlerAdapter { // (1)
 				ConcurrentHashMap<Proposal, AtomicInteger> proposedtransactions = properties.getSynData().getProposedTransactions();
 				proposedtransactions.put(p, new AtomicInteger(1));
 				
-				LOG.info("##################ACK count for proposal before incrementing####################" + proposedtransactions.get(p));
-				int count = proposedtransactions.get(p).incrementAndGet();
-				proposedtransactions.put(p, new AtomicInteger(count));
-				LOG.info("###################ACK count for proposal after incrementing####################" + proposedtransactions.get(p));
 				
 				
-//				//send proposal to quorum
-//				LOG.info("Leader:" + "Sending proposal to everyone:" + proposal);
-//				
-//				LOG.info("Number of members:" + properties.getMemberList().size());
-//				
-//				for (Entry<Long, InetSocketAddress> member : properties.getMemberList().entrySet()) {
-//						LOG.info("Sending "+proposal+" to: "+ member.getValue().getHostName() + ":"+ member.getValue().getPort());
-//						this.nettyClient.sendMessage(member.getValue().getHostName(), member.getValue().getPort(), proposal);
-//				}
-//
+				
+				//send proposal to quorum
+				LOG.info("Leader:" + "Sending proposal to everyone:" + proposal);
+				
+				LOG.info("Number of members:" + properties.getMemberList().size());
+				
+				for (Entry<Long, InetSocketAddress> member : properties.getMemberList().entrySet()) {
+						LOG.info("Sending "+proposal+" to: "+ member.getValue().getHostName() + ":"+ member.getValue().getPort());
+						this.nettyClient.sendMessage(member.getValue().getHostName(), member.getValue().getPort(), proposal);
+				}
+
 			}
 		
 			return "OK";
@@ -165,8 +162,10 @@ public class InHandler2 extends ChannelInboundHandlerAdapter { // (1)
 				
 				//checking the ack count for the proposal (counter value)		
 				ConcurrentHashMap<Proposal, AtomicInteger> proposedtransactions = properties.getSynData().getProposedTransactions();
+				LOG.info("##################ACK count for proposal before incrementing####################" + proposedtransactions.get(p));
 				int count = proposedtransactions.get(p).incrementAndGet();
-				properties.getSynData().getProposedTransactions().put(p,new AtomicInteger(count));
+				proposedtransactions.put(p, new AtomicInteger(count));
+				LOG.info("###################ACK count for proposal after incrementing####################" + proposedtransactions.get(p));
 				
 				return "OK";
 			}
