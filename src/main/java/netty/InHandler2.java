@@ -154,10 +154,9 @@ public class InHandler2 extends ChannelInboundHandlerAdapter { // (1)
 				//we have to increment the ack count for this zxid
 				LOG.info("Leader: Got ACK_PROPOSAL, incrementing count for zxid" + z);
 				
-				//checking the ack count for the proposal (counter value)
-				//TODO: use atomic integer
-				
-				int count = properties.getSynData().getProposedTransactions().get(p).incrementAndGet();
+				//checking the ack count for the proposal (counter value)		
+				ConcurrentHashMap<Proposal, AtomicInteger> proposedtransactions = properties.getSynData().getProposedTransactions();
+				int count = proposedtransactions.get(p).incrementAndGet();
 				properties.getSynData().getProposedTransactions().put(p,new AtomicInteger(count));
 				
 				return "OK";
