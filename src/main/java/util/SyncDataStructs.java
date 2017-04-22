@@ -27,8 +27,8 @@ public class SyncDataStructs {
  	//private MpscArrayQueue<Proposal> commitQueue = null;
 	
 	//used during broadcast
-	private ConcurrentHashMap<Proposal, AtomicInteger> proposedTransactions = null; //<counter,num_ack> Map that the leader maintains to store acknowledgements of proposedtransactions
-	private SortedSet<Proposal> committedTransactions = null;
+	private volatile ConcurrentHashMap<Proposal, AtomicInteger> proposedTransactions = null; //<counter,num_ack> Map that the leader maintains to store acknowledgements of proposedtransactions
+	private volatile SortedSet<Proposal> committedTransactions = null;
 	
 	private Vote myVote;
 	private long newEpoch;
