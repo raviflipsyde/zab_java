@@ -161,6 +161,8 @@ public class InHandler2 extends ChannelInboundHandlerAdapter { // (1)
 				return "ERROR: I am the eader, I send proposals, not accept!";
 			}
 			else{//follower
+				LOG.info ("Follower received COMMIT message");
+				LOG.info ("COMMIT message is:" + requestMsg);
 				String[] arr = requestMsg.split(":");
 				
 				//Parsing proposal for which acknowledgement was received				

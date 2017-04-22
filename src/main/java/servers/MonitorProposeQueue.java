@@ -39,6 +39,7 @@ public class MonitorProposeQueue implements Runnable {
 					SortedSet<Proposal> committedtransactions = nodeserverproperties.getSynData().getCommittedTransactions();
 					committedtransactions.add(entry.getKey());
 					
+					
 					//Adding the entry to remove Queue
 					removeMap.put(entry.getKey(), entry.getValue());
 				//}
@@ -52,7 +53,7 @@ public class MonitorProposeQueue implements Runnable {
 			
 			try {
 				//TODO: Decide how long to wait
-				Thread.sleep(500);
+				Thread.sleep(1000);
 			} catch (InterruptedException e) {
 				
 				e.printStackTrace();

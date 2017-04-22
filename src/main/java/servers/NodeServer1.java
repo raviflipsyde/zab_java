@@ -631,7 +631,8 @@ public class NodeServer1 {
 
 	public void broadcast(String message) {
 
-		LOG.info("*******MemberlistSize:"+properties.getMemberList().size());
+		//LOG.info("*******MemberlistSize:"+properties.getMemberList().size());
+		LOG.info("Inside Broadcast::Message:"+message );
 		Map<Long, InetSocketAddress> unreachablelist = new HashMap<Long, InetSocketAddress>();
 		for (Entry<Long, InetSocketAddress> member : properties.getMemberList().entrySet()) {
 			try {
