@@ -43,6 +43,31 @@ public class ZxId implements Comparable<ZxId>{
 			return 1;
 		else return 0;
 	}
+	@Override
+	public int hashCode() {
+		final int prime = 31;
+		int result = 1;
+		result = prime * result + (int) (counter ^ (counter >>> 32));
+		result = prime * result + (int) (epoch ^ (epoch >>> 32));
+		return result;
+	}
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		ZxId other = (ZxId) obj;
+		if (counter != other.counter)
+			return false;
+		if (epoch != other.epoch)
+			return false;
+		return true;
+	}
+	
+	
 	
 	
 	

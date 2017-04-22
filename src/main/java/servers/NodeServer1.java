@@ -549,13 +549,13 @@ public class NodeServer1 {
 		
 		if(this.properties.getNodePort() == 9001){
 			this.properties.setLeader(true);
-			this.properties.setNodeId(1L);
+			//this.properties.setNodeId(1L);
 			
 			this.properties.setNodestate(NodeServerProperties1.State.LEADING);
 		}
 		else{
 			this.properties.setLeader(false);
-			this.properties.setNodeId(2L);
+			//this.properties.setNodeId(2L);
 			this.properties.setNodestate(NodeServerProperties1.State.FOLLOWING);
 		}	
 	}

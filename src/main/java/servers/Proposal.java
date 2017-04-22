@@ -39,5 +39,43 @@ public class Proposal {
 	public String toString() {
 		return this.z.getEpoch() + ":" + this.z.getCounter() + ":" + this.key + ":" + this.value; 
 	}
+
+	@Override
+	public int hashCode() {
+		final int prime = 31;
+		int result = 1;
+		result = prime * result + ((key == null) ? 0 : key.hashCode());
+		result = prime * result + ((value == null) ? 0 : value.hashCode());
+		result = prime * result + ((z == null) ? 0 : z.hashCode());
+		return result;
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		Proposal other = (Proposal) obj;
+		if (key == null) {
+			if (other.key != null)
+				return false;
+		} else if (!key.equals(other.key))
+			return false;
+		if (value == null) {
+			if (other.value != null)
+				return false;
+		} else if (!value.equals(other.value))
+			return false;
+		if (z == null) {
+			if (other.z != null)
+				return false;
+		} else if (!z.equals(other.z))
+			return false;
+		return true;
+	}
+	
 	
 }
