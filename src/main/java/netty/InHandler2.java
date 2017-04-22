@@ -70,7 +70,7 @@ public class InHandler2 extends ChannelInboundHandlerAdapter { // (1)
 				//Forward write request to the leader
 				LOG.info("Follower received WRITE request from client, forwarding to the leader..!!");
 				this.nettyClient.sendMessage(properties.getLeaderAddress().getHostName(), properties.getLeaderAddress().getPort(), requestMsg);
-				return "FOLLOWER WRITE:OK";
+				return "OK";
 				
 			}
 			else{ //leader
@@ -104,7 +104,7 @@ public class InHandler2 extends ChannelInboundHandlerAdapter { // (1)
 				}
 			}
 		
-			return "LEADER_WRITE:OK";
+			return "OK";
 		}
 		
 		if(requestMsg.contains("PROPOSE")){
@@ -156,7 +156,7 @@ public class InHandler2 extends ChannelInboundHandlerAdapter { // (1)
 				//TODO: use atomic integer
 				properties.getSynData().incrementAckCount(p);	
 				
-				return "LEADER:ACK_PROPOSAL OK";
+				return "OK";
 			}
 			
 		}
@@ -193,7 +193,7 @@ public class InHandler2 extends ChannelInboundHandlerAdapter { // (1)
 					}				
 				}	
 				
-				return "FOLLOWER:COMMIT OK";
+				return "OK";
 			}
 		}
 		
