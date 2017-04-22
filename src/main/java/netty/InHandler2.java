@@ -92,13 +92,12 @@ public class InHandler2 extends ChannelInboundHandlerAdapter { // (1)
 				String proposal = "PROPOSE:" + p.toString();
 				
 				//enqueue this proposal to proposed transactions to keep the count of Acknowledgements
-				properties.getSynData().getProposedTransactions().put(p,new AtomicInteger(1));
 				
 				ConcurrentHashMap<Proposal, AtomicInteger> proposedtransactions = properties.getSynData().getProposedTransactions();
 				proposedtransactions.put(p, new AtomicInteger(1));
 				
-				
-				
+				//checking if the entry is enqueued in the proposed transaction map
+				LOG.info("Checking the counter right after enqueueing the entry: " + proposedtransactions.get(p));
 				
 				//send proposal to quorum
 				LOG.info("Leader:" + "Sending proposal to everyone:" + proposal);
