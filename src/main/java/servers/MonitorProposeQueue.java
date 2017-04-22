@@ -45,6 +45,7 @@ public class MonitorProposeQueue implements Runnable {
 				//}
 			}	
 		
+			LOG.info( removeMap.size() + "transactions to be removed");
 			
 			for (Entry<Proposal, Long> entry : removeMap.entrySet()) {
 				LOG.info("Removing from Proposed transactions Map"+ entry.getKey()+":"+ entry.getValue());

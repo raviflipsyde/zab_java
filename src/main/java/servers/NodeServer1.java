@@ -412,11 +412,13 @@ public class NodeServer1 {
 		if(properties.getNodestate() == NodeServerProperties1.State.LEADING){
 			LOG.info("Starting Monitor Propose Queue thread for leader...");
 			Thread threadMonitorProposeQueue = new Thread(new MonitorProposeQueue(properties, this));
+			threadMonitorProposeQueue.setPriority(Thread.MIN_PRIORITY);
 			threadMonitorProposeQueue.start();
 		}
 		
 		LOG.info("Starting Write to disk thread irrespective of leader or follower...");
 		Thread threadWriteToDisk = new Thread(new WriteToDisk(properties));
+		threadWriteToDisk.setPriority(Thread.MIN_PRIORITY);
 		threadWriteToDisk.start();
 	
 	}
