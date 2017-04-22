@@ -23,11 +23,11 @@ public class MonitorProposeQueue implements Runnable {
 			
 		LOG.info("Run method for MonitorProposeQueue");
 		
-		ConcurrentHashMap<Proposal, Long> removeMap = new ConcurrentHashMap<Proposal, Long>();
+		
 		ConcurrentHashMap<Proposal, Long> proposedtransactions = this.nodeserverproperties.getSynData().getProposedTransactions();
 
 		while(nodeserverproperties.getNodestate() == NodeServerProperties1.State.LEADING){
-			
+			ConcurrentHashMap<Proposal, Long> removeMap = new ConcurrentHashMap<Proposal, Long>();
 			for( Entry<Proposal,Long> entry: proposedtransactions.entrySet()){
 				//if(entry.getValue() >= this.nodeserverproperties.getMemberList().size()/2){
 					LOG.info("Quorum achieved for Proposal:" + entry.getKey());
@@ -51,6 +51,8 @@ public class MonitorProposeQueue implements Runnable {
 				LOG.info("Removing from Proposed transactions Map"+ entry.getKey()+":"+ entry.getValue());
 				proposedtransactions.remove(entry.getKey());
 			}
+			
+			removeMap.clear();
 			
 			try {
 				//TODO: Decide how long to wait
