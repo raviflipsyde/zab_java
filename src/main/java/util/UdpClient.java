@@ -27,7 +27,7 @@
 //	
 //	
 //	public void run() {
-//		LOG.info("--------------STARTING UDP CLIENT--------------"+ nodeServer.getMemberList().size());
+//		LOG.debug("--------------STARTING UDP CLIENT--------------"+ nodeServer.getMemberList().size());
 //		while(true){
 //			try {
 //				byte[] receiveData = new byte[100];
@@ -44,7 +44,7 @@
 //				
 //					DatagramPacket sendPacket = new DatagramPacket(sendData, sendData.length, IPAddress, port);
 //					
-////					LOG.info("Sending to:" + addr.toString());
+////					LOG.debug("Sending to:" + addr.toString());
 //					clientSocket.send(sendPacket);
 //					clientSocket.close();
 //				}

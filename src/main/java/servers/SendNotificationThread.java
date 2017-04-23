@@ -44,7 +44,7 @@
 //
 //	public void run() {
 //
-//		LOG.info("Send Notification:"+this.myNotification.toString()+" to "+ this.address);
+//		LOG.debug("Send Notification:"+this.myNotification.toString()+" to "+ this.address);
 //		
 //		TcpClient1 client = new TcpClient1(this.address.getHostName(), this.address.getPort());
 //		try {
@@ -56,7 +56,7 @@
 //				String resp[] = response.split(":");
 //				Notification responseNotification = new Notification(resp[1]);
 //
-//				LOG.info("Received Notification:"+responseNotification.toString()+" from "+ this.address);
+//				LOG.debug("Received Notification:"+responseNotification.toString()+" from "+ this.address);
 //				boolean retVal;
 //				
 //				retVal = electionQueue1.offer(responseNotification);
@@ -65,7 +65,7 @@
 ////					electionQueue1.notify();
 ////		        }
 //				
-//				LOG.info("electionQueue1.offer:"+retVal+"\n"+electionQueue1+"\n");
+//				LOG.debug("electionQueue1.offer:"+retVal+"\n"+electionQueue1+"\n");
 ////				this.PQueue.add(responseNotification);
 //			}
 //

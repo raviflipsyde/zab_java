@@ -47,7 +47,7 @@ public class UdpServer1 implements Runnable{
 //						String dedadhost = addr[0].trim();
 //						int deadPort = Integer.parseInt(addr[1]); 
 //						InetSocketAddress socketAddr = new InetSocketAddress(dedadhost, deadPort);
-//						LOG.info("Removing "+socketAddr.toString()+" from memberlist");
+//						LOG.debug("Removing "+socketAddr.toString()+" from memberlist");
 //						properties.getMemberList().remove(socketAddr);
 					}
 				}
@@ -57,9 +57,9 @@ public class UdpServer1 implements Runnable{
 		    	}
 		    	
 		    	if(heartBeatMap.size() < properties.getMemberList().size()/2){
-		    		LOG.info("Throwing runtime exception");
+		    		LOG.debug("Throwing runtime exception");
 //		    		properties.removeMemberFromList(properties.getLeaderId());
-		    		LOG.info("Removing leader from memberlist");
+		    		LOG.debug("Removing leader from memberlist");
 		    		properties.setLeaderId(0);
 		    		properties.setNodestate(NodeServerProperties1.State.ELECTION);
 		    		throw new RuntimeException();
@@ -74,7 +74,7 @@ public class UdpServer1 implements Runnable{
 	} 
 	
 	public void run() {
-		LOG.info("--------------STARTING UDP SERVER--------------"+ properties.getMemberList().size());
+		LOG.debug("--------------STARTING UDP SERVER--------------"+ properties.getMemberList().size());
 		DatagramSocket serverSocket = null;
 		try {
 			
@@ -83,9 +83,9 @@ public class UdpServer1 implements Runnable{
 			serverSocket.close();
 			serverSocket = new DatagramSocket(properties.getNodePort()+123);
 			
-			LOG.info("ServerSocketState:"+ serverSocket.isBound());
-			LOG.info("ServerSocketState:"+ serverSocket.isClosed());
-			LOG.info("ServerSocketState:"+ serverSocket.isConnected());
+			LOG.debug("ServerSocketState:"+ serverSocket.isBound());
+			LOG.debug("ServerSocketState:"+ serverSocket.isClosed());
+			LOG.debug("ServerSocketState:"+ serverSocket.isConnected());
 			byte[] receiveData = new byte[100];
 			byte[] sendData = new byte[100];
 
@@ -100,7 +100,7 @@ public class UdpServer1 implements Runnable{
 				InetSocketAddress recvAddress = new InetSocketAddress(IPAddress, port);
 				
 				long currentTime = System.currentTimeMillis();
-//				LOG.info("RECEIVED: " + sentence
+//				LOG.debug("RECEIVED: " + sentence
 //						+ " from "+ recvAddress.toString() 
 //						+" at "+ currentTime);
 			

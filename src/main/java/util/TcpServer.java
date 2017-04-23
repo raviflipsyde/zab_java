@@ -23,7 +23,7 @@
 //	}
 //
 //	public void run() {
-//		LOG.info("Started a TCP server at "+this.port);
+//		LOG.debug("Started a TCP server at "+this.port);
 //		ServerSocket serverSocket = null;
 //		BufferedReader in;
 //		PrintWriter out;

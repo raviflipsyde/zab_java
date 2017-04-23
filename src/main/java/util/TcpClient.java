@@ -31,17 +31,17 @@ public class TcpClient implements Runnable {
 		BufferedReader in;
 		PrintWriter out;
 		try {
-		LOG.info("Started a TCP Client ");
+		LOG.debug("Started a TCP Client ");
 		
 		
-			LOG.info("Socket for "+this.host+":"+this.port);
+			LOG.debug("Socket for "+this.host+":"+this.port);
 			socket = new Socket( host, port );
 			
 			
 			in = new BufferedReader(new InputStreamReader(socket.getInputStream()));
 			out = new PrintWriter(socket.getOutputStream(), true);
 			
-			LOG.info("Sending node info to groupmember");
+			LOG.debug("Sending node info to groupmember");
 			out.println("JOIN_GROUP:"+socket.getInetAddress()+":"+socket.getPort()+"\r\n");
 			out.flush();
 			
@@ -52,7 +52,7 @@ public class TcpClient implements Runnable {
 				request = in.readLine();
 			}
 			
-			LOG.info("Recieved from server: "+ strb.toString());
+			LOG.debug("Recieved from server: "+ strb.toString());
 			
 			in.close();
 			out.close();
@@ -61,12 +61,12 @@ public class TcpClient implements Runnable {
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
-			LOG.info(e.getMessage());
+			LOG.debug(e.getMessage());
 		}
 		catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
-			LOG.info(e.getMessage());
+			LOG.debug(e.getMessage());
 		}
 		
 		finally {
@@ -76,7 +76,7 @@ public class TcpClient implements Runnable {
 			} catch (IOException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
-				LOG.info(e.getMessage());
+				LOG.debug(e.getMessage());
 			}
 			
 		}

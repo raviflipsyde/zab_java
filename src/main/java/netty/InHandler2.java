@@ -44,9 +44,9 @@ public class InHandler2 extends ChannelInboundHandlerAdapter { // (1)
 
 		ByteBuf in = (ByteBuf) msg;
 		String requestMsg  = in.toString(StandardCharsets.UTF_8 );
-		LOG.info(">>>Channel Read:" + requestMsg);
+		LOG.debug(">>>Channel Read:" + requestMsg);
 		String response = handleClientRequest(requestMsg);
-		LOG.info("<<<Response:" + response);
+		LOG.debug("<<<Response:" + response);
 		
 		if(response.length()>0){
 			ctx.write(Unpooled.copiedBuffer(response+"\r\n", StandardCharsets.UTF_8));
@@ -59,13 +59,29 @@ public class InHandler2 extends ChannelInboundHandlerAdapter { // (1)
 	public void channelRegistered(ChannelHandlerContext ctx) throws Exception {
 
 		super.channelRegistered(ctx);
-		LOG.info("Channel Registered: "+ ctx.channel().localAddress() + ":" + ctx.channel().remoteAddress());
+		LOG.debug("Channel Registered: "+ ctx.channel().localAddress() + ":" + ctx.channel().remoteAddress());
 	}
 
 
 	private String handleClientRequest(String requestMsg) {
-		//		LOG.info("handleClientRequest:"+requestMsg);
-
+		//		LOG.debug("handleClientRequest:"+requestMsg);
+		
+		if(requestMsg.contains("READ:")){
+			LOG.info("Node ID:" + this.properties.getNodeId() + "received Read() request from client");
+			String[] arr = requestMsg.split(":");
+			String key = arr[1].trim();
+			Properties properties = this.properties.getDataMap();
+			if(properties.containsKey(key)){
+				String value = properties.getProperty(key);
+				LOG.info("Returning from local replica: Reply:" + key + value);
+				return value;
+			}
+			else{
+				return "READ ERROR: No result for key:" + key;
+			}
+				
+		}
+		
 		if(requestMsg.contains("WRITE:")){
 			if(!properties.isLeader()){ //follower
 				//Forward write request to the leader
@@ -101,15 +117,15 @@ public class InHandler2 extends ChannelInboundHandlerAdapter { // (1)
 				proposedtransactions.put(p, new AtomicInteger(1));
 				
 				//checking if the entry is enqueued in the proposed transaction map
-				LOG.info("Checking the counter right after enqueueing the entry: " + proposedtransactions.get(p));
+				LOG.debug("Checking the counter right after enqueueing the entry: " + proposedtransactions.get(p));
 				
 				//send proposal to quorum
 				LOG.info("Leader:" + "Sending proposal to everyone:" + proposal);
 				
-				LOG.info("Number of members:" + properties.getMemberList().size());
+				LOG.debug("Number of members:" + properties.getMemberList().size());
 				
 				for (Entry<Long, InetSocketAddress> member : properties.getMemberList().entrySet()) {
-						LOG.info("Sending "+proposal+" to: "+ member.getValue().getHostName() + ":"+ member.getValue().getPort());
+						LOG.debug("Sending "+proposal+" to: "+ member.getValue().getHostName() + ":"+ member.getValue().getPort());
 						this.nettyClientInhandler.sendMessage(member.getValue().getHostName(), member.getValue().getPort(), proposal);
 				}
 
@@ -120,7 +136,7 @@ public class InHandler2 extends ChannelInboundHandlerAdapter { // (1)
 		
 		if(requestMsg.contains("PROPOSE")){
 			if(properties.isLeader()){ // Leader will not accept this message
-				LOG.info("I am the Leader, I do not accept proposals");
+				LOG.debug("I am the Leader, I do not accept proposals");
 				return "ERROR: I am the eader, I send proposals, not accept!";
 				
 			}
@@ -146,7 +162,7 @@ public class InHandler2 extends ChannelInboundHandlerAdapter { // (1)
 		if(requestMsg.contains("ACK_PROPOSAL")){
 			if(!properties.isLeader()){//follower
 				//follower should disregard this message
-				LOG.info("Follower got ACK_PROPOSAL, shouldn't happen!");
+				LOG.debug("Follower got ACK_PROPOSAL, shouldn't happen!");
 				return "ERROR:Follower got ACK_PROPOSAL";
 			}
 			else{//Leader
@@ -161,7 +177,7 @@ public class InHandler2 extends ChannelInboundHandlerAdapter { // (1)
 				Proposal p = new Proposal(z,key,value);
 				
 				//we have to increment the ack count for this zxid
-				LOG.info("Leader: Got ACK_PROPOSAL, incrementing count for zxid" + z);
+				LOG.debug("Leader: Got ACK_PROPOSAL, incrementing count for zxid" + z);
 				
 				//checking the ack count for the proposal (counter value)		
 				ConcurrentHashMap<Proposal, AtomicInteger> proposedtransactions = properties.getSynData().getProposedTransactions();
@@ -170,10 +186,10 @@ public class InHandler2 extends ChannelInboundHandlerAdapter { // (1)
 					int count = proposedtransactions.get(p).incrementAndGet();
 					proposedtransactions.put(p, new AtomicInteger(count));
 				}
-				//LOG.info("##################ACK count for proposal before incrementing####################" + proposedtransactions.get(p));
+				//LOG.debug("##################ACK count for proposal before incrementing####################" + proposedtransactions.get(p));
 //				int count = proposedtransactions.get(p).incrementAndGet();
 //				proposedtransactions.put(p, new AtomicInteger(count));
-				//LOG.info("###################ACK count for proposal after incrementing####################" + proposedtransactions.get(p));
+				//LOG.debug("###################ACK count for proposal after incrementing####################" + proposedtransactions.get(p));
 				
 				return "OK";
 			}
@@ -182,11 +198,11 @@ public class InHandler2 extends ChannelInboundHandlerAdapter { // (1)
 		
 		if(requestMsg.contains("COMMIT:")){
 			if(properties.isLeader()){ // leader will not accept this message
-				LOG.info("I am the Leader, I do not accept commit messages");
+				LOG.debug("I am the Leader, I do not accept commit messages");
 				return "ERROR: I am the eader, I send proposals, not accept!";
 			}
 			else{//follower
-				LOG.info ("Follower received COMMIT message");
+				LOG.debug ("Follower received COMMIT message");
 				LOG.info ("COMMIT message is:" + requestMsg);
 				String[] arr = requestMsg.split(":");
 				
@@ -198,16 +214,16 @@ public class InHandler2 extends ChannelInboundHandlerAdapter { // (1)
 				String value = arr[4].trim();
 				Proposal p = new Proposal(z,key,value);
 				ConcurrentHashMap<Proposal, AtomicInteger> proposalMap = properties.getSynData().getProposedTransactions();
-				LOG.info("Map Size when Commit received: "+proposalMap.size());
-				LOG.info("Map when Commit received: "+ proposalMap);
+				LOG.debug("Map Size when Commit received: "+proposalMap.size());
+				LOG.debug("Map when Commit received: "+ proposalMap);
 				
 				if(proposalMap.containsKey(p)){
-					LOG.info("Commit Queue contains the transaction to be removed:" + p);
+					LOG.debug("Commit Queue contains the transaction to be removed:" + p);
 					//String fileName = "CommitedHistory_" + properties.getNodePort() + ".log";
 					//FileOps.appendTransaction(fileName, p.toString());
 					synchronized (properties.getSynData().getProposedTransactions()) {
 						//remove from proposedtransactions map
-						LOG.info("Inside synchronized block....!!!");
+						LOG.debug("Inside synchronized block....!!!");
 						properties.getSynData().getProposedTransactions().remove(p);
 						
 						//enqueue in commitQueue
@@ -229,7 +245,7 @@ public class InHandler2 extends ChannelInboundHandlerAdapter { // (1)
 			InetSocketAddress addr = new InetSocketAddress(arr[2].trim(), Integer.parseInt(arr[3].trim()));
 			properties.addMemberToList(nodeId, addr);
 
-			LOG.info(properties.getMemberList());
+			LOG.debug(properties.getMemberList());
 
 			return "OK";
 		}
@@ -245,8 +261,8 @@ public class InHandler2 extends ChannelInboundHandlerAdapter { // (1)
 			if(properties.getNodestate() == NodeServerProperties1.State.ELECTION){
 				
 				MpscArrayQueue<Notification> currentElectionQueue = properties.getSynData().getElectionQueue();
-				LOG.info("Before:"+currentElectionQueue.currentProducerIndex());
-				LOG.info("adding notification to the queue"+ responseNotification.toString());
+				LOG.debug("Before:"+currentElectionQueue.currentProducerIndex());
+				LOG.debug("adding notification to the queue"+ responseNotification.toString());
 				currentElectionQueue.offer(responseNotification);
 				
 					try {
@@ -257,10 +273,10 @@ public class InHandler2 extends ChannelInboundHandlerAdapter { // (1)
 						e.printStackTrace();
 					}
 				
-				LOG.info("After:"+currentElectionQueue.currentProducerIndex());
-				LOG.info("NODE is in STATE: "+ properties.getNodestate());
-				LOG.info("My Election ROUND: "+ properties.getElectionRound());
-				LOG.info("his Election ROUND: "+ responseNotification.getSenderRound());
+				LOG.debug("After:"+currentElectionQueue.currentProducerIndex());
+				LOG.debug("NODE is in STATE: "+ properties.getNodestate());
+				LOG.debug("My Election ROUND: "+ properties.getElectionRound());
+				LOG.debug("his Election ROUND: "+ responseNotification.getSenderRound());
 				
 			if(responseNotification.getSenderState() == NodeServerProperties1.State.ELECTION
 						&& responseNotification.getSenderRound() <= properties.getElectionRound()){
@@ -278,7 +294,7 @@ public class InHandler2 extends ChannelInboundHandlerAdapter { // (1)
 					Vote myVote = properties.getMyVote();
 
 					Notification myNotification = new Notification(myVote, properties.getNodeId(), properties.getNodestate(), properties.getElectionRound());
-					LOG.info("myNotification:"+myNotification);
+					LOG.debug("myNotification:"+myNotification);
 					return("SNOTIFICATION:"+myNotification.toString());
 
 				}
@@ -301,7 +317,7 @@ public class InHandler2 extends ChannelInboundHandlerAdapter { // (1)
 			if(properties.getNodestate() == NodeServerProperties1.State.ELECTION){
 				MpscArrayQueue<Notification> currentElectionQueue = properties.getSynData().getElectionQueue();
 				
-				LOG.info("Before:"+currentElectionQueue.currentProducerIndex());
+				LOG.debug("Before:"+currentElectionQueue.currentProducerIndex());
 				currentElectionQueue.offer(responseNotification);
 				
 					try {
@@ -313,14 +329,14 @@ public class InHandler2 extends ChannelInboundHandlerAdapter { // (1)
 						e.printStackTrace();
 					}
 			
-				LOG.info("After:"+currentElectionQueue.currentProducerIndex());
+				LOG.debug("After:"+currentElectionQueue.currentProducerIndex());
 
 
 			}
 			
 
 
-			LOG.info(properties.getMemberList());
+			LOG.debug(properties.getMemberList());
 			return("ERROR");
 
 		}
@@ -333,14 +349,14 @@ public class InHandler2 extends ChannelInboundHandlerAdapter { // (1)
 			//			
 			//			InetSocketAddress addr = new InetSocketAddress(arr[1].trim(), Integer.parseInt(arr[2].trim()));
 			//			server.addMemberToList(addr);
-			LOG.info("Client received OK!!");
-			LOG.info(properties.getMemberList());
+			LOG.debug("Client received OK!!");
+			LOG.debug(properties.getMemberList());
 
 			return "";
 		}
 
 		if (requestMsg.contains("FOLLOWERINFO")){
-			LOG.info("Request msg is = " + requestMsg);
+			LOG.debug("Request msg is = " + requestMsg);
 			String[] accEpoch = requestMsg.split(":");
 			long nodeId = Long.parseLong(accEpoch[1].trim());
 			long acceptedEpoch = Long.parseLong(accEpoch[2].trim());
@@ -380,14 +396,14 @@ public class InHandler2 extends ChannelInboundHandlerAdapter { // (1)
 		if (requestMsg.contains("NEWEPOCH")){
 
 			Map<Long, InetSocketAddress> memberList = this.properties.getMemberList();
-			LOG.info("Member List is = " + memberList);
+			LOG.debug("Member List is = " + memberList);
 
 			String ackepochmsg = "";
 			String[] newEpocharr = requestMsg.split(":");
 			long newEpoch = Long.parseLong(newEpocharr[1].trim());
 			long nodeId = Long.parseLong(newEpocharr[2].trim());
 			properties.getSynData().setNewEpoch(newEpoch);
-			LOG.info("New Epoch received is = " + newEpoch);
+			LOG.debug("New Epoch received is = " + newEpoch);
 			this.properties.setNewEpoch(newEpoch);
 			long acceptedEpoch = this.properties.getAcceptedEpoch();
 
@@ -411,14 +427,14 @@ public class InHandler2 extends ChannelInboundHandlerAdapter { // (1)
 			} else {
 
 				this.properties.setNodestate(NodeServerProperties1.State.ELECTION);
-				LOG.info("Going to Leader Election");
+				LOG.debug("Going to Leader Election");
 
 			}
 
 		}
 
 		if (requestMsg.contains("ACKEPOCH")){
-			LOG.info("Ack new epoch message received = " + requestMsg);
+			LOG.debug("Ack new epoch message received = " + requestMsg);
 			Map<Long, InetSocketAddress> memberList = this.properties.getMemberList();
 			String[] currEpochArr = requestMsg.split(":");
 			long nodeId = Long.parseLong(currEpochArr[1].trim());
@@ -426,20 +442,20 @@ public class InHandler2 extends ChannelInboundHandlerAdapter { // (1)
 			long currentCounter = Long.parseLong(currEpochArr[3].trim());
 
 			ZxId followerLastCommittedZxid = new ZxId(currentEpoch, currentCounter);
-			LOG.info("follower last committed zxid = " + followerLastCommittedZxid.getEpoch()
+			LOG.debug("follower last committed zxid = " + followerLastCommittedZxid.getEpoch()
 					+ "	" + followerLastCommittedZxid.getCounter());
 
 //			ConcurrentHashMap<Long, ZxId> currentEpochMap = properties.getSynData().getCurrentEpochMap();
 //			currentEpochMap.put(nodeId, followerLastCommittedZxid);
 
 			String leaderLastLog = FileOps.readLastLog(properties);
-			LOG.info("Leader last log = " + leaderLastLog);
+			LOG.debug("Leader last log = " + leaderLastLog);
 			String[] arr1 = leaderLastLog.split(",");
 			long epoch = Long.parseLong(arr1[0].trim());
 			long counter = Long.parseLong(arr1[1].trim());
 
 			ZxId leaderLastCommittedZxid = new ZxId(epoch, counter);
-			LOG.info("leader last committed zxid = " + leaderLastCommittedZxid.getEpoch()
+			LOG.debug("leader last committed zxid = " + leaderLastCommittedZxid.getEpoch()
 					+ "	" + leaderLastCommittedZxid.getCounter());
 
 			if (leaderLastCommittedZxid.getEpoch() == followerLastCommittedZxid.getEpoch()){
@@ -462,7 +478,7 @@ public class InHandler2 extends ChannelInboundHandlerAdapter { // (1)
 				} else if (followerLastCommittedZxid.getCounter() > leaderLastCommittedZxid.getCounter()){
 					// Go to Leader Election. Ideally, shouldn't happen
 					this.properties.setNodestate(NodeServerProperties1.State.ELECTION);
-					LOG.info("Going to Leader Election");
+					LOG.debug("Going to Leader Election");
 					// change phase
 				}
 
@@ -477,7 +493,7 @@ public class InHandler2 extends ChannelInboundHandlerAdapter { // (1)
 			} else if (followerLastCommittedZxid.getEpoch() > leaderLastCommittedZxid.getEpoch()){
 				// Go to Leader Election. Ideally, shouldn't happen
 				this.properties.setNodestate(NodeServerProperties1.State.ELECTION);
-				LOG.info("Going to Leader Election");
+				LOG.debug("Going to Leader Election");
 				//changePhase();
 			}
 
@@ -486,10 +502,10 @@ public class InHandler2 extends ChannelInboundHandlerAdapter { // (1)
 		}
 
 		if (requestMsg.contains("DIFF")){
-			LOG.info("DIFF message received");
+			LOG.debug("DIFF message received");
 
 			String[] decodedDiff = requestMsg.split(":");
-			LOG.info("Diff decoded is = " + decodedDiff[0] + "	" + decodedDiff[1]);
+			LOG.debug("Diff decoded is = " + decodedDiff[0] + "	" + decodedDiff[1]);
 			//REmove all brackets and split on multiple spaces
 			String[] diff = decodedDiff[1].replaceAll("\\[", "").replaceAll("\\]", "").split(", ");
 
@@ -497,7 +513,7 @@ public class InHandler2 extends ChannelInboundHandlerAdapter { // (1)
 				//Remove last comma
 				diff[i] = diff[i].trim();
 				if (diff[i].length() == 0) break;
-				LOG.info("Diff i = " + i + " Diff[i] = " + diff[i]);
+				LOG.debug("Diff i = " + i + " Diff[i] = " + diff[i]);
 				String[] proposalArr = diff[i].split(",");
 				long epoch = Long.parseLong(proposalArr[0].trim());
 				long counter = Long.parseLong(proposalArr[1].trim());
@@ -512,31 +528,31 @@ public class InHandler2 extends ChannelInboundHandlerAdapter { // (1)
 				dataMap.put(key, value);
 			}
 
-			LOG.info("Follower ready for Broadcast");
+			LOG.debug("Follower ready for Broadcast");
 			return "READY:" + this.properties.getNodeId();
 		}
 
 		if (requestMsg.contains("SNAP")){
 			Properties datamap = properties.getDataMap();
 			datamap.clear();
-			LOG.info("SNAP message received = " + requestMsg);
+			LOG.debug("SNAP message received = " + requestMsg);
 			String[] decodedSnap = requestMsg.split(":");
-			LOG.info("Snap decoded is = " + decodedSnap[0] + "	" + decodedSnap[1]);
+			LOG.debug("Snap decoded is = " + decodedSnap[0] + "	" + decodedSnap[1]);
 			String[] snap = decodedSnap[1].replaceAll("\\{", "").replaceAll("\\}", "").split(", ");
 			for (int i = 0; i < snap.length; i++){
 				snap[i] = snap[i].trim();
 				if (snap[i].length() == 0) break;
-				LOG.info("Snap i = " + i + " Snap[i] = " + snap[i]);
+				LOG.debug("Snap i = " + i + " Snap[i] = " + snap[i]);
 				String[] datamapEntryArr = snap[i].split("=");
 
 				String key = datamapEntryArr[0].trim();
 				String value = datamapEntryArr[1].trim();
-				LOG.info("Key is = " + key);
-				LOG.info("Value is = " + value);
+				LOG.debug("Key is = " + key);
+				LOG.debug("Value is = " + value);
 				datamap.put(key, value);
 			}
-			LOG.info("Updated datamap = " + properties.getDataMap());
-			LOG.info("Follower ready for Broadcast");
+			LOG.debug("Updated datamap = " + properties.getDataMap());
+			LOG.debug("Follower ready for Broadcast");
 			return "READY:" + this.properties.getNodeId();
 		}
 

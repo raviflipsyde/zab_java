@@ -58,8 +58,6 @@ public class SyncDataStructs {
 		proposedTransactions = new ConcurrentHashMap<Proposal, AtomicInteger>();
 		committedTransactions = new TreeSet<Proposal>(comparator);
 
-		//proposeQueue = new MpscArrayQueue<Proposal>(1000);
-		//commitQueue = new MpscArrayQueue<Proposal>(1000);
 
 
 	}

@@ -8,6 +8,7 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.nio.charset.Charset;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 //import java.util.Map;
 import java.util.Properties;
@@ -60,6 +61,30 @@ public class FileOps {
 	}
 
 
+	
+public static void writeDataMap(NodeServerProperties1 properties){
+		
+		String fileName = "datamap_" + properties.getNodePort() + ".properties";
+
+		Properties dataMap = properties.getDataMap();
+		
+		try {
+
+			FileWriter filewriter = new FileWriter(fileName);
+			Date date = new Date();
+			dataMap.store(filewriter, date.toString());
+			
+			filewriter.close();
+			
+		} catch (FileNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+
+	}
 
 	public static Properties readDataMap(NodeServerProperties1 properties) {
 

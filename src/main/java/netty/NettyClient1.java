@@ -88,8 +88,8 @@ public class NettyClient1 {
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
-			LOG.info("failed to send msg to "+ip+":"+port+ "\n"+ msg);
-			LOG.info("Remove this ip from the memberlist");
+			LOG.debug("failed to send msg to "+ip+":"+port+ "\n"+ msg);
+			LOG.debug("Remove this ip from the memberlist");
 			long removeId = -1;
 			for( Entry<Long, InetSocketAddress> entry : properties.getMemberList().entrySet()){
 				String memberip = entry.getValue().getHostName();
@@ -100,7 +100,7 @@ public class NettyClient1 {
 					break;
 				}
 			}
-			LOG.info("------------------**Remove "+removeId+" from memberlist");
+			LOG.debug("------------------**Remove "+removeId+" from memberlist");
 			properties.removeMemberFromList(removeId);
 			
 		}

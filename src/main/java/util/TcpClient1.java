@@ -32,7 +32,7 @@ public class TcpClient1 {
 		String retMsg = "";
 		try {
 
-			LOG.info("Started a TCP Client for " + this.host + ":" + this.port + " to send \n\"" + msg + "\"");
+			LOG.debug("Started a TCP Client for " + this.host + ":" + this.port + " to send \n\"" + msg + "\"");
 
 			socket = new Socket(host, port);
 			in = new BufferedReader(new InputStreamReader(socket.getInputStream()));
@@ -56,7 +56,7 @@ public class TcpClient1 {
 			} catch (IOException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
-				LOG.info(e.getMessage());
+				LOG.debug(e.getMessage());
 			}
 
 		}

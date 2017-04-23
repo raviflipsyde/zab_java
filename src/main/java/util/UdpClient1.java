@@ -26,7 +26,7 @@ public class UdpClient1 implements Runnable{
 
 
 	public void run() {
-		LOG.info("--------------STARTING UDP CLIENT--------------:::"+ properties.getMemberList().size());
+		LOG.debug("--------------STARTING UDP CLIENT--------------:::"+ properties.getMemberList().size());
 		int counter =5;
 
 		while(counter>0){
@@ -50,7 +50,7 @@ public class UdpClient1 implements Runnable{
 
 				DatagramPacket sendPacket = new DatagramPacket(sendData, sendData.length, IPAddress, port);
 
-				//			LOG.info("Sending to:" + addr.toString());
+				//			LOG.debug("Sending to:" + addr.toString());
 				clientSocket.send(sendPacket);
 				clientSocket.setSoTimeout(4000);
 				DatagramPacket receivePacket = new DatagramPacket(receiveData, receiveData.length);
@@ -64,20 +64,20 @@ public class UdpClient1 implements Runnable{
 					
 			} catch (IOException e) {
 				// TODO Auto-generated catch block
-				LOG.info(e.getMessage());
+				LOG.debug(e.getMessage());
 				counter--;
 				continue;	
 				
 			} catch (InterruptedException e) {
 				// TODO Auto-generated catch block
-				LOG.info(e.getMessage());
+				LOG.debug(e.getMessage());
 			}
 
 
 		}
-		LOG.info("Throwing runtime exception");
+		LOG.debug("Throwing runtime exception");
 //		properties.removeMemberFromList(properties.getLeaderId());
-		LOG.info("Removing leader from memberlist");
+		LOG.debug("Removing leader from memberlist");
 		properties.setLeaderId(0);
 		properties.setNodestate(NodeServerProperties1.State.ELECTION);
 		throw new RuntimeException();

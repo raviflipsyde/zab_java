@@ -19,7 +19,7 @@ public class Start {
 	public static void main(String[] args){
 
 		//    	 LOG.debug("This will be printed on debug");
-		//         LOG.info("This will be printed on info");
+		//         LOG.debug("This will be printed on info");
 		//         LOG.warn("This will be printed on warn");
 		//         LOG.error("This will be printed on error");
 		//         LOG.fatal("This will be printed on fatal");
@@ -46,9 +46,9 @@ public class Start {
 				bport = 4500;
 				nport = 8080;
 			}
-			LOG.info("Bootstrap Host: " + bhost);
-			LOG.info("Bootstrap Port: " + bport);
-			LOG.info("Node Port :" + nport);
+			LOG.debug("Bootstrap Host: " + bhost);
+			LOG.debug("Bootstrap Port: " + bport);
+			LOG.debug("Node Port :" + nport);
 
 			new NodeServer1(bhost, bport, nport).init();
 		}
@@ -62,7 +62,7 @@ public class Start {
 				port = 8080;
 			}
 
-			LOG.info("Port:" + port);
+			LOG.debug("Port:" + port);
 
 			try {
 				new BootstrapServer(port).run();

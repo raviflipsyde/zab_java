@@ -50,7 +50,9 @@ public class NodeServer1 {
 	}
 
 	private Vote startLeaderElection() {
-
+		
+		LOG.debug("Begin Leader Election---------");
+		
 		Map<Long, InetSocketAddress> memberList = this.properties.getMemberList();
 		HashMap<Long, Vote> receivedVote = new HashMap<Long, Vote>();
 		HashMap<Long, Long> receivedVotesRound = new HashMap<Long, Long>();
@@ -67,25 +69,25 @@ public class NodeServer1 {
 
 		Notification myNotification = new Notification(this.properties.getMyVote(), this.properties.getNodeId(),
 				this.properties.getNodestate(), this.properties.getElectionRound());
-		LOG.info("My Notification is:" + myNotification.toString());
+		LOG.debug("My Notification is:" + myNotification.toString());
 
 		// TODO: Verify
 		sendNotificationToAll(myNotification.toString());
 
 		while (this.properties.getNodestate() == NodeServerProperties1.State.ELECTION && timeout < limit_timeout) {
-			LOG.info("Fetching from CurrentElectionQueue:\n");
+			LOG.debug("Fetching from CurrentElectionQueue:\n");
 			Notification currentN = currentElectionQueue.poll();
 
 			if (currentN == null) {
-				LOG.info("Notification Queue is empty!!");
+				LOG.debug("Notification Queue is empty!!");
 				try {
 					Thread.sleep(timeout);
 					currentN = currentElectionQueue.poll();
 
 					if (currentN == null) {
-						LOG.info("Notification Queue is empty again!!");
+						LOG.debug("Notification Queue is empty again!!");
 						timeout = 2 * timeout;
-						LOG.info("increasing timeout");
+						LOG.debug("increasing timeout");
 
 						// TODO: verify
 						sendNotificationToAll(myNotification.toString());
@@ -101,23 +103,23 @@ public class NodeServer1 {
 			// CurrentN is not null
 
 			else if (currentN.getSenderState() == NodeServerProperties1.State.ELECTION) {
-				LOG.info("Received notification is in Election");
+				LOG.debug("Received notification is in Election");
 				if (currentN.getSenderRound() < this.properties.getElectionRound()) {
-					LOG.info("Disregard vote as round number is smaller than mine");
+					LOG.debug("Disregard vote as round number is smaller than mine");
 					continue;
 				} else {
 					if (currentN.getSenderRound() > this.properties.getElectionRound()) {
-						LOG.info("The round number is larger than mine");
+						LOG.debug("The round number is larger than mine");
 						this.properties.setElectionRound(currentN.getSenderRound());
 
 						receivedVote = new HashMap<Long, Vote>();
 						receivedVotesRound = new HashMap<Long, Long>();
 					}
-					LOG.info("-------------------------");
-					LOG.info("myvote:" + this.properties.getMyVote());
-					LOG.info("othervote:" + currentN.getVote());
-					LOG.info("vote compare:" + currentN.getVote().compareTo(this.properties.getMyVote()));
-					LOG.info("-------------------------");
+					LOG.debug("-------------------------");
+					LOG.debug("myvote:" + this.properties.getMyVote());
+					LOG.debug("othervote:" + currentN.getVote());
+					LOG.debug("vote compare:" + currentN.getVote().compareTo(this.properties.getMyVote()));
+					LOG.debug("-------------------------");
 					if (currentN.getVote().compareTo(this.properties.getMyVote()) > 0) { // if
 																							// the
 																							// currentN
@@ -125,7 +127,7 @@ public class NodeServer1 {
 																							// bigger
 																							// thn
 																							// myvote
-						LOG.info("His vote bigger than mine");
+						LOG.debug("His vote bigger than mine");
 						this.properties.setMyVote(currentN.getVote()); // update
 																		// myvote
 						myNotification.setVote(this.properties.getMyVote()); // update
@@ -136,26 +138,26 @@ public class NodeServer1 {
 					sendNotificationToAll(myNotification.toString());
 
 					// update the receivedVote datastructure
-					LOG.info("*****Vote for NodeID:" + currentN.getSenderId() + ":::" + currentN.getVote());
+					LOG.debug("*****Vote for NodeID:" + currentN.getSenderId() + ":::" + currentN.getVote());
 					receivedVote.put(currentN.getSenderId(), currentN.getVote());
 					receivedVotesRound.put(currentN.getSenderId(), currentN.getSenderRound());
 					// TODO should I put my vote in the receivedVote
 					receivedVote.put(this.properties.getNodeId(), this.properties.getMyVote());
 					receivedVotesRound.put(this.properties.getNodeId(), this.properties.getElectionRound());
-					LOG.info("*****receivedVote.size:" + receivedVote.size());
-					LOG.info("*****memberList.size:" + memberList.size());
+					LOG.debug("*****receivedVote.size:" + receivedVote.size());
+					LOG.debug("*****memberList.size:" + memberList.size());
 
 					if (receivedVote.size() == (memberList.size() + 1)) {
 						// TODO check for Quorum in the receivedvotes and then
 						// declare leader
-						LOG.info("***Received Votes from all the members");
+						LOG.info("Received Votes from all the members");
 						for (Entry<Long, Vote> entries : receivedVote.entrySet()) {
-							LOG.info(entries.getKey() + "::" + entries.getValue());
+							LOG.debug(entries.getKey() + "::" + entries.getValue());
 						}
 
 						break;
 					} else {
-						LOG.info("*Checking for Quorum in received votes");
+						LOG.debug("*Checking for Quorum in received votes");
 						int myVoteCounter = 0;
 						for (Entry<Long, Vote> v : receivedVote.entrySet()) {
 							Vote currVote = v.getValue();
@@ -164,7 +166,7 @@ public class NodeServer1 {
 							}
 						}
 						if (myVoteCounter > (memberList.size() + 1) / 2) {
-							LOG.info("**Found Quorum in received votes");
+							LOG.info("Found Quorum in received votes");
 							try {
 
 								Thread.sleep(timeout);
@@ -175,10 +177,10 @@ public class NodeServer1 {
 								e.printStackTrace();
 							}
 							if (currentElectionQueue.size() > 0) {
-								LOG.info("Still have notifications in ElectionQueue");
+								LOG.debug("Still have notifications in ElectionQueue");
 								continue;
 							} else {
-								LOG.info("No notifications in ElectionQueue");
+								LOG.info("And No more notifications in ElectionQueue");
 								break;
 							}
 						} else {
@@ -192,7 +194,7 @@ public class NodeServer1 {
 
 			else { // the received vote is either leading or following
 				if (currentN.getSenderRound() == this.properties.getElectionRound()) {
-					LOG.info(
+					LOG.debug(
 							"Notification is not in election, round numbers of current node and current notification are same");
 					receivedVote.put(currentN.getSenderId(), currentN.getVote());
 					receivedVotesRound.put(currentN.getSenderId(), currentN.getSenderRound());
@@ -206,11 +208,11 @@ public class NodeServer1 {
 																							// notification
 																							// from
 																							// leader
-						LOG.info("This notification is from the Leader");
+						LOG.debug("This notification is from the Leader");
 						this.properties.setMyVote(currentN.getVote());
 						break;
 					} else {
-						LOG.info("This notification is from a Follower");
+						LOG.debug("This notification is from a Follower");
 						int myVoteCounter = 0;
 						for (Entry<Long, Vote> v : receivedVote.entrySet()) {
 							Vote currVote = v.getValue();
@@ -307,25 +309,29 @@ public class NodeServer1 {
 
 		this.properties.getElectionQueue().clear();
 
+		LOG.info("End Leader Election---------");
+		LOG.info("Leader ID:"+this.properties.getMyVote().getId() );
+		
 		return this.properties.getMyVote();
 
 	}
 
 	private void Recovery() {
 		LOG.info("Starting Recovery phase");
+		
 		long leaderID = properties.getLeaderId();
 
 		if (this.properties.isLeader() == true) {
 			// Leader
-			LOG.info("I am Leader");
+			LOG.debug("I am Leader");
 
 			ConcurrentHashMap<Long, Long> acceptedEpochMap = this.properties.getSynData().getAcceptedEpochMap();
 
 			// this.properties.getSynData().setAcceptedEpochMap(acceptedEpochMap);
 			// this.properties.getSynData().setCurrentEpochMap(currentEpochMap);
 			//
-			LOG.info("Member List size before while is = " + properties.getMemberList().size());
-			LOG.info("Accepted Epoch Map Size before while is = " + acceptedEpochMap.size());
+			LOG.debug("Member List size before while is = " + properties.getMemberList().size());
+			LOG.debug("Accepted Epoch Map Size before while is = " + acceptedEpochMap.size());
 
 			while (acceptedEpochMap.size() < this.properties.getMemberList().size() / 2) {
 				// TODO: Figure out how to update memberlist size
@@ -336,8 +342,8 @@ public class NodeServer1 {
 				}
 			}
 
-			LOG.info("Member List size after while is = " + properties.getMemberList().size());
-			LOG.info("Accepted Epoch Map Size after while is = " + acceptedEpochMap.size());
+			LOG.debug("Member List size after while is = " + properties.getMemberList().size());
+			LOG.debug("Accepted Epoch Map Size after while is = " + acceptedEpochMap.size());
 
 			long max = this.properties.getAcceptedEpoch();
 			LOG.info("Accepted Epoch before max = " + max);
@@ -435,20 +441,20 @@ public class NodeServer1 {
 					e.printStackTrace();
 				}
 			}
-
+			LOG.info("End of Recovery phase");
 			LOG.info("Leader ready for Broadcast");
 
-			while (true) {
+			
 				try {
-					Thread.sleep(10);
+					Thread.sleep(3000);
 				} catch (InterruptedException e) {
 					e.printStackTrace();
 				}
-			}
+			
 
 		} else {
 			// Follower
-			LOG.info("I am Follower");
+			LOG.debug("I am Follower");
 			InetSocketAddress leaderAddr = properties.getMemberList().get(leaderID);
 			String leaderIp = leaderAddr.getHostName();
 			int leaderPort = leaderAddr.getPort();
@@ -464,14 +470,14 @@ public class NodeServer1 {
 			this.nettyClient.sendMessage(leaderIp, leaderPort, followerinfomsg);
 
 			// Receive SNAP, DIFF and TRUNC messages
-			while (true) {
+	
 				try {
-					Thread.sleep(10);
+					Thread.sleep(3000);
 				} catch (InterruptedException e) {
 					e.printStackTrace();
 				}
-			}
-
+			
+			LOG.debug("End of Recovery phase");
 		}
 
 	}
@@ -486,7 +492,7 @@ public class NodeServer1 {
 	// }
 
 	// this.properties.getSynData().setNewEpoch(0L);
-	// LOG.info("New Epoch before while is = " +
+	// LOG.debug("New Epoch before while is = " +
 	// properties.getSynData().getNewEpoch());
 	// while (this.properties.getSynData().getNewEpoch() == 0){
 	// try {
@@ -495,7 +501,7 @@ public class NodeServer1 {
 	// e.printStackTrace();
 	// }
 	// }
-	// LOG.info("New Epoch before while is = " +
+	// LOG.debug("New Epoch before while is = " +
 	// properties.getSynData().getNewEpoch());
 
 	// long newEpoch = this.properties.getSynData().getNewEpoch();
@@ -529,13 +535,13 @@ public class NodeServer1 {
 		this.properties.getSynData().getCommittedTransactions().clear();
 
 		if (properties.getNodestate() == NodeServerProperties1.State.LEADING) {
-			LOG.info("Starting Monitor Propose Queue thread for leader...");
+			LOG.debug("Starting Monitor Propose Queue thread for leader...");
 			Thread threadMonitorProposeQueue = new Thread(new MonitorProposeQueue(properties, this));
 			threadMonitorProposeQueue.setPriority(Thread.MIN_PRIORITY);
 			threadMonitorProposeQueue.start();
 		}
 
-		LOG.info("Starting Write to disk thread irrespective of leader or follower...");
+		LOG.debug("Starting Write to disk thread irrespective of leader or follower...");
 		if (properties.getNodestate() != NodeServerProperties1.State.ELECTION) {
 			Thread threadWriteToDisk = new Thread(new WriteToDisk(properties));
 			threadWriteToDisk.setPriority(Thread.MIN_PRIORITY);
@@ -549,10 +555,10 @@ public class NodeServer1 {
 		msgBootstrap();
 
 		for (Entry<Long, InetSocketAddress> entry : properties.getMemberList().entrySet()) {
-			LOG.info(entry.getKey() + ":::" + entry.getValue().getHostName() + ":" + entry.getValue().getPort());
+			LOG.debug(entry.getKey() + ":::" + entry.getValue().getHostName() + ":" + entry.getValue().getPort());
 		}
 
-		LOG.info("\n**ID for this node is :" + properties.getNodeId());
+		LOG.info("\nNode ID:" + properties.getNodeId());
 
 		this.nettyServerThread = new Thread(new NettyServer1(properties.getNodePort(), properties));
 		this.nettyServerThread.setPriority(Thread.MIN_PRIORITY);
@@ -575,23 +581,18 @@ public class NodeServer1 {
 		// readHistory();
 		FileOps.fillDataInProperties(properties);
 		// Properties datamap = this.properties.getDataMap();
-		String readLastLog = FileOps.readLastLog(properties);
-		String[] lastLogArr = readLastLog.split(",");
-		long epoch = Long.parseLong(lastLogArr[0].trim());
-		long counter = Long.parseLong(lastLogArr[1].trim());
-
-		ZxId lastZxid = new ZxId(epoch, counter);
-		this.properties.setLastZxId(lastZxid);
+		
+//Already taken care in above mthrod call..		
+//		String readLastLog = FileOps.readLastLog(properties);
+//		String[] lastLogArr = readLastLog.split(",");
+//		long epoch = Long.parseLong(lastLogArr[0].trim());
+//		long counter = Long.parseLong(lastLogArr[1].trim());
+//
+//		ZxId lastZxid = new ZxId(epoch, counter);
+//		this.properties.setLastZxId(lastZxid);
 
 		// startLeaderElection();
 		changePhase();
-
-		// changePhase();
-
-		// TODO:Call changePhase() instead of calling startbroadcast()
-		// mockData();
-		//
-		startBroadcast();
 
 	}
 
@@ -600,9 +601,9 @@ public class NodeServer1 {
 	// Thread.UncaughtExceptionHandler h = new Thread.UncaughtExceptionHandler()
 	// {
 	// public void uncaughtException(Thread th, Throwable ex) {
-	// LOG.info(th.getName());
-	// LOG.info(th.getId());
-	// LOG.info(ex);
+	// LOG.debug(th.getName());
+	// LOG.debug(th.getId());
+	// LOG.debug(ex);
 	// changePhase();
 	// System.out.println("Uncaught exception: " + ex);
 	//
@@ -617,10 +618,10 @@ public class NodeServer1 {
 	// long leaderID = properties.getNodeId();
 	// if(
 	// properties.getNodestate().equals(NodeServerProperties1.State.ELECTION)){
-	// LOG.info("Begin Leader Election---------");
+	// LOG.debug("Begin Leader Election---------");
 	// Vote leaderVote = startLeaderElection();
-	// LOG.info("End Leader Election---------");
-	// LOG.info("Leader ID:"+leaderVote.getId() );
+	// LOG.debug("End Leader Election---------");
+	// LOG.debug("Leader ID:"+leaderVote.getId() );
 	// if(leaderVote.getId() == properties.getNodeId()){
 	// properties.setLeader(true);
 	// properties.setNodestate(NodeServerProperties1.State.LEADING);
@@ -671,7 +672,7 @@ public class NodeServer1 {
 	// }
 
 	public void mockData() {
-		LOG.info("Mocking the data for testing broadcast...!!");
+		LOG.debug("Mocking the data for testing broadcast...!!");
 		InetSocketAddress leaderAddress = new InetSocketAddress("localhost", 9001);
 		this.properties.setLeaderAddress(leaderAddress);
 		this.properties.setAcceptedEpoch(3);
@@ -691,9 +692,9 @@ public class NodeServer1 {
 
 		Thread.UncaughtExceptionHandler h = new Thread.UncaughtExceptionHandler() {
 			public void uncaughtException(Thread th, Throwable ex) {
-				LOG.info(th.getName());
-				LOG.info(th.getId());
-				LOG.info(ex.getMessage());
+				LOG.debug(th.getName());
+				LOG.debug(th.getId());
+				LOG.debug(ex.getMessage());
 				changePhase();
 				System.out.println("Uncaught exception: " + ex);
 
@@ -707,24 +708,21 @@ public class NodeServer1 {
 		 */
 		long leaderID = properties.getNodeId();
 		if( properties.getNodestate().equals(NodeServerProperties1.State.ELECTION)){
-			LOG.info("Begin Leader Election---------");
+			
 			Vote leaderVote = startLeaderElection();
-			LOG.info("End Leader Election---------");
-			LOG.info("Leader ID:"+leaderVote.getId() );
+			
 
 			if (leaderVote.getId() != properties.getNodeId()){
-				LOG.info("Sleeping for 3 seconds");
+				LOG.debug("Sleeping for 3 seconds");
+				LOG.debug("For synchronizing with the Leader");
 				try {
 					Thread.sleep(3000);
 				} catch (InterruptedException e){
 					e.printStackTrace();
 				}
-				LOG.info("Good Morning");
+				
 			}
 
-			LOG.info("Begin Recovery---------");
-			Recovery();
-			LOG.info("END Recovery---------");
 			if(leaderVote.getId() == properties.getNodeId()){
 				properties.setLeader(true);
 				properties.setNodestate(NodeServerProperties1.State.LEADING);
@@ -748,6 +746,16 @@ public class NodeServer1 {
 				this.udpClientThread.setUncaughtExceptionHandler(h);
 				this.udpClientThread.start();
 			}
+			
+			Recovery();
+			
+			try {
+				Thread.sleep(3000);
+			} catch (InterruptedException e){
+				e.printStackTrace();
+			}
+			
+			startBroadcast();
 		}
 
 		
@@ -766,9 +774,6 @@ public class NodeServer1 {
 //			}
 //		}
 
-		//startRecovery();
-		//startBroadcast();
-//>>>>>>> 82f63f6ff91485b6e0a83f9992abcffb8d42cc83
 	}
 
 	public long msgBootstrap() {
@@ -780,15 +785,15 @@ public class NodeServer1 {
 			PrintWriter out = new PrintWriter(socket.getOutputStream(), true);
 			BufferedReader in = new BufferedReader(new InputStreamReader(socket.getInputStream()));
 			// set self_ip:port to bootstrap
-			LOG.info("set " + properties.getBootstrapHost() + ":" + properties.getBootstrapPort());
-			LOG.info("set " + properties.getNodeHost() + ":" + properties.getNodePort());
+			LOG.debug("set " + properties.getBootstrapHost() + ":" + properties.getBootstrapPort());
+			LOG.debug("set " + properties.getNodeHost() + ":" + properties.getNodePort());
 
 			out.println("set " + properties.getNodeHost() + ":" + properties.getNodePort());
 
 			String memberList = in.readLine();
 			String memberId = in.readLine();
 			id = Long.parseLong(memberId);
-			LOG.info("MemberID received:" + id);
+			LOG.debug("MemberID received:" + id);
 			// process memberlist
 
 			this.properties.setNodeId(id);
@@ -828,12 +833,12 @@ public class NodeServer1 {
 			}
 
 		}
-		LOG.info("-----------MemberListSize:" + properties.getMemberList().size());
+		LOG.debug("-----------MemberListSize:" + properties.getMemberList().size());
 
 	}
 
 	private void sendNotificationToAll(String message) {
-		LOG.info("SendNotificationToAll()" + message);
+		LOG.debug("SendNotificationToAll()" + message);
 		broadcast("CNOTIFICATION:" + message);
 	}
 
@@ -845,12 +850,12 @@ public class NodeServer1 {
 
 	public void broadcast(String message) {
 
-		//LOG.info("*******MemberlistSize:"+properties.getMemberList().size());
-		LOG.info("Inside Broadcast::Message:"+message );
+		//LOG.debug("*******MemberlistSize:"+properties.getMemberList().size());
+		LOG.debug("Inside Broadcast::Message:"+message );
 		Map<Long, InetSocketAddress> unreachablelist = new HashMap<Long, InetSocketAddress>();
 		for (Entry<Long, InetSocketAddress> member : properties.getMemberList().entrySet()) {
 			try {
-				LOG.info("Sending "+message+" to: "+ member.getValue().getHostName() + ":"+ member.getValue().getPort());
+				LOG.debug("Sending "+message+" to: "+ member.getValue().getHostName() + ":"+ member.getValue().getPort());
 				this.nettyClient.sendMessage(member.getValue().getHostName(), member.getValue().getPort(), message);
 			}
 			catch (Exception e) {
@@ -861,7 +866,7 @@ public class NodeServer1 {
 		}
 
 		for (Entry<Long, InetSocketAddress> member : unreachablelist.entrySet()) {
-			LOG.info("Removing from memberlist"+member.getKey()+":"+member.getValue());
+			LOG.debug("Removing from memberlist"+member.getKey()+":"+member.getValue());
 			properties.removeMemberFromList(member.getKey());
 		}
 	}
@@ -900,7 +905,7 @@ public class NodeServer1 {
 	// this.properties.setCurrentEpoch(lastMsg.getZxid().getEpoch());
 	// this.properties.setLastZxId(lastMsg.getZxid());
 
-	// LOG.info("ZxId of last message is = Epoch: " +
+	// LOG.debug("ZxId of last message is = Epoch: " +
 	// lastMsg.getZxid().getEpoch() + " Counter: " +
 	// lastMsg.getZxid().getCounter());
 

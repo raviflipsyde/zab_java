@@ -2,6 +2,8 @@ package servers;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
+
+import java.util.Properties;
 import java.util.SortedSet;
 import util.FileOps;
 
@@ -18,21 +20,35 @@ public class WriteToDisk implements Runnable {
 			
 	}
 	public void run() {
-		LOG.info("Run method for WriteToDisk thread");
-		LOG.info("Node is in " + properties.getNodestate().toString() + " state");
+		LOG.debug("Run method for WriteToDisk thread");
+		LOG.debug("Node is in " + properties.getNodestate().toString() + " state");
 		while( properties.getNodestate() != NodeServerProperties1.State.ELECTION && running == true){
 			
 			//flush the committed transactions set
 			SortedSet<Proposal> committedtransactions = properties.getSynData().getCommittedTransactions();
 			synchronized (committedtransactions) {
 				for(Object entry: committedtransactions){
-					LOG.info("WriteToDisk: Writing transactions to Transaction log:");
-					String s = entry.toString();
-					String fileName = "TestReplication_" + properties.getNodePort() + ".log";
-					FileOps.appendTransaction(fileName,s);
+					LOG.debug("WriteToDisk: Writing transactions to Transaction log:");
+					String entry_commit_history = entry.toString();
+					LOG.debug("entry_commit_history:"+ entry_commit_history);
+					
+					String fileName = "CommitedHistory_" + properties.getNodePort() + ".log";
+					FileOps.appendTransaction(fileName,entry_commit_history);
 					
 					//TODO: Write to datamap
+					String[] arr = entry_commit_history.split(":");
+					
+					
+					String key = arr[2].trim();
+					String value = arr[3].trim();
+					
+					
+					Properties datamap = properties.getDataMap();
+					datamap.setProperty(key, value);
+					
 				}
+				
+				FileOps.writeDataMap(properties);
 				
 				committedtransactions.clear();
 				

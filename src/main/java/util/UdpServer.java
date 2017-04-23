@@ -44,7 +44,7 @@
 //						String dedadhost = addr[0].trim();
 //						int deadPort = Integer.parseInt(addr[1]); 
 //						InetSocketAddress socketAddr = new InetSocketAddress(dedadhost, deadPort);
-//						LOG.info("Removing "+socketAddr.toString()+" from memberlist");
+//						LOG.debug("Removing "+socketAddr.toString()+" from memberlist");
 //						nodeServer.getMemberList().remove(socketAddr);
 //					}
 //				}
@@ -58,7 +58,7 @@
 //	} 
 //	
 //	public void run() {
-//		LOG.info("--------------STARTING UDP SERVER--------------"+ nodeServer.getMemberList().size());
+//		LOG.debug("--------------STARTING UDP SERVER--------------"+ nodeServer.getMemberList().size());
 //		DatagramSocket serverSocket = null;
 //		try {
 //			
@@ -78,7 +78,7 @@
 //				InetSocketAddress recvAddress = new InetSocketAddress(IPAddress, port);
 //				
 //				long currentTime = System.currentTimeMillis();
-////				LOG.info("RECEIVED: " + sentence
+////				LOG.debug("RECEIVED: " + sentence
 ////						+ " from "+ recvAddress.toString() 
 ////						+" at "+ currentTime);
 //			

@@ -101,7 +101,7 @@
 //		// send the address to bootstrap, get the member list, get the nodeID
 //		msgBootstrap();
 //
-//		LOG.info("ID for this node is :"+ properties.getId());
+//		LOG.debug("ID for this node is :"+ properties.getId());
 //
 //		
 //		Thread udpserverThread = new Thread(new UdpServer(this));
@@ -162,10 +162,10 @@
 //		 */
 //		long leaderID = properties.getId();
 //		if( properties.getNodestate().equals(NodeServerProperties.State.ELECTION)){
-//			LOG.info("Begin Leader Election---------");
+//			LOG.debug("Begin Leader Election---------");
 //			Vote leaderVote = startLeaderElection();
-//			LOG.info("End Leader Election---------");
-//			LOG.info("Leader ID:"+leaderVote.getId() );
+//			LOG.debug("End Leader Election---------");
+//			LOG.debug("Leader ID:"+leaderVote.getId() );
 //			if(leaderVote.getId() == properties.getId()){
 //				properties.setLeader(true);
 //				properties.setNodestate(NodeServerProperties.State.LEADING);
@@ -208,16 +208,16 @@
 //		this.properties.setMyVote(myVote123);
 //		
 //		Notification myNotification = new Notification(this.properties.getMyVote(), this.properties.getElectionRound(), this.properties.getId(), this.properties.getNodestate());
-//		LOG.info("My Notification is:"+myNotification.toString());
+//		LOG.debug("My Notification is:"+myNotification.toString());
 //		
 //		sendNotification(memberList, myNotification); 
 //		Notification currentN = null;
 //		while( properties.getNodestate() == NodeServerProperties.State.ELECTION && timeout<limit_timeout ){
-//			LOG.info("Fetching from CurrentElectionQueue:\n");
+//			LOG.debug("Fetching from CurrentElectionQueue:\n");
 //			currentN = currentElectionQueue.poll();
 //			
 //			if(currentN==null){
-//				LOG.info("Queue is empty!!");
+//				LOG.debug("Queue is empty!!");
 //				try {
 //					synchronized (currentElectionQueue) {
 //						currentElectionQueue.wait(timeout);
@@ -225,9 +225,9 @@
 //					currentN = currentElectionQueue.poll();
 //					
 //					if(currentN==null){
-//						LOG.info("Queue is empty again!!");
+//						LOG.debug("Queue is empty again!!");
 //						timeout = 2*timeout;
-//						LOG.info("increasing timeout");
+//						LOG.debug("increasing timeout");
 //						sendNotification(memberList, myNotification);
 //						
 //					}
@@ -241,25 +241,25 @@
 //			//CurrentN is not null
 //			
 //			else if ( currentN.getSenderState() == NodeServerProperties.State.ELECTION ){
-//				LOG.info("Received notification is in Election");
+//				LOG.debug("Received notification is in Election");
 //				if(currentN.getSenderRound() < this.properties.getElectionRound()){
-//					LOG.info("Disregard vote as round number is smaller than mine");
+//					LOG.debug("Disregard vote as round number is smaller than mine");
 //					continue;
 //				}else{
 //					if(currentN.getSenderRound() > this.properties.getElectionRound()){
-//						LOG.info("The round number is larger than mine");
+//						LOG.debug("The round number is larger than mine");
 //						this.properties.setElectionRound(currentN.getSenderRound());
 //						
 //						receivedVote = new HashMap<Long, Vote>();
 //						receivedVotesRound = new HashMap<Long, Long>();
 //					}
-//					LOG.info("-------------------------");
-//					LOG.info("myvote:"+this.properties.getMyVote());
-//					LOG.info("othervote:"+currentN.getVote());
-//					LOG.info("vote compare:"+ currentN.getVote().compareTo(this.properties.getMyVote()));
-//					LOG.info("-------------------------");
+//					LOG.debug("-------------------------");
+//					LOG.debug("myvote:"+this.properties.getMyVote());
+//					LOG.debug("othervote:"+currentN.getVote());
+//					LOG.debug("vote compare:"+ currentN.getVote().compareTo(this.properties.getMyVote()));
+//					LOG.debug("-------------------------");
 //					if(currentN.getVote().compareTo(this.properties.getMyVote()) > 0 ){ // if the currentN is bigger thn myvote
-//						LOG.info("His vote bigger than mine");
+//						LOG.debug("His vote bigger than mine");
 //						this.properties.setMyVote(currentN.getVote()); // update myvote
 //						myNotification.setVote(this.properties.getMyVote()); // update notification
 //						
@@ -274,11 +274,11 @@
 //					
 //					if(receivedVote.size() == (memberList.size()+1)){
 //						//TODO check for quorum in the receivedvotes and then declare leader
-//						LOG.info("***received votes from all the members");
+//						LOG.debug("***received votes from all the members");
 //						break;
 //					}
 //					else {
-//						LOG.info("*checking for quorum in received votes");
+//						LOG.debug("*checking for quorum in received votes");
 //						int myVoteCounter = 0;
 //						for( Entry<Long, Vote> v:receivedVote.entrySet()){
 //							Vote currVote = v.getValue();
@@ -287,7 +287,7 @@
 //							}
 //						}
 //						if(myVoteCounter> (memberList.size()+1)/2 ){
-//							LOG.info("**Found  quorum in received votes");
+//							LOG.debug("**Found  quorum in received votes");
 //							try {
 //								synchronized (currentElectionQueue) {
 //									currentElectionQueue.wait(timeout);
@@ -300,10 +300,10 @@
 //								e.printStackTrace();
 //							}
 //							if(currentElectionQueue.size() > 0) {
-//								LOG.info("Still have notifications in ElectionQueue");
+//								LOG.debug("Still have notifications in ElectionQueue");
 //								continue; }
 //							else {
-//								LOG.info("No notifications in ElectionQueue");
+//								LOG.debug("No notifications in ElectionQueue");
 //								break;
 //							}
 //						}
@@ -322,7 +322,7 @@
 //			// the received vote is either leading or following
 //			else{
 //				if(currentN.getSenderRound() == this.properties.getElectionRound()){
-//					LOG.info("notification is not in election, round number are same");
+//					LOG.debug("notification is not in election, round number are same");
 //					receivedVote.put(currentN.getSenderId(), currentN.getVote());
 //					receivedVotesRound.put(currentN.getSenderId(), currentN.getSenderRound());
 //					//TODO shoul i put my vote in the receivedVote
@@ -330,12 +330,12 @@
 ////					receivedVotesRound.put(this.properties.getId(), this.electionRound);
 //					
 //					if(currentN.getSenderState() == NodeServerProperties.State.LEADING){
-//						LOG.info("notification is not in Leading state");
+//						LOG.debug("notification is not in Leading state");
 //						this.properties.setMyVote( currentN.getVote());
 //						break;
 //					}
 //					else{
-//						LOG.info("notification is not in Followinf state");
+//						LOG.debug("notification is not in Followinf state");
 //						int myVoteCounter = 0;
 //						for( Entry<Long, Vote> v:receivedVote.entrySet()){
 //							Vote currVote = v.getValue();
@@ -455,7 +455,7 @@
 //			String memberList = in.readLine ();
 //			String memberId = in.readLine();
 //			id = Long.parseLong(memberId);
-//			LOG.info("MemberID received:"+ id);
+//			LOG.debug("MemberID received:"+ id);
 //			//process memberlist
 //
 //			this.properties.setId(id);

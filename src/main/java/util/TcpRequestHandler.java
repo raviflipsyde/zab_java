@@ -31,11 +31,11 @@ public class TcpRequestHandler implements Runnable {
 
 			String request = in.readLine();
 			
-			LOG.info("Received: "+ request);
+			LOG.debug("Received: "+ request);
 			
 			String output = processRequest(request);
 			
-			LOG.info("Sending response:"+ output);
+			LOG.debug("Sending response:"+ output);
 			
 			out.println(output+"\r\n");
 			out.flush();

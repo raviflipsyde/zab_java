@@ -47,7 +47,7 @@
 //            // Bind and start to accept incoming connections.
 //            ChannelFuture f = b.bind(port).sync(); // (7)
 //            
-//            LOG.info("Netty server started on port:"+port);
+//            LOG.debug("Netty server started on port:"+port);
 //            
 //            // Wait until the server socket is closed.
 //            // In this example, this does not happen, but you can do that to gracefully

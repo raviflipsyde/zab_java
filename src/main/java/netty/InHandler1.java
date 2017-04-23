@@ -49,9 +49,9 @@
 //
 //		ByteBuf in = (ByteBuf) msg;
 //		String requestMsg  =in.toString(StandardCharsets.UTF_8 );
-//		LOG.info("Channel Read:" + requestMsg);
+//		LOG.debug("Channel Read:" + requestMsg);
 //		String response = handleClientRequest(requestMsg);
-//		LOG.info("response:" + response);
+//		LOG.debug("response:" + response);
 //		if(response.length()>0){
 //			ctx.write(Unpooled.copiedBuffer(response+"\r\n", StandardCharsets.UTF_8));
 //			ctx.flush(); // (2)
@@ -65,12 +65,12 @@
 //	public void channelRegistered(ChannelHandlerContext ctx) throws Exception {
 //
 //		super.channelRegistered(ctx);
-//		LOG.info("Channel Registered: "+ctx.channel().localAddress() + ":" + ctx.channel().remoteAddress());
+//		LOG.debug("Channel Registered: "+ctx.channel().localAddress() + ":" + ctx.channel().remoteAddress());
 //	}
 //
 //
 //	private String handleClientRequest(String requestMsg) {
-//		//		LOG.info("handleClientRequest:"+requestMsg);
+//		//		LOG.debug("handleClientRequest:"+requestMsg);
 //
 //		if(requestMsg.contains("JOIN_GROUP:")){
 //			//add the ip:port to the group member list;
@@ -81,7 +81,7 @@
 //			InetSocketAddress addr = new InetSocketAddress(arr[1].trim(), Integer.parseInt(arr[2].trim()));
 //			server.addMemberToList(addr);
 //
-//			LOG.info(server.getMemberListString());
+//			LOG.debug(server.getMemberListString());
 //
 //			return "OK";
 //		}
@@ -96,7 +96,7 @@
 //			NodeServerProperties serverProp = server.getProperties();
 //			if(serverProp.getNodestate() == NodeServerProperties.State.ELECTION){
 //				MpscArrayQueue<Notification> currentElectionQueue = server.electionQueue123;
-//				LOG.info("Before:"+currentElectionQueue.currentProducerIndex());
+//				LOG.debug("Before:"+currentElectionQueue.currentProducerIndex());
 //				currentElectionQueue.offer(responseNotification);
 //				synchronized (currentElectionQueue) {
 //					currentElectionQueue.notify();
@@ -107,7 +107,7 @@
 //						e.printStackTrace();
 //					}
 //				}
-//				LOG.info("After:"+currentElectionQueue.currentProducerIndex());
+//				LOG.debug("After:"+currentElectionQueue.currentProducerIndex());
 //
 //				if(responseNotification.getSenderState() == NodeServerProperties.State.ELECTION
 //						&& responseNotification.getSenderRound() < serverProp.getElectionRound()){
@@ -125,7 +125,7 @@
 //					Vote myVote = serverProp.getMyVote();
 //
 //					Notification myNotification = new Notification(myVote, serverProp.getElectionRound(), serverProp.getId(), serverProp.getNodestate());
-//					LOG.info("myNotification:"+myNotification);
+//					LOG.debug("myNotification:"+myNotification);
 //					return("SNOTIFICATION:"+myNotification.toString());
 //
 //				}
@@ -147,7 +147,7 @@
 //			NodeServerProperties serverProp = server.getProperties();
 //			if(serverProp.getNodestate() == NodeServerProperties.State.ELECTION){
 //				MpscArrayQueue<Notification> currentElectionQueue = server.electionQueue123;
-//				LOG.info("Before:"+currentElectionQueue.currentProducerIndex());
+//				LOG.debug("Before:"+currentElectionQueue.currentProducerIndex());
 //				currentElectionQueue.offer(responseNotification);
 //				synchronized (currentElectionQueue) {
 //					currentElectionQueue.notify();
@@ -158,14 +158,14 @@
 //						e.printStackTrace();
 //					}
 //				}
-//				LOG.info("After:"+currentElectionQueue.currentProducerIndex());
+//				LOG.debug("After:"+currentElectionQueue.currentProducerIndex());
 //
 //
 //			}
 //			
 //
 //
-//			LOG.info(server.getMemberListString());
+//			LOG.debug(server.getMemberListString());
 //			return("ERROR");
 //
 //		}
@@ -178,8 +178,8 @@
 //			//			
 //			//			InetSocketAddress addr = new InetSocketAddress(arr[1].trim(), Integer.parseInt(arr[2].trim()));
 //			//			server.addMemberToList(addr);
-//			LOG.info("Client rreceived OK!!");
-//			LOG.info(server.getMemberList());
+//			LOG.debug("Client rreceived OK!!");
+//			LOG.debug(server.getMemberList());
 //
 //			return "";
 //		}
