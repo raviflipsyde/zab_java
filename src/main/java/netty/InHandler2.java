@@ -2,7 +2,10 @@ package netty;
 
 import java.net.InetSocketAddress;
 import java.nio.charset.StandardCharsets;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Map;
+import java.util.Properties;
 import java.util.concurrent.ConcurrentHashMap;
 
 import org.apache.logging.log4j.LogManager;
@@ -285,10 +288,14 @@ public class InHandler2 extends ChannelInboundHandlerAdapter { // (1)
 			if (leaderLastCommittedZxid.getEpoch() == followerLastCommittedZxid.getEpoch()){
 
 				if (followerLastCommittedZxid.getCounter() < leaderLastCommittedZxid.getCounter()){
-
 					// TODO: Send DIFF message
+					String diffMsg = "";
+					List<String> logList= FileOps.getDiffResponse(properties, followerLastCommittedZxid);
 
-					this.nettyClientInhandler.sendMessage(memberList.get(nodeId).getHostName(), memberList.get(nodeId).getPort(), "DIFF");
+					diffMsg = "DIFF:" + logList;
+
+					this.nettyClientInhandler.sendMessage(memberList.get(nodeId).getHostName(),
+							memberList.get(nodeId).getPort(), diffMsg);
 
 
 					// TODO: Iterate through CommitHistory (refer readHistory()), stringify and send
@@ -305,7 +312,8 @@ public class InHandler2 extends ChannelInboundHandlerAdapter { // (1)
 			} else if (followerLastCommittedZxid.getEpoch() < leaderLastCommittedZxid.getEpoch()){
 
 				// TODO: Send SNAP message
-				this.nettyClientInhandler.sendMessage(memberList.get(nodeId).getHostName(), memberList.get(nodeId).getPort(), "SNAP");
+				String snapmsg = "SNAP:" + properties.getDataMap();
+				this.nettyClientInhandler.sendMessage(memberList.get(nodeId).getHostName(), memberList.get(nodeId).getPort(), snapmsg);
 
 				// TODO: Iterate through the Map, stringify each entry and then send
 
@@ -322,18 +330,60 @@ public class InHandler2 extends ChannelInboundHandlerAdapter { // (1)
 
 		if (requestMsg.contains("DIFF")){
 			LOG.info("DIFF message received");
+
+			String[] decodedDiff = requestMsg.split(":");
+			LOG.info("Diff decoded is = " + decodedDiff[0] + "	" + decodedDiff[1]);
+			//REmove all brackets and split on multiple spaces
+			String[] diff = decodedDiff[1].replaceAll("\\[", "").replaceAll("\\]", "").split(", ");
+
+			for (int i = 0; i < diff.length; i++){
+				//Remove last comma
+				diff[i] = diff[i].trim();
+				if (diff[i].length() == 0) break;
+				LOG.info("Diff i = " + i + " Diff[i] = " + diff[i]);
+				String[] proposalArr = diff[i].split(",");
+				long epoch = Long.parseLong(proposalArr[0].trim());
+				long counter = Long.parseLong(proposalArr[1].trim());
+				String key = proposalArr[2].trim();
+				String value = proposalArr[3].trim();
+				ZxId zxid = new ZxId(epoch, counter);
+				Proposal pro = new Proposal(zxid, key, value);
+				//If it doesn't exist, create one.
+				String resp = FileOps.appendTransaction("CommitedHistory_" + properties.getNodePort() + ".log", pro.toString());
+				Properties dataMap = properties.getDataMap();
+				//this.properties.getSynData().getCommitQueue().offer(pro);
+				dataMap.put(key, value);
+			}
+
 			LOG.info("Follower ready for Broadcast");
-			return "ACKACTION:" + this.properties.getNodeId();
+			return "READY:" + this.properties.getNodeId();
 		}
 
 		if (requestMsg.contains("SNAP")){
-			LOG.info("SNAP message received");
+			Properties datamap = properties.getDataMap();
+			datamap.clear();
+			LOG.info("SNAP message received = " + requestMsg);
+			String[] decodedSnap = requestMsg.split(":");
+			LOG.info("Snap decoded is = " + decodedSnap[0] + "	" + decodedSnap[1]);
+			String[] snap = decodedSnap[1].replaceAll("\\{", "").replaceAll("\\}", "").split(", ");
+			for (int i = 0; i < snap.length; i++){
+				snap[i] = snap[i].trim();
+				if (snap[i].length() == 0) break;
+				LOG.info("Snap i = " + i + " Snap[i] = " + snap[i]);
+				String[] datamapEntryArr = snap[i].split("=");
+
+				String key = datamapEntryArr[0].trim();
+				String value = datamapEntryArr[1].trim();
+				LOG.info("Key is = " + key);
+				LOG.info("Value is = " + value);
+				datamap.put(key, value);
+			}
+			LOG.info("Updated datamap = " + properties.getDataMap());
 			LOG.info("Follower ready for Broadcast");
-			return "ACKACTION:" + this.properties.getNodeId();
+			return "READY:" + this.properties.getNodeId();
 		}
 
-		if (requestMsg.contains("ACKACTION")){
-
+		if (requestMsg.contains("READY")){
 			properties.getSynData().incrementQuorumCount();
 		}
 

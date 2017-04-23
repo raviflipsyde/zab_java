@@ -10,13 +10,11 @@ import java.io.PrintWriter;
 import java.net.InetSocketAddress;
 import java.net.Socket;
 import java.net.UnknownHostException;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 import java.util.Map.Entry;
-import java.util.Queue;
+
 import io.netty.util.internal.shaded.org.jctools.queues.MpscArrayQueue;
-import java.util.HashMap;
+
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.atomic.AtomicInteger;
 import java.util.concurrent.atomic.AtomicLong;
@@ -292,8 +290,6 @@ public class NodeServer1 {
 
 		this.properties.getElectionQueue().clear();
 
-
-
 		return this.properties.getMyVote();
 //		
 	}
@@ -514,9 +510,6 @@ public class NodeServer1 {
 			e.printStackTrace();
 		}
 
-//
-//		
-//
 //		this.udpClientThread = new Thread(new UdpClient1(properties));
 //		this.udpClientThread.setPriority(Thread.MIN_PRIORITY);
 //		this.udpClientThread.start();
@@ -525,6 +518,8 @@ public class NodeServer1 {
 		joinGroup();
 
 		//readHistory();
+		FileOps.fillDataInProperties(properties);
+//		Properties datamap = this.properties.getDataMap();
 		String readLastLog = FileOps.readLastLog(properties);
 		String[] lastLogArr = readLastLog.split(",");
 		long epoch = Long.parseLong(lastLogArr[0].trim());
@@ -596,9 +591,6 @@ public class NodeServer1 {
 				this.udpClientThread.setPriority(Thread.MIN_PRIORITY);
 				this.udpClientThread.setUncaughtExceptionHandler(h);
 				this.udpClientThread.start();
-				
-				
-				
 			}
 		}
 
@@ -645,17 +637,14 @@ public class NodeServer1 {
 			this.properties.setNodeId(id);
 
 			parseMemberList(memberList);
-			
-			
+
 			out.close();
 			in.close();
 			socket.close();
 
 		} catch (UnknownHostException e) {
-
 			e.printStackTrace();
 		} catch (IOException e) {
-
 			e.printStackTrace();
 		}
 
