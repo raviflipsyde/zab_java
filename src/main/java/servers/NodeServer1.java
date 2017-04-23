@@ -359,10 +359,11 @@ public class NodeServer1 {
 			this.properties.setNewEpoch(max + 1);
 
 			synchronized (acceptedEpochMap) {
+				this.properties.getSynData().setNewEpochFlag(true);
 				acceptedEpochMap.notifyAll();
 			}
 
-			this.properties.getSynData().setNewEpochFlag(true);
+			
 
 			// String leaderLastLog = FileOps.readLastLog(properties);
 			// String[] arr = leaderLastLog.split(",");
@@ -551,7 +552,9 @@ public class NodeServer1 {
 
 	public void init() {
 		LOG.info("Starting the Node server");
-
+		
+		this.nettyClient = new NettyClient1(properties);
+		
 		msgBootstrap();
 
 		for (Entry<Long, InetSocketAddress> entry : properties.getMemberList().entrySet()) {
@@ -574,7 +577,7 @@ public class NodeServer1 {
 		// this.udpClientThread.setPriority(Thread.MIN_PRIORITY);
 		// this.udpClientThread.start();
 
-		this.nettyClient = new NettyClient1(properties);
+		
 
 		joinGroup();
 

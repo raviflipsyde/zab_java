@@ -81,10 +81,14 @@ public class NettyClient1 {
 			SocketAddress remoteAddress = new InetSocketAddress(ip, port);
 
 			ChannelFuture f = b.connect(remoteAddress).sync();
-			Channel ch = f.channel();
+			final Channel ch = f.channel();
 			ChannelFuture lastWriteFuture = ch
 					.writeAndFlush(Unpooled.copiedBuffer(msg + "\r\n", StandardCharsets.UTF_8));
-//			lastWriteFuture.channel().closeFuture().sync();
+
+			lastWriteFuture.channel().closeFuture().sync();
+			ch.closeFuture().sync();
+			
+			
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();

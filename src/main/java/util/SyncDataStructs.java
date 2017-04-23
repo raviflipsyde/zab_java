@@ -18,17 +18,17 @@ import servers.ZxId;
 public class SyncDataStructs {
 
 	private static SyncDataStructs instance = null;
-	private MpscArrayQueue<Notification> electionQueue = null;
+	private volatile MpscArrayQueue<Notification> electionQueue = null;
 	private List<InetSocketAddress> memberList = null;
-	private ConcurrentHashMap<Long, Long> acceptedEpochMap = null;
-	private ConcurrentHashMap<Long, ZxId> currentEpochMap = null;
+	private volatile ConcurrentHashMap<Long, Long> acceptedEpochMap = null;
+	private volatile ConcurrentHashMap<Long, ZxId> currentEpochMap = null;
 	//ConcurrentHashMap<Long, InetSocketAddress> quorum = null;
 	//private MpscArrayQueue<Proposal> proposeQueue = null; //Request Queue with each node
 
 	//private MpscArrayQueue<Proposal> commitQueue = null;
 	private Vote myVote;
 	private long newEpoch;
-	private boolean newEpochFlag;
+	private volatile boolean newEpochFlag;
 	private AtomicInteger quorumCount;
 
 	//used during broadcast

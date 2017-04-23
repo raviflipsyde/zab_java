@@ -51,8 +51,9 @@ public class InHandler2 extends ChannelInboundHandlerAdapter { // (1)
 		if(response.length()>0){
 			ctx.write(Unpooled.copiedBuffer(response+"\r\n", StandardCharsets.UTF_8));
 			ctx.flush(); // (2)
-			ctx.close();
+			
 		}
+		ctx.close();
 	}
 
 	@Override
@@ -367,15 +368,17 @@ public class InHandler2 extends ChannelInboundHandlerAdapter { // (1)
 
 			ConcurrentHashMap<Long, Long> acceptedEpochMap = this.properties.getSynData().getAcceptedEpochMap();
 			//ConcurrentHashMap<Long, ZxId> currentEpochMap = properties.getSynData().getCurrentEpochMap();
-
-			acceptedEpochMap.put(nodeId, acceptedEpoch);
+			
+			synchronized (acceptedEpochMap){
+				acceptedEpochMap.put(nodeId, acceptedEpoch);
+			}
 			//currentEpochMap.put(nodeId, followerLastCommittedZxid);
 
 			if (acceptedEpochMap.size() < (this.properties.getMemberList().size() / 2) ){
 				synchronized (acceptedEpochMap){
 					try {
-						acceptedEpochMap.wait();
-						Thread.sleep(10);
+						acceptedEpochMap.wait(100);
+						
 					} catch (InterruptedException e){
 						e.printStackTrace();
 					}
@@ -384,7 +387,7 @@ public class InHandler2 extends ChannelInboundHandlerAdapter { // (1)
 
 			while (!this.properties.getSynData().isNewEpochFlag()){
 				try {
-					Thread.sleep(10);
+					Thread.sleep(100);
 				} catch (InterruptedException e){
 					e.printStackTrace();
 				}
@@ -569,7 +572,10 @@ public class InHandler2 extends ChannelInboundHandlerAdapter { // (1)
 	@Override
 	public void exceptionCaught(ChannelHandlerContext ctx, Throwable cause) { // (4)
 		// Close the connection when an exception is raised.
-		cause.printStackTrace();
+//		cause.printStackTrace();
+		LOG.error("Context Name:"+ ctx.name());
+		LOG.error("Context :"+ ctx.toString());
+		LOG.error(cause.getMessage());
 		ctx.close();
 	}
 
