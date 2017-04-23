@@ -76,6 +76,4 @@ public class Proposal {
 			return false;
 		return true;
 	}
-	
-	
 }
