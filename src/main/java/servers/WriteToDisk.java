@@ -30,7 +30,7 @@ public class WriteToDisk implements Runnable {
 				for(Object entry: committedtransactions){
 					LOG.info("WriteToDisk: Writing transactions to Transaction log:");
 					String entry_commit_history = entry.toString();
-					String fileName = "TestReplication_" + properties.getNodePort() + ".log";
+					String fileName = "CommitedHistory_" + properties.getNodePort() + ".log";
 					FileOps.appendTransaction(fileName,entry_commit_history);
 					
 					//Write to in-memory datamap
