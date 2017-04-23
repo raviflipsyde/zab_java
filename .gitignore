@@ -200,6 +200,7 @@ $RECYCLE.BIN/
 *.lnk
 
 */target/**
+target/*
 
 members.txt
 logfile.log
