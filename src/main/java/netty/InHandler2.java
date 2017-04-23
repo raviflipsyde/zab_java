@@ -82,12 +82,16 @@ public class InHandler2 extends ChannelInboundHandlerAdapter { // (1)
 				//Key-value pair to be proposed
 				String key = arr[1].trim();
 				String value = arr[2].trim();
-				long epoch = 3;//this.properties.getAcceptedEpoch()
-				long counter = 4;//this.getCounter()++;
+				long epoch = this.properties.getAcceptedEpoch();
+				synchronized(new Long(properties.getCounter())){
+					long counter = this.properties.getCounter();
+					counter++;
+					this.properties.setCounter(counter);
+				}
 			
 				
 				//Form a proposal
-				ZxId z = new ZxId(epoch, counter);
+				ZxId z = new ZxId(epoch, this.properties.getCounter());
 				Proposal p = new Proposal(z, key, value);
 				String proposal = "PROPOSE:" + p.toString();
 				

@@ -42,25 +42,27 @@ public class MonitorProposeQueue implements Runnable {
 					SortedSet<Proposal> committedtransactions = nodeserverproperties.getSynData().getCommittedTransactions();
 					committedtransactions.add(entry.getKey());
 					
-					int count = 0;
-					int maxTries = 3;
-					while(true) {
-					    try {
-					    	//Adding the entry to remove Queue
-							removeMap.put(entry.getKey(), entry.getValue());
-							
-							// break out of loop, or return, on success
-							break;  
-					    } catch (ConcurrentModificationException e) {
-					        try {
-								Thread.sleep(100);
-							} catch (InterruptedException e1) {
-								
-								e1.printStackTrace();
-							}
-					        if (++count == maxTries) throw e;
-					    }
-					}
+					//Putting in removemap and deleting later to avoid concurrent modification exception
+					removeMap.put(entry.getKey(), entry.getValue());
+//					int count = 0;
+//					int maxTries = 3;
+//					while(true) {
+//					    try {
+//					    	//Adding the entry to remove Queue
+//							removeMap.put(entry.getKey(), entry.getValue());
+//							
+//							// break out of loop, or return, on success
+//							break;  
+//					    } catch (ConcurrentModificationException e) {
+//					        try {
+//								Thread.sleep(500);
+//							} catch (InterruptedException e1) {
+//								
+//								e1.printStackTrace();
+//							}
+//					        if (++count == maxTries) throw e;
+//					    }
+//					}
 					
 				}
 			}	
@@ -76,7 +78,7 @@ public class MonitorProposeQueue implements Runnable {
 			
 			try {
 				//TODO: Decide how long to wait
-				Thread.sleep(1000);
+				Thread.sleep(500);
 			} catch (InterruptedException e) {
 				
 				e.printStackTrace();

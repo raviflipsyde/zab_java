@@ -1,16 +1,9 @@
 package servers;
 
-import java.util.Comparator;
-import java.util.SortedSet;
-import java.util.TreeSet;
-
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
-
+import java.util.SortedSet;
 import util.FileOps;
-
-//import netty.NettyClient1;
-//import servers.NodeServerProperties1.State;
 
 public class WriteToDisk implements Runnable {
 
@@ -32,7 +25,7 @@ public class WriteToDisk implements Runnable {
 			SortedSet<Proposal> committedtransactions = properties.getSynData().getCommittedTransactions();
 			synchronized (committedtransactions) {
 				for(Object entry: committedtransactions){
-					LOG.info("WriteToDisk: Writing transactions to Transaction log");
+					LOG.info("WriteToDisk: Writing transactions to Transaction log:");
 					String s = entry.toString();
 					String fileName = "TestReplication_" + properties.getNodePort() + ".log";
 					FileOps.appendTransaction(fileName,s);

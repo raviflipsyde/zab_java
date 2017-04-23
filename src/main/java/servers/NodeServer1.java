@@ -549,6 +549,8 @@ public class NodeServer1 {
 		LOG.info("Mocking the data for testing broadcast...!!");
 		InetSocketAddress leaderAddress = new InetSocketAddress("localhost", 9001);
 		this.properties.setLeaderAddress(leaderAddress);
+		this.properties.setAcceptedEpoch(3);
+		this.properties.setCounter(1);
 		
 		if(this.properties.getNodePort() == 9001){
 			this.properties.setLeader(true);
