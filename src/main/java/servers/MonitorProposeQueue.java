@@ -14,21 +14,22 @@ public class MonitorProposeQueue implements Runnable {
 	private NodeServer1 nodeserver;
 	
 	private static final Logger LOG = LogManager.getLogger(MonitorProposeQueue.class);
+	private volatile boolean running;
 	
 	public MonitorProposeQueue(NodeServerProperties1 nodeServerProperties1, NodeServer1 nodeServer) {
 		this.nodeserverproperties = nodeServerProperties1;
 		this.nodeserver =  nodeServer;
+		this.running = true;
 
 	}
+
 
 	public void run() {
 			
 		LOG.info("Run method for MonitorProposeQueue");
-		
-		
 		ConcurrentHashMap<Proposal, AtomicInteger> proposedtransactions = this.nodeserverproperties.getSynData().getProposedTransactions();
 
-		while(nodeserverproperties.getNodestate() == NodeServerProperties1.State.LEADING){
+		while(nodeserverproperties.getNodestate() == NodeServerProperties1.State.LEADING && running == true){
 			ConcurrentHashMap<Proposal, AtomicInteger> removeMap = new ConcurrentHashMap<Proposal, AtomicInteger>();
 			for( Entry<Proposal,AtomicInteger> entry: proposedtransactions.entrySet()){
 				

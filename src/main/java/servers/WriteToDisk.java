@@ -10,6 +10,7 @@ public class WriteToDisk implements Runnable {
 	private NodeServerProperties1 properties;
 	
 	private static final Logger LOG = LogManager.getLogger(WriteToDisk.class);
+	private volatile boolean running = true;
 	
 	public WriteToDisk(NodeServerProperties1 nodeProperties) {
 
@@ -19,7 +20,7 @@ public class WriteToDisk implements Runnable {
 	public void run() {
 		LOG.info("Run method for WriteToDisk thread");
 		LOG.info("Node is in " + properties.getNodestate().toString() + " state");
-		while( properties.getNodestate() != NodeServerProperties1.State.ELECTION){
+		while( properties.getNodestate() != NodeServerProperties1.State.ELECTION && running == true){
 			
 			//flush the committed transactions set
 			SortedSet<Proposal> committedtransactions = properties.getSynData().getCommittedTransactions();

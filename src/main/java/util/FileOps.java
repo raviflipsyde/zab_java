@@ -22,21 +22,35 @@ public class FileOps {
 	//write a function to write the line into the CommitedHistory file
 	public static String appendTransaction(String fileName, String transaction){
 
+		FileWriter fileWriter = null;
+		BufferedWriter bufferedWriter = null;
 		try {
-			FileWriter fileWriter = new FileWriter(fileName,true);
-			BufferedWriter bufferedWriter = new BufferedWriter(fileWriter);
+			fileWriter = new FileWriter(fileName,true);
+			bufferedWriter = new BufferedWriter(fileWriter);
 
 			bufferedWriter.write(transaction);
 			bufferedWriter.newLine();
 			bufferedWriter.flush();
 			bufferedWriter.close();
-
+			
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 			return "appendTransaction:Error";
 		}
-
+		
+		finally {
+			try {
+				bufferedWriter.close();
+				fileWriter.close();
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			
+			
+		}
+		
 		return "appendTransaction:Success";
 	}
 
