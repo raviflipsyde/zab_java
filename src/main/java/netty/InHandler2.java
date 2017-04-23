@@ -65,7 +65,23 @@ public class InHandler2 extends ChannelInboundHandlerAdapter { // (1)
 
 	private String handleClientRequest(String requestMsg) {
 		//		LOG.info("handleClientRequest:"+requestMsg);
-
+		
+		if(requestMsg.contains("READ:")){
+			LOG.info("Node ID:" + this.properties.getNodeId() + "received Read() request from client");
+			String[] arr = requestMsg.split(":");
+			String key = arr[1].trim();
+			Properties properties = this.properties.getDataMap();
+			if(properties.containsKey(key)){
+				String value = properties.getProperty(key);
+				LOG.info("Returning from local replica: Reply:" + key + value);
+				return value;
+			}
+			else{
+				return "READ ERROR: No result for key:" + key;
+			}
+				
+		}
+		
 		if(requestMsg.contains("WRITE:")){
 			if(!properties.isLeader()){ //follower
 				//Forward write request to the leader
