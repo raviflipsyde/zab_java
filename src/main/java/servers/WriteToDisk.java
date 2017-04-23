@@ -2,6 +2,8 @@ package servers;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
+
+import java.util.Properties;
 import java.util.SortedSet;
 import util.FileOps;
 
@@ -27,13 +29,25 @@ public class WriteToDisk implements Runnable {
 			synchronized (committedtransactions) {
 				for(Object entry: committedtransactions){
 					LOG.info("WriteToDisk: Writing transactions to Transaction log:");
-					String s = entry.toString();
+					String entry_commit_history = entry.toString();
 					String fileName = "TestReplication_" + properties.getNodePort() + ".log";
-					FileOps.appendTransaction(fileName,s);
+					FileOps.appendTransaction(fileName,entry_commit_history);
 					
-					//TODO: Write to datamap
+					//Write to in-memory datamap
+					String[] arr = entry_commit_history.split(":");
+					//Long epoch = Long.parseLong(arr[1].trim());
+					//Long counter = Long.parseLong(arr[2].trim());
+
+					String key = arr[3].trim();
+					String value = arr[4].trim();
+
+					
+					Properties datamap = properties.getDataMap();
+					datamap.setProperty(key, value);
 				}
 				
+				//Writing datamap to the properties file all at once
+				FileOps.writeDataMap(properties);
 				committedtransactions.clear();
 				
 			}

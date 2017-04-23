@@ -8,20 +8,18 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.nio.charset.Charset;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
-//import java.util.Map;
+
 import java.util.Properties;
 
 import org.apache.commons.io.input.ReversedLinesFileReader;
-
 import servers.NodeServerProperties1;
 import servers.ZxId;
 
 public class FileOps {
 
-	// write a function to write the line into the CommitedHistory file
-
-
+	//function to append transaction at the end of committed history or datamap properties file
 	public static String appendTransaction(String fileName, String transaction){
 		
 		FileWriter fileWriter = null;
@@ -60,6 +58,30 @@ public class FileOps {
 	}
 
 
+	public static void writeDataMap(NodeServerProperties1 properties){
+		
+		String fileName = "datamap_" + properties.getNodePort() + ".properties";
+
+		Properties dataMap = properties.getDataMap();
+		
+		try {
+
+			FileWriter filewriter = new FileWriter(fileName);
+			Date date = new Date();
+			dataMap.store(filewriter, date.toString());
+			
+			filewriter.close();
+			
+		} catch (FileNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+
+	}
+	
 
 	public static Properties readDataMap(NodeServerProperties1 properties) {
 
@@ -104,10 +126,10 @@ public class FileOps {
 		String ret = null;
 		String fileName = "CommitedHistory_" + properties.getNodePort() + ".log";
 		File file = new File(fileName);
-		long epoch;
-		long counter;
-		String key;
-		String value;
+//		long epoch;
+//		long counter;
+//		String key;
+//		String value;
 
 		try {
 			ReversedLinesFileReader reveFileReader = new ReversedLinesFileReader(file, Charset.defaultCharset());

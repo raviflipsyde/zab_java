@@ -317,7 +317,7 @@ public class NodeServer1 {
 
 		if (this.properties.isLeader() == true) {
 			// Leader
-			LOG.info("I am Leader");
+			LOG.info("I am the Leader");
 
 			ConcurrentHashMap<Long, Long> acceptedEpochMap = this.properties.getSynData().getAcceptedEpochMap();
 
@@ -337,6 +337,7 @@ public class NodeServer1 {
 			}
 
 			LOG.info("Member List size after while is = " + properties.getMemberList().size());
+			
 			LOG.info("Accepted Epoch Map Size after while is = " + acceptedEpochMap.size());
 
 			long max = this.properties.getAcceptedEpoch();
@@ -544,12 +545,12 @@ public class NodeServer1 {
 	}
 
 	public void init() {
-		LOG.info("Starting the Node server");
+		LOG.info("Init():Starting the Node server");
 
 		msgBootstrap();
 
 		for (Entry<Long, InetSocketAddress> entry : properties.getMemberList().entrySet()) {
-			LOG.info(entry.getKey() + ":::" + entry.getValue().getHostName() + ":" + entry.getValue().getPort());
+			LOG.info(entry.getKey() + "::" + entry.getValue().getHostName() + ":" + entry.getValue().getPort());
 		}
 
 		LOG.info("\n**ID for this node is :" + properties.getNodeId());
@@ -563,10 +564,6 @@ public class NodeServer1 {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-
-		// this.udpClientThread = new Thread(new UdpClient1(properties));
-		// this.udpClientThread.setPriority(Thread.MIN_PRIORITY);
-		// this.udpClientThread.start();
 
 		this.nettyClient = new NettyClient1(properties);
 
@@ -670,6 +667,7 @@ public class NodeServer1 {
 	// //startBroadcast();
 	// }
 
+	//Used to unit test mockData
 	public void mockData() {
 		LOG.info("Mocking the data for testing broadcast...!!");
 		InetSocketAddress leaderAddress = new InetSocketAddress("localhost", 9001);
