@@ -358,6 +358,14 @@ public class InHandler2 extends ChannelInboundHandlerAdapter { // (1)
 
 		if (requestMsg.contains("FOLLOWERINFO")){
 			LOG.debug("Request msg is = " + requestMsg);
+			while(properties.getNodestate() == NodeServerProperties1.State.ELECTION){
+				try {
+					Thread.sleep(500);
+				} catch (InterruptedException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+			}
 			String[] accEpoch = requestMsg.split(":");
 			long nodeId = Long.parseLong(accEpoch[1].trim());
 			long acceptedEpoch = Long.parseLong(accEpoch[2].trim());
