@@ -13,7 +13,7 @@
     <Loggers>
         <Logger name="com.memorynotfound" level="debug"/>
 
-        <Root level="debug">
+        <Root level="info">
             <AppenderRef ref="STDOUT"/>
             <AppenderRef ref="FILE"/>
         </Root>
