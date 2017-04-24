@@ -557,9 +557,7 @@ public class NodeServer1 {
 			threadWriteToDisk.setPriority(Thread.MIN_PRIORITY);
 			threadWriteToDisk.start();
 		}
-		else{
-			changePhase();
-		}
+		
 		
 		while(properties.getNodestate() != NodeServerProperties1.State.ELECTION){
 			try {
@@ -726,7 +724,7 @@ public class NodeServer1 {
 				LOG.debug(th.getName());
 				LOG.debug(th.getId());
 				LOG.debug(ex.getMessage());
-				changePhase();
+				
 				System.out.println("Uncaught exception: " + ex);
 
 			}
