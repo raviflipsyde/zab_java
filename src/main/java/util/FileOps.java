@@ -49,7 +49,11 @@ public class FileOps {
 			String key = arr[2].trim();
 			String value = arr[3].trim();
 			
+			
 			properties.getDataMap().put(key, value);
+			LOG.debug("Transaction received-"+ transaction);
+			LOG.debug("Adding to PropertiesMap-"+ key + ":" + value);
+			
 			properties.setLastZxId(new ZxId(epoch, counter));
 			
 
