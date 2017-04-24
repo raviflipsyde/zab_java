@@ -32,8 +32,8 @@ public class WriteToDisk implements Runnable {
 					String entry_commit_history = entry.toString();
 					LOG.debug("entry_commit_history:"+ entry_commit_history);
 					
-					String fileName = "CommitedHistory_" + properties.getNodePort() + ".log";
-					FileOps.appendTransaction(fileName,entry_commit_history);
+					
+					FileOps.appendTransaction(properties,entry_commit_history);
 					
 					//TODO: Write to datamap
 					String[] arr = entry_commit_history.split(":");

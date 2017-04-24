@@ -543,7 +543,7 @@ public class InHandler2 extends ChannelInboundHandlerAdapter { // (1)
 				ZxId zxid = new ZxId(epoch, counter);
 				Proposal pro = new Proposal(zxid, key, value);
 				//If it doesn't exist, create one.
-				String resp = FileOps.appendTransaction("CommitedHistory_" + properties.getNodePort() + ".log", pro.toString());
+				String resp = FileOps.appendTransaction(properties, pro.toString());
 				Properties dataMap = properties.getDataMap();
 				//this.properties.getSynData().getCommitQueue().offer(pro);
 				dataMap.put(key, value);

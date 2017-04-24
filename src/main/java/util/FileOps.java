@@ -23,12 +23,14 @@ public class FileOps {
 	// write a function to write the line into the CommitedHistory file
 
 
-	public static String appendTransaction(String fileName, String transaction){
+	public static String appendTransaction(NodeServerProperties1 properties,String transaction) {
 		
+		String fileName = "CommitedHistory_" + properties.getNodePort() + ".log";
 		FileWriter fileWriter = null;
 		BufferedWriter bufferedWriter = null;
 		try {
 			transaction = transaction.replaceAll(":", ",");
+			
 			fileWriter = new FileWriter(fileName,true);
 			bufferedWriter = new BufferedWriter(fileWriter);
 			bufferedWriter.newLine();
@@ -36,7 +38,12 @@ public class FileOps {
 
 			bufferedWriter.flush();
 			bufferedWriter.close();
-
+			
+			String[] arr = transaction.split(",");
+			long epoch = Long.parseLong(arr[0].trim());
+			long counter = Long.parseLong(arr[1].trim());
+			properties.setLastZxId(new ZxId(epoch, counter));
+			
 
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
