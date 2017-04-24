@@ -262,7 +262,7 @@ public class InHandler2 extends ChannelInboundHandlerAdapter { // (1)
 			if(properties.getNodestate() == NodeServerProperties1.State.ELECTION){
 				
 				MpscArrayQueue<Notification> currentElectionQueue = properties.getSynData().getElectionQueue();
-				LOG.debug("Before:"+currentElectionQueue.currentProducerIndex());
+				LOG.debug("Before:"+currentElectionQueue.size());
 				LOG.debug("adding notification to the queue"+ responseNotification.toString());
 				currentElectionQueue.offer(responseNotification);
 				
@@ -274,7 +274,7 @@ public class InHandler2 extends ChannelInboundHandlerAdapter { // (1)
 						e.printStackTrace();
 					}
 				
-				LOG.debug("After:"+currentElectionQueue.currentProducerIndex());
+				LOG.debug("After:"+currentElectionQueue.size());
 				LOG.debug("NODE is in STATE: "+ properties.getNodestate());
 				LOG.debug("My Election ROUND: "+ properties.getElectionRound());
 				LOG.debug("his Election ROUND: "+ responseNotification.getSenderRound());
@@ -318,7 +318,7 @@ public class InHandler2 extends ChannelInboundHandlerAdapter { // (1)
 			if(properties.getNodestate() == NodeServerProperties1.State.ELECTION){
 				MpscArrayQueue<Notification> currentElectionQueue = properties.getSynData().getElectionQueue();
 				
-				LOG.debug("Before:"+currentElectionQueue.currentProducerIndex());
+				LOG.debug("Before:"+currentElectionQueue.size());
 				currentElectionQueue.offer(responseNotification);
 				
 					try {
@@ -330,7 +330,7 @@ public class InHandler2 extends ChannelInboundHandlerAdapter { // (1)
 						e.printStackTrace();
 					}
 			
-				LOG.debug("After:"+currentElectionQueue.currentProducerIndex());
+				LOG.debug("After:"+currentElectionQueue.size());
 
 
 			}

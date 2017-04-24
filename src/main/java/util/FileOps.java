@@ -79,7 +79,8 @@ public static void writeDataMap(NodeServerProperties1 properties){
 
 			FileWriter filewriter = new FileWriter(fileName);
 			Date date = new Date();
-			dataMap.store(filewriter, date.toString());
+			
+			dataMap.store(filewriter,null);
 			
 			filewriter.close();
 			

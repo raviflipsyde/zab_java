@@ -59,7 +59,7 @@ public class NodeServer1 {
 		HashMap<Long, Vote> OutOfElectionVotes = new HashMap<Long, Vote>();
 		HashMap<Long, Long> OutOfElectionVotesRound = new HashMap<Long, Long>();
 		MpscArrayQueue<Notification> currentElectionQueue = properties.getSynData().getElectionQueue();
-		currentElectionQueue.clear();
+		
 		Vote myVote = new Vote(this.properties.getLastZxId(), this.properties.getNodeId());
 
 		long limit_timeout = 20000;
