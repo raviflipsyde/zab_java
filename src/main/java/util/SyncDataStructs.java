@@ -6,6 +6,7 @@ import java.util.List;
 import java.util.SortedSet;
 import java.util.TreeSet;
 import java.util.concurrent.ConcurrentHashMap;
+import java.util.concurrent.ConcurrentSkipListSet;
 import java.util.concurrent.CopyOnWriteArrayList;
 import java.util.concurrent.atomic.AtomicInteger;
 
@@ -56,7 +57,7 @@ public class SyncDataStructs {
 
 		newEpochFlag = false;
 		proposedTransactions = new ConcurrentHashMap<Proposal, AtomicInteger>();
-		committedTransactions = new TreeSet<Proposal>(comparator);
+		committedTransactions = new ConcurrentSkipListSet<Proposal>(comparator);
 
 
 
