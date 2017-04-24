@@ -461,7 +461,7 @@ public class InHandler2 extends ChannelInboundHandlerAdapter { // (1)
 			LOG.debug("leader last committed zxid = " + leaderLastCommittedZxid.getEpoch()
 					+ "	" + leaderLastCommittedZxid.getCounter());
 
-			if (leaderLastCommittedZxid.getEpoch()-followerLastCommittedZxid.getEpoch() < 4 ){
+			if (leaderLastCommittedZxid.getEpoch()==followerLastCommittedZxid.getEpoch() ){
 
 				if (followerLastCommittedZxid.getCounter() < leaderLastCommittedZxid.getCounter()){
 					// TODO: Send DIFF message
@@ -485,7 +485,30 @@ public class InHandler2 extends ChannelInboundHandlerAdapter { // (1)
 					// change phase
 				}
 
-			} else if (4 > leaderLastCommittedZxid.getEpoch()-followerLastCommittedZxid.getEpoch()){
+			} 
+			else if (leaderLastCommittedZxid.getEpoch()-followerLastCommittedZxid.getEpoch() < 4 ){
+
+					// TODO: Send DIFF message
+					String diffMsg = "";
+					List<String> logList= FileOps.getDiffResponse(properties, followerLastCommittedZxid);
+
+					diffMsg = "DIFF:" + logList;
+
+					this.nettyClientInhandler.sendMessage(memberList.get(nodeId).getHostName(),
+							memberList.get(nodeId).getPort(), diffMsg);
+
+
+					// TODO: Iterate through CommitHistory (refer readHistory()), stringify and send
+				
+
+			} 
+			else if (followerLastCommittedZxid.getEpoch() > leaderLastCommittedZxid.getEpoch()){
+				// Go to Leader Election. Ideally, shouldn't happen
+				this.properties.setNodestate(NodeServerProperties1.State.ELECTION);
+				LOG.debug("Going to Leader Election");
+				//changePhase();
+			}
+			else {
 
 				// TODO: Send SNAP message
 				String snapmsg = "SNAP:" + properties.getDataMap();
@@ -493,12 +516,7 @@ public class InHandler2 extends ChannelInboundHandlerAdapter { // (1)
 
 				// TODO: Iterate through the Map, stringify each entry and then send
 
-			} else if (followerLastCommittedZxid.getEpoch() > leaderLastCommittedZxid.getEpoch()){
-				// Go to Leader Election. Ideally, shouldn't happen
-				this.properties.setNodestate(NodeServerProperties1.State.ELECTION);
-				LOG.debug("Going to Leader Election");
-				//changePhase();
-			}
+			} 
 
 			return "";
 
