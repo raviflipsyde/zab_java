@@ -341,6 +341,9 @@ public class NodeServer1 {
 				} catch (InterruptedException e) {
 					e.printStackTrace();
 				}
+				if(properties.getNodestate() == NodeServerProperties1.State.ELECTION){
+					return;
+				}
 			}
 
 			LOG.debug("Member List size after while is = " + properties.getMemberList().size());
@@ -535,6 +538,10 @@ public class NodeServer1 {
 
 	private void startBroadcast() {
 		LOG.info("Starting the broadcast phase..!!");
+		
+		if(properties.getNodestate() == NodeServerProperties1.State.ELECTION){
+			changePhase();
+		}
 		// Clear proposal queue
 		this.properties.getSynData().getProposedTransactions().clear();
 		this.properties.getSynData().getCommittedTransactions().clear();
