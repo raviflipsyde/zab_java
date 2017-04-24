@@ -3,6 +3,7 @@ package util;
 import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
@@ -80,12 +81,10 @@ public static void writeDataMap(NodeServerProperties1 properties){
 		Properties dataMap = properties.getDataMap();
 		
 		try {
-
-			FileWriter filewriter = new FileWriter(fileName);
-			Date date = new Date();
-			dataMap.store(filewriter,null);
+			FileOutputStream out = new FileOutputStream(fileName);
+			dataMap.store(out,null);
 			
-			filewriter.close();
+			out.close();
 			
 		} catch (FileNotFoundException e) {
 			// TODO Auto-generated catch block

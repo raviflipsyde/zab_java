@@ -54,7 +54,7 @@ public class NodeServerProperties1 {
 	private MpscArrayQueue<Notification> electionQueue;
 	private Vote myVote;
 	
-	private Properties dataMap;
+	private volatile Properties dataMap;
 
 	public NodeServerProperties1() {
 		//TODO: acceptedEpoch = 0;
