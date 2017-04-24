@@ -2,6 +2,7 @@ package servers;
 
 import java.util.ConcurrentModificationException;
 import java.util.Map.Entry;
+import java.util.Queue;
 import java.util.SortedSet;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.atomic.AtomicInteger;
@@ -40,7 +41,7 @@ public class MonitorProposeQueue implements Runnable {
 					nodeserver.broadcast(commitMessage);
 					
 					//Adding to commit Queue
-					SortedSet<Proposal> committedtransactions = nodeserverproperties.getSynData().getCommittedTransactions();
+					 Queue<Proposal> committedtransactions = nodeserverproperties.getSynData().getCommittedTransactions();
 					committedtransactions.add(entry.getKey());
 					
 					//Putting in removemap and deleting later to avoid concurrent modification exception

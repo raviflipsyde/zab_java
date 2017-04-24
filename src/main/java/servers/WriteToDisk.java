@@ -4,6 +4,7 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
 import java.util.Properties;
+import java.util.Queue;
 import java.util.SortedSet;
 import util.FileOps;
 
@@ -25,7 +26,7 @@ public class WriteToDisk implements Runnable {
 		while( properties.getNodestate() != NodeServerProperties1.State.ELECTION && running == true){
 
 			//flush the committed transactions set
-			SortedSet<Proposal> committedtransactions = properties.getSynData().getCommittedTransactions();
+			 Queue<Proposal> committedtransactions = properties.getSynData().getCommittedTransactions();
 			if(committedtransactions.size()>0){
 				
 				synchronized (committedtransactions) {

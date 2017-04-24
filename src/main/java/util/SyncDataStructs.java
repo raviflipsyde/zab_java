@@ -3,9 +3,11 @@ package util;
 import java.net.InetSocketAddress;
 import java.util.Comparator;
 import java.util.List;
+import java.util.Queue;
 import java.util.SortedSet;
 import java.util.TreeSet;
 import java.util.concurrent.ConcurrentHashMap;
+import java.util.concurrent.ConcurrentLinkedQueue;
 import java.util.concurrent.ConcurrentSkipListSet;
 import java.util.concurrent.CopyOnWriteArrayList;
 import java.util.concurrent.atomic.AtomicInteger;
@@ -34,8 +36,8 @@ public class SyncDataStructs {
 
 	//used during broadcast
 	private volatile ConcurrentHashMap<Proposal, AtomicInteger> proposedTransactions = null; //<counter,num_ack> Map that the leader maintains to store acknowledgements of proposedtransactions
-	private volatile SortedSet<Proposal> committedTransactions = null;
-
+	private volatile Queue<Proposal> committedTransactions = null;
+	
 
 
 	public Comparator<Proposal> comparator = new Comparator<Proposal>() {
@@ -57,7 +59,7 @@ public class SyncDataStructs {
 
 		newEpochFlag = false;
 		proposedTransactions = new ConcurrentHashMap<Proposal, AtomicInteger>();
-		committedTransactions = new ConcurrentSkipListSet<Proposal>(comparator);
+		committedTransactions = new ConcurrentLinkedQueue<Proposal>();
 
 
 
@@ -139,6 +141,12 @@ public class SyncDataStructs {
 	public synchronized void setProposedTransactions(ConcurrentHashMap<Proposal, AtomicInteger> proposedTransactions) {
 		this.proposedTransactions = proposedTransactions;
 	}
+	public Queue<Proposal> getCommittedTransactions() {
+		return committedTransactions;
+	}
+	public void setCommittedTransactions(Queue<Proposal> committedTransactions) {
+		this.committedTransactions = committedTransactions;
+	}
 
 	//	public MpscArrayQueue<Proposal> getProposeQueue() {
 
@@ -153,12 +161,7 @@ public class SyncDataStructs {
 //	public void setCommitQueue(MpscArrayQueue<Proposal> commitQueue) {
 //		this.commitQueue = commitQueue;
 //	}
-	public SortedSet<Proposal> getCommittedTransactions() {
-		return committedTransactions;
-	}
-	public void setCommittedTransactions(SortedSet<Proposal> committedTransactions) {
-		this.committedTransactions = committedTransactions;
-	}
+	
 
 }
 
