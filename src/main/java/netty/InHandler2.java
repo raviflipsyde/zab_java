@@ -152,9 +152,9 @@ public class InHandler2 extends ChannelInboundHandlerAdapter { // (1)
 				Proposal proposal = new Proposal(z,key,value);
 				
 				properties.getSynData().getProposedTransactions().put(proposal, new AtomicInteger(0));
-				LOG.info("Enqueing proposal in Proposal Queue:" + proposal);
+				LOG.debug("Enqueing proposal in Proposal Queue:" + proposal);
 				
-				LOG.info("Sending Acknowledgement to the leader");
+				LOG.debug("Sending Acknowledgement to the leader");
 				return "ACK_PROPOSAL:" + proposal.toString();
 		
 			}

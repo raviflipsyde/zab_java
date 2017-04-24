@@ -36,8 +36,9 @@ public class MonitorProposeQueue implements Runnable {
 				
 				if(entry.getValue().get() > this.nodeserverproperties.getMemberList().size()/2){
 					LOG.debug("Quorum achieved for Proposal:" + entry.getKey());
-					LOG.info("Sending a COMMIT message now to all followers..!!");
+					LOG.debug("Sending a COMMIT message now to all followers..!!");
 					String commitMessage = "COMMIT:"+ entry.getKey();
+					LOG.info("Leader sending ::"+ commitMessage);
 					nodeserver.broadcast(commitMessage);
 					
 					//Adding to commit Queue
