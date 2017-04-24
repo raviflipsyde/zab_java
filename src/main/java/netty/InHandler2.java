@@ -544,9 +544,9 @@ public class InHandler2 extends ChannelInboundHandlerAdapter { // (1)
 				Proposal pro = new Proposal(zxid, key, value);
 				//If it doesn't exist, create one.
 				String resp = FileOps.appendTransaction(properties, pro.toString());
-				Properties dataMap = properties.getDataMap();
+				
 				//this.properties.getSynData().getCommitQueue().offer(pro);
-				dataMap.put(key, value);
+				
 			}
 			
 			
@@ -574,6 +574,7 @@ public class InHandler2 extends ChannelInboundHandlerAdapter { // (1)
 				LOG.debug("Value is = " + value);
 				datamap.put(key, value);
 			}
+			FileOps.writeDataMap(properties);
 			LOG.debug("Updated datamap = " + properties.getDataMap());
 			LOG.debug("Follower ready for Broadcast");
 			return "READY:" + this.properties.getNodeId();

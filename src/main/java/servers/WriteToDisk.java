@@ -43,8 +43,8 @@ public class WriteToDisk implements Runnable {
 					String value = arr[3].trim();
 					
 					
-					Properties datamap = properties.getDataMap();
-					datamap.setProperty(key, value);
+//					Properties datamap = properties.getDataMap();
+//					datamap.setProperty(key, value);
 					
 				}
 				

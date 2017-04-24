@@ -42,6 +42,10 @@ public class FileOps {
 			String[] arr = transaction.split(",");
 			long epoch = Long.parseLong(arr[0].trim());
 			long counter = Long.parseLong(arr[1].trim());
+			String key = arr[0].trim();
+			String value = arr[1].trim();
+			
+			properties.getDataMap().put(key, value);
 			properties.setLastZxId(new ZxId(epoch, counter));
 			
 
@@ -79,7 +83,6 @@ public static void writeDataMap(NodeServerProperties1 properties){
 
 			FileWriter filewriter = new FileWriter(fileName);
 			Date date = new Date();
-			
 			dataMap.store(filewriter,null);
 			
 			filewriter.close();
