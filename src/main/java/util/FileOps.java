@@ -15,14 +15,17 @@ import java.util.List;
 import java.util.Properties;
 
 import org.apache.commons.io.input.ReversedLinesFileReader;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
+import servers.NodeServer1;
 import servers.NodeServerProperties1;
 import servers.ZxId;
 
 public class FileOps {
 
 	// write a function to write the line into the CommitedHistory file
-
+	private static final Logger LOG = LogManager.getLogger(FileOps.class);
 
 	public static String appendTransaction(NodeServerProperties1 properties,String transaction) {
 		
@@ -79,7 +82,8 @@ public static void writeDataMap(NodeServerProperties1 properties){
 		String fileName = "datamap_" + properties.getNodePort() + ".properties";
 
 		Properties dataMap = properties.getDataMap();
-		
+		LOG.debug("Start writeDataMap to "+ fileName);
+		LOG.debug("Properties: "+ dataMap);
 		try {
 			FileOutputStream out = new FileOutputStream(fileName);
 			dataMap.store(out,null);
@@ -88,11 +92,14 @@ public static void writeDataMap(NodeServerProperties1 properties){
 			
 		} catch (FileNotFoundException e) {
 			// TODO Auto-generated catch block
+			LOG.debug("File not found "+ fileName);
 			e.printStackTrace();
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
+			LOG.debug("Some IO exception on "+ fileName);
 			e.printStackTrace();
 		}
+		LOG.debug("End writeDataMap method");
 
 	}
 
