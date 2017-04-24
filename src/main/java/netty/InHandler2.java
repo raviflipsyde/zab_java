@@ -461,7 +461,7 @@ public class InHandler2 extends ChannelInboundHandlerAdapter { // (1)
 			LOG.debug("leader last committed zxid = " + leaderLastCommittedZxid.getEpoch()
 					+ "	" + leaderLastCommittedZxid.getCounter());
 
-			if (leaderLastCommittedZxid.getEpoch() == followerLastCommittedZxid.getEpoch()){
+			if (leaderLastCommittedZxid.getEpoch()-followerLastCommittedZxid.getEpoch() < 4 ){
 
 				if (followerLastCommittedZxid.getCounter() < leaderLastCommittedZxid.getCounter()){
 					// TODO: Send DIFF message
@@ -485,7 +485,7 @@ public class InHandler2 extends ChannelInboundHandlerAdapter { // (1)
 					// change phase
 				}
 
-			} else if (followerLastCommittedZxid.getEpoch() < leaderLastCommittedZxid.getEpoch()){
+			} else if (4 > leaderLastCommittedZxid.getEpoch()-followerLastCommittedZxid.getEpoch()){
 
 				// TODO: Send SNAP message
 				String snapmsg = "SNAP:" + properties.getDataMap();
