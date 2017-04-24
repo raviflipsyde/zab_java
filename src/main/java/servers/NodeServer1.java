@@ -59,10 +59,11 @@ public class NodeServer1 {
 		HashMap<Long, Vote> OutOfElectionVotes = new HashMap<Long, Vote>();
 		HashMap<Long, Long> OutOfElectionVotesRound = new HashMap<Long, Long>();
 		MpscArrayQueue<Notification> currentElectionQueue = properties.getSynData().getElectionQueue();
+		currentElectionQueue.clear();
 		Vote myVote = new Vote(this.properties.getLastZxId(), this.properties.getNodeId());
 
-		long limit_timeout = 25000;
-		long timeout = 2000;
+		long limit_timeout = 20000;
+		long timeout = 1000;
 
 		this.properties.setElectionRound(this.properties.getElectionRound() + 1);
 		this.properties.setMyVote(myVote);
@@ -357,7 +358,10 @@ public class NodeServer1 {
 
 			LOG.info("New max = " + max);
 			this.properties.setNewEpoch(max + 1);
-
+			
+			this.properties.setAcceptedEpoch(max + 1);
+			this.properties.setCounter(0);
+			
 			synchronized (acceptedEpochMap) {
 				this.properties.getSynData().setNewEpochFlag(true);
 				acceptedEpochMap.notifyAll();
@@ -534,20 +538,44 @@ public class NodeServer1 {
 		// Clear proposal queue
 		this.properties.getSynData().getProposedTransactions().clear();
 		this.properties.getSynData().getCommittedTransactions().clear();
-
+		MonitorProposeQueue monitorObj = null;
+		WriteToDisk wtdObj = null;
+	
+		
 		if (properties.getNodestate() == NodeServerProperties1.State.LEADING) {
 			LOG.debug("Starting Monitor Propose Queue thread for leader...");
-			Thread threadMonitorProposeQueue = new Thread(new MonitorProposeQueue(properties, this));
+			monitorObj = new MonitorProposeQueue(properties, this);
+			Thread threadMonitorProposeQueue = new Thread(monitorObj);
 			threadMonitorProposeQueue.setPriority(Thread.MIN_PRIORITY);
 			threadMonitorProposeQueue.start();
 		}
 
 		LOG.debug("Starting Write to disk thread irrespective of leader or follower...");
 		if (properties.getNodestate() != NodeServerProperties1.State.ELECTION) {
-			Thread threadWriteToDisk = new Thread(new WriteToDisk(properties));
+			wtdObj = new WriteToDisk(properties);
+			Thread threadWriteToDisk = new Thread(wtdObj);
 			threadWriteToDisk.setPriority(Thread.MIN_PRIORITY);
 			threadWriteToDisk.start();
 		}
+		else{
+			changePhase();
+		}
+		
+		while(properties.getNodestate() != NodeServerProperties1.State.ELECTION){
+			try {
+				Thread.sleep(3000);
+			} catch (InterruptedException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			
+		}
+		
+		if(monitorObj!=null) monitorObj.stop();
+		wtdObj.stop();
+		
+		changePhase();
+		
 	}
 
 	public void init() {
@@ -725,11 +753,14 @@ public class NodeServer1 {
 				}
 				
 			}
-
+			
+			
+			
 			if(leaderVote.getId() == properties.getNodeId()){
 				properties.setLeader(true);
 				properties.setNodestate(NodeServerProperties1.State.LEADING);
 				leaderID = properties.getNodeId();
+				
 				
 				this.udpServerThread = new Thread(new UdpServer1(properties));
 				this.udpServerThread.setPriority(Thread.MIN_PRIORITY);
@@ -749,6 +780,8 @@ public class NodeServer1 {
 				this.udpClientThread.setUncaughtExceptionHandler(h);
 				this.udpClientThread.start();
 			}
+			
+			properties.getSynData().getElectionQueue().clear();
 			
 			Recovery();
 			

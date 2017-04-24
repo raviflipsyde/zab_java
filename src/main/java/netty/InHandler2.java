@@ -530,7 +530,9 @@ public class InHandler2 extends ChannelInboundHandlerAdapter { // (1)
 				//this.properties.getSynData().getCommitQueue().offer(pro);
 				dataMap.put(key, value);
 			}
-
+			
+			
+			FileOps.writeDataMap(properties);
 			LOG.debug("Follower ready for Broadcast");
 			return "READY:" + this.properties.getNodeId();
 		}

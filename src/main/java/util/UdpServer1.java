@@ -78,10 +78,14 @@ public class UdpServer1 implements Runnable{
 		DatagramSocket serverSocket = null;
 		try {
 			
+			try{
+				serverSocket = new DatagramSocket(properties.getNodePort()+123);
+			 }
+			catch(java.net.BindException e){
+				serverSocket.close();
+				serverSocket = new DatagramSocket(properties.getNodePort()+123);
+			}
 			
-			serverSocket = new DatagramSocket(properties.getNodePort()+123);
-			serverSocket.close();
-			serverSocket = new DatagramSocket(properties.getNodePort()+123);
 			
 			LOG.debug("ServerSocketState:"+ serverSocket.isBound());
 			LOG.debug("ServerSocketState:"+ serverSocket.isClosed());

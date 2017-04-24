@@ -70,6 +70,10 @@ public class MonitorProposeQueue implements Runnable {
 		
 		}
 	}
+	
+	public void stop(){
+		this.running = false;
+	}
 		
 
 }

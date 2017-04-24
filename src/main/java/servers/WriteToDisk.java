@@ -27,7 +27,7 @@ public class WriteToDisk implements Runnable {
 			//flush the committed transactions set
 			SortedSet<Proposal> committedtransactions = properties.getSynData().getCommittedTransactions();
 			synchronized (committedtransactions) {
-				for(Object entry: committedtransactions){
+				for(Proposal entry: committedtransactions){
 					LOG.debug("WriteToDisk: Writing transactions to Transaction log:");
 					String entry_commit_history = entry.toString();
 					LOG.debug("entry_commit_history:"+ entry_commit_history);
@@ -63,6 +63,10 @@ public class WriteToDisk implements Runnable {
 			
 		}
 		
+	}
+	
+	public void stop(){
+		running = false;
 	}
 
 }
