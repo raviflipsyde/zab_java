@@ -63,8 +63,8 @@ public class NodeServer1 {
 
 		Vote myVote = new Vote(this.properties.getLastZxId(), this.properties.getNodeId());
 
-		long limit_timeout = 20000;
-		long timeout = 1000;
+		long limit_timeout = 15000;
+		long timeout = 500;
 
 		this.properties.setElectionRound(this.properties.getElectionRound() + 1);
 		this.properties.setMyVote(myVote);
@@ -459,7 +459,7 @@ public class NodeServer1 {
 			}
 
 			long reEndTime = System.nanoTime();
-			LOG.info("Time required for Leader Election Phase:" + (reEndTime-reStartTime)/1000000);
+			LOG.info("Time required for Recovery Phase:" + (reEndTime-reStartTime)/1000000);
 			LOG.info("End of Recovery phase");
 		} else {
 			// Follower
@@ -486,7 +486,7 @@ public class NodeServer1 {
 				e.printStackTrace();
 			}
 			long reEndTime = System.nanoTime();
-			LOG.info("Time required for Leader Election Phase:" + (reEndTime-reStartTime)/1000000);
+			LOG.info("Time required for Recovery Phase:" + (reEndTime-reStartTime)/1000000);
 			
 			LOG.info("End of Recovery Phase");
 
