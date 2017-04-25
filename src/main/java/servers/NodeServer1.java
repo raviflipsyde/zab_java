@@ -50,16 +50,16 @@ public class NodeServer1 {
 	}
 
 	private Vote startLeaderElection() {
-		
-		LOG.debug("Begin Leader Election---------");
-		
+
+		LOG.info("Start Leader Election Phase");
+
 		Map<Long, InetSocketAddress> memberList = this.properties.getMemberList();
 		HashMap<Long, Vote> receivedVote = new HashMap<Long, Vote>();
 		HashMap<Long, Long> receivedVotesRound = new HashMap<Long, Long>();
 		HashMap<Long, Vote> OutOfElectionVotes = new HashMap<Long, Vote>();
 		HashMap<Long, Long> OutOfElectionVotesRound = new HashMap<Long, Long>();
 		MpscArrayQueue<Notification> currentElectionQueue = properties.getSynData().getElectionQueue();
-		
+
 		Vote myVote = new Vote(this.properties.getLastZxId(), this.properties.getNodeId());
 
 		long limit_timeout = 20000;
@@ -122,17 +122,17 @@ public class NodeServer1 {
 					LOG.debug("vote compare:" + currentN.getVote().compareTo(this.properties.getMyVote()));
 					LOG.debug("-------------------------");
 					if (currentN.getVote().compareTo(this.properties.getMyVote()) > 0) { // if
-																							// the
-																							// currentN
-																							// is
-																							// bigger
-																							// thn
-																							// myvote
+						// the
+						// currentN
+						// is
+						// bigger
+						// thn
+						// myvote
 						LOG.debug("His vote bigger than mine");
 						this.properties.setMyVote(currentN.getVote()); // update
-																		// myvote
+						// myvote
 						myNotification.setVote(this.properties.getMyVote()); // update
-																				// notification
+						// notification
 
 					}
 					// TODO: verify
@@ -205,10 +205,10 @@ public class NodeServer1 {
 					// this.electionRound);
 
 					if (currentN.getSenderState() == NodeServerProperties1.State.LEADING) { // This
-																							// is
-																							// notification
-																							// from
-																							// leader
+						// is
+						// notification
+						// from
+						// leader
 						LOG.debug("This notification is from the Leader");
 						this.properties.setMyVote(currentN.getVote());
 						break;
@@ -229,7 +229,7 @@ public class NodeServer1 {
 							this.properties.setMyVote(currentN.getVote());
 							break;
 						} else if (myVoteCounter > (memberList.size() + 1) / 2) { // our
-																					// improvement
+							// improvement
 							this.properties.setMyVote(currentN.getVote());
 							break;
 						}
@@ -263,12 +263,12 @@ public class NodeServer1 {
 					this.properties.setMyVote(currentN.getVote());
 					break;
 				} else if (myVoteCounter > (memberList.size() + 1) / 2) { // our
-																			// improvement
-																			// just
-																			// check
-																			// for
-																			// the
-																			// quorum
+					// improvement
+					// just
+					// check
+					// for
+					// the
+					// quorum
 
 					this.properties.setMyVote(currentN.getVote());
 					break;
@@ -310,16 +310,16 @@ public class NodeServer1 {
 
 		this.properties.getElectionQueue().clear();
 
-		LOG.info("End Leader Election---------");
-		LOG.info("Leader ID:"+this.properties.getMyVote().getId() );
-		
+		LOG.info("End of Leader Election Phase");
+		LOG.info("Leader ID: " + this.properties.getMyVote().getId());
+
 		return this.properties.getMyVote();
 
 	}
 
 	private void Recovery() {
-		LOG.info("Starting Recovery phase");
-		
+		LOG.info("Start Recovery Phase");
+
 		long leaderID = properties.getLeaderId();
 
 		if (this.properties.isLeader() == true) {
@@ -341,7 +341,7 @@ public class NodeServer1 {
 				} catch (InterruptedException e) {
 					e.printStackTrace();
 				}
-				if(properties.getNodestate() == NodeServerProperties1.State.ELECTION){
+				if (properties.getNodestate() == NodeServerProperties1.State.ELECTION) {
 					return;
 				}
 			}
@@ -359,18 +359,16 @@ public class NodeServer1 {
 				}
 			}
 
-			LOG.info("New max = " + max);
 			this.properties.setNewEpoch(max + 1);
-			
+
+			LOG.info("NewEpoch = " + max + 1);
 			this.properties.setAcceptedEpoch(max + 1);
 			this.properties.setCounter(0);
-			
+
 			synchronized (acceptedEpochMap) {
 				this.properties.getSynData().setNewEpochFlag(true);
 				acceptedEpochMap.notifyAll();
 			}
-
-			
 
 			// String leaderLastLog = FileOps.readLastLog(properties);
 			// String[] arr = leaderLastLog.split(",");
@@ -449,17 +447,14 @@ public class NodeServer1 {
 					e.printStackTrace();
 				}
 			}
+
+			try {
+				Thread.sleep(3000);
+			} catch (InterruptedException e) {
+				e.printStackTrace();
+			}
+
 			LOG.info("End of Recovery phase");
-			LOG.info("Leader ready for Broadcast");
-
-			
-				try {
-					Thread.sleep(3000);
-				} catch (InterruptedException e) {
-					e.printStackTrace();
-				}
-			
-
 		} else {
 			// Follower
 			LOG.debug("I am Follower");
@@ -473,19 +468,19 @@ public class NodeServer1 {
 			String followerinfomsg = "FOLLOWERINFO:" + this.properties.getNodeId() + ":"
 					+ this.properties.getAcceptedEpoch();
 
-			LOG.info("Follower info msg is = " + followerinfomsg);
+			LOG.info("FOLLOWERINFO : " + followerinfomsg);
 
 			this.nettyClient.sendMessage(leaderIp, leaderPort, followerinfomsg);
 
 			// Receive SNAP, DIFF and TRUNC messages
-	
-				try {
-					Thread.sleep(3000);
-				} catch (InterruptedException e) {
-					e.printStackTrace();
-				}
-			
-			LOG.debug("End of Recovery phase");
+
+			try {
+				Thread.sleep(3000);
+			} catch (InterruptedException e) {
+				e.printStackTrace();
+			}
+			LOG.info("End of Recovery Phase");
+
 		}
 
 	}
@@ -537,9 +532,9 @@ public class NodeServer1 {
 	// }
 
 	private void startBroadcast() {
-		LOG.info("Starting the broadcast phase..!!");
-		
-		if(properties.getNodestate() == NodeServerProperties1.State.ELECTION){
+		LOG.info("Start Broadcast Phase");
+
+		if (properties.getNodestate() == NodeServerProperties1.State.ELECTION) {
 			changePhase();
 		}
 		// Clear proposal queue
@@ -547,8 +542,7 @@ public class NodeServer1 {
 		this.properties.getSynData().getCommittedTransactions().clear();
 		MonitorProposeQueue monitorObj = null;
 		WriteToDisk wtdObj = null;
-	
-		
+
 		if (properties.getNodestate() == NodeServerProperties1.State.LEADING) {
 			LOG.debug("Starting Monitor Propose Queue thread for leader...");
 			monitorObj = new MonitorProposeQueue(properties, this);
@@ -564,37 +558,39 @@ public class NodeServer1 {
 			threadWriteToDisk.setPriority(Thread.MIN_PRIORITY);
 			threadWriteToDisk.start();
 		}
-		
-		
-		while(properties.getNodestate() != NodeServerProperties1.State.ELECTION){
+
+		while (properties.getNodestate() != NodeServerProperties1.State.ELECTION) {
 			try {
 				Thread.sleep(3000);
 			} catch (InterruptedException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
-			
+
 		}
-		
-		if(monitorObj!=null) monitorObj.stop();
+
+		if (monitorObj != null)
+			monitorObj.stop();
 		wtdObj.stop();
-		
+
+		LOG.info("End of Broadcast Phase");
 		changePhase();
-		
+
 	}
 
 	public void init() {
-		LOG.info("Starting the Node server");
-		
+
+		LOG.info("Starting Node server");
+
 		this.nettyClient = new NettyClient1(properties);
-		
+
 		msgBootstrap();
 
 		for (Entry<Long, InetSocketAddress> entry : properties.getMemberList().entrySet()) {
 			LOG.debug(entry.getKey() + ":::" + entry.getValue().getHostName() + ":" + entry.getValue().getPort());
 		}
 
-		LOG.info("\nNode ID:" + properties.getNodeId());
+		LOG.info("Received Node ID: " + properties.getNodeId());
 
 		this.nettyServerThread = new Thread(new NettyServer1(properties.getNodePort(), properties));
 		this.nettyServerThread.setPriority(Thread.MIN_PRIORITY);
@@ -606,28 +602,10 @@ public class NodeServer1 {
 			e.printStackTrace();
 		}
 
-		// this.udpClientThread = new Thread(new UdpClient1(properties));
-		// this.udpClientThread.setPriority(Thread.MIN_PRIORITY);
-		// this.udpClientThread.start();
-
-		
-
 		joinGroup();
 
-		// readHistory();
 		FileOps.fillDataInProperties(properties);
-		// Properties datamap = this.properties.getDataMap();
-		
-//Already taken care in above mthrod call..		
-//		String readLastLog = FileOps.readLastLog(properties);
-//		String[] lastLogArr = readLastLog.split(",");
-//		long epoch = Long.parseLong(lastLogArr[0].trim());
-//		long counter = Long.parseLong(lastLogArr[1].trim());
-//
-//		ZxId lastZxid = new ZxId(epoch, counter);
-//		this.properties.setLastZxId(lastZxid);
 
-		// startLeaderElection();
 		changePhase();
 
 	}
@@ -726,94 +704,89 @@ public class NodeServer1 {
 		}
 	}
 
-		Thread.UncaughtExceptionHandler h = new Thread.UncaughtExceptionHandler() {
-			public void uncaughtException(Thread th, Throwable ex) {
-				LOG.debug(th.getName());
-				LOG.debug(th.getId());
-				LOG.debug(ex.getMessage());
-				
-				System.out.println("Uncaught exception: " + ex);
+	Thread.UncaughtExceptionHandler h = new Thread.UncaughtExceptionHandler() {
+		public void uncaughtException(Thread th, Throwable ex) {
+			LOG.debug(th.getName());
+			LOG.debug(th.getId());
+			LOG.debug(ex.getMessage());
 
-			}
-		};
-	
+			System.out.println("Uncaught exception: " + ex);
+
+		}
+	};
 
 	private void changePhase() {
 		/*
-		 The logic of changing phases
+		 * The logic of changing phases
 		 */
 		long leaderID = properties.getNodeId();
-		if( properties.getNodestate().equals(NodeServerProperties1.State.ELECTION)){
-			
-			Vote leaderVote = startLeaderElection();
-			
+		if (properties.getNodestate().equals(NodeServerProperties1.State.ELECTION)) {
 
-			if (leaderVote.getId() != properties.getNodeId()){
+			Vote leaderVote = startLeaderElection();
+
+			if (leaderVote.getId() != properties.getNodeId()) {
 				LOG.debug("Sleeping for 3 seconds");
 				LOG.debug("For synchronizing with the Leader");
 				try {
 					Thread.sleep(3000);
-				} catch (InterruptedException e){
+				} catch (InterruptedException e) {
 					e.printStackTrace();
 				}
-				
+
 			}
-			
-			
-			
-			if(leaderVote.getId() == properties.getNodeId()){
+
+			if (leaderVote.getId() == properties.getNodeId()) {
 				properties.setLeader(true);
 				properties.setNodestate(NodeServerProperties1.State.LEADING);
 				leaderID = properties.getNodeId();
-				
-				
+
 				this.udpServerThread = new Thread(new UdpServer1(properties));
 				this.udpServerThread.setPriority(Thread.MIN_PRIORITY);
 				this.udpServerThread.setUncaughtExceptionHandler(h);
 				this.udpServerThread.start();
 
-			} else{
+			} else {
 				properties.setLeader(false);
 				properties.setNodestate(NodeServerProperties1.State.FOLLOWING);
 				leaderID = leaderVote.getId();
 				properties.setLeaderId(leaderID);
 				InetSocketAddress leaderis = properties.getMemberList().get(leaderID);
 				properties.setLeaderAddress(leaderis);
-	
+
 				this.udpClientThread = new Thread(new UdpClient1(properties));
 				this.udpClientThread.setPriority(Thread.MIN_PRIORITY);
 				this.udpClientThread.setUncaughtExceptionHandler(h);
 				this.udpClientThread.start();
 			}
-			
+
 			properties.getSynData().getElectionQueue().clear();
-			
+
 			Recovery();
-			
+
 			try {
 				Thread.sleep(3000);
-			} catch (InterruptedException e){
+			} catch (InterruptedException e) {
 				e.printStackTrace();
 			}
-			
+
 			startBroadcast();
 		}
 
-		
-//		while(true){
-//
-//			if(properties.getNodestate() != NodeServerProperties1.State.ELECTION ){
-//				try {
-//					Thread.sleep(4000);
-//				} catch (InterruptedException e) {
-//					// TODO Auto-generated catch block
-//					e.printStackTrace();
-//				}
-//			}
-//			else{
-//				changePhase();
-//			}
-//		}
+		// while(true){
+		//
+		// if(properties.getNodestate() != NodeServerProperties1.State.ELECTION
+		// ){
+		// try {
+		// Thread.sleep(4000);
+		// } catch (InterruptedException e) {
+		// // TODO Auto-generated catch block
+		// e.printStackTrace();
+		// }
+		// }
+		// else{
+		// changePhase();
+		// }
+		// }
 
 	}
 
@@ -856,9 +829,10 @@ public class NodeServer1 {
 
 	private void parseMemberList(String memberList) {
 
-		LOG.info("------------MembersList:----------\n" + memberList);
+		LOG.info("Received MembersList :\n" + memberList);
+
 		String[] list = memberList.split(",");
-		System.out.println("Members");
+
 		for (String s : list) {
 			String[] address = s.split(":");
 			long nodeId = Integer.parseInt(address[0]);
@@ -884,22 +858,22 @@ public class NodeServer1 {
 	}
 
 	private void joinGroup() {
-
+		LOG.info("Send JOIN_GROUP message");
 		broadcast("JOIN_GROUP:" + properties.getNodeId() + ":" + properties.getNodeHost() + ":"
 				+ properties.getNodePort());
 	}
 
 	public void broadcast(String message) {
 
-		//LOG.debug("*******MemberlistSize:"+properties.getMemberList().size());
-		LOG.debug("Inside Broadcast::Message:"+message );
+		// LOG.debug("*******MemberlistSize:"+properties.getMemberList().size());
+		LOG.debug("Inside Broadcast::Message:" + message);
 		Map<Long, InetSocketAddress> unreachablelist = new HashMap<Long, InetSocketAddress>();
 		for (Entry<Long, InetSocketAddress> member : properties.getMemberList().entrySet()) {
 			try {
-				LOG.debug("Sending "+message+" to: "+ member.getValue().getHostName() + ":"+ member.getValue().getPort());
+				LOG.debug("Sending " + message + " to: " + member.getValue().getHostName() + ":"
+						+ member.getValue().getPort());
 				this.nettyClient.sendMessage(member.getValue().getHostName(), member.getValue().getPort(), message);
-			}
-			catch (Exception e) {
+			} catch (Exception e) {
 				unreachablelist.put(member.getKey(), member.getValue());
 				LOG.error(e.getMessage());
 				e.printStackTrace();
@@ -907,7 +881,7 @@ public class NodeServer1 {
 		}
 
 		for (Entry<Long, InetSocketAddress> member : unreachablelist.entrySet()) {
-			LOG.debug("Removing from memberlist"+member.getKey()+":"+member.getValue());
+			LOG.debug("Removing from memberlist" + member.getKey() + ":" + member.getValue());
 			properties.removeMemberFromList(member.getKey());
 		}
 	}

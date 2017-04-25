@@ -68,7 +68,8 @@ public class InHandler2 extends ChannelInboundHandlerAdapter { // (1)
 		//		LOG.debug("handleClientRequest:"+requestMsg);
 		
 		if(requestMsg.contains("READ:")){
-			LOG.info("Node ID:" + this.properties.getNodeId() + "received Read() request from client");
+			LOG.info("Received: " + requestMsg);
+//			LOG.info("Node ID:" + this.properties.getNodeId() + "received Read() request from client");
 			String[] arr = requestMsg.split(":");
 			String key = arr[1].trim();
 			Properties properties = this.properties.getDataMap();
@@ -84,9 +85,12 @@ public class InHandler2 extends ChannelInboundHandlerAdapter { // (1)
 		}
 		
 		if(requestMsg.contains("WRITE:")){
+			
+			LOG.info("Received: " + requestMsg);
+			
 			if(!properties.isLeader()){ //follower
 				//Forward write request to the leader
-				LOG.info("Follower received WRITE request from client, forwarding to the leader..!!");
+				LOG.debug("Follower received WRITE request from client, forwarding to the leader..!!");
 				this.nettyClientInhandler.sendMessage(properties.getLeaderAddress().getHostName(), properties.getLeaderAddress().getPort(), requestMsg);
 				return "OK";
 				
@@ -121,7 +125,7 @@ public class InHandler2 extends ChannelInboundHandlerAdapter { // (1)
 				LOG.debug("Checking the counter right after enqueueing the entry: " + proposedtransactions.get(p));
 				
 				//send proposal to quorum
-				LOG.info("Leader:" + "Sending proposal to everyone:" + proposal);
+				LOG.info("Leader sending: " + proposal);
 				
 				LOG.debug("Number of members:" + properties.getMemberList().size());
 				
@@ -143,6 +147,8 @@ public class InHandler2 extends ChannelInboundHandlerAdapter { // (1)
 			}
 			else{ ///Follower
 				//enqueue this message to proposal queue 
+				LOG.info("Received: " + requestMsg);
+				
 				String[] arr = requestMsg.split(":");
 				Long epoch = Long.parseLong(arr[1].trim());
 				Long counter = Long.parseLong(arr[2].trim());
@@ -204,7 +210,7 @@ public class InHandler2 extends ChannelInboundHandlerAdapter { // (1)
 			}
 			else{//follower
 				LOG.debug ("Follower received COMMIT message");
-				LOG.info ("COMMIT message is:" + requestMsg);
+				LOG.info ("-----Received: " + requestMsg);
 				String[] arr = requestMsg.split(":");
 				
 				//Parsing proposal for which acknowledgement was received				
@@ -357,7 +363,8 @@ public class InHandler2 extends ChannelInboundHandlerAdapter { // (1)
 		}
 
 		if (requestMsg.contains("FOLLOWERINFO")){
-			LOG.debug("Request msg is = " + requestMsg);
+			LOG.info("Leader Received: " + requestMsg);
+			
 			while(properties.getNodestate() == NodeServerProperties1.State.ELECTION){
 				try {
 					Thread.sleep(500);
@@ -400,8 +407,10 @@ public class InHandler2 extends ChannelInboundHandlerAdapter { // (1)
 					e.printStackTrace();
 				}
 			}
-
-			return "NEWEPOCH:" + properties.getNewEpoch() + ":" + this.properties.getNodeId();
+			
+			String newEpoch = "NEWEPOCH:" + properties.getNewEpoch() + ":" + this.properties.getNodeId(); 
+			LOG.info("Send: " + newEpoch);
+			return newEpoch;
 		}
 
 		if (requestMsg.contains("NEWEPOCH")){
@@ -414,7 +423,7 @@ public class InHandler2 extends ChannelInboundHandlerAdapter { // (1)
 			long newEpoch = Long.parseLong(newEpocharr[1].trim());
 			long nodeId = Long.parseLong(newEpocharr[2].trim());
 			properties.getSynData().setNewEpoch(newEpoch);
-			LOG.debug("New Epoch received is = " + newEpoch);
+			LOG.info("New Epoch Received : " + newEpoch);
 			this.properties.setNewEpoch(newEpoch);
 			long acceptedEpoch = this.properties.getAcceptedEpoch();
 
@@ -430,7 +439,8 @@ public class InHandler2 extends ChannelInboundHandlerAdapter { // (1)
 
 				ackepochmsg = "ACKEPOCH:" + this.properties.getNodeId()
 						+ ":" + currentEpoch + ":" + currentCounter;
-
+				
+				LOG.info("Send: " + ackepochmsg);
 				this.nettyClientInhandler.sendMessage(memberList.get(nodeId).getHostName(), memberList.get(nodeId).getPort(), ackepochmsg);
 
 				return "";
@@ -445,7 +455,7 @@ public class InHandler2 extends ChannelInboundHandlerAdapter { // (1)
 		}
 
 		if (requestMsg.contains("ACKEPOCH")){
-			LOG.debug("Ack new epoch message received = " + requestMsg);
+			LOG.info("Leader Received: " + requestMsg);
 			Map<Long, InetSocketAddress> memberList = this.properties.getMemberList();
 			String[] currEpochArr = requestMsg.split(":");
 			long nodeId = Long.parseLong(currEpochArr[1].trim());
@@ -477,7 +487,7 @@ public class InHandler2 extends ChannelInboundHandlerAdapter { // (1)
 					List<String> logList= FileOps.getDiffResponse(properties, followerLastCommittedZxid);
 
 					diffMsg = "DIFF:" + logList;
-
+					LOG.info("Send: "+diffMsg);
 					this.nettyClientInhandler.sendMessage(memberList.get(nodeId).getHostName(),
 							memberList.get(nodeId).getPort(), diffMsg);
 
@@ -501,6 +511,7 @@ public class InHandler2 extends ChannelInboundHandlerAdapter { // (1)
 					List<String> logList= FileOps.getDiffResponse(properties, followerLastCommittedZxid);
 
 					diffMsg = "DIFF:" + logList;
+					LOG.info("Send: "+diffMsg);
 
 					this.nettyClientInhandler.sendMessage(memberList.get(nodeId).getHostName(),
 							memberList.get(nodeId).getPort(), diffMsg);
@@ -520,6 +531,7 @@ public class InHandler2 extends ChannelInboundHandlerAdapter { // (1)
 
 				// TODO: Send SNAP message
 				String snapmsg = "SNAP:" + properties.getDataMap();
+				LOG.info("Send: "+snapmsg);
 				this.nettyClientInhandler.sendMessage(memberList.get(nodeId).getHostName(), memberList.get(nodeId).getPort(), snapmsg);
 
 				// TODO: Iterate through the Map, stringify each entry and then send
@@ -559,8 +571,10 @@ public class InHandler2 extends ChannelInboundHandlerAdapter { // (1)
 			
 			
 			FileOps.writeDataMap(properties);
-			LOG.debug("Follower ready for Broadcast");
-			return "READY:" + this.properties.getNodeId();
+			
+			String readyMsg = "READY:" + this.properties.getNodeId(); 
+			LOG.info("Send: "+readyMsg );
+			return readyMsg;
 		}
 
 		if (requestMsg.contains("SNAP")){
@@ -589,6 +603,7 @@ public class InHandler2 extends ChannelInboundHandlerAdapter { // (1)
 		}
 
 		if (requestMsg.contains("READY")){
+			
 			properties.getSynData().incrementQuorumCount();
 		}
 

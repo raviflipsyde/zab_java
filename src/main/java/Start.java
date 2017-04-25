@@ -35,7 +35,7 @@ public class Start {
 			String bhost;
 			int bport, nport;
 			
-			System.out.println(args.length);
+//			System.out.println(args.length);
 			if (args.length > 3) {
 				bport = Integer.parseInt(args[2]);
 				nport = Integer.parseInt(args[3]);
