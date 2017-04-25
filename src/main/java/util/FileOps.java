@@ -7,6 +7,8 @@ import java.io.FileOutputStream;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.io.PrintWriter;
+import java.io.UnsupportedEncodingException;
 import java.nio.charset.Charset;
 import java.util.ArrayList;
 import java.util.Date;
@@ -119,13 +121,22 @@ public static void writeDataMap(NodeServerProperties1 properties){
 			dataMap.load(fileReader);
 			fileReader.close();
 		} catch (FileNotFoundException e) {
-			// TODO Auto-generated catch block
+			
+			try {
+				PrintWriter writer = new PrintWriter(fileName, "UTF-8");
+				writer.close();
+			} catch (IOException e1) {
+				// TODO Auto-generated catch block
+				e1.printStackTrace();
+			} 
+			
 			e.printStackTrace();
+			return dataMap;
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-
+		
 		return dataMap;
 
 	}
@@ -161,8 +172,16 @@ public static void writeDataMap(NodeServerProperties1 properties){
 
 			reveFileReader.close();
 		} catch (IOException e) {
-			// TODO Auto-generated catch block
+			
 			e.printStackTrace();
+			try {
+				PrintWriter writer = new PrintWriter(fileName, "UTF-8");
+				writer.close();
+			} catch (IOException e1) {
+				// TODO Auto-generated catch block
+				e1.printStackTrace();
+			} 
+			return "0,0,0,0";
 		}
 
 		return ret;
@@ -204,9 +223,12 @@ public static void writeDataMap(NodeServerProperties1 properties){
 	}
 
 	public static void fillDataInProperties(NodeServerProperties1 properties) {
+		
+		
 		Properties datamap = readDataMap(properties);
+		
 		String lastLine = readLastLog(properties);
-		System.out.println(lastLine);
+		
 
 		String[] arr = lastLine.split(",");
 		long epoch = Long.parseLong(arr[0].trim());
