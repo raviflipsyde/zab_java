@@ -8,10 +8,8 @@ import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.io.UnsupportedEncodingException;
 import java.nio.charset.Charset;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 //import java.util.Map;
 import java.util.Properties;
@@ -20,7 +18,6 @@ import org.apache.commons.io.input.ReversedLinesFileReader;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
-import servers.NodeServer1;
 import servers.NodeServerProperties1;
 import servers.ZxId;
 
