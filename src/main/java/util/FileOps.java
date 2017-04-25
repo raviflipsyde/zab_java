@@ -8,10 +8,8 @@ import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.io.UnsupportedEncodingException;
 import java.nio.charset.Charset;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 //import java.util.Map;
 import java.util.Properties;
@@ -20,7 +18,6 @@ import org.apache.commons.io.input.ReversedLinesFileReader;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
-import servers.NodeServer1;
 import servers.NodeServerProperties1;
 import servers.ZxId;
 
@@ -28,22 +25,33 @@ public class FileOps {
 
 	// write a function to write the line into the CommitedHistory file
 	private static final Logger LOG = LogManager.getLogger(FileOps.class);
-
+	private static FileWriter appendLogFileWriter;
+	private static BufferedWriter appendLogFileBufferWriter;
+	
 	public static String appendTransaction(NodeServerProperties1 properties,String transaction) {
 		
 		String fileName = "CommitedHistory_" + properties.getNodePort() + ".log";
-		FileWriter fileWriter = null;
-		BufferedWriter bufferedWriter = null;
+		
+		if(appendLogFileWriter != null){
+			try {
+				appendLogFileWriter = new FileWriter(fileName,true);
+				appendLogFileBufferWriter = new BufferedWriter(appendLogFileWriter);
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			
+		}
+		
 		try {
 			transaction = transaction.replaceAll(":", ",");
 			
-			fileWriter = new FileWriter(fileName,true);
-			bufferedWriter = new BufferedWriter(fileWriter);
-			bufferedWriter.newLine();
-			bufferedWriter.write(transaction);
+			
+			appendLogFileBufferWriter.newLine();
+			appendLogFileBufferWriter.write(transaction);
 
-			bufferedWriter.flush();
-			bufferedWriter.close();
+			appendLogFileBufferWriter.flush();
+			
 			
 			String[] arr = transaction.split(",");
 			long epoch = Long.parseLong(arr[0].trim());
@@ -63,19 +71,6 @@ public class FileOps {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 			return "appendTransaction:Error";
-		}
-
-		
-		finally {
-			try {
-				bufferedWriter.close();
-				fileWriter.close();
-			} catch (IOException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
-			
-			
 		}
 		
 		return "appendTransaction:Success";
