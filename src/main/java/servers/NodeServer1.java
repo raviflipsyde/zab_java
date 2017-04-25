@@ -52,7 +52,8 @@ public class NodeServer1 {
 	private Vote startLeaderElection() {
 
 		LOG.info("Start Leader Election Phase");
-
+		long leStartTime = System.nanoTime();
+		
 		Map<Long, InetSocketAddress> memberList = this.properties.getMemberList();
 		HashMap<Long, Vote> receivedVote = new HashMap<Long, Vote>();
 		HashMap<Long, Long> receivedVotesRound = new HashMap<Long, Long>();
@@ -311,6 +312,8 @@ public class NodeServer1 {
 		this.properties.getElectionQueue().clear();
 
 		LOG.info("End of Leader Election Phase");
+		long leEndTime = System.nanoTime();
+		LOG.info("Time required for Leader Election Phase:" + (leEndTime-leStartTime)/1000000);
 		LOG.info("Leader ID: " + this.properties.getMyVote().getId());
 
 		return this.properties.getMyVote();
@@ -319,7 +322,8 @@ public class NodeServer1 {
 
 	private void Recovery() {
 		LOG.info("Start Recovery Phase");
-
+		long reStartTime = System.nanoTime();
+		
 		long leaderID = properties.getLeaderId();
 
 		if (this.properties.isLeader() == true) {
@@ -454,6 +458,8 @@ public class NodeServer1 {
 				e.printStackTrace();
 			}
 
+			long reEndTime = System.nanoTime();
+			LOG.info("Time required for Leader Election Phase:" + (reEndTime-reStartTime)/1000000);
 			LOG.info("End of Recovery phase");
 		} else {
 			// Follower
@@ -479,6 +485,9 @@ public class NodeServer1 {
 			} catch (InterruptedException e) {
 				e.printStackTrace();
 			}
+			long reEndTime = System.nanoTime();
+			LOG.info("Time required for Leader Election Phase:" + (reEndTime-reStartTime)/1000000);
+			
 			LOG.info("End of Recovery Phase");
 
 		}
