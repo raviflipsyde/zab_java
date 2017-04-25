@@ -25,33 +25,22 @@ public class FileOps {
 
 	// write a function to write the line into the CommitedHistory file
 	private static final Logger LOG = LogManager.getLogger(FileOps.class);
-	private static FileWriter appendLogFileWriter;
-	private static BufferedWriter appendLogFileBufferWriter;
-	
+
 	public static String appendTransaction(NodeServerProperties1 properties,String transaction) {
 		
 		String fileName = "CommitedHistory_" + properties.getNodePort() + ".log";
-		
-		if(appendLogFileWriter != null){
-			try {
-				appendLogFileWriter = new FileWriter(fileName,true);
-				appendLogFileBufferWriter = new BufferedWriter(appendLogFileWriter);
-			} catch (IOException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
-			
-		}
-		
+		FileWriter fileWriter = null;
+		BufferedWriter bufferedWriter = null;
 		try {
 			transaction = transaction.replaceAll(":", ",");
 			
-			
-			appendLogFileBufferWriter.newLine();
-			appendLogFileBufferWriter.write(transaction);
+			fileWriter = new FileWriter(fileName,true);
+			bufferedWriter = new BufferedWriter(fileWriter);
+			bufferedWriter.newLine();
+			bufferedWriter.write(transaction);
 
-			appendLogFileBufferWriter.flush();
-			
+			bufferedWriter.flush();
+			bufferedWriter.close();
 			
 			String[] arr = transaction.split(",");
 			long epoch = Long.parseLong(arr[0].trim());
@@ -71,6 +60,19 @@ public class FileOps {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 			return "appendTransaction:Error";
+		}
+
+		
+		finally {
+			try {
+				bufferedWriter.close();
+				fileWriter.close();
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			
+			
 		}
 		
 		return "appendTransaction:Success";
