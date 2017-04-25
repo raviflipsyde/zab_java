@@ -11,6 +11,11 @@ local.properties
 .settings/
 .loadpath
 .recommenders
+*/target/**
+target/*
+target/
+members.txt
+logfile.log
 
 # External tool builders
 .externalToolBuilders/
@@ -199,8 +204,4 @@ $RECYCLE.BIN/
 # Windows shortcuts
 *.lnk
 
-*/target/**
-target/*
 
-members.txt
-logfile.log
