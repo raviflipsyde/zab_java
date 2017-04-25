@@ -574,6 +574,8 @@ public class InHandler2 extends ChannelInboundHandlerAdapter { // (1)
 			
 			String readyMsg = "READY:" + this.properties.getNodeId(); 
 			LOG.info("Send: "+readyMsg );
+			long reEndTime = System.nanoTime();
+			LOG.info("Time required for Recovery Phase:" + (reEndTime-properties.reStartTime)/1000000);
 			return readyMsg;
 		}
 
