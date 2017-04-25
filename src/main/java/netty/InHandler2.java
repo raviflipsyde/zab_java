@@ -545,7 +545,7 @@ public class InHandler2 extends ChannelInboundHandlerAdapter { // (1)
 		}
 
 		if (requestMsg.contains("DIFF")){
-			LOG.debug("DIFF message received");
+			LOG.info("DIFF message received");
 
 			String[] decodedDiff = requestMsg.split(":");
 			LOG.debug("Diff decoded is = " + decodedDiff[0] + "	" + decodedDiff[1]);
