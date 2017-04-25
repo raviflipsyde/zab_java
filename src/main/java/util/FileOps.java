@@ -251,6 +251,8 @@ public static void writeDataMap(NodeServerProperties1 properties){
 		//
 		// System.out.println(retList);
 		fillDataInProperties(p1);
+		
+		
 
 	}
 

@@ -36,7 +36,7 @@ public class SyncDataStructs {
 
 	//used during broadcast
 	private volatile ConcurrentHashMap<Proposal, AtomicInteger> proposedTransactions = null; //<counter,num_ack> Map that the leader maintains to store acknowledgements of proposedtransactions
-	private volatile Queue<Proposal> committedTransactions = null;
+	private volatile SortedSet<Proposal> committedTransactions = null;
 	
 
 
@@ -59,7 +59,7 @@ public class SyncDataStructs {
 
 		newEpochFlag = false;
 		proposedTransactions = new ConcurrentHashMap<Proposal, AtomicInteger>();
-		committedTransactions = new ConcurrentLinkedQueue<Proposal>();
+		committedTransactions = new ConcurrentSkipListSet<Proposal>(comparator);
 
 
 
@@ -141,12 +141,14 @@ public class SyncDataStructs {
 	public synchronized void setProposedTransactions(ConcurrentHashMap<Proposal, AtomicInteger> proposedTransactions) {
 		this.proposedTransactions = proposedTransactions;
 	}
-	public Queue<Proposal> getCommittedTransactions() {
+	public SortedSet<Proposal> getCommittedTransactions() {
 		return committedTransactions;
 	}
-	public void setCommittedTransactions(Queue<Proposal> committedTransactions) {
+	public void setCommittedTransactions(SortedSet<Proposal> committedTransactions) {
 		this.committedTransactions = committedTransactions;
 	}
+	
+	
 
 	//	public MpscArrayQueue<Proposal> getProposeQueue() {
 

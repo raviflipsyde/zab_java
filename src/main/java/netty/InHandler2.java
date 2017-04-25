@@ -487,7 +487,8 @@ public class InHandler2 extends ChannelInboundHandlerAdapter { // (1)
 					List<String> logList= FileOps.getDiffResponse(properties, followerLastCommittedZxid);
 
 					diffMsg = "DIFF:" + logList;
-					LOG.info("Send: "+diffMsg);
+					LOG.debug("Send: DIFF"+diffMsg);
+					LOG.info("Send: DIFF");
 					this.nettyClientInhandler.sendMessage(memberList.get(nodeId).getHostName(),
 							memberList.get(nodeId).getPort(), diffMsg);
 
@@ -511,8 +512,8 @@ public class InHandler2 extends ChannelInboundHandlerAdapter { // (1)
 					List<String> logList= FileOps.getDiffResponse(properties, followerLastCommittedZxid);
 
 					diffMsg = "DIFF:" + logList;
-					LOG.info("Send: "+diffMsg);
-
+					LOG.debug("Send: "+diffMsg);
+					LOG.info("Send: DIFF");
 					this.nettyClientInhandler.sendMessage(memberList.get(nodeId).getHostName(),
 							memberList.get(nodeId).getPort(), diffMsg);
 

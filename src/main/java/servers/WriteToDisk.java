@@ -26,7 +26,7 @@ public class WriteToDisk implements Runnable {
 		while( properties.getNodestate() != NodeServerProperties1.State.ELECTION && running == true){
 
 			//flush the committed transactions set
-			 Queue<Proposal> committedtransactions = properties.getSynData().getCommittedTransactions();
+			SortedSet<Proposal> committedtransactions = properties.getSynData().getCommittedTransactions();
 			if(committedtransactions.size()>0){
 				
 				synchronized (committedtransactions) {
@@ -45,7 +45,9 @@ public class WriteToDisk implements Runnable {
 
 						String key = arr[2].trim();
 						String value = arr[3].trim();
-
+						long epoch = Long.parseLong(arr[0].trim());
+						long counter = Long.parseLong(arr[1].trim());
+						properties.setLastZxId(new ZxId(epoch, counter));
 
 						//					Properties datamap = properties.getDataMap();
 						//					datamap.setProperty(key, value);

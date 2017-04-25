@@ -34,7 +34,12 @@ public class MonitorProposeQueue implements Runnable {
 			ConcurrentHashMap<Proposal, AtomicInteger> removeMap = new ConcurrentHashMap<Proposal, AtomicInteger>();
 			for( Entry<Proposal,AtomicInteger> entry: proposedtransactions.entrySet()){
 				
-				if(entry.getValue().get() > this.nodeserverproperties.getMemberList().size()/2){
+				if(entry.getValue().get() > this.nodeserverproperties.getMemberList().size()/2
+						&&
+						entry.getKey().getZ().compareTo(nodeserverproperties.getLastZxId() ) > 0 
+						){
+					//if(this entry is not smaller than last entry f commitedHistory)
+					
 					LOG.debug("Quorum achieved for Proposal:" + entry.getKey());
 					LOG.debug("Sending a COMMIT message now to all followers..!!");
 					String commitMessage = "COMMIT:"+ entry.getKey();
@@ -42,7 +47,7 @@ public class MonitorProposeQueue implements Runnable {
 					nodeserver.broadcast(commitMessage);
 					
 					//Adding to commit Queue
-					 Queue<Proposal> committedtransactions = nodeserverproperties.getSynData().getCommittedTransactions();
+					SortedSet<Proposal> committedtransactions = nodeserverproperties.getSynData().getCommittedTransactions();
 					committedtransactions.add(entry.getKey());
 					
 					//Putting in removemap and deleting later to avoid concurrent modification exception
