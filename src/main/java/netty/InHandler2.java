@@ -483,7 +483,7 @@ public class InHandler2 extends ChannelInboundHandlerAdapter { // (1)
 			if (leaderLastCommittedZxid.getEpoch()==followerLastCommittedZxid.getEpoch() ){
 
 				if (followerLastCommittedZxid.getCounter() < leaderLastCommittedZxid.getCounter()){
-					// TODO: Send DIFF message
+
 					String diffMsg = "";
 					List<String> logList= FileOps.getDiffResponse(properties, followerLastCommittedZxid);
 
@@ -494,10 +494,12 @@ public class InHandler2 extends ChannelInboundHandlerAdapter { // (1)
 							memberList.get(nodeId).getPort(), diffMsg);
 
 
-					// TODO: Iterate through CommitHistory (refer readHistory()), stringify and send
-
 				} else if (followerLastCommittedZxid.getCounter() == leaderLastCommittedZxid.getCounter()){
-					// Do nothing
+
+					this.nettyClientInhandler.sendMessage(memberList.get(nodeId).getHostName(),
+							memberList.get(nodeId).getPort(), "NEXT");
+
+
 				} else if (followerLastCommittedZxid.getCounter() > leaderLastCommittedZxid.getCounter()){
 					// Go to Leader Election. Ideally, shouldn't happen
 					this.properties.setNodestate(NodeServerProperties1.State.ELECTION);
@@ -508,7 +510,6 @@ public class InHandler2 extends ChannelInboundHandlerAdapter { // (1)
 			} 
 			else if (leaderLastCommittedZxid.getEpoch()-followerLastCommittedZxid.getEpoch() < 4 ){
 
-					// TODO: Send DIFF message
 					String diffMsg = "";
 					List<String> logList= FileOps.getDiffResponse(properties, followerLastCommittedZxid);
 
@@ -518,8 +519,6 @@ public class InHandler2 extends ChannelInboundHandlerAdapter { // (1)
 					this.nettyClientInhandler.sendMessage(memberList.get(nodeId).getHostName(),
 							memberList.get(nodeId).getPort(), diffMsg);
 
-
-					// TODO: Iterate through CommitHistory (refer readHistory()), stringify and send
 				
 
 			} 
@@ -531,12 +530,11 @@ public class InHandler2 extends ChannelInboundHandlerAdapter { // (1)
 			}
 			else {
 
-				// TODO: Send SNAP message
+
 				String snapmsg = "SNAP:" + properties.getDataMap();
 				LOG.info("Send: "+snapmsg);
 				this.nettyClientInhandler.sendMessage(memberList.get(nodeId).getHostName(), memberList.get(nodeId).getPort(), snapmsg);
-
-				// TODO: Iterate through the Map, stringify each entry and then send
+				
 
 			} 
 
@@ -604,8 +602,13 @@ public class InHandler2 extends ChannelInboundHandlerAdapter { // (1)
 			return "READY:" + this.properties.getNodeId();
 		}
 
+		if (requestMsg.contains("NEXT")){
+			LOG.info("Received: " + requestMsg);
+			return "READY:" + this.properties.getNodeId();
+		}
+
 		if (requestMsg.contains("READY")){
-			
+
 			properties.getSynData().incrementQuorumCount();
 		}
 
