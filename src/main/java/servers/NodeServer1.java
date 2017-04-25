@@ -358,10 +358,10 @@ public class NodeServer1 {
 					max = accEpoch;
 				}
 			}
+			max += 1;
+			this.properties.setNewEpoch(max);
 
-			this.properties.setNewEpoch(max + 1);
-
-			LOG.info("NewEpoch = " + max + 1);
+			LOG.info("NewEpoch = " + max);
 			this.properties.setAcceptedEpoch(max + 1);
 			this.properties.setCounter(0);
 
