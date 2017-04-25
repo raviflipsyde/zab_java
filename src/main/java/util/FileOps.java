@@ -130,7 +130,7 @@ public static void writeDataMap(NodeServerProperties1 properties){
 				e1.printStackTrace();
 			} 
 			
-			e.printStackTrace();
+			
 			return dataMap;
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
@@ -173,7 +173,7 @@ public static void writeDataMap(NodeServerProperties1 properties){
 			reveFileReader.close();
 		} catch (IOException e) {
 			
-			e.printStackTrace();
+			
 			try {
 				PrintWriter writer = new PrintWriter(fileName, "UTF-8");
 				writer.close();
