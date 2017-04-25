@@ -169,7 +169,8 @@ public static void writeDataMap(NodeServerProperties1 properties){
 		try {
 			ReversedLinesFileReader reveFileReader = new ReversedLinesFileReader(file, Charset.defaultCharset());
 			ret = reveFileReader.readLine();
-
+			if(ret==null || ret.length()==0)
+				ret = "0,0,0,0";
 			reveFileReader.close();
 		} catch (IOException e) {
 			
