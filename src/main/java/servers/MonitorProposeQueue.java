@@ -33,6 +33,8 @@ public class MonitorProposeQueue implements Runnable {
 			ConcurrentHashMap<Proposal, AtomicInteger> removeMap = new ConcurrentHashMap<Proposal, AtomicInteger>();
 			for( Entry<Proposal,AtomicInteger> entry: proposedtransactions.entrySet()){
 				
+				LOG.debug("----------Proposal:" + entry.getKey()+ "::" + entry.getValue());
+				
 				if(entry.getValue().get() > this.nodeserverproperties.getMemberList().size()/2
 						&&
 						entry.getKey().getZ().compareTo(nodeserverproperties.getLastZxId() ) > 0 
