@@ -57,6 +57,8 @@ public class NodeServerProperties1 {
 	private volatile Properties dataMap;
 
 	public long  reStartTime;
+	public long  leStartTime;
+	public long  bcStartTime;
 	
 	public NodeServerProperties1() {
 		//TODO: acceptedEpoch = 0;

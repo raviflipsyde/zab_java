@@ -53,6 +53,7 @@ public class NodeServer1 {
 
 		LOG.info("Start Leader Election Phase");
 		long leStartTime = System.nanoTime();
+		properties.leStartTime = leStartTime;
 		
 		Map<Long, InetSocketAddress> memberList = this.properties.getMemberList();
 		HashMap<Long, Vote> receivedVote = new HashMap<Long, Vote>();
@@ -543,7 +544,10 @@ public class NodeServer1 {
 
 	private void startBroadcast() {
 		LOG.info("Start Broadcast Phase");
-
+		
+		long bcStartTime = System.nanoTime();
+		LOG.info("--Time required for Leader Election Phase:" + (properties.leStartTime-bcStartTime)/1000000);
+		
 		if (properties.getNodestate() == NodeServerProperties1.State.ELECTION) {
 			changePhase();
 		}
