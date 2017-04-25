@@ -7,6 +7,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
 import java.util.Properties;
+import java.util.SortedMap;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.atomic.AtomicInteger;
 
@@ -118,7 +119,7 @@ public class InHandler2 extends ChannelInboundHandlerAdapter { // (1)
 				
 				//enqueue this proposal to proposed transactions to keep the count of Acknowledgements
 				
-				ConcurrentHashMap<Proposal, AtomicInteger> proposedtransactions = properties.getSynData().getProposedTransactions();
+				SortedMap<Proposal, AtomicInteger> proposedtransactions = properties.getSynData().getProposedTransactions();
 				proposedtransactions.put(p, new AtomicInteger(1));
 				
 				//checking if the entry is enqueued in the proposed transaction map
@@ -187,7 +188,7 @@ public class InHandler2 extends ChannelInboundHandlerAdapter { // (1)
 				LOG.debug("Leader: Got ACK_PROPOSAL, incrementing count for zxid" + z);
 				
 				//checking the ack count for the proposal (counter value)		
-				ConcurrentHashMap<Proposal, AtomicInteger> proposedtransactions = properties.getSynData().getProposedTransactions();
+				SortedMap<Proposal, AtomicInteger> proposedtransactions = properties.getSynData().getProposedTransactions();
 				
 				synchronized (proposedtransactions) {
 					int count = proposedtransactions.get(p).incrementAndGet();
@@ -220,7 +221,7 @@ public class InHandler2 extends ChannelInboundHandlerAdapter { // (1)
 				String key = arr[3].trim();
 				String value = arr[4].trim();
 				Proposal p = new Proposal(z,key,value);
-				ConcurrentHashMap<Proposal, AtomicInteger> proposalMap = properties.getSynData().getProposedTransactions();
+				SortedMap<Proposal, AtomicInteger> proposalMap = properties.getSynData().getProposedTransactions();
 				LOG.debug("Map Size when Commit received: "+proposalMap.size());
 				LOG.debug("Map when Commit received: "+ proposalMap);
 				

@@ -4,10 +4,12 @@ import java.net.InetSocketAddress;
 import java.util.Comparator;
 import java.util.List;
 import java.util.Queue;
+import java.util.SortedMap;
 import java.util.SortedSet;
 import java.util.TreeSet;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.ConcurrentLinkedQueue;
+import java.util.concurrent.ConcurrentSkipListMap;
 import java.util.concurrent.ConcurrentSkipListSet;
 import java.util.concurrent.CopyOnWriteArrayList;
 import java.util.concurrent.atomic.AtomicInteger;
@@ -35,7 +37,7 @@ public class SyncDataStructs {
 	private AtomicInteger quorumCount;
 
 	//used during broadcast
-	private volatile ConcurrentHashMap<Proposal, AtomicInteger> proposedTransactions = null; //<counter,num_ack> Map that the leader maintains to store acknowledgements of proposedtransactions
+	private volatile SortedMap<Proposal, AtomicInteger> proposedTransactions = null; //<counter,num_ack> Map that the leader maintains to store acknowledgements of proposedtransactions
 	private volatile SortedSet<Proposal> committedTransactions = null;
 	
 
@@ -58,7 +60,7 @@ public class SyncDataStructs {
 		currentEpochMap = new ConcurrentHashMap<Long, ZxId>();
 
 		newEpochFlag = false;
-		proposedTransactions = new ConcurrentHashMap<Proposal, AtomicInteger>();
+		proposedTransactions = new ConcurrentSkipListMap<Proposal, AtomicInteger>();
 		committedTransactions = new ConcurrentSkipListSet<Proposal>(comparator);
 
 
@@ -134,15 +136,15 @@ public class SyncDataStructs {
 //		return this.quorum;
 //	}
 
-	public synchronized ConcurrentHashMap<Proposal, AtomicInteger> getProposedTransactions() {
-		return proposedTransactions;
-	}
 
-	public synchronized void setProposedTransactions(ConcurrentHashMap<Proposal, AtomicInteger> proposedTransactions) {
-		this.proposedTransactions = proposedTransactions;
-	}
 	public SortedSet<Proposal> getCommittedTransactions() {
 		return committedTransactions;
+	}
+	public synchronized SortedMap<Proposal, AtomicInteger> getProposedTransactions() {
+		return proposedTransactions;
+	}
+	public synchronized void setProposedTransactions(SortedMap<Proposal, AtomicInteger> proposedTransactions) {
+		this.proposedTransactions = proposedTransactions;
 	}
 	public void setCommittedTransactions(SortedSet<Proposal> committedTransactions) {
 		this.committedTransactions = committedTransactions;

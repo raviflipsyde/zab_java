@@ -1,6 +1,6 @@
 package servers;
 
-public class Proposal {
+public class Proposal implements Comparable<Proposal> {
 	ZxId z;
 	String key;
 	String value;
@@ -75,5 +75,10 @@ public class Proposal {
 		} else if (!z.equals(other.z))
 			return false;
 		return true;
+	}
+
+	public int compareTo(Proposal o) {
+		return this.z.compareTo(o.z);
+		
 	}
 }

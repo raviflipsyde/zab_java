@@ -1,8 +1,7 @@
 package servers;
 
-import java.util.ConcurrentModificationException;
 import java.util.Map.Entry;
-import java.util.Queue;
+import java.util.SortedMap;
 import java.util.SortedSet;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.atomic.AtomicInteger;
@@ -28,7 +27,7 @@ public class MonitorProposeQueue implements Runnable {
 	public void run() {
 			
 		LOG.debug("Run method for MonitorProposeQueue");
-		ConcurrentHashMap<Proposal, AtomicInteger> proposedtransactions = this.nodeserverproperties.getSynData().getProposedTransactions();
+		SortedMap<Proposal, AtomicInteger> proposedtransactions = this.nodeserverproperties.getSynData().getProposedTransactions();
 
 		while(nodeserverproperties.getNodestate() == NodeServerProperties1.State.LEADING && running == true){
 			ConcurrentHashMap<Proposal, AtomicInteger> removeMap = new ConcurrentHashMap<Proposal, AtomicInteger>();
