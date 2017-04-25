@@ -709,8 +709,9 @@ public class NodeServer1 {
 			LOG.debug(th.getName());
 			LOG.debug(th.getId());
 			LOG.debug(ex.getMessage());
-
-			System.out.println("Uncaught exception: " + ex);
+			
+			LOG.info("Leader is Unreachable!");
+			LOG.debug("Uncaught exception: " + ex);
 
 		}
 	};

@@ -91,8 +91,9 @@ public class NettyClient1 {
 			
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
-			e.printStackTrace();
-			LOG.debug("failed to send msg to "+ip+":"+port+ "\n"+ msg);
+			
+			LOG.debug(e.getMessage());
+			LOG.info(""+ip+":"+port+ " is unreachable. Cannot send: "+ msg);
 			LOG.debug("Remove this ip from the memberlist");
 			long removeId = -1;
 			for( Entry<Long, InetSocketAddress> entry : properties.getMemberList().entrySet()){
