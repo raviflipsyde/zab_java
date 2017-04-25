@@ -38,7 +38,7 @@ public class NodeServerProperties1 {
 	private long currentEpoch;
 	private long newEpoch;
 	private long counter;
-	private ZxId lastZxId;
+	private volatile ZxId lastZxId;
 	private boolean isLeader;
 	private volatile State nodestate;
 	private long electionRound;

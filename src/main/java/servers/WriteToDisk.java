@@ -43,11 +43,11 @@ public class WriteToDisk implements Runnable {
 						String[] arr = entry_commit_history.split(":");
 
 
-						String key = arr[2].trim();
-						String value = arr[3].trim();
-						long epoch = Long.parseLong(arr[0].trim());
-						long counter = Long.parseLong(arr[1].trim());
-						properties.setLastZxId(new ZxId(epoch, counter));
+//						String key = arr[2].trim();
+//						String value = arr[3].trim();
+//						long epoch = Long.parseLong(arr[0].trim());
+//						long counter = Long.parseLong(arr[1].trim());
+//						
 
 						//					Properties datamap = properties.getDataMap();
 						//					datamap.setProperty(key, value);
