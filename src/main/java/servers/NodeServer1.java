@@ -64,7 +64,7 @@ public class NodeServer1 {
 		Vote myVote = new Vote(this.properties.getLastZxId(), this.properties.getNodeId());
 
 		long limit_timeout = 15000;
-		long timeout = 500;
+		long timeout = 250;
 
 		this.properties.setElectionRound(this.properties.getElectionRound() + 1);
 		this.properties.setMyVote(myVote);
