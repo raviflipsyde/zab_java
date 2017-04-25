@@ -11,7 +11,7 @@
     </Appenders>
 
     <Loggers>
-        <Logger name="com.memorynotfound" level="debug"/>
+        <Logger name="com.memorynotfound" level="info"/>
 
         <Root level="debug">
             <AppenderRef ref="STDOUT"/>
