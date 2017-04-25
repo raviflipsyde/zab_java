@@ -362,7 +362,7 @@ public class NodeServer1 {
 			this.properties.setNewEpoch(max);
 
 			LOG.info("NewEpoch = " + max);
-			this.properties.setAcceptedEpoch(max + 1);
+			this.properties.setAcceptedEpoch(max);
 			this.properties.setCounter(0);
 
 			synchronized (acceptedEpochMap) {
