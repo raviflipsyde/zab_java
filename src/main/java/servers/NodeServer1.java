@@ -322,7 +322,7 @@ public class NodeServer1 {
 
 	private void Recovery() {
 		LOG.info("Start Recovery Phase");
-		long reStartTime = System.nanoTime();
+		properties.reStartTime = System.nanoTime();
 		
 		long leaderID = properties.getLeaderId();
 
@@ -451,15 +451,18 @@ public class NodeServer1 {
 					e.printStackTrace();
 				}
 			}
-
+			
+			long reEndTime = System.nanoTime();
+			LOG.info("Time required for Recovery Phase:" + (reEndTime-properties.reStartTime)/1000000);
+			
 			try {
 				Thread.sleep(3000);
 			} catch (InterruptedException e) {
 				e.printStackTrace();
 			}
 
-			long reEndTime = System.nanoTime();
-			LOG.info("Time required for Recovery Phase:" + (reEndTime-reStartTime)/1000000);
+			
+			
 			LOG.info("End of Recovery phase");
 		} else {
 			// Follower
@@ -485,8 +488,6 @@ public class NodeServer1 {
 			} catch (InterruptedException e) {
 				e.printStackTrace();
 			}
-			long reEndTime = System.nanoTime();
-			LOG.info("Time required for Recovery Phase:" + (reEndTime-reStartTime)/1000000);
 			
 			LOG.info("End of Recovery Phase");
 

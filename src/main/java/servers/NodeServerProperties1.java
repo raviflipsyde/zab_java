@@ -56,6 +56,8 @@ public class NodeServerProperties1 {
 	
 	private volatile Properties dataMap;
 
+	public long  reStartTime;
+	
 	public NodeServerProperties1() {
 		//TODO: acceptedEpoch = 0;
 		nodeId = 0;

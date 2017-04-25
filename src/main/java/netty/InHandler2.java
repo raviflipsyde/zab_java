@@ -599,16 +599,22 @@ public class InHandler2 extends ChannelInboundHandlerAdapter { // (1)
 			FileOps.writeDataMap(properties);
 			LOG.debug("Updated datamap = " + properties.getDataMap());
 			LOG.debug("Follower ready for Broadcast");
+			long reEndTime = System.nanoTime();
+			LOG.info("Time required for Recovery Phase:" + (reEndTime-properties.reStartTime)/1000000);
 			return "READY:" + this.properties.getNodeId();
 		}
 
 		if (requestMsg.contains("NEXT")){
 			LOG.info("Received: " + requestMsg);
+			long reEndTime = System.nanoTime();
+			LOG.info("Time required for Recovery Phase:" + (reEndTime-properties.reStartTime)/1000000);
 			return "READY:" + this.properties.getNodeId();
+			
 		}
 
 		if (requestMsg.contains("READY")){
-
+			
+			
 			properties.getSynData().incrementQuorumCount();
 		}
 
