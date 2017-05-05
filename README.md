@@ -23,4 +23,20 @@ Starting Bootstrapserver: java -cp zab1-0.0.1.jar Start Server <bootstrap_port>
 
 Starting Node: java -cp zab1-0.0.1.jar Start Node <bootstrap_IP> <bootstrap_port> <node_port>
 
+To test this project, start one bootstrap server and once the bootstrap is up and running start one or more node processes (ideally 3 node processes on 3 different VCLs if log analysis is required). 
+
+The leader election and recovery will take around 15 seconds after which the cluster can start processing READ and WRITE requests from the client.
+
+The Commits are stored in CommitedHistory_xxxx.log files in the root directory of the node/ project.
+Format of the logs in logfile is [ZxId_Epoch,ZxId_Counter,Key,value]
+
+READ and WRITE requests can be sent to any of the node in the cluster. The correctness of the algorithm can be verified by following 2 parameters
+- The CommitedHistory_xxxx.log files on all the nodes will be consistent in the order of the commit.
+- The commits in CommitedHistory_xxxx.log files will not contain a smaller ZxId after a bigger ZxId
+ 
+Client Read Request format: echo -e "WRITE:<KEY>:<VALUE>" | nc <node_IP> <node_port>
+
+Client Write Request format: echo -e "READ:<KEY>" | nc <node_IP> <node_port>
+
+
 
