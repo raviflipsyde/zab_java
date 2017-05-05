@@ -2,6 +2,10 @@ package servers;
 
 import servers.NodeServerProperties1.State;
 
+/**
+ * @author rpatel16, pghanek
+ *
+ */
 public class Notification{
 	//this order is preserved from the paper. It is advisable to use the same order while initializing the member variables for consistency.
 	private Vote vote;

@@ -9,6 +9,10 @@ import java.util.concurrent.atomic.AtomicInteger;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
+/**
+ * @author pghanek
+ *
+ */
 public class MonitorProposeQueue implements Runnable {
 	private NodeServerProperties1 nodeserverproperties;
 	private NodeServer1 nodeserver;

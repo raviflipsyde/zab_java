@@ -23,6 +23,7 @@ import io.netty.util.ReferenceCountUtil;
 
 /**
  * Handles a server-side channel.
+ * @author rpatel16
  */
 public class BootStrapServerHandler extends ChannelInboundHandlerAdapter { // (1)
 	private static final Logger LOG = LogManager.getLogger(BootStrapServerHandler.class);

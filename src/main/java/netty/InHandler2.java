@@ -25,6 +25,11 @@ import util.FileOps;
 
 /**
  * Handles a server-side channel.
+ * @author rpatel16, pghanek 
+ */
+/**
+ * @author ravipatel
+ *
  */
 public class InHandler2 extends ChannelInboundHandlerAdapter { // (1)
 	private static final Logger LOG = LogManager.getLogger(InHandler2.class);
@@ -64,6 +69,10 @@ public class InHandler2 extends ChannelInboundHandlerAdapter { // (1)
 		LOG.debug("Channel Registered: "+ ctx.channel().localAddress() + ":" + ctx.channel().remoteAddress());
 	}
 
+	/**
+	 * Handle the incoming mesages.
+	 * @author rpatel16, pghanek, fvravani 
+	 */
 
 	private String handleClientRequest(String requestMsg) {
 		//		LOG.debug("handleClientRequest:"+requestMsg);

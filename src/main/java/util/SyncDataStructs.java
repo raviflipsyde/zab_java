@@ -20,6 +20,10 @@ import servers.Proposal;
 import servers.Vote;
 import servers.ZxId;
 
+/**
+ * @author rpatel16, pghanek, fvravani
+ *
+ */
 public class SyncDataStructs {
 
 	private static SyncDataStructs instance = null;
@@ -27,10 +31,6 @@ public class SyncDataStructs {
 	private List<InetSocketAddress> memberList = null;
 	private volatile ConcurrentHashMap<Long, Long> acceptedEpochMap = null;
 	private volatile ConcurrentHashMap<Long, ZxId> currentEpochMap = null;
-	//ConcurrentHashMap<Long, InetSocketAddress> quorum = null;
-	//private MpscArrayQueue<Proposal> proposeQueue = null; //Request Queue with each node
-
-	//private MpscArrayQueue<Proposal> commitQueue = null;
 	private Vote myVote;
 	private long newEpoch;
 	private volatile boolean newEpochFlag;

@@ -1,5 +1,9 @@
 package servers;
 
+/**
+ * @author rpatel16, pghanek
+ *
+ */
 public class Vote implements Comparable<Vote>{
 
 	private ZxId zxid;

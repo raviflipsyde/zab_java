@@ -1,5 +1,9 @@
 package servers;
 
+/**
+ * @author pghanek, fvravani
+ *
+ */
 public class Proposal implements Comparable<Proposal> {
 	ZxId z;
 	String key;

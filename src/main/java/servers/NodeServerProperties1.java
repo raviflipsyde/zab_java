@@ -19,6 +19,10 @@ import java.util.concurrent.CopyOnWriteArrayList;
 import io.netty.util.internal.shaded.org.jctools.queues.MpscArrayQueue;
 import util.SyncDataStructs;
 
+/**
+ * @author rpatel16, pghanek, fvravani
+ *
+ */
 public class NodeServerProperties1 {
 	public static enum State {
 		ELECTION, LEADING, FOLLOWING
@@ -47,8 +51,7 @@ public class NodeServerProperties1 {
 	private InetSocketAddress myAddress;
 
 	//TODO: remove requestQueue and CommitQueue
-	private Queue<Message> requestQueue;
-	private Queue<Message> commitQueue;
+	
 	
 	private SyncDataStructs synData;
 	private MpscArrayQueue<Notification> electionQueue;
@@ -230,21 +233,7 @@ public class NodeServerProperties1 {
 		this.leaderAddress = leaderAddress;
 	}
 
-	public synchronized Queue<Message> getRequestQueue() {
-		return requestQueue;
-	}
 
-	public synchronized void setRequestQueue(Queue<Message> requestQueue) {
-		this.requestQueue = requestQueue;
-	}
-
-	public synchronized Queue<Message> getCommitQueue() {
-		return commitQueue;
-	}
-
-	public synchronized void setCommitQueue(Queue<Message> commitQueue) {
-		this.commitQueue = commitQueue;
-	}
 
 	public synchronized String getNodeHost() {
 		return nodeHost;

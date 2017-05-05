@@ -21,11 +21,21 @@ import org.apache.logging.log4j.Logger;
 import servers.NodeServerProperties1;
 import servers.ZxId;
 
+
+/**
+ * @author ravipatel
+ *
+ */
 public class FileOps {
 
 	// write a function to write the line into the CommitedHistory file
 	private static final Logger LOG = LogManager.getLogger(FileOps.class);
 
+	/**
+	 * @author rpatel16, pghanek, fvravani
+	 * @ 
+	 * 
+	 */
 	public static String appendTransaction(NodeServerProperties1 properties,String transaction) {
 		
 		String fileName = "CommitedHistory_" + properties.getNodePort() + ".log";

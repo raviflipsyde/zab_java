@@ -11,6 +11,10 @@ import io.netty.channel.socket.SocketChannel;
 import io.netty.channel.socket.nio.NioServerSocketChannel;
 import netty.BootStrapServerHandler;
 
+/**
+ * @author rpatel16
+ *
+ */
 public class BootstrapServer implements Runnable {
 	private int port;
 

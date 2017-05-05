@@ -10,6 +10,10 @@ import java.net.Socket;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
+/**
+ * @author rpatel16
+ *
+ */
 public class TcpRequestHandler implements Runnable {
 	
 	private static final Logger LOG = LogManager.getLogger(TcpRequestHandler.class);

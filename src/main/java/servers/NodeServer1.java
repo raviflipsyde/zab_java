@@ -28,6 +28,10 @@ import util.FileOps;
 import util.UdpClient1;
 import util.UdpServer1;
 
+/**
+ * @author rpatel16, pghanek, fvravani
+ *
+ */
 public class NodeServer1 {
 	private static final Logger LOG = LogManager.getLogger(NodeServer1.class);
 	private NodeServerProperties1 properties;

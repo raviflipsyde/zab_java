@@ -13,6 +13,10 @@ import org.apache.logging.log4j.Logger;
 
 import servers.NodeServerProperties1;
 
+/**
+ * @author rpatel16
+ *
+ */
 public class UdpClient1 implements Runnable{
 
 	private static final Logger LOG = LogManager.getLogger(UdpClient1.class);

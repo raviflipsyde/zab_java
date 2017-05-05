@@ -4,7 +4,7 @@
 package servers;
 
 /**
- * @author Prathamesh
+ * @author pghanek
  *
  */
 public class ZxId implements Comparable<ZxId>{

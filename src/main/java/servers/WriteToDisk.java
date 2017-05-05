@@ -3,11 +3,13 @@ package servers;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
-import java.util.Properties;
-import java.util.Queue;
 import java.util.SortedSet;
 import util.FileOps;
 
+/**
+ * @author pghanek
+ *
+ */
 public class WriteToDisk implements Runnable {
 
 	private NodeServerProperties1 properties;

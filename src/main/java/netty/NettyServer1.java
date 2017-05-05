@@ -17,6 +17,10 @@ import io.netty.channel.socket.SocketChannel;
 import io.netty.channel.socket.nio.NioServerSocketChannel;
 import servers.NodeServerProperties1;
 
+/**
+ * @author rpatel16
+ *
+ */
 public class NettyServer1 implements Runnable {
 	private int port;
 	private NodeServerProperties1 properties;

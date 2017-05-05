@@ -22,6 +22,10 @@ import io.netty.channel.socket.nio.NioSocketChannel;
 
 import servers.NodeServerProperties1;
 
+/**
+ * @author rpatel16
+ *
+ */
 public class NettyClient1 {
 	private static final Logger LOG = LogManager.getLogger(NettyClient1.class);
 	// private SyncDataStructs sds = SyncDataStructs.getInstance();

@@ -1,5 +1,5 @@
 /**
- * Created by ravipatel on 3/2/17.
+ * Created by rpatel16 on 3/2/17.
  */
 
 
@@ -18,11 +18,7 @@ public class Start {
 
 	public static void main(String[] args){
 
-		//    	 LOG.debug("This will be printed on debug");
-		//         LOG.debug("This will be printed on info");
-		//         LOG.warn("This will be printed on warn");
-		//         LOG.error("This will be printed on error");
-		//         LOG.fatal("This will be printed on fatal");
+	
 		if(args.length < 2){
 			System.out.println("Too Few Parameters. \n Start client or Start Server port");
 			System.exit(0);
@@ -31,11 +27,11 @@ public class Start {
 
 
 		if(args[0].equals("Node")){
-			//    		new NodeServer("127.0.0.1", 4500).run1();
+		
 			String bhost;
 			int bport, nport;
 			
-//			System.out.println(args.length);
+
 			if (args.length > 3) {
 				bport = Integer.parseInt(args[2]);
 				nport = Integer.parseInt(args[3]);

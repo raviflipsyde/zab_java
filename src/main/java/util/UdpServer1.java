@@ -19,6 +19,10 @@ import servers.NodeServerProperties1;
 //import servers.NodeServer;
 
 
+/**
+ * @author rpatel16
+ *
+ */
 public class UdpServer1 implements Runnable{
 	private static final Logger LOG = LogManager.getLogger(UdpServer1.class);
 	private static final String HELLO = "U OK?";
