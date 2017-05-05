@@ -550,7 +550,7 @@ public class NodeServer1 {
 		LOG.info("Start Broadcast Phase");
 		
 		long bcStartTime = System.nanoTime();
-		LOG.info("Time required to reach Broadcast Phase:" + (properties.leStartTime-bcStartTime)/1000000);
+		LOG.info("Time required to reach Broadcast Phase:" + (bcStartTime - properties.leStartTime)/1000000);
 		
 		if (properties.getNodestate() == NodeServerProperties1.State.ELECTION) {
 			changePhase();
