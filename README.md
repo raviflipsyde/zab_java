@@ -1,7 +1,7 @@
 # zab_java
 
 
-Local Dev Environment Setup.
+Local Dev Environment Setup and Testing.
 
 Step1: install jdk if not present.
 
@@ -15,13 +15,29 @@ Step2: install maven if not present.
 	set JAVA_HOME to your jdk directory
 	set PATH to include maven bin directory
 
-Step 3: git clone https://github.com/raviflipsyde/zab_java.git
+Step 3: Clone the git repo 
+		
+	git clone https://github.com/raviflipsyde/zab_java.git
 
-Step 4: mvn clean install package
+Step 4: Compile and create executable jar 
 
-Starting Bootstrapserver: java -cp zab1-0.0.1.jar Start Server <bootstrap_port>
+	mvn clean install package
 
-Starting Node: java -cp zab1-0.0.1.jar Start Node <bootstrap_IP> <bootstrap_port> <node_port>
+Step 5: Test the code on one or more VCLs
+	
+	1. Starting Bootstrapserver: 
+	java -cp zab1-0.0.1.jar Start Server <bootstrap_port>
+
+	2. Starting a Node: 
+	java -cp zab1-0.0.1.jar Start Node <bootstrap_IP> <bootstrap_port> <node_port>
+
+Step 6: Test the Read/Write requests from client
+
+	Client Read Request: 
+	echo -e "WRITE:<KEY>:<VALUE>" | nc <node_IP> <node_port>
+
+	Client Write Request: 
+	echo -e "READ:<KEY>" | nc <node_IP> <node_port>	
 
 To test this project, start one bootstrap server and once the bootstrap is up and running start one or more node processes (ideally 3 node processes on 3 different VCLs if log analysis is required). 
 
@@ -34,9 +50,6 @@ READ and WRITE requests can be sent to any of the node in the cluster. The corre
 - The CommitedHistory_xxxx.log files on all the nodes will be consistent in the order of the commit.
 - The commits in CommitedHistory_xxxx.log files will not contain a smaller ZxId after a bigger ZxId
  
-Client Read Request format: echo -e "WRITE:<KEY>:<VALUE>" | nc <node_IP> <node_port>
-
-Client Write Request format: echo -e "READ:<KEY>" | nc <node_IP> <node_port>
 
 
 
