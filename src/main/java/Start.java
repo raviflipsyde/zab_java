@@ -49,7 +49,7 @@ public class Start {
 			new NodeServer1(bhost, bport, nport).init();
 		}
 
-		else if(args[0].equals("Server")){
+		else if(args[0].equals("Bootstrap")){
 
 			int port;
 			if (args.length > 0) {

@@ -26,17 +26,17 @@ Step 4: Compile and create executable jar
 Step 5: Test the code on one or more VCLs
 	
 	1. Starting Bootstrapserver: 
-	java -cp zab1-0.0.1.jar Start Server <bootstrap_port>
+	java -cp zab1-0.0.1.jar Start Bootstrap <bootstrap_port>
 
 	2. Starting a Node: 
 	java -cp zab1-0.0.1.jar Start Node <bootstrap_IP> <bootstrap_port> <node_port>
 
 Step 6: Test the Read/Write requests from client
 
-	Client Read Request: 
+	Client Write Request: 
 	echo -e "WRITE:<KEY>:<VALUE>" | nc <node_IP> <node_port>
 
-	Client Write Request: 
+	Client Read Request: 
 	echo -e "READ:<KEY>" | nc <node_IP> <node_port>	
 
 To test this project, start one bootstrap server and once the bootstrap is up and running start one or more node processes (ideally 3 node processes on 3 different VCLs if log analysis is required). 
